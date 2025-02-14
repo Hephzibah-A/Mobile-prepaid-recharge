@@ -32,7 +32,7 @@ The **Mobile Recharge Application** provides users with a simple and efficient w
 ## Installation & Usage
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/mobile-recharge-app.git
+   git clone [https://github.com/your-username/mobile-recharge-app.git](https://github.com/Hephzibah-A/Mobile-prepaid-recharge)
    ```
 2. Open `index.html` in your browser.
 3. Ensure Bootstrap files are correctly linked for styling and responsiveness.

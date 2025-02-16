@@ -76,6 +76,7 @@
     h1 {
         font-size: 3rem;
         margin-bottom: 20px;
+        font-weight: bold;
     }
 
     p {
@@ -83,9 +84,7 @@
         margin-bottom: 30px;
     }
 
-    .btn {
-        /* padding: 12px 25px; */
-    }
+
 
     img {
         max-width: 500px;
@@ -97,7 +96,375 @@
     margin-top: 13%;
     align-items: center;
     justify-items: start;
-    /* display: flex; */
+
 
 }
 
+/* Recommended Packs Section */
+.container.mt-5 {
+    margin-top: 5rem;
+}
+
+.recommended-packs-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.plan-card {
+    border: none;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: white;
+}
+
+.plan-card:hover {
+    transform: scale(1.05);
+}
+
+.plan-card-body {
+    background-color: white;
+    padding: 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.plan-price {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.plan-details {
+    margin-bottom: 2rem;
+    flex-grow: 1;
+}
+
+.plan-details p {
+    margin-bottom: 0.5rem;
+}
+
+.recharge-btn {
+    background: linear-gradient(to bottom, #4300B1, #36008E);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    align-self: center;
+    margin-bottom: 10px;
+}
+
+.recharge-btn:hover {
+    background-color: #230259;
+    color: #f0f0f0;
+}
+
+.view-details {
+    color: white;
+    text-decoration: none;
+    align-self: center;
+    font-size: smaller;
+}
+
+.view-details:hover {
+    text-decoration: underline;
+}
+
+.more-plans-link {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.8rem 1.5rem;
+    background-color: #4300B1;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.more-plans-link:hover {
+    background-color: #36008E;
+}
+
+/* about us */
+.about-us {
+    background: linear-gradient(to right, #4300B1, #36008E);
+    color: white;
+    padding: 80px 0;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1140px;
+}
+
+.row {
+    --bs-gutter-x: 0;
+}
+
+.col-md-6 {
+    padding: 0;
+}
+
+.about-us-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.about-us-text {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-us-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 25px;
+
+    border-radius: 10px;
+    position: relative;
+    gap: 1.5rem;
+    /* Space between icon and text */
+}
+
+.detail-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 20px;
+    width: calc(100% - 40px);
+    height: 1px;
+
+}
+
+.detail-item:first-child::before {
+    display: none;
+}
+
+.detail-item i {
+    color: white;
+    font-size: 1.5rem;
+    margin-top: 5px;
+
+}
+
+.detail-label {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.detail-item a,
+.detail-item span {
+    color: white;
+    font-size: 1.1rem;
+}
+
+.detail-item a:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+.about-us img {
+    max-width: 100%;
+    height: auto;
+
+}
+
+/* testimonials */
+.testimonials {
+    background-color: #f8f9fa;
+    /* Light gray background */
+    padding: 80px 0;
+}
+
+.testimonials-title {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #4300B1;
+}
+
+.testimonials-subtitle {
+    font-size: 1rem;
+    color: #777;
+    /* Slightly lighter text color */
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.testimonial-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 10px;
+    height: 55vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.testimonial-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    object-fit: cover;
+    /* Prevent image distortion */
+}
+
+.testimonial-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.testimonial-location {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 1rem;
+}
+
+.testimonial-text {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* faq */
+.faq-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4300B1;
+    margin-bottom: 2rem;
+}
+
+.faq-item {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+    /* Light gray separator line */
+    padding-bottom: 1.5rem;
+}
+
+.faq-question {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #555;
+    /* Slightly darker gray color */
+    cursor: pointer;
+    /* Indicate it's clickable */
+    display: flex;
+    /* Use flexbox for alignment */
+    justify-content: space-between;
+    /* Align items to start and end */
+    align-items: center;
+    /* Vertically center items */
+}
+
+.faq-question i {
+    transition: transform 0.3s ease;
+    /* Smooth rotation */
+}
+
+.faq-question.collapsed i {
+    transform: rotate(-90deg);
+    /* Rotate icon when collapsed */
+}
+
+.faq-answer {
+    color: #777;
+    /* Lighter gray color */
+    margin-top: 1rem;
+    display: none;
+    /* Hide answer initially */
+}
+
+.faq-answer.show {
+    display: block;
+    /* Show answer when expanded */
+}
+
+/* contact */
+.contact-section {
+    padding: 80px 0;
+}
+
+.contact-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #4300B1;
+    /* Purple color */
+    margin-bottom: 20px;
+}
+
+.contact-description {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 40px;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #555;
+}
+
+.form-control {
+    border-color: #ddd;
+}
+
+.d-grid {
+    /* justify-content: center; */
+    align-items: center;
+    justify-items: center;
+}
+
+.btn-secondary {
+    align-items: center;
+    width: 150px;
+    background-color: #4300B1;
+    border-color: #4300B1;
+}
+
+.btn-secondary:hover {
+    background-color: #36008E;
+    border-color: #36008E;
+}
+
+/* footer */
+.contact-footer {
+    height: 80px;
+    
+    background-color: #4300B1;
+    text-align: center;
+    margin-top: 50px;
+    color: white;
+}
+.contact-footer a {
+    
+  
+    text-decoration: none;
+}
+.contact-footer a:hover {
+    text-decoration: underline;
+}

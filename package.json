@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  },
+  "name": "mobile-prepaid-recharge",
+  "version": "1.0.0",
+  "description": "The **Mobile Recharge Application** provides users with a simple and efficient way to recharge their mobile numbers online. The frontend of the application is built using **HTML, CSS, JavaScript, and Bootstrap** to ensure a responsive and user-friendly interface.",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,18 @@
+// Step 1: Override the $primary variable **before** importing Bootstrap's SCSS
+$primary: rgb(67, 0, 177); // Set primary to your desired color
+
+btn-primary{
+    background-color: #6f42c1; 
+            border-color: #6f42c1;
+            color: white;
+            padding: 8px 16px; /* Adjust padding as needed */
+            border-radius: 5px;
+            text-decoration: none;
+}
+
+btn-primary:hover{
+    background-color: #563d7c; /* Darker shade on hover */
+    border-color: #563d7c;
+}
+// Step 2: Import Bootstrap's SCSS after overriding $primary
+@import "./node_modules/bootstrap/scss/bootstrap";

@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+    font-family: "Open Sans", serif;
+}
+
+
+.hero {
+    background-color: #4b0082;
+    /* Example: You can use a gradient or image */
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.cta-btn {
+    background-color: #6f42c1;
+    /* Example: Customize your button color */
+    border-color: #6f42c1;
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.plan-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    /* Ensure image stays within card bounds */
+}
+
+.plan-card-img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.plan-card-body {
+    padding: 20px;
+}
+
+.plan-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.plan-details {
+    font-size: 1rem;
+}
+
+.recharge-btn {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    /* Make button fill card width */
+}
+
+.features {
+    padding: 50px 0;
+    background-color: #f8f9fa;
+    /* Example: Light gray background */
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #6f42c1;
+    /* Example: Purple icon color */
+}

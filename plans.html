@@ -4,48 +4,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MobiComm</title>
+    <title>MobiComm | Plans</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="Assets/css/plans.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-    <!-- navbar   -->
+
+    <!-- Navbar -->
     <section class="header-container">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="index.html"><img src="Assets/png/logo_color.png" alt="MobiComm Logo"></a>
+                <a class="navbar-brand" href="main.html"><img src="Assets/png/logo_color.png" alt="MobiComm Logo"
+                        style="height: 50px;"></a>
+            </div>
         </nav>
     </section>
 
-
-
-
-    <!-- 
-        <footer class="header">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-3">
-                        <a class="navbar-brand" href="#">
-                            <img src="Assets/png/logo.png" alt="MobiComm Logo">
-                        </a>
+    <!-- Offer Banner -->
+    <header>
+        <div class="offer-banner">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-auto">
+                        <img src="Assets/png/offer.png" alt="Offer" class="offer-image">
                     </div>
-                    <div class="col-md-9">
-                        <div class="footer-links">
-                            <p>&copy;2025 Company Name. All rights reserved.
-                                <a href="#">Privacy &amp; Policy</a> |
-                                <a href="#">Terms &amp; Condition</a>
-                            </p>
+                    <div class="col-md">
+                        <p class="offer-text"><strong>30% OFF</strong><br>Unlock More with Our New Recharge Plan!</p>
+                        <p class="plan-description">
+                            Enjoy seamless connectivity with our latest recharge plan! Get more talk time, extra data,
+                            and exclusive cashback offers - all at an unbeatable price.
+                        </p>
+                        <div class="cta-buttons">
+                            <button class="btn btn-primary">Recharge Now</button>
+                            <button class="btn btn-outline-primary">Learn More</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </footer> -->
+        </div>
+    </header>
 
-    <script src="Assets/js/script.js"></script>
+    <!-- Main Content -->
+    <main class="container mt-4">
+        <div class="search-filter-area">
+            <div class="row">
+                <!-- Filters -->
+                <div class="col-md-3">
+                    <input type="search" class="form-control" id="searchBox" placeholder="Search for plans">
+                    <div class="filter-options mt-3">
+                        <div class="filter-group">
+                            <label class="form-label">Sort By</label>
+                            <select class="form-select" id="sortOptions">
+                                <option value="relevance">Relevance</option>
+                                <option value="low-to-high">Price: Low to High</option>
+                                <option value="high-to-low">Price: High to Low</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="form-label">Price Range</label>
+                            <input type="range" class="form-range" id="priceRange" min="0" max="2000" step="50">
+                            <span id="priceValue">Max: ₹2000</span>
+                        </div>
+                        <div class="filter-group">
+                            <label class="form-label">Validity</label>
+                            <select class="form-select" id="validityFilter">
+                                <option value="all">All</option>
+                                <option value="1">1 Day</option>
+                                <option value="7">7 Days</option>
+                                <option value="28">28 Days</option>
+                                <option value="48">48 Days</option>
+                                <option value="56">56 Days</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="form-label">Data Allowance</label>
+                            <select class="form-select" id="dataFilter">
+                                <option value="all">All</option>
+                                <option value="1">1 GB/day</option>
+                                <option value="2">2 GB/day</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label class="form-label">Plan Type</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="talkTime" value="talktime">
+                            <label class="form-check-label" for="talkTime">Talk Time Plans</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="dataPlans" value="data">
+                            <label class="form-check-label" for="dataPlans">Data Plans</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="comboPlans" value="combo">
+                            <label class="form-check-label" for="comboPlans">Combo Plans</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="international"
+                                value="international-roaming">
+                            <label class="form-check-label" for="international">International Roaming</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="ott" value="ott">
+                            <label class="form-check-label" for="ott">OTT Plans</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="popular" value="popular">
+                            <label class="form-check-label" for="popular">Popular Plans</label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Plans List -->
+                <div class="col-md-9">
+                    <div class="plan-cards-area">
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="planList">
+                            <!-- Cards will be injected here by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <a class="navbar-brand" href="#">
+                        <img src="Assets/png/logo.png" alt="MobiComm Logo">
+                    </a>
+                </div>
+                <div class="col-md-9">
+                    <div class="footer-links">
+                        <p>&copy;2025 Company Name. All rights reserved.
+                            <a href="#">Privacy &amp; Policy</a> |
+                            <a href="#">Terms &amp; Condition</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="Assets/js/plans.js"></script>
 </body>
 
 </html>

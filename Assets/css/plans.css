@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+body {
+    background-color: #f8f9fa;
+    /* Light Gray background */
+    font-family: "Open Sans", serif;
+}
+
+
+/* Offer Banner Styles */
+.offer-banner {
+
+    /* Example background color */
+    padding: 20px 0;
+}
+
+.offer-image {
+    max-width: 700px;
+    /* Adjust as needed */
+    height: auto;
+    margin-right: 20px;
+}
+
+.offer-text {
+    margin-bottom: 10px;
+}
+
+.plan-description {
+    font-size: 14px;
+}
+
+.cta-buttons .btn {
+    margin-right: 10px;
+}
+
+/* Plan Card Styles */
+.plan-card {
+    border: 1px solid #ddd;
+}
+
+.plan-price {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.plan-details {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.plan-details li {
+    margin-bottom: 5px;
+}
+
+/* Search and Filter Area Styles */
+.search-filter-area {
+    margin-bottom: 20px;
+}
+
+.filter-options {
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+
+
+
+/* footer */
+footer {
+    background: linear-gradient(to bottom, #4300B1, #36008E);
+    color: white;
+    padding: 15px 0;
+}
+
+footer .navbar-brand img {
+    max-height: 40px;
+
+}
+
+.footer-links {
+    text-align: right;
+    padding-top: 10px;
+
+}
+
+.footer-links p {
+    margin-bottom: 0;
+
+    font-size: 14px;
+
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+    /* Space between links */
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}

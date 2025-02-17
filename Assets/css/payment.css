@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+body {
+    background-color: #f8f9fa;
+    /* Light Gray background */
+    font-family: "Open Sans", serif;
+}
+
+.container {
+    max-width: 100%;
+    /* Adjust container width */
+}
+
+.plan-summary {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+}
+
+.plan-summary h2 {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.plan-summary ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.plan-summary li {
+    margin-bottom: 10px;
+}
+
+.plan-summary strong {
+    font-weight: bold;
+}
+
+.payment-options .btn {
+    margin-right: 10px;
+}
+
+.payment-methods {
+    margin-bottom: 30px;
+}
+
+.payment-methods label {
+    margin-right: 20px;
+}
+
+.card-details {
+    border: 1px solid #ced4da;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.card-details label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.card-details input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+
+.payment-image {
+    text-align: center;
+    width: 400px;
+
+}
+
+.payment-image img {
+    margin-left: 10px;
+    ;
+    max-width: 100%;
+    /* Make image responsive */
+    height: auto;
+}
+
+/* Styles for dynamic forms */
+.payment-form {
+    display: none;
+    /* Hide all forms initially */
+}
+
+#card-form {
+    display: block;
+    /* Show card form by default */
+}
+
+.secure-payment {
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+    margin-top: 20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .plan-summary {
+        padding: 20px;
+    }
+
+    .payment-options .btn {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}

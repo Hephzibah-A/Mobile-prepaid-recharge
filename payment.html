@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> MobiComm | Payment</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="Assets/css/payment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="main.html">
+                    <img src="Assets/png/logo_color.png" alt="MobiComm Logo" style="height: 50px;">
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-4">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="plan-summary">
+                    <h2>Recharge Summary</h2>
+                    <div id="planDetails"></div>
+                    <a href="plans.html"><button class="btn btn-primary" id="editPlanButton">Edit Plan</button></a>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="plan-summary">
+                    <h2>Payment Methods</h2>
+                    <div class="payment-methods">
+                        <label>
+                            <input type="radio" name="paymentMethod" value="upi" id="upi-radio"> UPI (Google Pay etc...)
+                        </label><br>
+                        <label>
+                            <input type="radio" name="paymentMethod" value="card" id="card-radio" checked> Credit /
+                            Debit card
+                        </label><br>
+                        <label>
+                            <input type="radio" name="paymentMethod" value="netbanking" id="netbanking-radio"> Net
+                            Banking
+                        </label><br>
+                        <label>
+                            <input type="radio" name="paymentMethod" value="wallet" id="wallet-radio"> Wallet (Paytm,
+                            etc...)
+                        </label>
+                    </div>
+
+                    <!-- Card Payment Form -->
+                    <div id="card-form" class="payment-form">
+                        <div class="card-details">
+                            <label for="cardNumber">Card number</label>
+                            <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000">
+                            <span id="cardNumberError" class="error-message"></span><br>
+
+                            <label for="expiry">Expires</label>
+                            <input type="text" id="expiry" placeholder="MM / YY">
+                            <span id="expiryError" class="error-message"></span><br>
+
+                            <label for="cvc">Security code</label>
+                            <input type="text" id="cvc" placeholder="CVC">
+                            <span id="cvcError" class="error-message"></span><br>
+
+                            <label for="cardholder">Cardholder name</label>
+                            <input type="text" id="cardholder" placeholder="Amy Schumer">
+                            <span id="cardholderError" class="error-message"></span><br>
+
+                            <a href="success.html"> <button class="btn btn-primary" onclick="validateCardForm()">Pay
+                                    ₹<span id="paymentAmount"></span> now</button></a>
+                            <div class="secure-payment">Your transaction is secured with SSL encryption</div>
+                        </div>
+                    </div>
+
+                    <!-- UPI Payment Form -->
+                    <div id="upi-form" class="payment-form">
+                        <div class="card-details">
+                            <label for="upiId">UPI ID</label>
+                            <input type="text" id="upiId" placeholder="your_upi_id@bank">
+                            <span id="upiIdError" class="error-message"></span><br>
+
+                            <a href="success.html"> <button class="btn btn-primary" onclick="validateUpiForm()">Pay
+                                    ₹<span id="paymentAmountUpi"></span> now</button></a>
+                            <div class="secure-payment">Your transaction is secured with SSL encryption</div>
+                        </div>
+                    </div>
+
+                    <!-- NetBanking Payment Form -->
+                    <div id="netbanking-form" class="payment-form">
+                        <div class="card-details">
+                            <label for="bankName">Bank Name</label>
+                            <input type="text" id="bankName" placeholder="Your Bank Name">
+                            <span id="bankNameError" class="error-message"></span><br>
+
+                            <label for="netbankingId">NetBanking ID</label>
+                            <input type="text" id="netbankingId" placeholder="Your NetBanking ID">
+                            <span id="netbankingIdError" class="error-message"></span><br>
+
+                            <label for="netbankingPassword">Password</label>
+                            <input type="password" id="netbankingPassword" placeholder="Your Password">
+                            <span id="netbankingPasswordError" class="error-message"></span><br>
+
+                            <a href="success.html"> <button class="btn btn-primary"
+                                    onclick="validateNetbankingForm()">Pay ₹<span id="paymentAmountNetbanking"></span>
+                                    now</button></a>
+                            <div class="secure-payment">Your transaction is secured with SSL encryption</div>
+                        </div>
+                    </div>
+
+                    <!-- Wallet Payment Form -->
+                    <div id="wallet-form" class="payment-form">
+                        <div class="card-details">
+                            <label for="walletProvider">Wallet Provider</label>
+                            <input type="text" id="walletProvider" placeholder="Paytm/PhonePe/etc.">
+                            <span id="walletProviderError" class="error-message"></span><br>
+
+                            <label for="walletMobile">Mobile Number</label>
+                            <input type="text" id="walletMobile" placeholder="Your Mobile Number">
+                            <span id="walletMobileError" class="error-message"></span><br>
+
+                            <a href="success.html"> <button class="btn btn-primary" onclick="validateWalletForm()">Pay
+                                    ₹<span id="paymentAmountWallet"></span> now</button></a>
+                            <div class="secure-payment">Your transaction is secured with SSL encryption</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4 payment-image">
+                <img src="Assets/png/Mobile payments-rafiki 1.png" alt="Payment Illustration">
+            </div>
+        </div>
+    </main>
+    <br><br>
+    <footer>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <a class="navbar-brand" href="#">
+                        <img src="Assets/png/logo.png" alt="MobiComm Logo">
+                    </a>
+                </div>
+                <div class="col-md-9">
+                    <div class="footer-links">
+                        <p>&copy;2025 Company Name. All rights reserved.
+                            <a href="#">Privacy &amp; Policy</a> |
+                            <a href="#">Terms &amp; Condition</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+<script src="Assets/js/payment.js"></script>
+
+</html>

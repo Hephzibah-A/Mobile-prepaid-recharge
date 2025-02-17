@@ -1,0 +1,299 @@
+[
+  {
+    "id": 1,
+    "price": 199,
+    "data": "1GB/day",
+    "calls": "Unlimited",
+    "validity": 28,
+    "planType": "combo",
+    "popular": true
+  },
+  {
+    "id": 2,
+    "price": 399,
+    "data": "2GB/day",
+    "calls": "Unlimited",
+    "validity": 56,
+    "planType": "talktime",
+    "popular": false
+  },
+  {
+    "id": 3,
+    "price": 299,
+    "data": "1.5GB/day",
+    "calls": "Unlimited",
+    "validity": 28,
+    "planType": "data",
+    "popular": true
+  },
+  {
+    "id": 4,
+    "price": 499,
+    "data": "3GB/day",
+    "calls": "Unlimited",
+    "validity": 56,
+    "planType": "combo",
+    "popular": true
+  },
+  {
+    "id": 5,
+    "price": 99,
+    "data": "500MB/day",
+    "calls": "Unlimited",
+    "validity": 21,
+    "planType": "data",
+    "popular": false
+  },
+  {
+    "id": 6,
+    "price": 699,
+    "data": "5GB/day",
+    "calls": "Unlimited",
+    "validity": 84,
+    "planType": "talktime",
+    "popular": false
+  },
+  {
+    "id": 7,
+    "price": 249,
+    "data": "1GB/day",
+    "calls": "500 Minutes",
+    "validity": 30,
+    "planType": "data",
+    "popular": true
+  },
+  {
+    "id": 8,
+    "price": 799,
+    "data": "8GB/day",
+    "calls": "Unlimited",
+    "validity": 60,
+    "planType": "combo",
+    "popular": false
+  },
+  {
+    "id": 9,
+    "price": 599,
+    "data": "4GB/day",
+    "calls": "Unlimited",
+    "validity": 70,
+    "planType": "combo",
+    "popular": false
+  },
+  {
+    "id": 10,
+    "price": 499,
+    "data": "3GB/day",
+    "calls": "Unlimited",
+    "validity": 45,
+    "planType": "combo",
+    "popular": false
+  },
+  {
+    "id": 11,
+    "price": 399,
+    "data": "2GB/day",
+    "calls": "Unlimited",
+    "validity": 30,
+    "planType": "talktime",
+    "popular": false
+  },
+  {
+    "id": 12,
+    "price": 1599,
+    "data": "Unlimited",
+    "calls": "Unlimited",
+    "validity": 90,
+    "planType": "combo",
+    "popular": false
+  },
+  {
+    "id": 13,
+    "price": 299,
+    "data": "1GB/day",
+    "calls": "300 Minutes",
+    "validity": 21,
+    "planType": "talktime",
+    "popular": false
+  },
+  {
+    "id": 14,
+    "price": 1299,
+    "data": "8GB/day",
+    "calls": "Unlimited",
+    "validity": 90,
+    "planType": "data",
+    "popular": true
+  },
+  {
+    "id": 15,
+    "price": 2499,
+    "data": "Unlimited",
+    "calls": "Unlimited",
+    "validity": 180,
+    "planType": "combo",
+    "popular": true
+  },
+  {
+    "id": 16,
+    "price": 1199,
+    "data": "6GB/day",
+    "calls": "Unlimited",
+    "validity": 60,
+    "planType": "data",
+    "popular": true
+  },
+  {
+    "id": 17,
+    "price": 1499,
+    "data": "8GB/day",
+    "calls": "Unlimited",
+    "validity": 60,
+    "planType": "data",
+    "popular": false
+  },
+  {
+    "id": 18,
+    "price": 999,
+    "data": "5GB/day",
+    "calls": "Unlimited",
+    "validity": 56,
+    "planType": "data",
+    "popular": true
+  },
+  {
+    "id": 19,
+    "price": 1299,
+    "data": "10GB/day",
+    "calls": "Unlimited",
+    "validity": 60,
+    "planType": "data",
+    "popular": true
+  },
+  {
+    "id": 20,
+    "price": 5999,
+    "data": "Unlimited",
+    "calls": "Unlimited",
+    "validity": 365,
+    "planType": "combo",
+    "popular": false
+  },
+  {
+    "id": 21,
+    "price": 799,
+    "data": "10GB",
+    "calls": "500 Minutes",
+    "validity": 30,
+    "planType": "international-roaming",
+    "popular": false
+  },
+  {
+    "id": 22,
+    "price": 4999,
+    "data": "30GB",
+    "calls": "Unlimited",
+    "validity": 30,
+    "planType": "international-roaming",
+    "popular": true
+  },
+  {
+    "id": 23,
+    "price": 2999,
+    "data": "20GB",
+    "calls": "Unlimited",
+    "validity": 30,
+    "planType": "international-roaming",
+    "popular": false
+  },
+  {
+    "id": 24,
+    "price": 1799,
+    "data": "15GB",
+    "calls": "Unlimited",
+    "validity": 30,
+    "planType": "international-roaming",
+    "popular": false
+  },
+  {
+    "id": 25,
+    "price": 599,
+    "data": "1GB/day",
+    "calls": "Unlimited",
+    "validity": 56,
+    "planType": "ott",
+    "popular": true
+  },
+  {
+    "id": 26,
+    "price": 899,
+    "data": "2GB/day",
+    "calls": "Unlimited",
+    "validity": 56,
+    "planType": "ott",
+    "popular": false
+  },
+  {
+    "id": 27,
+    "price": 999,
+    "data": "3GB/day",
+    "calls": "Unlimited",
+    "validity": 56,
+    "planType": "ott",
+    "popular": false
+  },
+  {
+    "id": 28,
+    "price": 1299,
+    "data": "5GB/day",
+    "calls": "Unlimited",
+    "validity": 56,
+    "planType": "ott",
+    "popular": false
+  },
+  {
+    "id": 29,
+    "price": 999,
+    "data": "3GB/day",
+    "calls": "Unlimited",
+    "validity": 56,
+    "planType": "combo",
+    "popular": true
+  },
+  {
+    "id": 30,
+    "price": 1499,
+    "data": "10GB/day",
+    "calls": "Unlimited",
+    "validity": 48,
+    "planType": "combo",
+    "popular": true
+  },
+  {
+    "id": 31,
+    "price": 19,
+    "data": "1GB",
+    "calls": "None",
+    "validity": 1,
+    "planType": "data",
+    "popular": true
+  },
+  {
+    "id": 32,
+    "price": 29,
+    "data": "2GB",
+    "calls": "None",
+    "validity": 1,
+    "planType": "data",
+    "popular": true
+  },
+  {
+    "id": 33,
+    "price": 49,
+    "data": "Unlimited",
+    "calls": "None",
+    "validity": 1,
+    "planType": "data",
+    "popular": true
+  }
+]

@@ -2,18 +2,19 @@ function validateForm() {
     let mobile = document.getElementById("mobile").value;
     let mobileError = document.getElementById("mobileError");
 
-    // Basic Mobile Number Validation (You can customize this)
     if (mobile.trim() === "") {
         mobileError.textContent = "Mobile number is required.";
         return false;
-    } else if (!/^\d{10}$/.test(mobile)) { // 10-digit number
+    } else if (!/^\d{10}$/.test(mobile)) {
         mobileError.textContent = "Please enter a valid 10-digit mobile number.";
         return false;
     } else {
-        mobileError.textContent = ""; // Clear error
+        mobileError.textContent = "";
     }
 
-    // If validation passes, you can proceed with form submission or OTP logic
-    alert("Validation successful! (OTP logic would go here)");
+    // Store the mobile number in localStorage (more secure than URL parameters for this step)
+    localStorage.setItem('mobileNumber', mobile);
+
+    window.location.href = "otp.html"; // Redirect without the parameter in the URL
     return true;
 }

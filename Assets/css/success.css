@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+body {
+    font-family: "Open Sans", sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.success-container {
+    padding-top: 90px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    height: 130vh;
+}
+
+.success-icon {
+    font-size: 50px;
+    color: green;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.details-card {
+    background-color: #fafafa;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.details-card h2 {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.details-card p {
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.payment-method {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0e0e0;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.payment-method i {
+    margin-right: 10px;
+    font-size: 24px;
+}

@@ -486,3 +486,140 @@ footer .navbar-brand img {
 .footer-links a:hover {
     text-decoration: underline;
 }
+
+/* General Styles */
+body,
+html {
+    overflow-x: hidden;
+    /* Prevents horizontal scrolling */
+}
+
+/* Navbar */
+.navbar {
+    padding: 10px 20px;
+}
+
+.navbar-nav {
+    text-align: center;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.hero .header-content h1 {
+    font-size: 2rem;
+}
+
+.hero img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Login Form */
+@media (min-width: 768px) {
+    .login-container {
+        display: flex;
+        /* Use Flexbox for alignment */
+        align-items: center;
+        /* Vertically center content */
+        min-height: 50vh;
+        /* Ensure container takes up at least half the viewport height */
+        padding: 50px 0;
+        /* Add some padding */
+    }
+
+    .login-box {
+        padding: 40px;
+        border-radius: 10px;
+        /* Add rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Add a subtle shadow */
+        background-color: #fff;
+        /* White background for contrast */
+    }
+
+    .illustration-box {
+        text-align: center;
+        /* Center the image */
+    }
+
+    .illustration {
+        max-width: 80%;
+        /* Adjust image width as needed */
+        height: auto;
+    }
+
+    .login-form {
+        text-align: left;
+        /* Align form elements to the left */
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        /* Add space between form elements */
+    }
+
+    .recharge-btn {
+        width: 100%;
+        /* Make button full width */
+    }
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .navbar-collapse {
+        text-align: center;
+    }
+
+    .header-content h1 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .plan-card,
+    .testimonial-card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .about-us img {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .header-container {
+        padding: 10px;
+    }
+
+    .plan-card {
+        padding: 10px;
+    }
+
+    .footer {
+        font-size: 14px;
+    }
+}

@@ -7,6 +7,8 @@
     <title>MobiComm</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="Assets/css/login.css">
+    <link rel="icon" href="Assets/png/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -28,13 +30,13 @@
                             <a class="nav-link" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Plans</a>
+                            <a class="nav-link" href="#plans">Plans</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About Us</a>
+                            <a class="nav-link" href="#about">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contact Us</a>
+                            <a class="nav-link" href="#contact">Contact Us</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link btn btn-primary login-btn" href="login.html">Login</a>
@@ -51,8 +53,8 @@
                     ">
                         <h1>Recharge Your Mobile<br>in Just a Few Clicks!</h1>
                         <p>Fast, Secure, and Hassle-Free<br>Recharges for All</p>
-                        <button class="btn btn-primary login-btn"><a href="login.html"
-                                style="text-decoration: none;">Login</a></button>
+                        <button class="btn btn-light login-btn"><a href="#login" style="text-decoration: none;">Get
+                                Started</a></button>
                     </div>
                     <div class="col-md-6">
                         <img src="Assets/png/Connected-cuate 1.png" alt="Recharge Illustration" class="img-fluid">
@@ -61,9 +63,42 @@
             </div>
         </section>
     </section>
+    <!-- login -->
+    <div class="container" id="login">
+        <div class="row justify-content-center">
+            <div class="col-md-6 login-box">
+                <div class="login-form">
+                    <h2 class="welcome-back">WELCOME BACK</h2>
+                    <p class="enter-details">Welcome back! Please enter your details.</p>
+
+                    <form id="loginForm">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="mobile">Mobile</label>
+                                    <input type="text" class="form-control" id="mobile" name="mobile"
+                                        placeholder="Enter your number">
+                                    <span id="mobileError" class="error-message"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-12"> <button type="button" class="recharge-btn" onclick="validateForm()">Get
+                                    OTP</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6 illustration-box">
+                <img src="Assets/png/At the office-pana (1) 1.png" alt="Illustration" class="illustration img-fluid">
+            </div>
+        </div>
+    </div>
     <!-- plans -->
 
-    <section class="container mt-5">
+    <section id="plans" class="container mt-5">
         <h2 class="recommended-packs-title">Recommended Packs</h2>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
             <div class="col">
@@ -75,7 +110,7 @@
                             <p>Calls: Unlimited</p>
                             <p>Validity: 28 Days</p>
                         </div>
-                        <a href="#" class="recharge-btn">Recharge</a>
+                        <a href="login.html" class="recharge-btn">Recharge</a>
                         <a href="#" class="view-details">view details</a>
                     </div>
                 </div>
@@ -89,7 +124,7 @@
                             <p>Calls: Unlimited</p>
                             <p>Validity: 28 Days</p>
                         </div>
-                        <a href="#" class="recharge-btn">Recharge</a>
+                        <a href="login.html" class="recharge-btn">Recharge</a>
                         <a href="#" class="view-details">view details</a>
                     </div>
                 </div>
@@ -103,7 +138,7 @@
                             <p>Calls: Unlimited</p>
                             <p>Validity: 28 Days</p>
                         </div>
-                        <a href="#" class="recharge-btn">Recharge</a>
+                        <a href="login.html" class="recharge-btn">Recharge</a>
                         <a href="#" class="view-details">view details</a>
                     </div>
                 </div>
@@ -117,7 +152,7 @@
                             <p>Calls: No</p>
                             <p>Validity: 01 Day</p>
                         </div>
-                        <a href="#" class="recharge-btn">Recharge</a>
+                        <a href="login.html" class="recharge-btn">Recharge</a>
                         <a href="#" class="view-details">view details</a>
                     </div>
                 </div>
@@ -131,7 +166,7 @@
                             <p>Calls: Unlimited</p>
                             <p>Validity: 365 Days</p>
                         </div>
-                        <a href="#" class="recharge-btn">Recharge</a>
+                        <a href="login.html" class="recharge-btn">Recharge</a>
                         <a href="#" class="view-details">view details</a>
                     </div>
                 </div>
@@ -145,7 +180,7 @@
                             <p>Calls: Unlimited</p>
                             <p>Validity: 84 Days</p>
                         </div>
-                        <a href="#" class="recharge-btn">Recharge</a>
+                        <a href="login.html" class="recharge-btn">Recharge</a>
                         <a href="#" class="view-details">view details</a>
                     </div>
                 </div>
@@ -159,7 +194,7 @@
                             <p>Calls: No</p>
                             <p>Validity: 01 Day</p>
                         </div>
-                        <a href="#" class="recharge-btn">Recharge</a>
+                        <a href="login.html" class="recharge-btn">Recharge</a>
                         <a href="#" class="view-details">view details</a>
                     </div>
                 </div>
@@ -186,7 +221,7 @@
     </section>
     <br>
     <!-- about us -->
-    <section class="about-us py-5">
+    <section id="about" class="about-us py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -239,7 +274,7 @@
                     <div class="testimonial-card">
                         <img src="Assets/png/image 4.png" alt="John Smith" class="testimonial-avatar">
                         <h3 class="testimonial-name">John Smith</h3>
-                        <p class="testimonial-location">New York, USA</p>
+                        <p class="testimonial-location">New Delhi, India</p>
                         <p class="testimonial-text">
                             "This website makes mobile recharges effortless! Quick transactions, secure payments, and a
                             smooth user experience every time."
@@ -261,7 +296,7 @@
                     <div class="testimonial-card">
                         <img src="Assets/png/image 8.png" alt="Ahmed Khan" class="testimonial-avatar">
                         <h3 class="testimonial-name">Ahmed Khan</h3>
-                        <p class="testimonial-location">Dubai, UAE</p>
+                        <p class="testimonial-location">Kochi, India</p>
                         <p class="testimonial-text">
                             "Easy, secure, and super quick! I can recharge in seconds without any hassle. Highly
                             recommended!"
@@ -337,7 +372,7 @@
     </section>
 
     <!-- contact -->
-    <section class="contact-section">
+    <section id="contact" class="contact-section">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8">
@@ -384,6 +419,7 @@
     </footer>
 
     <script src="Assets/js/script.js"></script>
+    <script src="Assets/js/login.js"></script>
 </body>
 
 </html>

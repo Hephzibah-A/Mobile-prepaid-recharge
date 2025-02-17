@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recharge History</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="Assets/css/history.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="icon" href="Assets/png/favicon.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img src="Assets/png/logo_color.png" alt="MobiComm Logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Plans</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#userProfileModal">
+                            <i class="fas fa-user-circle fa-2x"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- User Profile Modal -->
+    <div class="modal fade" id="userProfileModal" tabindex="-1" aria-labelledby="userProfileModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userProfileModalLabel">User Profile</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- View Profile Content -->
+                    <div id="profileContent">
+                        <p><strong>Name:</strong> <span id="userName">John Doe</span></p>
+                        <p><strong>Phone Number:</strong> <span id="userPhone">+1234567890</span></p>
+                        <p><strong>Email:</strong> <span id="userEmail">johndoe@example.com</span></p>
+                        <button class="btn btn-primary" id="editProfileBtn">Edit Profile</button>
+                    </div>
+
+                    <!-- Edit Profile Content (Initially Hidden) -->
+                    <div id="editProfileContent" style="display: none;">
+                        <form id="editProfileForm">
+                            <div class="form-group">
+                                <label for="editName">Name</label>
+                                <input type="text" class="form-control" id="editName" value="John Doe" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="editPhone">Phone Number</label>
+                                <input type="text" class="form-control" id="editPhone" value="+1234567890" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="editEmail">Email</label>
+                                <input type="email" class="form-control" id="editEmail" value="johndoe@example.com">
+                            </div>
+                            <button type="submit" class="btn btn-success">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Toggle between view and edit profile mode
+            const editProfileBtn = document.getElementById('editProfileBtn');
+            const profileContent = document.getElementById('profileContent');
+            const editProfileContent = document.getElementById('editProfileContent');
+
+            // Toggle to Edit Profile Mode
+            editProfileBtn.addEventListener('click', function () {
+                profileContent.style.display = 'none';
+                editProfileContent.style.display = 'block';
+            });
+
+            // Handle the Save Changes functionality
+            const editProfileForm = document.getElementById('editProfileForm');
+            editProfileForm.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent form submission
+
+                const updatedEmail = document.getElementById('editEmail').value;
+
+                // Update the user profile with the new email
+                document.getElementById('userEmail').textContent = updatedEmail;
+
+                // Hide edit profile form and show profile content again
+                editProfileContent.style.display = 'none';
+                profileContent.style.display = 'block';
+            });
+        });
+    </script>
+
+
+    <div class="container">
+        <h1>Recharge History</h1>
+        <button class="btn btn-secondary btn-download" onclick="downloadPDF()">Download as PDF</button>
+        <table class="table table-bordered" id="historyTable">
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Recharge Method</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>TXN1234567890</td>
+                    <td>2025-02-17</td>
+                    <td>₹500</td>
+                    <td>Mobile Recharge</td>
+                    <td class="status-success">Successful</td>
+                </tr>
+                <tr>
+                    <td>TXN9876543210</td>
+                    <td>2025-02-16</td>
+                    <td>₹200</td>
+                    <td>Mobile Recharge</td>
+                    <td class="status-fail">Failed</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="mt-auto">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <a class="navbar-brand" href="#">
+                        <img src="Assets/png/logo.png" alt="MobiComm Logo" style="max-height: 50px;">
+                    </a>
+                </div>
+                <div class="col-md-9">
+                    <div class="footer-links">
+                        <p>&copy;2025 Company Name. All rights reserved.
+                            <a href="#">Privacy &amp; Policy</a> |
+                            <a href="#">Terms &amp; Condition</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="Assets/js/history.js"></script>
+    <!-- <script>
+        function downloadPDF() {
+            const doc = new jsPDF();
+            const table = document.getElementById('historyTable');
+
+            html2canvas(table, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const width = doc.internal.pageSize.getWidth();
+                const height = canvas.height * width / canvas.width;
+                doc.addImage(imgData, 'PNG', 10, 10, width - 20, height - 20);
+                doc.save('recharge_history.pdf');
+            }).catch(error => {
+                console.error('Error converting HTML to canvas:', error);
+                alert('Error downloading PDF. Please check the console for details.');
+            });
+        }
+    </script> -->
+
+</body>
+
+</html>

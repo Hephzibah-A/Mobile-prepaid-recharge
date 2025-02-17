@@ -4,101 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Successful</title>
+    <title>MobiComm | Payment Successful</title>
+    <link rel="stylesheet" href="Assets/css/success.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="Assets/png/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f7fa;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
 
-        .container {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-        }
-
-        .success-icon {
-            font-size: 50px;
-            color: green;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .details-card {
-            background-color: #fafafa;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-
-        .details-card h2 {
-            font-size: 18px;
-            color: #444;
-            margin-bottom: 10px;
-        }
-
-        .details-card p {
-            font-size: 14px;
-            color: #555;
-            margin: 5px 0;
-        }
-
-        .payment-method {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #e0e0e0;
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        .payment-method i {
-            margin-right: 10px;
-            font-size: 24px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            text-decoration: none;
-            margin-top: 20px;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
 
 <body>
 
-    <div class="container">
+    <div class="success-container">
         <div class="success-icon">
-            <i class="fas fa-check-circle"></i>
+            <dotlottie-player src="https://lottie.host/901ad1b2-2873-4966-9767-c2e9f6fe4c34/HlsWzjIbTr.lottie"
+                background="transparent" speed="1" style="width: 200px; height: 200px" loop autoplay></dotlottie-player>
+
         </div>
         <h1>Payment Successful</h1>
 
@@ -115,9 +37,17 @@
             <i class="fab fa-cc-visa"></i>
             <span>Payment Method: Credit Card</span>
         </div>
-
-        <a href="main.html" class="btn">Go to Home</a>
+        <br>
+        <div class="btn-container">
+            <a href="main.html"><button class="btn btn-primary">Go to Home</button></a>
+            <a href="history.html"><button class="btn btn-secondary">View History</button></a>
+            <br>
+            <br>
+            <a href="#><button class=" btn btn-secondary">Download Invoice</button></a>
+        </div>
     </div>
+
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 
 </body>
 

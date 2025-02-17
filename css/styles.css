@@ -246,7 +246,7 @@
     border-radius: 10px;
     position: relative;
     gap: 1.5rem;
-    /* Space between icon and text */
+
 }
 
 .detail-item::before {
@@ -296,7 +296,7 @@
 /* testimonials */
 .testimonials {
     background-color: #f8f9fa;
-    /* Light gray background */
+
     padding: 80px 0;
 }
 
@@ -311,7 +311,7 @@
 .testimonials-subtitle {
     font-size: 1rem;
     color: #777;
-    /* Slightly lighter text color */
+
     margin-bottom: 3rem;
     text-align: center;
 }
@@ -332,7 +332,7 @@
     border-radius: 50%;
     margin-bottom: 1rem;
     object-fit: cover;
-    /* Prevent image distortion */
+
 }
 
 .testimonial-name {
@@ -363,23 +363,23 @@
 .faq-item {
     margin-bottom: 1.5rem;
     border-bottom: 1px solid #eee;
-    /* Light gray separator line */
+
     padding-bottom: 1.5rem;
 }
 
 .faq-question {
     font-size: 1.1rem;
     font-weight: 500;
-    color: #555;
-    /* Slightly darker gray color */
+    color: black;
+
     cursor: pointer;
-    /* Indicate it's clickable */
+
     display: flex;
-    /* Use flexbox for alignment */
+
     justify-content: space-between;
-    /* Align items to start and end */
+
     align-items: center;
-    /* Vertically center items */
+
 }
 
 .faq-question i {
@@ -452,19 +452,37 @@
 }
 
 /* footer */
-.contact-footer {
-    height: 80px;
-    
-    background-color: #4300B1;
-    text-align: center;
-    margin-top: 50px;
+footer {
+    background: linear-gradient(to bottom, #4300B1, #36008E);
     color: white;
+    padding: 15px 0;
 }
-.contact-footer a {
-    
-  
+
+footer .navbar-brand img {
+    max-height: 40px;
+
+}
+
+.footer-links {
+    text-align: right;
+    padding-top: 10px;
+
+}
+
+.footer-links p {
+    margin-bottom: 0;
+
+    font-size: 14px;
+
+}
+
+.footer-links a {
+    color: white;
     text-decoration: none;
+    margin-left: 10px;
+    /* Space between links */
 }
-.contact-footer a:hover {
+
+.footer-links a:hover {
     text-decoration: underline;
 }

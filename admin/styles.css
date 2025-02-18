@@ -10,14 +10,28 @@ body {
     font-family: 'Arial', sans-serif;
 }
 
-.sidebar .nav-link {
-    background-color: white;
+.sidebar {
+    background-color: rgba(44, 120, 115, .70);
     height: 100vh;
     color: var(--retro-gray);
     padding-top: 20px;
     position: fixed;
     width: 250px;
 }
+
+.sidebar .nav-link {
+    color: black;
+}
+
+.sidebar .nav-link:hover {
+    color: #043e3a;
+}
+
+.sidebar .nav-link:active {
+    color: var(--retro-gray);
+    background-color: rgba(44, 120, 115,.20);
+}
+
 
 .content {
     margin-left: 260px;

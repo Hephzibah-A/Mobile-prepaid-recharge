@@ -46,6 +46,7 @@
             .login-btn {
                 margin-left: 10px;
             }
+
             .nav-link {
                 color: #390096;
             }
@@ -63,7 +64,8 @@
 
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="#"><img style="height: 50px;"  src="Assets/png/logo_color.png" alt="MobiComm Logo"></a>
+            <a class="navbar-brand" href="#"><img style="height: 50px;" src="Assets/png/logo_color.png"
+                    alt="MobiComm Logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -94,10 +96,10 @@
     <div class="container">
         <div class="profile-container">
             <i class="fas fa-user profile-icon-user"></i>
-            <h3 id="userName">John Doe</h3>
-            <p id="userEmail"><i class="fas fa-envelope"></i> johndoe@example.com</p>
-            <p id="userBio"><i class="fas fa-user"></i> Web Developer & Designer</p>
-            <p id="userPhone"><i class="fas fa-phone"></i> +1 234 567 890</p>
+            <h3 id="userName">Ashley</h3>
+            <p id="userEmail"><i class="fas fa-envelope"></i> Ashley@example.com</p>
+
+            <p id="userPhone"><i class="fas fa-phone"></i> +91 9876543210</p>
             <button class="btn btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editProfileModal">
                 <i class="fas fa-edit"></i> Edit Profile
             </button>
@@ -118,16 +120,16 @@
                     <form id="editProfileForm">
                         <div class="mb-3">
                             <label for="editName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="editName" value="John Doe">
+                            <input type="text" class="form-control" id="editName" value="Ashley">
                         </div>
                         <div class="mb-3">
                             <label for="editEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="editEmail" value="johndoe@example.com">
+                            <input type="email" class="form-control" id="editEmail" value="ashley@example.com">
                         </div>
 
                         <div class="mb-3">
                             <label for="editPhone" class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="editPhone" value="+1 234 567 890" disabled>
+                            <input type="text" class="form-control" id="editPhone" value="+91 9876543210" disabled>
                         </div>
                         <button type="button" class="btn btn-primary" id="saveChangesBtn">Save Changes</button>
                     </form>

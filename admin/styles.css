@@ -15,7 +15,7 @@ body {
 
 /* Sidebar */
 .sidebar {
-    background-color: var(--retro-gray);
+    background-color: var(--retro-teal);
     height: 100vh;
     color: white;
     padding-top: 20px;
@@ -27,6 +27,7 @@ body {
 .sidebar h4 {
     color: white;
     text-align: center;
+    font-weight: bold;
 }
 
 .sidebar .nav-link {
@@ -36,12 +37,9 @@ body {
 }
 
 .sidebar .nav-link:hover {
-    background-color: #495057;
+    background-color: #24625e;
 }
 
-.sidebar .nav-link.active {
-    background-color: var(--retro-teal);
-}
 
 /* Content */
 .content {
@@ -72,7 +70,7 @@ body {
 .stats-card h2 {
     font-size: 2rem;
     font-weight: bold;
-    color: var(--retro-teal);
+    color: black;
 }
 
 /* Table */
@@ -89,7 +87,7 @@ body {
 }
 
 .table th {
-    background-color: var(--retro-gray);
+    background-color: rgba(44, 120, 115, .85);
     color: white;
 }
 

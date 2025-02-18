@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MobiComm | User profile</title>
+
+
+    <link rel="icon" href="Assets/png/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- <link rel="stylesheet" href="css/styles.css" -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .profile-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .profile-icon-user {
+            font-size: 80px;
+            color: #390096;
+            border: 3px solid #390096;
+            padding: 20px;
+            border-radius: 50%;
+        }
+
+        .edit-btn {
+            margin-top: 10px;
+        }
+
+        .navbar {
+            color: #ffffff;
+
+            .login-btn {
+                margin-left: 10px;
+            }
+            .nav-link {
+                color: #390096;
+            }
+
+            .nav-link:hover {
+                color: #300377;
+            }
+
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img style="height: 50px;"  src="Assets/png/logo_color.png" alt="MobiComm Logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="main.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="plans.html">Plans</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="main.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="main.html">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">
+                            <i class="fas fa-user-circle fa-2x"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="profile-container">
+            <i class="fas fa-user profile-icon-user"></i>
+            <h3 id="userName">John Doe</h3>
+            <p id="userEmail"><i class="fas fa-envelope"></i> johndoe@example.com</p>
+            <p id="userBio"><i class="fas fa-user"></i> Web Developer & Designer</p>
+            <p id="userPhone"><i class="fas fa-phone"></i> +1 234 567 890</p>
+            <button class="btn btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                <i class="fas fa-edit"></i> Edit Profile
+            </button>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <!-- Edit Profile Modal -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProfileForm">
+                        <div class="mb-3">
+                            <label for="editName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="editName" value="John Doe">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="editEmail" value="johndoe@example.com">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="editPhone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="editPhone" value="+1 234 567 890" disabled>
+                        </div>
+                        <button type="button" class="btn btn-primary" id="saveChangesBtn">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- JavaScript -->
+    <script>
+        function saveProfile() {
+            document.getElementById("userName").innerText = document.getElementById("editName").value;
+            document.getElementById("userEmail").innerHTML = `<i class="fas fa-envelope"></i> ` + document.getElementById("editEmail").value;
+            document.getElementById("userPhone").innerHTML = `<i class="fas fa-phone"></i> ` + document.getElementById("editPhone").value;
+
+            // Close modal
+            let modal = new bootstrap.Modal(document.getElementById('editProfileModal'));
+            modal.hide();
+        }
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

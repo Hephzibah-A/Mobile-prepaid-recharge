@@ -8,52 +8,39 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-
     <link rel="stylesheet" href="Assets/css/history.css">
     <link rel="stylesheet" href="css/styles.css">
-
     <link rel="icon" href="Assets/png/favicon.ico">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-
 </head>
 
 <body>
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="main.html"><img src="Assets/png/logo_color.png" alt="MobiComm Logo"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            <a class="navbar-brand" href="main.html">
+                <img src="Assets/png/logo_color.png" alt="MobiComm Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Plans</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile.html">
-                            <i class="fas fa-user-circle fa-2x"></i>
-                        </a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Plans</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="profile.html"><i
+                                class="fas fa-user-circle fa-2x"></i></a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- User Profile Modal -->
-
-
-    <div class="container">
+    <!-- Recharge History Section -->
+    <div class="container mt-4">
         <h1>Recharge History</h1>
         <button class="btn btn-secondary btn-download" onclick="downloadPDF()">Download as PDF</button>
         <table class="table table-bordered" id="historyTable">
@@ -66,25 +53,13 @@
                     <th>Status</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>TXN1234567890</td>
-                    <td>2025-02-17</td>
-                    <td>₹500</td>
-                    <td>Mobile Recharge</td>
-                    <td class="status-success">Successful</td>
-                </tr>
-                <tr>
-                    <td>TXN9876543210</td>
-                    <td>2025-02-16</td>
-                    <td>₹200</td>
-                    <td>Mobile Recharge</td>
-                    <td class="status-fail">Failed</td>
-                </tr>
+            <tbody id="historyBody">
+                <!-- History records will be dynamically inserted here -->
             </tbody>
         </table>
     </div>
 
+    <!-- Footer -->
     <footer class="mt-auto">
         <div class="container-fluid">
             <div class="row">
@@ -105,28 +80,88 @@
         </div>
     </footer>
 
-
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="Assets/js/history.js"></script>
-    <!-- <script>
-        function downloadPDF() {
-            const doc = new jsPDF();
-            const table = document.getElementById('historyTable');
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Retrieve the mobile number of the logged-in user from localStorage
+            const mobileNumber = localStorage.getItem('mobileNumber');
+            if (!mobileNumber) {
+                console.error("Mobile number not found in localStorage.");
+                window.location.href = "index.html"; // Redirect to login/home if not found
+                return;
+            }
 
-            html2canvas(table, { scale: 2 }).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                const width = doc.internal.pageSize.getWidth();
-                const height = canvas.height * width / canvas.width;
-                doc.addImage(imgData, 'PNG', 10, 10, width - 20, height - 20);
-                doc.save('recharge_history.pdf');
-            }).catch(error => {
-                console.error('Error converting HTML to canvas:', error);
-                alert('Error downloading PDF. Please check the console for details.');
-            });
-        }
-    </script> -->
+            // Function to load the user's recharge (payment) history from JSON Server
+            function loadHistory() {
+                // Query JSON Server for the user with the matching phone number (assumes field "phnno")
+                fetch('http://localhost:3000/users?phnno=' + mobileNumber)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("HTTP error " + response.status);
+                        }
+                        return response.json();
+                    })
+                    .then(users => {
+                        if (users.length === 0) {
+                            console.error("User not found for mobile number: " + mobileNumber);
+                            document.getElementById('historyBody').innerHTML =
+                                `<tr><td colspan="5" class="text-center">No history found.</td></tr>`;
+                            return;
+                        }
+                        // Assume mobile numbers are unique; use the first user found
+                        const user = users[0];
+                        let historyHTML = "";
+                        if (user.paymentHistory && user.paymentHistory.length > 0) {
+                            user.paymentHistory.forEach(payment => {
+                                // Assume payment record contains: id, date, amount, method
+                                // We'll assume status is "Successful" (unless provided)
+                                const status = payment.status ? payment.status : "Successful";
+                                historyHTML += `
+                  <tr>
+                    <td>${payment.id}</td>
+                    <td>${payment.date}</td>
+                    <td>₹${payment.amount}</td>
+                    <td>${payment.method}</td>
+                    <td class="${status.toLowerCase()}">${status}</td>
+                  </tr>
+                `;
+                            });
+                        } else {
+                            historyHTML = `<tr><td colspan="5" class="text-center">No history found.</td></tr>`;
+                        }
+                        document.getElementById('historyBody').innerHTML = historyHTML;
+                    })
+                    .catch(error => {
+                        console.error("Error fetching user record:", error);
+                        document.getElementById('historyBody').innerHTML =
+                            `<tr><td colspan="5" class="text-center">Error loading history: ${error.message}</td></tr>`;
+                    });
+            }
 
+            // Call loadHistory when the page loads
+            loadHistory();
+
+            // Function to download the history table as a PDF
+            window.downloadPDF = function () {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                const table = document.getElementById('historyTable');
+
+                html2canvas(table, { scale: 2 }).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const width = doc.internal.pageSize.getWidth();
+                    const height = canvas.height * width / canvas.width;
+                    doc.addImage(imgData, 'PNG', 10, 10, width - 20, height - 20);
+                    doc.save('recharge_history.pdf');
+                }).catch(error => {
+                    console.error('Error converting HTML to canvas:', error);
+                    alert('Error downloading PDF. Please check the console for details.');
+                });
+            };
+        });
+    </script>
 </body>
 
 </html>

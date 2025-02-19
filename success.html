@@ -11,44 +11,66 @@
     <link rel="icon" href="Assets/png/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
 </head>
 
 <body>
-
     <div class="success-container">
         <div class="success-icon">
             <dotlottie-player src="https://lottie.host/901ad1b2-2873-4966-9767-c2e9f6fe4c34/HlsWzjIbTr.lottie"
                 background="transparent" speed="1" style="width: 200px; height: 200px" loop autoplay></dotlottie-player>
-
         </div>
         <h1>Payment Successful</h1>
-
-        <div class="details-card">
-            <h2>Transaction Details</h2>
-            <p><strong>Transaction ID:</strong> TXN1234567890</p>
-            <p><strong>Amount:</strong> ₹500</p>
-            <p><strong>Recharge Method:</strong> Mobile Recharge</p>
-            <p><strong>Status:</strong> Successful</p>
-            <p><strong>Date:</strong> 17th February 2025</p>
+        <!-- Transaction Details Section -->
+        <div class="details-card" id="transactionDetails">
+            <!-- Transaction details (including plan and payment method) will be inserted here -->
         </div>
-
-        <div class="payment-method">
-            <i class="fab fa-cc-visa"></i>
-            <span>Payment Method: Credit Card</span>
-        </div>
-        <br>
         <div class="btn-container">
             <a href="main.html"><button class="btn btn-primary">Go to Home</button></a>
             <a href="history.html"><button class="btn btn-secondary">View History</button></a>
-            <br>
-            <br>
-            <a href="#><button class=" btn btn-secondary">Download Invoice</button></a>
+            <br><br>
+            <a href="#"><button class="btn btn-secondary">Download Invoice</button></a>
         </div>
     </div>
 
+    <!-- DotLottie Player -->
     <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Utility function to format date (e.g., "February 17, 2025")
+            function formatDate(dateObj) {
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                return dateObj.toLocaleDateString('en-US', options);
+            }
+            const currentDate = formatDate(new Date());
 
+            // Retrieve selected plan details from localStorage
+            const storedPlan = localStorage.getItem('selectedPlan');
+            let plan = null;
+            if (storedPlan) {
+                plan = JSON.parse(storedPlan);
+            }
+
+            // Retrieve the selected payment method from localStorage
+            const selectedPaymentMethod = localStorage.getItem('selectedPaymentMethod');
+
+            // Generate a unique transaction ID (using current timestamp)
+            const transactionId = "TXN" + Date.now();
+
+            // Build the Transaction Details HTML integrating the plan details and the payment method
+            let transactionDetailsHTML = `
+        <h2>Transaction Details</h2>
+        <p><strong>Transaction ID:</strong> ${transactionId}</p>
+        <p><strong>Amount:</strong> ₹${plan ? plan.price : "0"}</p>
+        <p><strong>Recharge Method:</strong> ${plan ? (plan.name ? plan.name : ("Plan " + plan.id)) : "N/A"}</p>
+        <p><strong>Payment Method:</strong> ${selectedPaymentMethod ? selectedPaymentMethod.toUpperCase() : "N/A"}</p>
+        <p><strong>Status:</strong> Successful</p>
+        <p><strong>Date:</strong> ${currentDate}</p>
+      `;
+
+            // Update the Transaction Details section
+            document.getElementById('transactionDetails').innerHTML = transactionDetailsHTML;
+        });
+    </script>
 </body>
 
 </html>

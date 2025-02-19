@@ -2,111 +2,143 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MobiComm | User profile</title>
-
-
-    <link rel="icon" href="Assets/png/favicon.ico">
-    <link rel="stylesheet" href="style.css">
-
-    <!-- <link rel="stylesheet" href="css/styles.css" -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MobiComm | User Profile</title>
+    <link rel="icon" href="Assets/png/favicon.ico" />
+    <!-- You can link external CSS files if needed -->
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         body {
             background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif;
         }
 
+        /* Navbar styling */
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand img {
+            max-height: 50px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #4b0082;
+            font-weight: 500;
+            margin-right: 15px;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #300377;
+        }
+
+        /* Profile Container Styling */
         .profile-container {
             max-width: 600px;
             margin: 50px auto;
-            background: white;
-            padding: 20px;
+            background: #ffffff;
+            padding: 30px;
             border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
         .profile-icon-user {
-            font-size: 80px;
-            color: #390096;
-            border: 3px solid #390096;
+            font-size: 100px;
+            color: #4b0082;
+            border: 4px solid #4b0082;
             padding: 20px;
             border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #666;
         }
 
         .edit-btn {
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
-        .navbar {
-            color: #ffffff;
+        /* Modal Styling */
+        .modal-content {
+            border-radius: 10px;
+        }
 
-            .login-btn {
-                margin-left: 10px;
-            }
+        .modal-header {
+            border-bottom: none;
+            background: #4b0082;
+            color: #fff;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
 
-            .nav-link {
-                color: #390096;
-            }
+        .modal-title {
+            font-weight: 700;
+        }
 
-            .nav-link:hover {
-                color: #300377;
-            }
+        .btn-primary {
+            background-color: #4b0082;
+            border-color: #4b0082;
+        }
 
-
+        .btn-primary:hover {
+            background-color: #300377;
+            border-color: #300377;
         }
     </style>
 </head>
 
 <body>
-
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="main.html"><img style="height: 50px;" src="Assets/png/logo_color.png"
-                    alt="MobiComm Logo"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            <a class="navbar-brand" href="main.html">
+                <img src="Assets/png/logo_color.png" alt="MobiComm Logo" />
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="main.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="plans.html">Plans</a></li>
+                    <li class="nav-item"><a class="nav-link" href="main.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="main.html">Contact Us</a></li>
                     <li class="nav-item">
-                        <a class="nav-link" href="main.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="plans.html">Plans</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="main.html">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="main.html">Contact Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile.html">
-                            <i class="fas fa-user-circle fa-2x"></i>
-                        </a>
+                        <a class="nav-link" href="profile.html"><i class="fas fa-user-circle fa-2x"></i></a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    <!-- Profile Container -->
     <div class="container">
         <div class="profile-container">
             <i class="fas fa-user profile-icon-user"></i>
-            <h3 id="userName">Ashley</h3>
-            <p id="userEmail"><i class="fas fa-envelope"></i> Ashley@example.com</p>
-
-            <p id="userPhone"><i class="fas fa-phone"></i> +91 9876543210</p>
+            <h3 id="userName">Loading...</h3>
+            <p id="userEmail"><i class="fas fa-envelope"></i> Loading...</p>
+            <p id="userPhone"><i class="fas fa-phone"></i> Loading...</p>
             <button class="btn btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editProfileModal">
                 <i class="fas fa-edit"></i> Edit Profile
             </button>
         </div>
     </div>
 
-    <!-- Edit Profile Modal -->
     <!-- Edit Profile Modal -->
     <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel"
         aria-hidden="true">
@@ -120,16 +152,15 @@
                     <form id="editProfileForm">
                         <div class="mb-3">
                             <label for="editName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="editName" value="Ashley">
+                            <input type="text" class="form-control" id="editName" value="">
                         </div>
                         <div class="mb-3">
                             <label for="editEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="editEmail" value="ashley@example.com">
+                            <input type="email" class="form-control" id="editEmail" value="">
                         </div>
-
                         <div class="mb-3">
                             <label for="editPhone" class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="editPhone" value="+91 9876543210" disabled>
+                            <input type="text" class="form-control" id="editPhone" value="" disabled>
                         </div>
                         <button type="button" class="btn btn-primary" id="saveChangesBtn">Save Changes</button>
                     </form>
@@ -138,24 +169,98 @@
         </div>
     </div>
 
-
-
-    <!-- JavaScript -->
-    <script>
-        function saveProfile() {
-            document.getElementById("userName").innerText = document.getElementById("editName").value;
-            document.getElementById("userEmail").innerHTML = `<i class="fas fa-envelope"></i> ` + document.getElementById("editEmail").value;
-            document.getElementById("userPhone").innerHTML = `<i class="fas fa-phone"></i> ` + document.getElementById("editPhone").value;
-
-            // Close modal
-            let modal = new bootstrap.Modal(document.getElementById('editProfileModal'));
-            modal.hide();
-        }
-    </script>
-
-    <!-- Bootstrap JS -->
+    <!-- Bootstrap JS (CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript to fetch and update user profile from JSON Server -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Retrieve mobile number of logged-in user from localStorage
+            const mobileNumber = localStorage.getItem("mobileNumber");
+            if (!mobileNumber) {
+                console.error("Mobile number not found in localStorage.");
+                window.location.href = "index.html"; // Redirect if no mobile number
+                return;
+            }
 
+            // Function to fetch user data from JSON Server
+            function fetchUserData() {
+                fetch('http://localhost:3000/users?phnno=' + mobileNumber)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("HTTP error " + response.status);
+                        }
+                        return response.json();
+                    })
+                    .then(users => {
+                        if (users.length > 0) {
+                            const user = users[0];
+                            // Update profile display
+                            document.getElementById("userName").innerText = user.name;
+                            document.getElementById("userEmail").innerHTML = `<i class="fas fa-envelope"></i> ${user.email}`;
+                            document.getElementById("userPhone").innerHTML = `<i class="fas fa-phone"></i> ${user.phnno}`;
+                            // Pre-fill the modal with current values
+                            document.getElementById("editName").value = user.name;
+                            document.getElementById("editEmail").value = user.email;
+                            document.getElementById("editPhone").value = user.phnno;
+                            // Save user data to localStorage for later use
+                            localStorage.setItem("userData", JSON.stringify(user));
+                        } else {
+                            console.error("User not found for mobile number: " + mobileNumber);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error fetching user data:", error);
+                    });
+            }
+
+            // Call fetchUserData on page load
+            fetchUserData();
+
+            // Save changes when clicking the Save Changes button
+            document.getElementById("saveChangesBtn").addEventListener("click", function () {
+                const updatedName = document.getElementById("editName").value;
+                const updatedEmail = document.getElementById("editEmail").value;
+                const phone = document.getElementById("editPhone").value; // Phone is not editable
+
+                let userData = localStorage.getItem("userData");
+                if (userData) {
+                    userData = JSON.parse(userData);
+                    userData.name = updatedName;
+                    userData.email = updatedEmail;
+                    // Update profile display
+                    document.getElementById("userName").innerText = userData.name;
+                    document.getElementById("userEmail").innerHTML = `<i class="fas fa-envelope"></i> ${userData.email}`;
+                    document.getElementById("userPhone").innerHTML = `<i class="fas fa-phone"></i> ${userData.phnno}`;
+
+                    // Update JSON Server via PUT request
+                    fetch('http://localhost:3000/users/' + userData.id, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(userData)
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("HTTP error " + response.status);
+                            }
+                            return response.json();
+                        })
+                        .then(updatedUser => {
+                            console.log("User profile updated successfully:", updatedUser);
+                            localStorage.setItem("userData", JSON.stringify(updatedUser));
+                            // Close modal using Bootstrap API
+                            const modalEl = document.getElementById("editProfileModal");
+                            const modal = bootstrap.Modal.getInstance(modalEl);
+                            modal.hide();
+                        })
+                        .catch(error => {
+                            console.error("Error updating user profile:", error);
+                        });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

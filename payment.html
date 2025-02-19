@@ -4,18 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> MobiComm | Payment</title>
+    <title>MobiComm | Payment</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="Assets/css/payment.css">
     <link rel="icon" href="Assets/png/favicon.ico">
-    <link rel="icon" href="Assets/png/favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Bootstrap CSS for responsiveness -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 
 <body>
-
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
@@ -75,8 +74,10 @@
                             <input type="text" id="cardholder" placeholder="Amy Schumer">
                             <span id="cardholderError" class="error-message"></span><br>
 
-                            <a href="success.html"> <button class="btn btn-primary" onclick="validateCardForm()">Pay
-                                    ₹<span id="paymentAmount"></span> now</button></a>
+                            <a href="success.html">
+                                <button class="btn btn-primary" onclick="validateCardForm()">Pay ₹<span
+                                        id="paymentAmount"></span> now</button>
+                            </a>
                             <div class="secure-payment">Your transaction is secured with SSL encryption</div>
                         </div>
                     </div>
@@ -88,8 +89,10 @@
                             <input type="text" id="upiId" placeholder="your_upi_id@bank">
                             <span id="upiIdError" class="error-message"></span><br>
 
-                            <a href="success.html"> <button class="btn btn-primary" onclick="validateUpiForm()">Pay
-                                    ₹<span id="paymentAmountUpi"></span> now</button></a>
+                            <a href="success.html">
+                                <button class="btn btn-primary" onclick="validateUpiForm()">Pay ₹<span
+                                        id="paymentAmountUpi"></span> now</button>
+                            </a>
                             <div class="secure-payment">Your transaction is secured with SSL encryption</div>
                         </div>
                     </div>
@@ -109,9 +112,11 @@
                             <input type="password" id="netbankingPassword" placeholder="Your Password">
                             <span id="netbankingPasswordError" class="error-message"></span><br>
 
-                            <a href="success.html"> <button class="btn btn-primary"
-                                    onclick="validateNetbankingForm()">Pay ₹<span id="paymentAmountNetbanking"></span>
-                                    <div class="secure-payment">Your transaction is secured with SSL encryption</div>
+                            <a href="success.html">
+                                <button class="btn btn-primary" onclick="validateNetbankingForm()">Pay ₹<span
+                                        id="paymentAmountNetbanking"></span> now</button>
+                            </a>
+                            <div class="secure-payment">Your transaction is secured with SSL encryption</div>
                         </div>
                     </div>
 
@@ -126,8 +131,10 @@
                             <input type="text" id="walletMobile" placeholder="Your Mobile Number">
                             <span id="walletMobileError" class="error-message"></span><br>
 
-                            <a href="success.html"> <button class="btn btn-primary" onclick="validateWalletForm()">Pay
-                                    ₹<span id="paymentAmountWallet"></span> now</button></a>
+                            <a href="success.html">
+                                <button class="btn btn-primary" onclick="validateWalletForm()">Pay ₹<span
+                                        id="paymentAmountWallet"></span> now</button>
+                            </a>
                             <div class="secure-payment">Your transaction is secured with SSL encryption</div>
                         </div>
                     </div>
@@ -159,12 +166,10 @@
             </div>
         </div>
     </footer>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+    <script src="Assets/js/script.js"></script>
+    <!-- Added Bootstrap JS for responsiveness and interactive components -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="Assets/js/payment.js"></script>
 </body>
-<script src="Assets/js/payment.js"></script>
 
 </html>

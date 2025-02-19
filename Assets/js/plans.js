@@ -56,7 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
-
     // Function to filter and update plans
     function filterAndSortPlans() {
         let filteredPlans = plans;

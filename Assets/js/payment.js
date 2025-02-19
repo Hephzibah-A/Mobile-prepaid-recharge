@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (selectedPlan) {
         planDetails.innerHTML = `
             <ul>
-                <li><strong>Plan Name:</strong> ${selectedPlan.name}</li>
+                <li><strong>Plan Name:</strong> ${selectedPlan.name ? selectedPlan.name : "Plan " + selectedPlan.id}</li>
                 <li><strong>Price:</strong> ₹${selectedPlan.price}</li>
                 <li><strong>Data:</strong> ${selectedPlan.data}</li>
                 <li><strong>Calls:</strong> ${selectedPlan.calls}</li>
@@ -34,10 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     editPlanButton.addEventListener('click', () => {
-        // Redirect to the plan selection page or perform other edit action
-        window.location.href = 'plans.html'; // Replace with your plan selection page URL
+        window.location.href = 'plans.html';
     });
-
 
     function hideAllForms() {
         cardForm.style.display = 'none';
@@ -46,7 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
         walletForm.style.display = 'none';
     }
 
-    // Event listeners for radio buttons
     upiRadio.addEventListener('change', () => {
         hideAllForms();
         upiForm.style.display = 'block';
@@ -67,11 +64,8 @@ document.addEventListener("DOMContentLoaded", function () {
         walletForm.style.display = 'block';
     });
 
-
-    // Initialize the forms (show card form by default)
     hideAllForms();
     cardForm.style.display = 'block';
-
 
     function validateCardForm() {
         const cardNumber = document.getElementById('cardNumber').value;
@@ -84,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const cvcError = document.getElementById('cvcError');
         const cardholderError = document.getElementById('cardholderError');
 
-        // Reset error messages
         cardNumberError.textContent = '';
         expiryError.textContent = '';
         cvcError.textContent = '';
@@ -96,37 +89,31 @@ document.addEventListener("DOMContentLoaded", function () {
             cardNumberError.textContent = 'Card number is required.';
             isValid = false;
         }
-
         if (expiry.trim() === '') {
             expiryError.textContent = 'Expiry date is required.';
             isValid = false;
         }
-
         if (cvc.trim() === '') {
             cvcError.textContent = 'CVC is required.';
             isValid = false;
         }
-
         if (cardholder.trim() === '') {
             cardholderError.textContent = 'Cardholder name is required.';
             isValid = false;
         }
-
-        return isValid; // Return validation status
+        return isValid;
     }
 
     function validateUpiForm() {
         const upiId = document.getElementById('upiId').value;
         const upiIdError = document.getElementById('upiIdError');
-        upiIdError.textContent = ''; // Reset error message
+        upiIdError.textContent = '';
         let isValid = true;
-
         if (upiId.trim() === '') {
             upiIdError.textContent = 'UPI ID is required.';
             isValid = false;
         }
-
-        return isValid; // Return validation status
+        return isValid;
     }
 
     function validateNetbankingForm() {
@@ -142,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
         netbankingPasswordError.textContent = '';
 
         let isValid = true;
-
         if (bankName.trim() === '') {
             bankNameError.textContent = 'Bank Name is required.';
             isValid = false;
@@ -166,7 +152,6 @@ document.addEventListener("DOMContentLoaded", function () {
         walletProviderError.textContent = '';
         walletMobileError.textContent = '';
         let isValid = true;
-
         if (walletProvider.trim() === '') {
             walletProviderError.textContent = 'Wallet Provider is required.';
             isValid = false;
@@ -178,13 +163,11 @@ document.addEventListener("DOMContentLoaded", function () {
         return isValid;
     }
 
-    // *Crucially*, prevent default form submission and add event listeners
     const cardFormElement = document.getElementById('card-form');
     cardFormElement.addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent form from actually submitting
+        event.preventDefault();
         if (validateCardForm()) {
             alert("Card payment successful (placeholder)");
-            // Replace with your actual payment processing logic
         }
     });
 
@@ -211,6 +194,4 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Wallet payment successful (placeholder)");
         }
     });
-
-
 });

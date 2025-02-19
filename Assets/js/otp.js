@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function () {
     const mobileNumber = localStorage.getItem('mobileNumber');
     const otpDisplay = document.getElementById("otpDisplay");
     const otpInput = document.getElementById("otp");
@@ -46,9 +46,16 @@ document.addEventListener('DOMContentLoaded', function () {
             toast.textContent = "Congratulations! You have been successfully authenticated.";
             toast.classList.add("show");
 
+            // Check if the user came from a card payment flow.
+            const fromCard = localStorage.getItem('fromCardPayment');
             setTimeout(() => {
                 toast.classList.remove("show");
-                window.location.href = "main.html";
+                // If 'fromCardPayment' flag is set to 'true', go to the payment page; otherwise, go to main.html.
+                if (fromCard === 'true') {
+                    window.location.href = "payment.html";
+                } else {
+                    window.location.href = "main.html";
+                }
             }, 3000);
         } else {
             verificationStatus.textContent = "Incorrect OTP. Please try again.";

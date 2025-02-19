@@ -2,13 +2,14 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+
 </head>
 
 <body>
@@ -16,12 +17,24 @@
     <nav class="sidebar">
         <h4 class="p-3">Admin Panel</h4>
         <ul class="nav flex-column">
-            <li class="nav-item"><a class="nav-link active" href="#" onclick="showPage('dashboard')">Dashboard</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('recharge-history')">Recharge
-                    History</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('analytics')">Analytics</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" onclick="logout()" style="color: rgb(255, 49, 49);"><i
-                        class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
+            <li class="nav-item">
+                <a class="nav-link active" href="#" onclick="showPage('dashboard')">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showPage('recharge-history')">Recharge History</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showPage('analytics')">Analytics</a>
+            </li>
+            <!-- Plan Management Nav Item -->
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="showPage('plan-management'); loadPlans();">Plan Management</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="logout()" style="color: rgb(255, 49, 49);">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+                </a>
+            </li>
         </ul>
     </nav>
 
@@ -29,25 +42,24 @@
     <div id="dashboard" class="content">
         <div class="row mb-4">
             <div class="col-md-4">
-                <div class="stats-card" style="border-left: 4px solid var(--retro-teal)">
+                <div class="stats-card" style="border-left: 4px solid #009688;">
                     <h5>Total Users</h5>
                     <h2 id="total-users">1,234</h2>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="stats-card" style="border-left: 4px solid var(--retro-mustard)">
+                <div class="stats-card" style="border-left: 4px solid #FFC107;">
                     <h5>Active Users</h5>
                     <h2 id="active-users">1,024</h2>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="stats-card" style="border-left: 4px solid var(--retro-coral)">
+                <div class="stats-card" style="border-left: 4px solid #FF5722;">
                     <h5>Expiring Soon</h5>
                     <h2 id="expiring-users">50</h2>
                 </div>
             </div>
         </div>
-
         <h3>Expiring Subscriptions (Next 3 Days)</h3>
         <table class="table table-striped mt-3">
             <thead>
@@ -66,24 +78,73 @@
     <div id="recharge-history" class="content d-none">
         <h3>Recharge History</h3>
         <div id="user-list">
-            <!-- Dummy user cards will be inserted here -->
+            <!-- User cards will be inserted here -->
         </div>
     </div>
 
-
     <!-- Analytics Page -->
     <div id="analytics" class="content d-none">
-        <div class="chart-container" style="height: 80vh; justify-content: center;">
-            <canvas id="planDistributionChart"></canvas>
-        </div>
-        <div class="bento-grid">
-            <div class="chart-container">
-                <canvas id="revenueChart"></canvas>
+        <div class="container">
+            <h2 class="my-4 text-center">Analytics Dashboard</h2>
+            <p class="text-center mb-4">Overview of key metrics and trends.</p>
+            <div class="row">
+                <!-- Revenue Trends Chart -->
+                <div class="col-md-6 mb-4">
+                    <div class="chart-container" style="height: 300px;">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <h5 class="text-center mt-2">Revenue Trends</h5>
+                </div>
+                <!-- User Growth Chart -->
+                <div class="col-md-6 mb-4">
+                    <div class="chart-container" style="height: 300px;">
+                        <canvas id="userGrowthChart"></canvas>
+                    </div>
+                    <h5 class="text-center mt-2">User Growth</h5>
+                </div>
             </div>
-            <div class="chart-container">
-                <canvas id="userGrowthChart"></canvas>
+            <div class="row">
+                <!-- Plan Distribution Chart -->
+                <div class="col-md-12 mb-4">
+                    <div class="chart-container" style="height: 400px;">
+                        <canvas id="planDistributionChart"></canvas>
+                    </div>
+                    <h5 class="text-center mt-2">Plan Distribution</h5>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Recharge Trend Chart -->
+                <div class="col-md-12 mb-4">
+                    <div class="chart-container" style="height: 400px;">
+                        <canvas id="rechargeTrendChart"></canvas>
+                    </div>
+                    <h5 class="text-center mt-2">Recharge Trend</h5>
+                </div>
             </div>
         </div>
+    </div>
+
+    <!-- Plan Management Page -->
+    <div id="plan-management" class="content d-none">
+        <h3>Plan Management</h3>
+        <button class="btn btn-primary mb-3" onclick="showPlanModal('create')">Add New Plan</button>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Price</th>
+                    <th>Data</th>
+                    <th>Calls</th>
+                    <th>Validity</th>
+                    <th>Plan Type</th>
+                    <th>Popular</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="plans-table-body">
+                <!-- Plans will be populated here -->
+            </tbody>
+        </table>
     </div>
 
     <!-- User Modal -->
@@ -101,6 +162,54 @@
         </div>
     </div>
 
+    <!-- Plan Modal -->
+    <div class="modal fade" id="planModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="planModalTitle">Plan Management</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="planForm">
+                        <input type="hidden" id="planId" value="">
+                        <div class="mb-3">
+                            <label for="planPrice" class="form-label">Price</label>
+                            <input type="number" class="form-control" id="planPrice" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="planData" class="form-label">Data</label>
+                            <input type="text" class="form-control" id="planData" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="planCalls" class="form-label">Calls</label>
+                            <input type="text" class="form-control" id="planCalls" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="planValidity" class="form-label">Validity (Days)</label>
+                            <input type="number" class="form-control" id="planValidity" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="planType" class="form-label">Plan Type</label>
+                            <select id="planType" class="form-select" required>
+                                <option value="combo">Combo</option>
+                                <option value="talktime">Talktime</option>
+                                <option value="data">Data</option>
+                                <option value="international-roaming">International Roaming</option>
+                                <option value="ott">OTT</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="planPopular">
+                            <label for="planPopular" class="form-check-label">Popular</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="savePlanButton">Save Plan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast -->
     <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive"
         aria-atomic="true">
@@ -111,8 +220,16 @@
         </div>
     </div>
 
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Scripts -->
     <script>
-        // Dummy Data Generation
+        /* ----------------- Global Data and Initialization ----------------- */
+        // Global variable to hold plans from JSON Server.
+        let plans = [];
+
+        // Dummy Data Generation for Users (used initially, but will be overridden by JSON Server data)
         const generateUsers = (count) => {
             const users = [];
             for (let i = 1; i <= count; i++) {
@@ -120,7 +237,7 @@
                     id: i,
                     name: `User ${i}`,
                     number: `98765432${i.toString().padStart(2, '0')}`,
-                    expiry: `${i % 28 + 1}-Feb-2024`,
+                    expiry: `${(i % 28) + 1}-Feb-2024`,
                     recharges: Array.from({ length: Math.floor(Math.random() * 5) + 1 }, (_, j) => ({
                         date: `${j + 1}-Feb-2024`,
                         plan: `${(j + 1) * 2}GB Data Plan`,
@@ -131,40 +248,41 @@
             return users;
         };
 
-        const allUsers = generateUsers(50);
+        // Initially, dummy data is generated (this will be overridden by the fetched data)
+        let allUsers = generateUsers(50);
 
-        // Initialize Dashboard
+        // Initialize Dashboard with dummy data.
         document.getElementById('dashboard-data').innerHTML = allUsers.map(user => `
-            <tr>
-                <td>${user.name}</td>
-                <td>${user.number}</td>
-                <td>${user.expiry}</td>
-                <td><button class="btn btn-warning" onclick="showToast()">Notify</button></td>
-            </tr>
-        `).join('');
+      <tr>
+        <td>${user.name}</td>
+        <td>${user.number}</td>
+        <td>${user.expiry}</td>
+        <td><button class="btn btn-warning" onclick="showToast()">Notify</button></td>
+      </tr>
+    `).join('');
 
-        // Initialize Recharge History
+        // Initialize Recharge History with dummy data.
         document.getElementById('user-list').innerHTML = allUsers.map(user => `
-            <div class="user-card" onclick="showUserDetails(${user.id})">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <h6>${user.name}</h6>
-                        <small class="text-muted">${user.number}</small>
-                    </div>
-                    <div class="text-end">
-                        <small>Last Recharge: ${user.recharges[0].date}</small><br>
-                        <small class="text-success">${user.recharges[0].plan}</small>
-                    </div>
-                </div>
-            </div>
-        `).join('');
+      <div class="user-card" onclick="showUserDetails(${user.id})">
+        <div class="d-flex justify-content-between">
+          <div>
+            <h6>${user.name}</h6>
+            <small class="text-muted">${user.number}</small>
+          </div>
+          <div class="text-end">
+            <small>Last Recharge: ${user.recharges[0].date}</small><br>
+            <small class="text-success">${user.recharges[0].plan}</small>
+          </div>
+        </div>
+      </div>
+    `).join('');
 
         // Chart Configurations
         const chartOptions = {
             responsive: true,
             plugins: {
                 legend: { position: 'top' },
-                title: { display: true, color: '#4a4a4a' }
+                title: { display: false }
             },
             scales: {
                 y: { grid: { color: '#e0e0e0' } },
@@ -172,7 +290,7 @@
             }
         };
 
-        // Revenue Chart
+        // Revenue Chart (Line Chart)
         new Chart(document.getElementById('revenueChart'), {
             type: 'line',
             data: {
@@ -187,7 +305,7 @@
             options: chartOptions
         });
 
-        // User Growth Chart
+        // User Growth Chart (Bar Chart)
         new Chart(document.getElementById('userGrowthChart'), {
             type: 'bar',
             data: {
@@ -201,7 +319,7 @@
             options: chartOptions
         });
 
-        // Plan Distribution Chart
+        // Plan Distribution Chart (Doughnut Chart)
         new Chart(document.getElementById('planDistributionChart'), {
             type: 'doughnut',
             data: {
@@ -214,25 +332,53 @@
             options: chartOptions
         });
 
+        // Recharge Trend Chart (Line Chart)
+        new Chart(document.getElementById('rechargeTrendChart'), {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Recharges',
+                    data: [10, 15, 8, 20, 12, 18, 25],
+                    borderColor: '#ff6b6b',
+                    backgroundColor: 'rgba(255,107,107,0.2)',
+                    tension: 0.4
+                }]
+            },
+            options: chartOptions
+        });
+
         // Show User Details Modal
         function showUserDetails(userId) {
             const user = allUsers.find(u => u.id === userId);
             const modalContent = `
-                <h6>${user.name}</h6>
-                <p>Mobile: ${user.number}</p>
-                <h6 class="mt-3">Recharge History:</h6>
-                <ul class="list-group">
-                    ${user.recharges.map(recharge => `
-                        <li class="list-group-item d-flex justify-content-between">
-                            <div>
-                                <strong>${recharge.plan}</strong><br>
-                                <small>${recharge.date}</small>
-                            </div>
-                            <span class="badge bg-primary">${recharge.payment}</span>
-                        </li>
-                    `).join('')}
-                </ul>
-            `;
+        <h6>${user.name}</h6>
+        <p>Mobile: ${user.phnno}</p>
+        <h6 class="mt-3">Recharge History:</h6>
+        <ul class="list-group">
+          ${user.rechargeHistory ? user.rechargeHistory.map(recharge => `
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <strong>${recharge.plan}</strong><br>
+                <small>${recharge.date}</small>
+              </div>
+              <span >${recharge.method}</span>
+            </li>
+          `).join('') : '<li class="list-group-item">No recharge history available.</li>'}
+        </ul>
+        <h6 class="mt-3">Payment History:</h6>
+        <ul class="list-group">
+          ${user.paymentHistory ? user.paymentHistory.map(payment => `
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <strong>${payment.method}</strong><br>
+                <small>${payment.date}</small>
+              </div>
+              <span >₹${payment.amount}</span>
+            </li>
+          `).join('') : '<li class="list-group-item">No payment history available.</li>'}
+        </ul>
+      `;
             document.getElementById('userDetailsContent').innerHTML = modalContent;
             new bootstrap.Modal('#userModal').show();
         }
@@ -251,11 +397,192 @@
         }
 
         function logout() {
-            alert("Admin, You're Logging out!")
+            alert("Admin, You're Logging out!");
             window.location.href = 'login.html';
         }
+
+        /* ------------------- Plan Management Functions Using JSON Server ------------------- */
+        // Load plans from JSON Server endpoint.
+        function loadPlans() {
+            fetch('http://localhost:3000/plans')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("HTTP error " + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    plans = data;
+                    renderPlansTable();
+                })
+                .catch(error => {
+                    console.error("Error loading plans:", error);
+                    document.getElementById('plans-table-body').innerHTML =
+                        `<tr><td colspan="8" class="text-center text-danger">Error loading plans: ${error.message}</td></tr>`;
+                });
+        }
+
+        // Render the plans table in the Plan Management page.
+        function renderPlansTable() {
+            const tbody = document.getElementById('plans-table-body');
+            if (!plans.length) {
+                tbody.innerHTML = `<tr><td colspan="8" class="text-center">No plans found.</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = plans.map(plan => `
+        <tr>
+          <td>${plan.id}</td>
+          <td>${plan.price}</td>
+          <td>${plan.data}</td>
+          <td>${plan.calls}</td>
+          <td>${plan.validity}</td>
+          <td>${plan.planType}</td>
+          <td>${plan.popular ? 'Yes' : 'No'}</td>
+          <td>
+            <button class="btn btn-sm btn-info" onclick="showPlanModal('edit', ${plan.id})">Edit</button>
+            <button class="btn btn-sm btn-danger" onclick="deletePlan(${plan.id})">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+        }
+
+        // Show the Plan Modal for creating or editing a plan.
+        // Use loose equality (==) when matching IDs to handle type differences.
+        function showPlanModal(mode, planId = null) {
+            const planModal = new bootstrap.Modal(document.getElementById('planModal'));
+            const modalTitle = document.getElementById('planModalTitle');
+            const planForm = document.getElementById('planForm');
+            planForm.reset();
+            document.getElementById('planId').value = '';
+
+            if (mode === 'create') {
+                modalTitle.textContent = 'Add New Plan';
+            } else if (mode === 'edit') {
+                modalTitle.textContent = 'Edit Plan';
+                const plan = plans.find(p => p.id == planId);
+                if (plan) {
+                    document.getElementById('planId').value = plan.id;
+                    document.getElementById('planPrice').value = plan.price;
+                    document.getElementById('planData').value = plan.data;
+                    document.getElementById('planCalls').value = plan.calls;
+                    document.getElementById('planValidity').value = plan.validity;
+                    document.getElementById('planType').value = plan.planType;
+                    document.getElementById('planPopular').checked = plan.popular;
+                }
+            }
+            planModal.show();
+        }
+
+        // Handle form submission for creating/updating a plan.
+        document.getElementById('planForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const idValue = document.getElementById('planId').value;
+            const price = parseFloat(document.getElementById('planPrice').value);
+            const dataValue = document.getElementById('planData').value;
+            const calls = document.getElementById('planCalls').value;
+            const validity = parseInt(document.getElementById('planValidity').value);
+            const planType = document.getElementById('planType').value;
+            const popular = document.getElementById('planPopular').checked;
+
+            const planData = { price, data: dataValue, calls, validity, planType, popular };
+
+            if (idValue) {
+                // Update existing plan using PUT.
+                fetch(`http://localhost:3000/plans/${idValue}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id: parseInt(idValue), ...planData })
+                })
+                    .then(response => response.json())
+                    .then(updatedPlan => {
+                        loadPlans();
+                    })
+                    .catch(error => console.error("Error updating plan:", error));
+            } else {
+                // Create a new plan using POST.
+                fetch('http://localhost:3000/plans', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(planData)
+                })
+                    .then(response => response.json())
+                    .then(newPlan => {
+                        loadPlans();
+                    })
+                    .catch(error => console.error("Error creating plan:", error));
+            }
+            const planModalEl = document.getElementById('planModal');
+            const planModal = bootstrap.Modal.getInstance(planModalEl);
+            planModal.hide();
+        });
+
+        // Delete a plan using DELETE.
+        function deletePlan(planId) {
+            if (confirm("Are you sure you want to delete this plan?")) {
+                fetch(`http://localhost:3000/plans/${planId}`, { method: 'DELETE' })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("HTTP error " + response.status);
+                        }
+                        loadPlans();
+                    })
+                    .catch(error => {
+                        console.error("Error deleting plan:", error);
+                        alert("Error deleting plan: " + error.message);
+                    });
+            }
+        }
+
+        /* ------------------- New: Retrieve User Data from JSON Server ------------------- */
+        function loadUsers() {
+            fetch('http://localhost:3000/users')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("HTTP error " + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Override allUsers with fetched data.
+                    allUsers = data;
+                    // Update Dashboard: Use user name, phone (phnno), and set expiry as "N/A" (since not provided).
+                    document.getElementById('dashboard-data').innerHTML = allUsers.map(user => `
+            <tr>
+              <td>${user.name}</td>
+              <td>${user.phnno}</td>
+              <td>N/A</td>
+              <td><button class="btn btn-warning" onclick="showToast()">Notify</button></td>
+            </tr>
+          `).join('');
+                    // Update Recharge History: Display user name, phone, and email.
+                    document.getElementById('user-list').innerHTML = allUsers.map(user => `
+            <div class="user-card" onclick="showUserDetails(${user.id})">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <h6>${user.name}</h6>
+                  <small class="text-muted">${user.phnno}</small>
+                </div>
+                <div class="text-end">
+                  <small>Email: ${user.email}</small>
+                </div>
+              </div>
+            </div>
+          `).join('');
+                })
+                .catch(error => {
+                    console.error("Error loading users:", error);
+                });
+        }
+
+        // Call loadUsers() on page load to retrieve user data from JSON Server.
+        window.addEventListener('load', function () {
+            loadUsers();
+        });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -2,102 +2,79 @@
 
 * {
     font-family: "Open Sans", serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .header-container {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     background: linear-gradient(220.55deg, #4300B1 0%, #36008E 100%);
-
-    display: flex;
     color: #ffffff;
+    display: flex;
     flex-direction: column;
-
 }
-
 
 .navbar {
+    padding: 10px 20px;
     color: #ffffff;
-
-    .login-btn {
-        margin-left: 10px;
-    }
-
-    .nav-link {
-        color: #ffffff;
-    }
-
-    .nav-link:hover {
-        color: #d7d7d7;
-    }
-
-    .login-btn {
-        padding: 10px 55px;
-        background-color: white;
-        color: #4300B1;
-        font-weight: bold;
-    }
-
-    .login-btn:hover {
-        background-color: rgb(214, 210, 210);
-        color: #36008E;
-        /* padding: 10px 55px; */
-        font-weight: bold;
-    }
 }
 
-.login-btn {
+.navbar .login-btn {
+    margin-left: 10px;
+}
+
+.navbar .nav-link {
+    color: #ffffff;
+}
+
+.navbar .nav-link:hover {
+    color: #d7d7d7;
+}
+
+.navbar .login-btn {
+    padding: 10px 55px;
     background-color: white;
     color: #4300B1;
-    padding: 10px 55px;
     font-weight: bold;
 }
 
-.login-btn:hover {
+.navbar .login-btn:hover {
     background-color: rgb(214, 210, 210);
     color: #36008E;
-    padding: 10px 55px;
     font-weight: bold;
 }
 
-.navbar-brand {
-
+.navbar-brand img {
     height: 40px;
-
-    img {
-        height: 40px;
-    }
 }
 
 .hero {
-    background-color: linear-gradient(220.55deg, #4300B1 0%, #36008E 100%);
+    text-align: center;
+    padding: 40px 20px;
+}
 
+.hero h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
 
-    h1 {
-        font-size: 3rem;
-        margin-bottom: 20px;
-        font-weight: bold;
-    }
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
 
-    p {
-        font-size: 1.2rem;
-        margin-bottom: 30px;
-    }
-
-
-
-    img {
-        max-width: 500px;
-
-    }
+.hero img {
+    max-width: 100%;
+    height: auto;
 }
 
 .header-content {
     margin-top: 13%;
     align-items: center;
     justify-items: start;
-
-
 }
 
 /* Recommended Packs Section */
@@ -196,24 +173,12 @@
     background-color: #36008E;
 }
 
-/* about us */
+/* About Us Section */
 .about-us {
     background: linear-gradient(to right, #4300B1, #36008E);
     color: white;
     padding: 80px 0;
     overflow: hidden;
-}
-
-.container {
-    max-width: 1140px;
-}
-
-.row {
-    --bs-gutter-x: 0;
-}
-
-.col-md-6 {
-    padding: 0;
 }
 
 .about-us-title {
@@ -242,11 +207,9 @@
     display: flex;
     align-items: flex-start;
     padding: 25px;
-
     border-radius: 10px;
     position: relative;
     gap: 1.5rem;
-
 }
 
 .detail-item::before {
@@ -256,7 +219,6 @@
     left: 20px;
     width: calc(100% - 40px);
     height: 1px;
-
 }
 
 .detail-item:first-child::before {
@@ -267,7 +229,6 @@
     color: white;
     font-size: 1.5rem;
     margin-top: 5px;
-
 }
 
 .detail-label {
@@ -290,13 +251,11 @@
 .about-us img {
     max-width: 100%;
     height: auto;
-
 }
 
-/* testimonials */
+/* Testimonials Section */
 .testimonials {
     background-color: #f8f9fa;
-
     padding: 80px 0;
 }
 
@@ -311,7 +270,6 @@
 .testimonials-subtitle {
     font-size: 1rem;
     color: #777;
-
     margin-bottom: 3rem;
     text-align: center;
 }
@@ -321,7 +279,7 @@
     border-radius: 10px;
     padding: 30px;
     margin: 10px;
-    height: 55vh;
+    height: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
@@ -332,7 +290,6 @@
     border-radius: 50%;
     margin-bottom: 1rem;
     object-fit: cover;
-
 }
 
 .testimonial-name {
@@ -352,7 +309,7 @@
     line-height: 1.6;
 }
 
-/* faq */
+/* FAQ Section */
 .faq-title {
     font-size: 2rem;
     font-weight: bold;
@@ -363,7 +320,6 @@
 .faq-item {
     margin-bottom: 1.5rem;
     border-bottom: 1px solid #eee;
-
     padding-bottom: 1.5rem;
 }
 
@@ -371,41 +327,31 @@
     font-size: 1.1rem;
     font-weight: 500;
     color: black;
-
     cursor: pointer;
-
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
 }
 
 .faq-question i {
     transition: transform 0.3s ease;
-    /* Smooth rotation */
 }
 
 .faq-question.collapsed i {
     transform: rotate(-90deg);
-    /* Rotate icon when collapsed */
 }
 
 .faq-answer {
     color: #777;
-    /* Lighter gray color */
     margin-top: 1rem;
     display: none;
-    /* Hide answer initially */
 }
 
 .faq-answer.show {
     display: block;
-    /* Show answer when expanded */
 }
 
-/* contact */
+/* Contact Section */
 .contact-section {
     padding: 80px 0;
 }
@@ -414,7 +360,6 @@
     font-size: 2.5rem;
     font-weight: bold;
     color: #4300B1;
-    /* Purple color */
     margin-bottom: 20px;
 }
 
@@ -434,13 +379,11 @@
 }
 
 .d-grid {
-    /* justify-content: center; */
     align-items: center;
     justify-items: center;
 }
 
 .btn-secondary {
-    align-items: center;
     width: 150px;
     background-color: #4300B1;
     border-color: #4300B1;
@@ -451,7 +394,7 @@
     border-color: #36008E;
 }
 
-/* footer */
+/* Footer */
 footer {
     background: linear-gradient(to bottom, #4300B1, #36008E);
     color: white;
@@ -460,122 +403,26 @@ footer {
 
 footer .navbar-brand img {
     max-height: 40px;
-
 }
 
 .footer-links {
     text-align: right;
     padding-top: 10px;
-
 }
 
 .footer-links p {
     margin-bottom: 0;
-
     font-size: 14px;
-
 }
 
 .footer-links a {
     color: white;
     text-decoration: none;
     margin-left: 10px;
-    /* Space between links */
 }
 
 .footer-links a:hover {
     text-decoration: underline;
-}
-
-/* General Styles */
-body,
-html {
-    overflow-x: hidden;
-    /* Prevents horizontal scrolling */
-}
-
-/* Navbar */
-.navbar {
-    padding: 10px 20px;
-}
-
-.navbar-nav {
-    text-align: center;
-}
-
-.navbar-toggler {
-    border: none;
-}
-
-/* Hero Section */
-.hero {
-    text-align: center;
-    padding: 40px 20px;
-}
-
-.hero .header-content h1 {
-    font-size: 2rem;
-}
-
-.hero img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Login Form */
-@media (min-width: 768px) {
-    .login-container {
-        display: flex;
-        /* Use Flexbox for alignment */
-        align-items: center;
-        /* Vertically center content */
-        min-height: 50vh;
-        /* Ensure container takes up at least half the viewport height */
-        padding: 50px 0;
-        /* Add some padding */
-    }
-
-    .login-box {
-        padding: 40px;
-        border-radius: 10px;
-        /* Add rounded corners */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        /* Add a subtle shadow */
-        background-color: #fff;
-        /* White background for contrast */
-    }
-
-    .illustration-box {
-        text-align: center;
-        /* Center the image */
-    }
-
-    .illustration {
-        max-width: 80%;
-        /* Adjust image width as needed */
-        height: auto;
-    }
-
-    .login-form {
-        text-align: left;
-        /* Align form elements to the left */
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-        /* Add space between form elements */
-    }
-
-    .recharge-btn {
-        width: 100%;
-        /* Make button full width */
-    }
-}
-
-/* Footer */
-.footer {
-    text-align: center;
-    padding: 20px;
 }
 
 /* Responsive Adjustments */

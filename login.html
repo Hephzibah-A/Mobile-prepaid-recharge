@@ -4,11 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MobiComm |Login</title>
+    <title>MobiComm | Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="Assets/css/login.css">
     <link rel="icon" href="Assets/png/favicon.ico">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Additional CSS for responsiveness */
+        @media (max-width: 767px) {
+            .login-box {
+                /* Ensure the login box uses full width on small screens */
+                width: 100%;
+                padding: 0 15px;
+                margin-bottom: 20px;
+            }
+
+            .illustration-box {
+                margin-top: 20px;
+            }
+
+            .login-form h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -16,16 +35,15 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="index.html"><img src="Assets/png/logo_color.png" alt="MobiComm Logo"></a>
+            </div>
         </nav>
     </section>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 login-box">
-
                 <div class="login-form">
                     <h2 class="welcome-back">WELCOME BACK</h2>
                     <p class="enter-details">Welcome back! Please enter your details.</p>
-
                     <form id="loginForm">
                         <div class="form-group">
                             <label for="mobile">Mobile</label>

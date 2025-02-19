@@ -5,11 +5,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome (adjust path if needed) -->
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css" />
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css" />
+    <style>
+        /* You can add additional custom styles here */
+        .user-card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
 
+        .user-card:hover {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 
 <body>
@@ -78,7 +96,7 @@
     <div id="recharge-history" class="content d-none">
         <h3>Recharge History</h3>
         <div id="user-list">
-            <!-- User cards will be inserted here -->
+            <!-- User cards will be dynamically inserted here -->
         </div>
     </div>
 
@@ -124,6 +142,7 @@
         </div>
     </div>
 
+
     <!-- Plan Management Page -->
     <div id="plan-management" class="content d-none">
         <h3>Plan Management</h3>
@@ -147,7 +166,7 @@
         </table>
     </div>
 
-    <!-- User Modal -->
+    <!-- User Details Modal (for showing recharge & payment history) -->
     <div class="modal fade" id="userModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -210,7 +229,7 @@
         </div>
     </div>
 
-    <!-- Toast -->
+    <!-- Toast Notification -->
     <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive"
         aria-atomic="true">
         <div class="d-flex">
@@ -222,178 +241,175 @@
 
     <!-- External Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
     <!-- Scripts -->
     <script>
         /* ----------------- Global Data and Initialization ----------------- */
-        // Global variable to hold plans from JSON Server.
         let plans = [];
+        let allUsers = [];
 
-        // Dummy Data Generation for Users (used initially, but will be overridden by JSON Server data)
+        // Fallback dummy data generator (for testing if JSON Server is unavailable)
         const generateUsers = (count) => {
             const users = [];
             for (let i = 1; i <= count; i++) {
                 users.push({
                     id: i,
                     name: `User ${i}`,
-                    number: `98765432${i.toString().padStart(2, '0')}`,
-                    expiry: `${(i % 28) + 1}-Feb-2024`,
-                    recharges: Array.from({ length: Math.floor(Math.random() * 5) + 1 }, (_, j) => ({
+                    phnno: `98765432${i.toString().padStart(2, '0')}`,
+                    email: `user${i}@example.com`,
+                    rechargeHistory: Array.from({ length: Math.floor(Math.random() * 5) + 1 }, (_, j) => ({
+                        id: j + 1,
                         date: `${j + 1}-Feb-2024`,
                         plan: `${(j + 1) * 2}GB Data Plan`,
-                        payment: j % 2 === 0 ? 'UPI' : 'Credit Card'
+                        payment: j % 2 === 0 ? 'UPI' : 'Credit Card',
+                        amount: (j + 1) * 50
+                    })),
+                    paymentHistory: Array.from({ length: Math.floor(Math.random() * 3) + 1 }, (_, j) => ({
+                        id: j + 1,
+                        date: `${j + 1}-Feb-2024`,
+                        amount: (j + 1) * 100,
+                        method: j % 2 === 0 ? 'Credit Card' : 'UPI',
+                        status: 'Successful'
                     }))
                 });
             }
             return users;
         };
 
-        // Initially, dummy data is generated (this will be overridden by the fetched data)
-        let allUsers = generateUsers(50);
+        // Fallback dummy data (for testing)
+        allUsers = generateUsers(50);
 
-        // Initialize Dashboard with dummy data.
-        document.getElementById('dashboard-data').innerHTML = allUsers.map(user => `
-      <tr>
-        <td>${user.name}</td>
-        <td>${user.number}</td>
-        <td>${user.expiry}</td>
-        <td><button class="btn btn-warning" onclick="showToast()">Notify</button></td>
-      </tr>
-    `).join('');
-
-        // Initialize Recharge History with dummy data.
-        document.getElementById('user-list').innerHTML = allUsers.map(user => `
-      <div class="user-card" onclick="showUserDetails(${user.id})">
-        <div class="d-flex justify-content-between">
-          <div>
-            <h6>${user.name}</h6>
-            <small class="text-muted">${user.number}</small>
-          </div>
-          <div class="text-end">
-            <small>Last Recharge: ${user.recharges[0].date}</small><br>
-            <small class="text-success">${user.recharges[0].plan}</small>
-          </div>
-        </div>
-      </div>
-    `).join('');
-
-        // Chart Configurations
-        const chartOptions = {
-            responsive: true,
-            plugins: {
-                legend: { position: 'top' },
-                title: { display: false }
-            },
-            scales: {
-                y: { grid: { color: '#e0e0e0' } },
-                x: { grid: { color: '#e0e0e0' } }
-            }
-        };
-
-        // Revenue Chart (Line Chart)
-        new Chart(document.getElementById('revenueChart'), {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-                datasets: [{
-                    label: 'Revenue (₹ Lakhs)',
-                    data: [12, 19, 3, 5, 2],
-                    borderColor: '#2c7873',
-                    tension: 0.4
-                }]
-            },
-            options: chartOptions
-        });
-
-        // User Growth Chart (Bar Chart)
-        new Chart(document.getElementById('userGrowthChart'), {
-            type: 'bar',
-            data: {
-                labels: ['2020', '2021', '2022', '2023'],
-                datasets: [{
-                    label: 'Total Users',
-                    data: [400, 700, 900, 1200],
-                    backgroundColor: '#f7c45a'
-                }]
-            },
-            options: chartOptions
-        });
-
-        // Plan Distribution Chart (Doughnut Chart)
-        new Chart(document.getElementById('planDistributionChart'), {
-            type: 'doughnut',
-            data: {
-                labels: ['Basic', 'Standard', 'Premium'],
-                datasets: [{
-                    data: [300, 500, 200],
-                    backgroundColor: ['#2c7873', '#f7c45a', '#ff6b6b']
-                }]
-            },
-            options: chartOptions
-        });
-
-        // Recharge Trend Chart (Line Chart)
-        new Chart(document.getElementById('rechargeTrendChart'), {
-            type: 'line',
-            data: {
-                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                datasets: [{
-                    label: 'Recharges',
-                    data: [10, 15, 8, 20, 12, 18, 25],
-                    borderColor: '#ff6b6b',
-                    backgroundColor: 'rgba(255,107,107,0.2)',
-                    tension: 0.4
-                }]
-            },
-            options: chartOptions
-        });
-
-        // Show User Details Modal
-        function showUserDetails(userId) {
-            const user = allUsers.find(u => u.id === userId);
-            const modalContent = `
-        <h6>${user.name}</h6>
-        <p>Mobile: ${user.phnno}</p>
-        <h6 class="mt-3">Recharge History:</h6>
-        <ul class="list-group">
-          ${user.rechargeHistory ? user.rechargeHistory.map(recharge => `
-            <li class="list-group-item d-flex justify-content-between">
-              <div>
-                <strong>${recharge.plan}</strong><br>
-                <small>${recharge.date}</small>
-              </div>
-              <span >${recharge.method}</span>
-            </li>
-          `).join('') : '<li class="list-group-item">No recharge history available.</li>'}
-        </ul>
-        <h6 class="mt-3">Payment History:</h6>
-        <ul class="list-group">
-          ${user.paymentHistory ? user.paymentHistory.map(payment => `
-            <li class="list-group-item d-flex justify-content-between">
-              <div>
-                <strong>${payment.method}</strong><br>
-                <small>${payment.date}</small>
-              </div>
-              <span >₹${payment.amount}</span>
-            </li>
-          `).join('') : '<li class="list-group-item">No payment history available.</li>'}
-        </ul>
-      `;
-            document.getElementById('userDetailsContent').innerHTML = modalContent;
-            new bootstrap.Modal('#userModal').show();
+        // ---------------------------
+        // Load Users from JSON Server
+        // ---------------------------
+        function loadUsers() {
+            fetch('http://localhost:3000/users')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("HTTP error " + response.status);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    allUsers = data;
+                    // Update Dashboard Table
+                    document.getElementById('dashboard-data').innerHTML = allUsers.map(user => `
+                <tr>
+                  <td>${user.name}</td>
+                  <td>${user.phnno}</td>
+                  <td>N/A</td>
+                  <td><button class="btn btn-warning" onclick="showToast()">Notify</button></td>
+                </tr>
+              `).join('');
+                    // Update Recharge History (User Cards)
+                    document.getElementById('user-list').innerHTML = allUsers.map(user => `
+                <div class="user-card" onclick="showUserDetails(${user.id})">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <h6>${user.name}</h6>
+                      <small class="text-muted">${user.phnno}</small>
+                    </div>
+                    <div class="text-end">
+                      <small>Email: ${user.email}</small>
+                    </div>
+                  </div>
+                </div>
+              `).join('');
+                })
+                .catch(error => {
+                    console.error("Error loading users:", error);
+                });
         }
 
-        // Toast Function
+        // Call loadUsers on page load
+        window.addEventListener('load', function () {
+            loadUsers();
+        });
+
+        // ---------------------------
+        // Show User Details Modal by Fetching Data from JSON Server
+        // ---------------------------
+        function showUserDetails(userId) {
+            fetch('http://localhost:3000/users/' + userId)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("HTTP error " + response.status);
+                    }
+                    return response.json();
+                })
+                .then(user => {
+                    let rechargeHistoryHTML = "";
+                    if (user.rechargeHistory && user.rechargeHistory.length > 0) {
+                        rechargeHistoryHTML = user.rechargeHistory.map(recharge => `
+                  <li class="list-group-item d-flex justify-content-between">
+                    <div>
+                      <strong>${recharge.plan}</strong><br>
+                      <small>${recharge.date}</small>
+                    </div>
+                    <span>₹${recharge.amount}</span>
+                  </li>
+                `).join('');
+                    } else {
+                        rechargeHistoryHTML = '<li class="list-group-item">No recharge history available.</li>';
+                    }
+                    let paymentHistoryHTML = "";
+                    if (user.paymentHistory && user.paymentHistory.length > 0) {
+                        paymentHistoryHTML = user.paymentHistory.map(payment => `
+                  <li class="list-group-item d-flex justify-content-between">
+                    <div>
+                      <strong>${payment.method}</strong><br>
+                      <small>${payment.date}</small>
+                    </div>
+                    <span >₹${payment.amount}</span>
+                  </li>
+                `).join('');
+                    } else {
+                        paymentHistoryHTML = '<li class="list-group-item">No payment history available.</li>';
+                    }
+                    const modalContent = `
+                <h6>${user.name}</h6>
+                <p><strong>Mobile:</strong> ${user.phnno}</p>
+                <p><strong>Email:</strong> ${user.email}</p>
+                <h6 class="mt-3">Recharge History:</h6>
+                <ul class="list-group">
+                  ${rechargeHistoryHTML}
+                </ul>
+                <h6 class="mt-3">Payment History:</h6>
+                <ul class="list-group">
+                  ${paymentHistoryHTML}
+                </ul>
+              `;
+                    document.getElementById('userDetailsContent').innerHTML = modalContent;
+                    new bootstrap.Modal(document.getElementById('userModal')).show();
+                })
+                .catch(error => {
+                    console.error("Error fetching user details:", error);
+                });
+        }
+
+        // ---------------------------
+        // Toast Notification Function
+        // ---------------------------
         const toastEl = document.querySelector('.toast');
         const toast = new bootstrap.Toast(toastEl);
         function showToast() {
             toast.show();
         }
 
+        // ---------------------------
         // Page Navigation
+        // ---------------------------
         function showPage(page) {
             document.querySelectorAll('.content').forEach(el => el.classList.add('d-none'));
             document.getElementById(page).classList.remove('d-none');
+            if (page === 'analytics') {
+                // Force charts to update when analytics page is visible
+                if (window.revenueChart) window.revenueChart.resize();
+                if (window.userGrowthChart) window.userGrowthChart.resize();
+                if (window.planDistributionChart) window.planDistributionChart.resize();
+                if (window.rechargeTrendChart) window.rechargeTrendChart.resize();
+            }
         }
 
         function logout() {
@@ -402,7 +418,6 @@
         }
 
         /* ------------------- Plan Management Functions Using JSON Server ------------------- */
-        // Load plans from JSON Server endpoint.
         function loadPlans() {
             fetch('http://localhost:3000/plans')
                 .then(response => {
@@ -422,7 +437,6 @@
                 });
         }
 
-        // Render the plans table in the Plan Management page.
         function renderPlansTable() {
             const tbody = document.getElementById('plans-table-body');
             if (!plans.length) {
@@ -430,24 +444,22 @@
                 return;
             }
             tbody.innerHTML = plans.map(plan => `
-        <tr>
-          <td>${plan.id}</td>
-          <td>${plan.price}</td>
-          <td>${plan.data}</td>
-          <td>${plan.calls}</td>
-          <td>${plan.validity}</td>
-          <td>${plan.planType}</td>
-          <td>${plan.popular ? 'Yes' : 'No'}</td>
-          <td>
-            <button class="btn btn-sm btn-info" onclick="showPlanModal('edit', ${plan.id})">Edit</button>
-            <button class="btn btn-sm btn-danger" onclick="deletePlan(${plan.id})">Delete</button>
-          </td>
-        </tr>
-      `).join('');
+            <tr>
+              <td>${plan.id}</td>
+              <td>${plan.price}</td>
+              <td>${plan.data}</td>
+              <td>${plan.calls}</td>
+              <td>${plan.validity}</td>
+              <td>${plan.planType}</td>
+              <td>${plan.popular ? 'Yes' : 'No'}</td>
+              <td>
+                <button class="btn btn-sm btn-info" onclick="showPlanModal('edit', ${plan.id})">Edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deletePlan(${plan.id})">Delete</button>
+              </td>
+            </tr>
+          `).join('');
         }
 
-        // Show the Plan Modal for creating or editing a plan.
-        // Use loose equality (==) when matching IDs to handle type differences.
         function showPlanModal(mode, planId = null) {
             const planModal = new bootstrap.Modal(document.getElementById('planModal'));
             const modalTitle = document.getElementById('planModalTitle');
@@ -473,7 +485,6 @@
             planModal.show();
         }
 
-        // Handle form submission for creating/updating a plan.
         document.getElementById('planForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const idValue = document.getElementById('planId').value;
@@ -487,7 +498,6 @@
             const planData = { price, data: dataValue, calls, validity, planType, popular };
 
             if (idValue) {
-                // Update existing plan using PUT.
                 fetch(`http://localhost:3000/plans/${idValue}`, {
                     method: 'PUT',
                     headers: {
@@ -501,7 +511,6 @@
                     })
                     .catch(error => console.error("Error updating plan:", error));
             } else {
-                // Create a new plan using POST.
                 fetch('http://localhost:3000/plans', {
                     method: 'POST',
                     headers: {
@@ -520,7 +529,6 @@
             planModal.hide();
         });
 
-        // Delete a plan using DELETE.
         function deletePlan(planId) {
             if (confirm("Are you sure you want to delete this plan?")) {
                 fetch(`http://localhost:3000/plans/${planId}`, { method: 'DELETE' })
@@ -536,51 +544,79 @@
                     });
             }
         }
+    </script>
 
-        /* ------------------- New: Retrieve User Data from JSON Server ------------------- */
-        function loadUsers() {
-            fetch('http://localhost:3000/users')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("HTTP error " + response.status);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Override allUsers with fetched data.
-                    allUsers = data;
-                    // Update Dashboard: Use user name, phone (phnno), and set expiry as "N/A" (since not provided).
-                    document.getElementById('dashboard-data').innerHTML = allUsers.map(user => `
-            <tr>
-              <td>${user.name}</td>
-              <td>${user.phnno}</td>
-              <td>N/A</td>
-              <td><button class="btn btn-warning" onclick="showToast()">Notify</button></td>
-            </tr>
-          `).join('');
-                    // Update Recharge History: Display user name, phone, and email.
-                    document.getElementById('user-list').innerHTML = allUsers.map(user => `
-            <div class="user-card" onclick="showUserDetails(${user.id})">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <h6>${user.name}</h6>
-                  <small class="text-muted">${user.phnno}</small>
-                </div>
-                <div class="text-end">
-                  <small>Email: ${user.email}</small>
-                </div>
-              </div>
-            </div>
-          `).join('');
-                })
-                .catch(error => {
-                    console.error("Error loading users:", error);
-                });
-        }
+    <!-- Chart Configurations and Charts -->
+    <script>
+        // Chart Configurations
+        const chartOptions = {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' },
+                title: { display: false }
+            },
+            scales: {
+                y: { grid: { color: '#e0e0e0' } },
+                x: { grid: { color: '#e0e0e0' } }
+            }
+        };
 
-        // Call loadUsers() on page load to retrieve user data from JSON Server.
-        window.addEventListener('load', function () {
-            loadUsers();
+        // Revenue Chart (Line Chart)
+        window.revenueChart = new Chart(document.getElementById('revenueChart'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                datasets: [{
+                    label: 'Revenue (₹ Lakhs)',
+                    data: [12, 19, 3, 5, 2],
+                    borderColor: '#2c7873',
+                    tension: 0.4
+                }]
+            },
+            options: chartOptions
+        });
+
+        // User Growth Chart (Bar Chart)
+        window.userGrowthChart = new Chart(document.getElementById('userGrowthChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2020', '2021', '2022', '2023'],
+                datasets: [{
+                    label: 'Total Users',
+                    data: [400, 700, 900, 1200],
+                    backgroundColor: '#f7c45a'
+                }]
+            },
+            options: chartOptions
+        });
+
+        // Plan Distribution Chart (Doughnut Chart)
+        window.planDistributionChart = new Chart(document.getElementById('planDistributionChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Basic', 'Standard', 'Premium'],
+                datasets: [{
+                    data: [300, 500, 200],
+                    backgroundColor: ['#2c7873', '#f7c45a', '#ff6b6b']
+                }]
+            },
+            options: chartOptions
+        });
+
+        // Recharge Trend Chart (Line Chart)
+        window.rechargeTrendChart = new Chart(document.getElementById('rechargeTrendChart'), {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Recharges',
+                    data: [10, 15, 8, 20, 12, 18, 25],
+                    borderColor: '#ff6b6b',
+                    backgroundColor: 'rgba(255,107,107,0.2)',
+                    tension: 0.4
+                }]
+            },
+            options: chartOptions
         });
     </script>
 </body>

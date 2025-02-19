@@ -314,6 +314,15 @@
       "validity": 28,
       "planType": "combo",
       "popular": false
+    },
+    {
+      "id": "967c",
+      "price": 39,
+      "data": "3GB",
+      "calls": "None",
+      "validity": 2,
+      "planType": "data",
+      "popular": false
     }
   ],
   "users": [
@@ -454,6 +463,12 @@
           "id": 1739941126266,
           "date": "2025-02-19",
           "amount": 2499,
+          "method": "upi"
+        },
+        {
+          "id": 1739955755030,
+          "date": "2025-02-19",
+          "amount": 199,
           "method": "upi"
         }
       ],

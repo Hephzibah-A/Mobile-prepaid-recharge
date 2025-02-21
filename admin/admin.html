@@ -548,7 +548,7 @@
 
     <!-- Chart Configurations and Charts -->
     <script>
-        // Chart Configurations
+        // Chart configuration options (same for all charts)
         const chartOptions = {
             responsive: true,
             plugins: {
@@ -561,14 +561,14 @@
             }
         };
 
-        // Revenue Chart (Line Chart)
+        // Create charts with empty initial data
         window.revenueChart = new Chart(document.getElementById('revenueChart'), {
             type: 'line',
             data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                labels: [],
                 datasets: [{
                     label: 'Revenue (₹ Lakhs)',
-                    data: [12, 19, 3, 5, 2],
+                    data: [],
                     borderColor: '#2c7873',
                     tension: 0.4
                 }]
@@ -576,41 +576,38 @@
             options: chartOptions
         });
 
-        // User Growth Chart (Bar Chart)
         window.userGrowthChart = new Chart(document.getElementById('userGrowthChart'), {
             type: 'bar',
             data: {
-                labels: ['2020', '2021', '2022', '2023'],
+                labels: [],
                 datasets: [{
                     label: 'Total Users',
-                    data: [400, 700, 900, 1200],
+                    data: [],
                     backgroundColor: '#f7c45a'
                 }]
             },
             options: chartOptions
         });
 
-        // Plan Distribution Chart (Doughnut Chart)
         window.planDistributionChart = new Chart(document.getElementById('planDistributionChart'), {
             type: 'doughnut',
             data: {
-                labels: ['Basic', 'Standard', 'Premium'],
+                labels: [],
                 datasets: [{
-                    data: [300, 500, 200],
-                    backgroundColor: ['#2c7873', '#f7c45a', '#ff6b6b']
+                    data: [],
+                    backgroundColor: [] // will be set below
                 }]
             },
             options: chartOptions
         });
 
-        // Recharge Trend Chart (Line Chart)
         window.rechargeTrendChart = new Chart(document.getElementById('rechargeTrendChart'), {
             type: 'line',
             data: {
-                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                labels: [],
                 datasets: [{
                     label: 'Recharges',
-                    data: [10, 15, 8, 20, 12, 18, 25],
+                    data: [],
                     borderColor: '#ff6b6b',
                     backgroundColor: 'rgba(255,107,107,0.2)',
                     tension: 0.4
@@ -618,7 +615,113 @@
             },
             options: chartOptions
         });
+
+        // Function to load analytics data from the users and plans endpoints
+        function loadAnalyticsData() {
+            // Use Promise.all to fetch users and plans concurrently
+            Promise.all([
+                fetch('http://localhost:3000/users').then(res => res.json()),
+                fetch('http://localhost:3000/plans').then(res => res.json())
+            ]).then(([users, plans]) => {
+                // -------- Revenue Trend Chart --------
+                // Aggregate revenue by month from paymentHistory of users
+                const revenueByMonth = {};
+                users.forEach(user => {
+                    if (user.paymentHistory && user.paymentHistory.length > 0) {
+                        user.paymentHistory.forEach(payment => {
+                            // Assume payment.date is in "DD-MMM-YYYY" format; extract "MMM-YYYY"
+                            const parts = payment.date.split('-');
+                            if (parts.length >= 3) {
+                                const key = parts[1] + '-' + parts[2];
+                                if (!revenueByMonth[key]) revenueByMonth[key] = 0;
+                                revenueByMonth[key] += payment.amount;
+                            }
+                        });
+                    }
+                });
+                const revenueLabels = Object.keys(revenueByMonth).sort((a, b) => a.localeCompare(b));
+                const revenueData = revenueLabels.map(label => revenueByMonth[label]);
+                revenueChart.data.labels = revenueLabels;
+                revenueChart.data.datasets[0].data = revenueData;
+                revenueChart.update();
+
+                // -------- User Growth Chart --------
+                // Group users by year using a createdAt property (fallback to '2023' if missing)
+                const userGrowth = {};
+                users.forEach(user => {
+                    const year = user.createdAt ? user.createdAt.slice(0, 4) : '2023';
+                    if (!userGrowth[year]) userGrowth[year] = 0;
+                    userGrowth[year]++;
+                });
+                const growthLabels = Object.keys(userGrowth).sort();
+                const growthData = growthLabels.map(year => userGrowth[year]);
+                userGrowthChart.data.labels = growthLabels;
+                userGrowthChart.data.datasets[0].data = growthData;
+                userGrowthChart.update();
+
+                // -------- Recharge Trend Chart --------
+                // Aggregate recharge events by month from rechargeHistory of users
+                const rechargeTrend = {};
+                users.forEach(user => {
+                    if (user.rechargeHistory && user.rechargeHistory.length > 0) {
+                        user.rechargeHistory.forEach(event => {
+                            const parts = event.date.split('-'); // "DD-MMM-YYYY"
+                            if (parts.length >= 3) {
+                                const key = parts[1] + '-' + parts[2];
+                                if (!rechargeTrend[key]) rechargeTrend[key] = 0;
+                                rechargeTrend[key]++;
+                            }
+                        });
+                    }
+                });
+                const rechargeLabels = Object.keys(rechargeTrend).sort((a, b) => a.localeCompare(b));
+                const rechargeData = rechargeLabels.map(key => rechargeTrend[key]);
+                rechargeTrendChart.data.labels = rechargeLabels;
+                rechargeTrendChart.data.datasets[0].data = rechargeData;
+                rechargeTrendChart.update();
+
+                // -------- Plan Distribution Chart --------
+                // Group plans by planType
+                const planDistribution = {};
+                plans.forEach(plan => {
+                    const type = plan.planType;
+                    if (!planDistribution[type]) planDistribution[type] = 0;
+                    planDistribution[type]++;
+                });
+                const planLabels = Object.keys(planDistribution);
+                const planData = planLabels.map(label => planDistribution[label]);
+                planDistributionChart.data.labels = planLabels;
+                planDistributionChart.data.datasets[0].data = planData;
+                // Set a background color for each plan type (customize as needed)
+                const colorMapping = {
+                    'combo': '#2c7873',
+                    'talktime': '#f7c45a',
+                    'data': '#ff6b6b',
+                    'international-roaming': '#6a4c93',
+                    'ott': '#00bcd4'
+                };
+                planDistributionChart.data.datasets[0].backgroundColor = planLabels.map(label => colorMapping[label] || '#cccccc');
+                planDistributionChart.update();
+            }).catch(error => {
+                console.error("Error loading analytics data:", error);
+            });
+        }
+
+        // Update your showPage function so that when the analytics page is shown, we load the data
+        function showPage(page) {
+            document.querySelectorAll('.content').forEach(el => el.classList.add('d-none'));
+            document.getElementById(page).classList.remove('d-none');
+            if (page === 'analytics') {
+                loadAnalyticsData();
+                // Optionally, force charts to resize
+                if (window.revenueChart) revenueChart.resize();
+                if (window.userGrowthChart) userGrowthChart.resize();
+                if (window.planDistributionChart) planDistributionChart.resize();
+                if (window.rechargeTrendChart) rechargeTrendChart.resize();
+            }
+        }
     </script>
+
 </body>
 
 </html>

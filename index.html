@@ -14,17 +14,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="Assets/css/main.css">
     <style>
         /* You can include additional custom responsive styles here if needed */
     </style>
 </head>
 
 <body>
+    <!-- background blur -->
+    <div class="absolute">
+        <div class="absolute inset-0 justify-center">
+            <div class="bg-shape-1 bg-teal opacity-50 bg-blur"></div>
+            <div class="bg-shape-2 bg-purple opacity-50 bg-blur"></div>
+            <div class="bg-shape-3 bg-teal opacity-50 bg-blur"></div>
+        </div>
+    </div>
     <!-- navbar   -->
     <section class="header-container">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="#"><img src="Assets/png/logo.png" alt="MobiComm Logo"></a>
+                <a class="navbar-brand" href="#"><img src="Assets/png/logo_color.png" alt="MobiComm Logo"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -44,7 +53,7 @@
                             <a class="nav-link" href="#contact">Contact Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-primary login-btn" href="login.html">Login</a>
+                            <a class=" btn btn-secondary login-btn" href="login.html">Login</a>
                         </li>
                     </ul>
                 </div>
@@ -57,11 +66,12 @@
                     <div class="col-md-6 header-content">
                         <h1>Recharge Your Mobile <br> in Just a Few Clicks!</h1>
                         <p>Fast, Secure, and Hassle-Free Recharges for All</p>
-                        <button class="btn btn-light login-btn"><a href="#login" style="text-decoration: none;">Get
+                        <button class="btn btn-secondary "><a href="#login"
+                                style="text-decoration: none; color: white;">Get
                                 Started</a></button>
                     </div>
                     <div class="col-md-6">
-                        <img src="Assets/png/Connected-cuate 1.png" alt="Recharge Illustration" class="img-fluid">
+                        <img src="Assets/png/Connected world-cuate.png" alt="Recharge Illustration" class="img-fluid">
                     </div>
                 </div>
             </div>
@@ -108,21 +118,25 @@
             <!-- Popular plans will be dynamically inserted here -->
         </div>
     </section>
+
     <br>
-    <!-- about us -->
+    <!-- About Us Section -->
     <section id="about" class="about-us py-5">
         <div class="container">
-            <div class="row">
+            <div class="row align-items-center">
+                <!-- Left Column: Illustration -->
                 <div class="col-md-6">
                     <img src="Assets/png/Connected world-cuate 1.png" alt="About Us Illustration" class="img-fluid">
                 </div>
-                <div class="col-md-6 d-flex flex-column justify-content-center">
+                <!-- Right Column: Text & Bento Grid Details -->
+                <div class="col-md-6">
                     <h2 class="about-us-title">About Us</h2>
                     <p class="about-us-text">
                         We are your go-to platform for quick, secure, and hassle-free mobile recharges anytime,
                         anywhere.
-                    </p>
-                    <div class="about-us-details">
+                    </p><br>
+                    <!-- Existing Bento Grid for Detail Items -->
+                    <div class="about-us-details bento-grid">
                         <div class="detail-item">
                             <i class="fas fa-headset"></i>
                             <div>
@@ -130,13 +144,7 @@
                                 <a href="mailto:support@mobicomm.com">support@mobicomm.com</a>
                             </div>
                         </div>
-                        <div class="detail-item">
-                            <i class="fas fa-award"></i>
-                            <div>
-                                <span class="detail-label">Best Price Guaranteed</span><br>
-                                <span>Enjoy the best prices on mobile recharges - guaranteed!</span>
-                            </div>
-                        </div>
+
                         <div class="detail-item">
                             <i class="fas fa-map-marker-alt"></i>
                             <div>
@@ -146,12 +154,22 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Additional Single Grid Card -->
+                    <div class="additional-card mt-5">
+                        <div class="card-content">
+                            <h3>Discover More</h3>
+                            <p>Learn about our journey, innovation, and commitment to excellence.</p>
+                            <a href="#contact" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Why Choose MobiComm -->
+
+
+    <!-- Why Choose MobiComm Section -->
     <section class="why-choose py-5">
         <div class="container">
             <h2 class="text-center mb-4">Why Choose MobiComm</h2>
@@ -181,12 +199,12 @@
         </div>
     </section>
 
-    <!-- faq -->
-    <section class="faq-container">
-        <div class="container mt-5">
+    <!-- FAQ Section -->
+    <section class="faq-container py-5">
+        <div class="container">
             <h2 class="faq-title text-center">FAQS</h2>
             <div class="faq-list">
-                <div class="faq-item ">
+                <div class="faq-item">
                     <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq-answer-1">
                         How do I recharge my mobile on this website?
                         <i class="fas fa-chevron-down"></i>
@@ -238,14 +256,16 @@
         </div>
     </section>
 
+
     <!-- contact -->
-    <section id="contact" class="contact-section">
+    <section id=" contact" class="contact-section">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <h2 class="contact-title text-center">Contact</h2>
                     <p class="contact-description text-center">
-                        We'd love to hear from you! For any inquiries or assistance, feel free to reach out to us. Our
+                        We'd love to hear from you! For any inquiries or assistance, feel free to
+                        reach out to us. Our
                         team is available to help you with any questions or issues.
                     </p>
                     <form id="contactForm">
@@ -274,7 +294,7 @@
                 </div>
                 <div class="col-md-9">
                     <div class="footer-links">
-                        <p>&copy;2025 Company Name. All rights reserved.
+                        <p>&copy;2025 MobiComm. All rights reserved.
                             <a href="#">Privacy &amp; Policy</a> |
                             <a href="#">Terms &amp; Condition</a>
                         </p>
@@ -290,7 +310,7 @@
 
     <!-- Script for dynamically loading popular plans -->
     <script>
-        // Function to load popular plans from JSON Server
+        // Function to load plans data from the JSON endpoint
         function loadPopularPlans() {
             fetch('http://localhost:3000/plans')
                 .then(response => {
@@ -300,46 +320,46 @@
                     return response.json();
                 })
                 .then(plans => {
-                    // Filter plans where popular property is true
-                    let popularPlans = plans.filter(plan => plan.popular);
-                    // Limit to 8 popular plans (if there are more than 8, pick the first 8)
-                    popularPlans = popularPlans.slice(0, 8);
+                    // Filter only popular plans and limit to the first 8
+                    const popularPlans = plans.filter(plan => plan.popular).slice(0, 8);
                     displayPopularPlans(popularPlans);
                 })
                 .catch(error => {
                     console.error("Error loading popular plans:", error);
                     document.getElementById('popular-plans').innerHTML =
-                        `<div class="alert alert-danger">Error loading popular plans: ${error.message}</div>`;
+                        `<div class="alert alert-danger">Error loading plans: ${error.message}</div>`;
                 });
         }
 
-        // Function to display popular plans in the Recommended Packs section
+        // Function to display plans dynamically
         function displayPopularPlans(plans) {
             let html = "";
             plans.forEach(plan => {
                 html += `
-                <div class="col popular-plan" data-plan-id="${plan.id}">
-                    <div class="card plan-card">
-                        <div class="card-body plan-card-body">
-                            <h5 class="plan-price">₹${plan.price}</h5>
-                            <div class="plan-details">
-                                <p>${plan.data}</p>
-                                <p>Calls: ${plan.calls}</p>
-                                <p>Validity: ${plan.validity} Days</p>
-                            </div>
-                            <a href="login.html" class="recharge-btn">Recharge</a>
-                            <a href="#" class="view-details">View Details</a>
-                        </div>
-                    </div>
-                </div>
-                `;
+        <div class="col popular-plan" data-plan-id="${plan.id}">
+          <div class="card plan-card">
+            ${plan.popular ? `<div class="popular-label">Popular</div>` : ""}
+            <div class="card-body plan-card-body">
+              <h5 class="plan-price">₹${plan.price}</h5>
+              <div class="plan-details">
+                <p>${plan.data}</p>
+                <p>Calls: ${plan.calls}</p>
+                <p>Validity: ${plan.validity} Days</p>
+              </div>
+              <a href="login.html" class="recharge-btn">Recharge</a>
+              <a href="#" class="view-details">View Details</a>
+            </div>
+          </div>
+        </div>
+      `;
             });
             document.getElementById('popular-plans').innerHTML = html;
         }
 
-        // Load popular plans when the page loads
+        // Call loadPopularPlans on page load
         window.addEventListener('load', loadPopularPlans);
     </script>
+
 </body>
 
 </html>

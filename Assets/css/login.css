@@ -12,7 +12,7 @@ body {
     padding: 150px;
     border-radius: 8px;
 
-    background-color: white;
+    /* background-color: white; */
 }
 
 .login-form {
@@ -56,6 +56,20 @@ body {
     background-color: #3A0068;
     /* Darker Purple */
     border-color: #3A0068;
+}
+
+
+.btn-accent {
+    color: white;
+    background-color: rgb(255, 157, 0);
+    border-color: rgb(255, 157, 0);
+    border-radius: 50px;
+
+}
+
+.btn-accent:hover {
+    background-color: rgb(204, 126, 0);
+    border-color: rgb(204, 126, 0);
 }
 
 .error-message {

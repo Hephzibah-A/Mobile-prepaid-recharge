@@ -325,192 +325,39 @@
       "popular": false
     }
   ],
+
   "users": [
-    {
-      "id": "1",
-      "phnno": "9876543210",
-      "otp": "123456",
-      "name": "Alice Johnson",
-      "address": "123 Main Street, Springfield",
-      "email": "alice@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-15",
-          "amount": 150,
-          "method": "Credit Card"
-        },
-        {
-          "id": 2,
-          "date": "2023-03-10",
-          "amount": 200,
-          "method": "UPI"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-20",
-          "plan": "Combo",
-          "amount": 199,
-          "method": "Credit Card"
-        },
-        {
-          "id": 2,
-          "date": "2023-04-05",
-          "plan": "Data",
-          "amount": 299,
-          "method": "UPI"
-        }
-      ]
-    },
-    {
-      "id": "2",
-      "phnno": "9988776655",
-      "otp": "654321",
-      "name": "Bob Smith",
-      "address": "456 Oak Avenue, Metropolis",
-      "email": "bob@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-10",
-          "amount": 100,
-          "method": "Debit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-15",
-          "plan": "Talktime",
-          "amount": 399,
-          "method": "Debit Card"
-        }
-      ]
-    },
-    {
-      "id": "3",
-      "phnno": "1234567890",
-      "otp": "987654",
-      "name": "Carol Davis",
-      "address": "789 Pine Road, Gotham",
-      "email": "carol@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-03-01",
-          "amount": 250,
-          "method": "Credit Card"
-        },
-        {
-          "id": 2,
-          "date": "2023-05-01",
-          "amount": 300,
-          "method": "Net Banking"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-03-05",
-          "plan": "Data",
-          "amount": 299,
-          "method": "Credit Card"
-        },
-        {
-          "id": 2,
-          "date": "2023-06-10",
-          "plan": "Combo",
-          "amount": 499,
-          "method": "UPI"
-        }
-      ]
-    },
-    {
-      "id": "4",
-      "phnno": "7448440919",
-      "otp": "098765",
-      "name": "David Lee",
-      "address": "321 Maple Lane, Star City",
-      "email": "david@gmail.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-04-01",
-          "amount": 300,
-          "method": "UPI"
-        },
-        {
-          "id": 2,
-          "date": "2023-07-01",
-          "amount": 350,
-          "method": "Credit Card"
-        },
-        {
-          "id": 1739939019592,
-          "date": "2025-02-19",
-          "amount": 499,
-          "method": "upi"
-        },
-        {
-          "id": 1739939436957,
-          "date": "2025-02-19",
-          "amount": 499,
-          "method": "upi"
-        },
-        {
-          "id": 1739941126266,
-          "date": "2025-02-19",
-          "amount": 2499,
-          "method": "upi"
-        },
-        {
-          "id": 1739955755030,
-          "date": "2025-02-19",
-          "amount": 199,
-          "method": "upi"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-04-10",
-          "plan": "Combo",
-          "amount": 499,
-          "method": "UPI"
-        },
-        {
-          "id": 2,
-          "date": "2023-08-15",
-          "plan": "Talktime",
-          "amount": 399,
-          "method": "Debit Card"
-        }
-      ]
-    },
     {
       "id": "5",
       "phnno": "9000000005",
       "otp": "111111",
-      "name": "User 5",
-      "address": "5 Fifth Street, City 5",
-      "email": "user5@example.com",
+      "name": "Rahul Sharma",
+      "address": "5 MG Road, Bangalore",
+      "email": "rahul.sharma@example.com",
       "paymentHistory": [
         {
           "id": 1,
-          "date": "2023-01-05",
-          "amount": 105,
+          "date": "2018-03-10",
+          "amount": 100,
           "method": "Credit Card"
-        }
+        },
+        { "id": 2, "date": "2020-07-15", "amount": 150, "method": "UPI" },
+        { "id": 3, "date": "2025-01-05", "amount": 200, "method": "Debit Card" }
       ],
       "rechargeHistory": [
         {
           "id": 1,
-          "date": "2023-01-06",
+          "date": "2018-04-05",
           "plan": "Data",
-          "amount": 205,
+          "amount": 120,
           "method": "UPI"
+        },
+        {
+          "id": 2,
+          "date": "2025-02-20",
+          "plan": "Combo",
+          "amount": 199,
+          "method": "Credit Card"
         }
       ]
     },
@@ -518,24 +365,37 @@
       "id": "6",
       "phnno": "9000000006",
       "otp": "222222",
-      "name": "User 6",
-      "address": "6 Sixth Street, City 6",
-      "email": "user6@example.com",
+      "name": "Priya Singh",
+      "address": "6 Residency Road, Mumbai",
+      "email": "priya.singh@example.com",
       "paymentHistory": [
         {
           "id": 1,
-          "date": "2023-01-06",
-          "amount": 106,
+          "date": "2019-05-10",
+          "amount": 110,
           "method": "Debit Card"
+        },
+        {
+          "id": 2,
+          "date": "2021-09-12",
+          "amount": 130,
+          "method": "Credit Card"
         }
       ],
       "rechargeHistory": [
         {
           "id": 1,
-          "date": "2023-01-07",
-          "plan": "Combo",
-          "amount": 206,
-          "method": "Credit Card"
+          "date": "2019-06-01",
+          "plan": "Talktime",
+          "amount": 399,
+          "method": "UPI"
+        },
+        {
+          "id": 2,
+          "date": "2024-11-20",
+          "plan": "Data",
+          "amount": 299,
+          "method": "Net Banking"
         }
       ]
     },
@@ -543,24 +403,32 @@
       "id": "7",
       "phnno": "9000000007",
       "otp": "333333",
-      "name": "User 7",
-      "address": "7 Seventh Street, City 7",
-      "email": "user7@example.com",
+      "name": "Amit Kumar",
+      "address": "7 Laxmi Nagar, Delhi",
+      "email": "amit.kumar@example.com",
       "paymentHistory": [
         {
           "id": 1,
-          "date": "2023-01-07",
-          "amount": 107,
-          "method": "UPI"
-        }
+          "date": "2018-12-05",
+          "amount": 115,
+          "method": "Credit Card"
+        },
+        { "id": 2, "date": "2023-03-15", "amount": 125, "method": "UPI" }
       ],
       "rechargeHistory": [
         {
           "id": 1,
-          "date": "2023-01-08",
-          "plan": "Talktime",
-          "amount": 207,
+          "date": "2018-12-10",
+          "plan": "Data",
+          "amount": 299,
           "method": "Debit Card"
+        },
+        {
+          "id": 2,
+          "date": "2023-04-20",
+          "plan": "Combo",
+          "amount": 499,
+          "method": "Credit Card"
         }
       ]
     },
@@ -568,24 +436,32 @@
       "id": "8",
       "phnno": "9000000008",
       "otp": "444444",
-      "name": "User 8",
-      "address": "8 Eighth Street, City 8",
-      "email": "user8@example.com",
+      "name": "Neha Gupta",
+      "address": "8 Park Street, Kolkata",
+      "email": "neha.gupta@example.com",
       "paymentHistory": [
         {
           "id": 1,
-          "date": "2023-01-08",
-          "amount": 108,
-          "method": "Credit Card"
-        }
+          "date": "2018-08-15",
+          "amount": 120,
+          "method": "Debit Card"
+        },
+        { "id": 2, "date": "2022-01-22", "amount": 140, "method": "UPI" }
       ],
       "rechargeHistory": [
         {
           "id": 1,
-          "date": "2023-01-09",
+          "date": "2018-09-01",
+          "plan": "Talktime",
+          "amount": 399,
+          "method": "Credit Card"
+        },
+        {
+          "id": 2,
+          "date": "2022-02-05",
           "plan": "Data",
-          "amount": 208,
-          "method": "UPI"
+          "amount": 299,
+          "method": "Net Banking"
         }
       ]
     },
@@ -593,23 +469,31 @@
       "id": "9",
       "phnno": "9000000009",
       "otp": "555555",
-      "name": "User 9",
-      "address": "9 Ninth Street, City 9",
-      "email": "user9@example.com",
+      "name": "Suresh Reddy",
+      "address": "9 Anna Salai, Chennai",
+      "email": "suresh.reddy@example.com",
       "paymentHistory": [
         {
           "id": 1,
-          "date": "2023-01-09",
-          "amount": 109,
-          "method": "Debit Card"
-        }
+          "date": "2019-03-10",
+          "amount": 130,
+          "method": "Credit Card"
+        },
+        { "id": 2, "date": "2023-07-15", "amount": 150, "method": "Debit Card" }
       ],
       "rechargeHistory": [
         {
           "id": 1,
-          "date": "2023-01-10",
+          "date": "2019-04-12",
           "plan": "Combo",
-          "amount": 209,
+          "amount": 499,
+          "method": "UPI"
+        },
+        {
+          "id": 2,
+          "date": "2023-08-20",
+          "plan": "Talktime",
+          "amount": 399,
           "method": "Credit Card"
         }
       ]
@@ -618,24 +502,37 @@
       "id": "10",
       "phnno": "9000000010",
       "otp": "666666",
-      "name": "User 10",
-      "address": "10 Tenth Street, City 10",
-      "email": "user10@example.com",
+      "name": "Pooja Verma",
+      "address": "10 Banjara Hills, Hyderabad",
+      "email": "pooja.verma@example.com",
       "paymentHistory": [
         {
           "id": 1,
-          "date": "2023-01-10",
-          "amount": 110,
+          "date": "2020-06-15",
+          "amount": 135,
+          "method": "Debit Card"
+        },
+        {
+          "id": 2,
+          "date": "2024-03-22",
+          "amount": 155,
           "method": "Credit Card"
         }
       ],
       "rechargeHistory": [
         {
           "id": 1,
-          "date": "2023-01-11",
-          "plan": "Talktime",
-          "amount": 210,
+          "date": "2020-07-01",
+          "plan": "Data",
+          "amount": 299,
           "method": "UPI"
+        },
+        {
+          "id": 2,
+          "date": "2024-04-10",
+          "plan": "Combo",
+          "amount": 499,
+          "method": "Net Banking"
         }
       ]
     },
@@ -643,23 +540,31 @@
       "id": "11",
       "phnno": "9000000011",
       "otp": "777777",
-      "name": "User 11",
-      "address": "11 Eleventh Street, City 11",
-      "email": "user11@example.com",
+      "name": "Vikram Rao",
+      "address": "11 MG Road, Pune",
+      "email": "vikram.rao@example.com",
       "paymentHistory": [
         {
           "id": 1,
-          "date": "2023-01-11",
-          "amount": 111,
-          "method": "Debit Card"
-        }
+          "date": "2018-11-20",
+          "amount": 140,
+          "method": "Credit Card"
+        },
+        { "id": 2, "date": "2022-05-10", "amount": 160, "method": "UPI" }
       ],
       "rechargeHistory": [
         {
           "id": 1,
-          "date": "2023-01-12",
+          "date": "2018-12-01",
+          "plan": "Talktime",
+          "amount": 399,
+          "method": "Debit Card"
+        },
+        {
+          "id": 2,
+          "date": "2022-06-15",
           "plan": "Data",
-          "amount": 211,
+          "amount": 299,
           "method": "Credit Card"
         }
       ]
@@ -668,24 +573,37 @@
       "id": "12",
       "phnno": "9000000012",
       "otp": "888888",
-      "name": "User 12",
-      "address": "12 Twelfth Street, City 12",
-      "email": "user12@example.com",
+      "name": "Anita Desai",
+      "address": "12 Brigade Road, Bangalore",
+      "email": "anita.desai@example.com",
       "paymentHistory": [
         {
           "id": 1,
-          "date": "2023-01-12",
-          "amount": 112,
-          "method": "UPI"
+          "date": "2019-04-05",
+          "amount": 145,
+          "method": "Debit Card"
+        },
+        {
+          "id": 2,
+          "date": "2023-09-10",
+          "amount": 165,
+          "method": "Credit Card"
         }
       ],
       "rechargeHistory": [
         {
           "id": 1,
-          "date": "2023-01-13",
+          "date": "2019-04-20",
           "plan": "Combo",
-          "amount": 212,
-          "method": "Debit Card"
+          "amount": 499,
+          "method": "UPI"
+        },
+        {
+          "id": 2,
+          "date": "2023-10-05",
+          "plan": "Talktime",
+          "amount": 399,
+          "method": "Net Banking"
         }
       ]
     },
@@ -693,24 +611,32 @@
       "id": "13",
       "phnno": "9000000013",
       "otp": "999999",
-      "name": "User 13",
-      "address": "13 Thirteenth Street, City 13",
-      "email": "user13@example.com",
+      "name": "Rohit Sharma",
+      "address": "13 Connaught Place, New Delhi",
+      "email": "rohit.sharma@example.com",
       "paymentHistory": [
         {
           "id": 1,
-          "date": "2023-01-13",
-          "amount": 113,
+          "date": "2020-01-15",
+          "amount": 150,
           "method": "Credit Card"
-        }
+        },
+        { "id": 2, "date": "2025-06-20", "amount": 180, "method": "UPI" }
       ],
       "rechargeHistory": [
         {
           "id": 1,
-          "date": "2023-01-14",
-          "plan": "Talktime",
-          "amount": 213,
-          "method": "UPI"
+          "date": "2020-02-10",
+          "plan": "Data",
+          "amount": 299,
+          "method": "Debit Card"
+        },
+        {
+          "id": 2,
+          "date": "2025-07-15",
+          "plan": "Combo",
+          "amount": 499,
+          "method": "Credit Card"
         }
       ]
     },
@@ -718,924 +644,37 @@
       "id": "14",
       "phnno": "9000000014",
       "otp": "101010",
-      "name": "User 14",
-      "address": "14 Fourteenth Street, City 14",
-      "email": "user14@example.com",
+      "name": "Kavita Agarwal",
+      "address": "14 Marine Drive, Mumbai",
+      "email": "kavita.agarwal@example.com",
       "paymentHistory": [
         {
           "id": 1,
-          "date": "2023-01-14",
-          "amount": 114,
+          "date": "2018-07-12",
+          "amount": 160,
           "method": "Debit Card"
-        }
-      ],
-      "rechargeHistory": [
+        },
         {
-          "id": 1,
-          "date": "2023-01-15",
-          "plan": "Data",
-          "amount": 214,
-          "method": "Credit Card"
-        }
-      ]
-    },
-    {
-      "id": "15",
-      "phnno": "9000000015",
-      "otp": "202020",
-      "name": "User 15",
-      "address": "15 Fifteenth Street, City 15",
-      "email": "user15@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-15",
-          "amount": 115,
-          "method": "UPI"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-16",
-          "plan": "Combo",
-          "amount": 215,
-          "method": "Debit Card"
-        }
-      ]
-    },
-    {
-      "id": "16",
-      "phnno": "9000000016",
-      "otp": "303030",
-      "name": "User 16",
-      "address": "16 Sixteenth Street, City 16",
-      "email": "user16@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-16",
-          "amount": 116,
+          "id": 2,
+          "date": "2022-10-25",
+          "amount": 190,
           "method": "Credit Card"
         }
       ],
       "rechargeHistory": [
         {
           "id": 1,
-          "date": "2023-01-17",
+          "date": "2018-08-05",
           "plan": "Talktime",
-          "amount": 216,
+          "amount": 399,
           "method": "UPI"
-        }
-      ]
-    },
-    {
-      "id": "17",
-      "phnno": "9000000017",
-      "otp": "404040",
-      "name": "User 17",
-      "address": "17 Seventeenth Street, City 17",
-      "email": "user17@example.com",
-      "paymentHistory": [
+        },
         {
-          "id": 1,
-          "date": "2023-01-17",
-          "amount": 117,
-          "method": "Debit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-18",
+          "id": 2,
+          "date": "2022-11-15",
           "plan": "Data",
-          "amount": 217,
-          "method": "Credit Card"
-        }
-      ]
-    },
-    {
-      "id": "18",
-      "phnno": "9000000018",
-      "otp": "505050",
-      "name": "User 18",
-      "address": "18 Eighteenth Street, City 18",
-      "email": "user18@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-18",
-          "amount": 118,
-          "method": "UPI"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-19",
-          "plan": "Combo",
-          "amount": 218,
+          "amount": 299,
           "method": "Debit Card"
-        }
-      ]
-    },
-    {
-      "id": "19",
-      "phnno": "9000000019",
-      "otp": "606060",
-      "name": "User 19",
-      "address": "19 Nineteenth Street, City 19",
-      "email": "user19@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-19",
-          "amount": 119,
-          "method": "Credit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-20",
-          "plan": "Talktime",
-          "amount": 219,
-          "method": "UPI"
-        }
-      ]
-    },
-    {
-      "id": "20",
-      "phnno": "9000000020",
-      "otp": "707070",
-      "name": "User 20",
-      "address": "20 Twentieth Street, City 20",
-      "email": "user20@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-20",
-          "amount": 120,
-          "method": "Debit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-21",
-          "plan": "Data",
-          "amount": 220,
-          "method": "Credit Card"
-        }
-      ]
-    },
-    {
-      "id": "21",
-      "phnno": "9000000021",
-      "otp": "808080",
-      "name": "User 21",
-      "address": "21 Twenty-first Street, City 21",
-      "email": "user21@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-21",
-          "amount": 121,
-          "method": "UPI"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-22",
-          "plan": "Combo",
-          "amount": 221,
-          "method": "Debit Card"
-        }
-      ]
-    },
-    {
-      "id": "22",
-      "phnno": "9000000022",
-      "otp": "909090",
-      "name": "User 22",
-      "address": "22 Twenty-second Street, City 22",
-      "email": "user22@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-22",
-          "amount": 122,
-          "method": "Credit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-23",
-          "plan": "Talktime",
-          "amount": 222,
-          "method": "UPI"
-        }
-      ]
-    },
-    {
-      "id": "23",
-      "phnno": "9000000023",
-      "otp": "111111",
-      "name": "User 23",
-      "address": "23 Twenty-third Street, City 23",
-      "email": "user23@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-23",
-          "amount": 123,
-          "method": "Debit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-24",
-          "plan": "Data",
-          "amount": 223,
-          "method": "Credit Card"
-        }
-      ]
-    },
-    {
-      "id": "24",
-      "phnno": "9000000024",
-      "otp": "222222",
-      "name": "User 24",
-      "address": "24 Twenty-fourth Street, City 24",
-      "email": "user24@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-24",
-          "amount": 124,
-          "method": "UPI"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-25",
-          "plan": "Combo",
-          "amount": 224,
-          "method": "Debit Card"
-        }
-      ]
-    },
-    {
-      "id": "25",
-      "phnno": "9000000025",
-      "otp": "333333",
-      "name": "User 25",
-      "address": "25 Twenty-fifth Street, City 25",
-      "email": "user25@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-25",
-          "amount": 125,
-          "method": "Credit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-26",
-          "plan": "Talktime",
-          "amount": 225,
-          "method": "UPI"
-        }
-      ]
-    },
-    {
-      "id": "26",
-      "phnno": "9000000026",
-      "otp": "444444",
-      "name": "User 26",
-      "address": "26 Twenty-sixth Street, City 26",
-      "email": "user26@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-26",
-          "amount": 126,
-          "method": "Debit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-27",
-          "plan": "Data",
-          "amount": 226,
-          "method": "Credit Card"
-        }
-      ]
-    },
-    {
-      "id": "27",
-      "phnno": "9000000027",
-      "otp": "555555",
-      "name": "User 27",
-      "address": "27 Twenty-seventh Street, City 27",
-      "email": "user27@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-27",
-          "amount": 127,
-          "method": "UPI"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-28",
-          "plan": "Combo",
-          "amount": 227,
-          "method": "Debit Card"
-        }
-      ]
-    },
-    {
-      "id": "28",
-      "phnno": "9000000028",
-      "otp": "666666",
-      "name": "User 28",
-      "address": "28 Twenty-eighth Street, City 28",
-      "email": "user28@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-28",
-          "amount": 128,
-          "method": "Credit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-29",
-          "plan": "Talktime",
-          "amount": 228,
-          "method": "UPI"
-        }
-      ]
-    },
-    {
-      "id": "29",
-      "phnno": "9000000029",
-      "otp": "777777",
-      "name": "User 29",
-      "address": "29 Twenty-ninth Street, City 29",
-      "email": "user29@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-29",
-          "amount": 129,
-          "method": "Debit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-30",
-          "plan": "Data",
-          "amount": 229,
-          "method": "Credit Card"
-        }
-      ]
-    },
-    {
-      "id": "30",
-      "phnno": "9000000030",
-      "otp": "888888",
-      "name": "User 30",
-      "address": "30 Thirtieth Street, City 30",
-      "email": "user30@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-30",
-          "amount": 130,
-          "method": "UPI"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-31",
-          "plan": "Combo",
-          "amount": 230,
-          "method": "Debit Card"
-        }
-      ]
-    },
-    {
-      "id": "31",
-      "phnno": "9000000031",
-      "otp": "999999",
-      "name": "User 31",
-      "address": "31 Thirty-first Street, City 31",
-      "email": "user31@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-01-31",
-          "amount": 131,
-          "method": "Credit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-01",
-          "plan": "Talktime",
-          "amount": 231,
-          "method": "UPI"
-        }
-      ]
-    },
-    {
-      "id": "32",
-      "phnno": "9000000032",
-      "otp": "101112",
-      "name": "User 32",
-      "address": "32 Thirty-second Street, City 32",
-      "email": "user32@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-01",
-          "amount": 132,
-          "method": "Debit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-02",
-          "plan": "Data",
-          "amount": 232,
-          "method": "Credit Card"
-        }
-      ]
-    },
-    {
-      "id": "33",
-      "phnno": "9000000033",
-      "otp": "121314",
-      "name": "User 33",
-      "address": "33 Thirty-third Street, City 33",
-      "email": "user33@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-02",
-          "amount": 133,
-          "method": "UPI"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-03",
-          "plan": "Combo",
-          "amount": 233,
-          "method": "Debit Card"
-        }
-      ]
-    },
-    {
-      "id": "34",
-      "phnno": "9000000034",
-      "otp": "141516",
-      "name": "User 34",
-      "address": "34 Thirty-fourth Street, City 34",
-      "email": "user34@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-03",
-          "amount": 134,
-          "method": "Credit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-04",
-          "plan": "Talktime",
-          "amount": 234,
-          "method": "UPI"
-        }
-      ]
-    },
-    {
-      "id": "35",
-      "phnno": "9000000035",
-      "otp": "161718",
-      "name": "User 35",
-      "address": "35 Thirty-fifth Street, City 35",
-      "email": "user35@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-04",
-          "amount": 135,
-          "method": "Debit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-05",
-          "plan": "Data",
-          "amount": 235,
-          "method": "Credit Card"
-        }
-      ]
-    },
-    {
-      "id": "36",
-      "phnno": "9000000036",
-      "otp": "181920",
-      "name": "User 36",
-      "address": "36 Thirty-sixth Street, City 36",
-      "email": "user36@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-05",
-          "amount": 136,
-          "method": "UPI"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-06",
-          "plan": "Combo",
-          "amount": 236,
-          "method": "Debit Card"
-        }
-      ]
-    },
-    {
-      "id": "37",
-      "phnno": "9000000037",
-      "otp": "202122",
-      "name": "User 37",
-      "address": "37 Thirty-seventh Street, City 37",
-      "email": "user37@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-06",
-          "amount": 137,
-          "method": "Credit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-07",
-          "plan": "Talktime",
-          "amount": 237,
-          "method": "UPI"
-        }
-      ]
-    },
-    {
-      "id": "38",
-      "phnno": "9000000038",
-      "otp": "222324",
-      "name": "User 38",
-      "address": "38 Thirty-eighth Street, City 38",
-      "email": "user38@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-07",
-          "amount": 138,
-          "method": "Debit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-08",
-          "plan": "Data",
-          "amount": 238,
-          "method": "Credit Card"
-        }
-      ]
-    },
-    {
-      "id": "39",
-      "phnno": "9000000039",
-      "otp": "242526",
-      "name": "User 39",
-      "address": "39 Thirty-ninth Street, City 39",
-      "email": "user39@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-08",
-          "amount": 139,
-          "method": "UPI"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-09",
-          "plan": "Combo",
-          "amount": 239,
-          "method": "Debit Card"
-        }
-      ]
-    },
-    {
-      "id": "40",
-      "phnno": "9000000040",
-      "otp": "262728",
-      "name": "User 40",
-      "address": "40 Fortieth Street, City 40",
-      "email": "user40@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-09",
-          "amount": 140,
-          "method": "Credit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-10",
-          "plan": "Talktime",
-          "amount": 240,
-          "method": "UPI"
-        }
-      ]
-    },
-    {
-      "id": "41",
-      "phnno": "9000000041",
-      "otp": "282930",
-      "name": "User 41",
-      "address": "41 Forty-first Street, City 41",
-      "email": "user41@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-10",
-          "amount": 141,
-          "method": "Debit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-11",
-          "plan": "Data",
-          "amount": 241,
-          "method": "Credit Card"
-        }
-      ]
-    },
-    {
-      "id": "42",
-      "phnno": "9000000042",
-      "otp": "303132",
-      "name": "User 42",
-      "address": "42 Forty-second Street, City 42",
-      "email": "user42@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-11",
-          "amount": 142,
-          "method": "UPI"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-12",
-          "plan": "Combo",
-          "amount": 242,
-          "method": "Debit Card"
-        }
-      ]
-    },
-    {
-      "id": "43",
-      "phnno": "9000000043",
-      "otp": "323334",
-      "name": "User 43",
-      "address": "43 Forty-third Street, City 43",
-      "email": "user43@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-12",
-          "amount": 143,
-          "method": "Credit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-13",
-          "plan": "Talktime",
-          "amount": 243,
-          "method": "UPI"
-        }
-      ]
-    },
-    {
-      "id": "44",
-      "phnno": "9000000044",
-      "otp": "343536",
-      "name": "User 44",
-      "address": "44 Forty-fourth Street, City 44",
-      "email": "user44@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-13",
-          "amount": 144,
-          "method": "Debit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-14",
-          "plan": "Data",
-          "amount": 244,
-          "method": "Credit Card"
-        }
-      ]
-    },
-    {
-      "id": "45",
-      "phnno": "9000000045",
-      "otp": "363738",
-      "name": "User 45",
-      "address": "45 Forty-fifth Street, City 45",
-      "email": "user45@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-14",
-          "amount": 145,
-          "method": "UPI"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-15",
-          "plan": "Combo",
-          "amount": 245,
-          "method": "Debit Card"
-        }
-      ]
-    },
-    {
-      "id": "46",
-      "phnno": "9000000046",
-      "otp": "383940",
-      "name": "User 46",
-      "address": "46 Forty-sixth Street, City 46",
-      "email": "user46@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-15",
-          "amount": 146,
-          "method": "Credit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-16",
-          "plan": "Talktime",
-          "amount": 246,
-          "method": "UPI"
-        }
-      ]
-    },
-    {
-      "id": "47",
-      "phnno": "9000000047",
-      "otp": "404142",
-      "name": "User 47",
-      "address": "47 Forty-seventh Street, City 47",
-      "email": "user47@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-16",
-          "amount": 147,
-          "method": "Debit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-17",
-          "plan": "Data",
-          "amount": 247,
-          "method": "Credit Card"
-        }
-      ]
-    },
-    {
-      "id": "48",
-      "phnno": "9000000048",
-      "otp": "424344",
-      "name": "User 48",
-      "address": "48 Forty-eighth Street, City 48",
-      "email": "user48@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-17",
-          "amount": 148,
-          "method": "UPI"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-18",
-          "plan": "Combo",
-          "amount": 248,
-          "method": "Debit Card"
-        }
-      ]
-    },
-    {
-      "id": "49",
-      "phnno": "9000000049",
-      "otp": "444555",
-      "name": "User 49",
-      "address": "49 Forty-ninth Street, City 49",
-      "email": "user49@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-18",
-          "amount": 149,
-          "method": "Credit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-19",
-          "plan": "Talktime",
-          "amount": 249,
-          "method": "UPI"
-        }
-      ]
-    },
-    {
-      "id": "50",
-      "phnno": "9000000050",
-      "otp": "555666",
-      "name": "User 50",
-      "address": "50 Fiftieth Street, City 50",
-      "email": "user50@example.com",
-      "paymentHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-19",
-          "amount": 150,
-          "method": "Debit Card"
-        }
-      ],
-      "rechargeHistory": [
-        {
-          "id": 1,
-          "date": "2023-02-20",
-          "plan": "Data",
-          "amount": 250,
-          "method": "Credit Card"
         }
       ]
     }

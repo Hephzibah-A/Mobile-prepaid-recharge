@@ -7,18 +7,167 @@
     box-sizing: border-box;
 }
 
+/* background animation */
+.absolute {
+    z-index: -1;
+    position: absolute;
+    top: 50px !important;
+    inset: 0;
+    justify-content: center;
+    display: inline-flex;
+    flex-direction: row;
+}
+
+.justify-center {
+    justify-content: center;
+
+}
+
+.bg-shape-1 {
+    width: 400px;
+    height: 400px;
+    border-radius: 9999px;
+    position: relative;
+    animation: one 5s infinite;
+}
+
+
+.bg-shape-2 {
+    width: 300px;
+    height: 300px;
+    border-radius: 9999px;
+    position: relative;
+    animation: two 7s infinite;
+}
+
+.bg-shape-3 {
+    width: 320px;
+    height: 320px;
+    border-radius: 9999px;
+    position: relative;
+    animation: three 9s infinite;
+}
+
+@keyframes one {
+    0% {
+        left: 0px;
+        top: 0px;
+    }
+
+    25% {
+        left: -100px;
+        top: 70px;
+    }
+
+    50% {
+        left: 20px;
+        top: 150px;
+    }
+
+    75% {
+        left: 50px;
+        top: 100px;
+    }
+
+    100% {
+        left: 0px;
+        top: 0px;
+    }
+
+}
+
+@keyframes two {
+    0% {
+        left: 0px;
+        top: 0px;
+    }
+
+    25% {
+        left: 50px;
+        top: 10px;
+    }
+
+    50% {
+        left: 100px;
+        top: 50px;
+    }
+
+    75% {
+        left: 50px;
+        top: 100px;
+    }
+
+    100% {
+        left: 0px;
+        top: 0px;
+    }
+
+}
+
+@keyframes three {
+    0% {
+        left: 0px;
+        top: 0px;
+    }
+
+    25% {
+        left: 50px;
+        top: 10px;
+    }
+
+    50% {
+        left: 20px;
+        top: 150px;
+    }
+
+    75% {
+        left: 50px;
+        top: 10px;
+    }
+
+    100% {
+        left: 0px;
+        top: 0px;
+    }
+
+}
+
+.opacity-50 {
+    opacity: .5;
+}
+
+.bg-blur {
+    filter: blur(90px);
+}
+
+.bg-primary {
+    background-color: rgb(98, 0, 255);
+    ;
+}
+
+.bg-teal {
+    background-color: rgb(98, 0, 255);
+}
+
+.bg-purple {
+    background-color: rgb(255, 157, 0);
+}
+
+/* header and navbar */
+
 .header-container {
+    z-index: 2;
     width: 100%;
     min-height: 100vh;
-    background: linear-gradient(220.55deg, #4300B1 0%, #36008E 100%);
-    color: #ffffff;
+    /* background: linear-gradient(220.55deg, #4300B1 0%, #36008E 100%); */
+    color: black;
     display: flex;
     flex-direction: column;
 }
 
 .navbar {
     padding: 10px 20px;
-    color: #ffffff;
+    color: black;
 }
 
 .navbar .login-btn {
@@ -26,23 +175,26 @@
 }
 
 .navbar .nav-link {
-    color: #ffffff;
+    color: black;
 }
 
 .navbar .nav-link:hover {
-    color: #d7d7d7;
+    color: #4300B1;
 }
 
 .navbar .login-btn {
-    padding: 10px 55px;
-    background-color: white;
-    color: #4300B1;
+    /* padding: 10px 55px; */
+    background-color: rgb(98, 0, 255);
+    color: white;
+    border-radius: 90px;
+    height: 40px;
+    width: 80px;
     font-weight: bold;
 }
 
 .navbar .login-btn:hover {
-    background-color: rgb(214, 210, 210);
-    color: #36008E;
+    background-color: rgb(78, 0, 204);
+    color: white;
     font-weight: bold;
 }
 
@@ -51,19 +203,20 @@
 }
 
 .hero {
-    text-align: center;
     padding: 40px 20px;
 }
 
 .hero h1 {
-    font-size: 2rem;
+    font-size: 3rem;
     margin-bottom: 20px;
     font-weight: bold;
+
 }
 
 .hero p {
     font-size: 1.2rem;
     margin-bottom: 30px;
+
 }
 
 .hero img {
@@ -73,8 +226,22 @@
 
 .header-content {
     margin-top: 13%;
-    align-items: center;
+    align-items: flex-start;
     justify-items: start;
+}
+
+.btn-accent {
+    color: white;
+    background-color: rgb(255, 157, 0);
+    border-color: rgb(255, 157, 0);
+    border-radius: 50px;
+
+}
+
+.btn-accent:hover {
+    color: white;
+    background-color: rgb(204, 126, 0);
+    border-color: rgb(204, 126, 0);
 }
 
 /* Recommended Packs Section */
@@ -89,10 +256,12 @@
     font-weight: bolder;
 }
 
+/* Plan Card with Inverted Border-Radius */
 .plan-card {
     border: none;
     margin: 10px;
-    border-radius: 10px;
+    /* Inverted border-radius: round only top-right and bottom-left */
+    border-radius: 0 20px 0 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.2s ease;
@@ -100,6 +269,7 @@
     display: flex;
     flex-direction: column;
     background: white;
+    position: relative;
 }
 
 .plan-card:hover {
@@ -173,10 +343,55 @@
     background-color: #36008E;
 }
 
-/* About Us Section */
+/* Popular Label Styling */
+.popular-label {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #FFC107;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    z-index: 1;
+}
+
+/* Responsive tweaks */
+@media (max-width: 576px) {
+    .plan-card {
+        border-radius: 0 10px 0 10px;
+    }
+
+    .plan-price {
+        font-size: 1.5rem;
+    }
+
+    .plan-details p {
+        font-size: 0.9rem;
+    }
+
+    .recharge-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .popular-label {
+        top: 5px;
+        right: 5px;
+        font-size: 0.7rem;
+        padding: 3px 7px;
+    }
+}
+
+
+/* =============================
+   About Us Section (Bento Grid)
+============================= */
 .about-us {
-    background: linear-gradient(to right, #4300B1, #36008E);
-    color: white;
+    background: #fff;
+    /* Minimalistic white background */
     padding: 80px 0;
     overflow: hidden;
 }
@@ -186,6 +401,7 @@
     font-weight: bold;
     margin-bottom: 2rem;
     text-align: center;
+    color: #333;
 }
 
 .about-us-text {
@@ -195,161 +411,193 @@
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
+    color: #555;
 }
 
-.about-us-details {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+/* Use a responsive grid (bento style) for detail items */
+.about-us-details.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
 }
 
 .detail-item {
+    background: linear-gradient(135deg, #fceabb, #fed6e3);
+    /* Pastel gradient for each cell */
+    padding: 20px;
+    border-radius: 12px;
     display: flex;
-    align-items: flex-start;
-    padding: 25px;
-    border-radius: 10px;
-    position: relative;
-    gap: 1.5rem;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
-.detail-item::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 20px;
-    width: calc(100% - 40px);
-    height: 1px;
+.detail-item:hover {
+    transform: translateY(-5px);
 }
 
-.detail-item:first-child::before {
-    display: none;
+/* Existing About Us styles remain unchanged */
+
+/* Bento Grid for Detail Items */
+.about-us-details.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
 }
+
+/* Additional Single Grid Card */
+.additional-card {
+    background: linear-gradient(135deg, #fceabb, #fed6e3);
+    /* Soft pastel gradient */
+    padding: 30px;
+    border-radius: 12px;
+    margin-top: 2rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.additional-card:hover {
+    transform: translateY(-5px);
+}
+
+.additional-card .card-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.additional-card .card-content p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+/* Optional: Style the Learn More button if needed */
+.additional-card .card-content a.btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    background-color: #4300B1;
+    border: none;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.additional-card .card-content a.btn:hover {
+    background-color: #36008E;
+}
+
 
 .detail-item i {
-    color: white;
-    font-size: 1.5rem;
-    margin-top: 5px;
+    font-size: 2rem;
+    color: #ff8c00;
+    /* Accent color for icons */
 }
 
 .detail-label {
     font-weight: bold;
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
+    display: block;
+    color: #333;
 }
 
 .detail-item a,
 .detail-item span {
-    color: white;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    color: #666;
 }
 
-.detail-item a:hover {
-    color: #007bff;
-    text-decoration: underline;
-}
-
-.about-us img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Testimonials Section */
-.testimonials {
-    background-color: #f8f9fa;
+/* =============================
+     Why Choose MobiComm Section
+  ============================= */
+.why-choose {
+    background: #fff;
     padding: 80px 0;
 }
 
-.testimonials-title {
-    font-size: 2rem;
-    font-weight: 900;
-    margin-bottom: 1rem;
-    text-align: center;
-    color: #4300B1;
-}
-
-.testimonials-subtitle {
-    font-size: 1rem;
-    color: #777;
-    margin-bottom: 3rem;
+.why-choose h2 {
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
     text-align: center;
 }
 
-.testimonial-card {
-    background-color: white;
-    border-radius: 10px;
+.feature-card {
+    background: linear-gradient(135deg, #e0f7fa, #ffe0b2);
+    /* Soft pastel gradient */
+    border-radius: 12px;
     padding: 30px;
-    margin: 10px;
-    height: auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
     text-align: center;
 }
 
-.testimonial-avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 1rem;
-    object-fit: cover;
+.feature-card:hover {
+    transform: translateY(-5px);
 }
 
-.testimonial-name {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+.feature-card i {
+    color: #ff8c00;
+    margin-bottom: 15px;
 }
 
-.testimonial-location {
+.feature-card h5 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.feature-card p {
     font-size: 1rem;
-    color: #777;
-    margin-bottom: 1rem;
+    color: #555;
 }
 
-.testimonial-text {
-    font-size: 1rem;
-    line-height: 1.6;
+/* =============================
+           FAQ Section
+  ============================= */
+.faq-container {
+    background: #fff;
+    padding: 80px 0;
 }
 
-/* FAQ Section */
 .faq-title {
+    color: #333;
     font-size: 2rem;
-    font-weight: bold;
-    color: #4300B1;
-    margin-bottom: 2rem;
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 .faq-item {
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 1.5rem;
+    background: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .faq-question {
     font-size: 1.1rem;
     font-weight: 500;
-    color: black;
+    color: #333;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.faq-question i {
-    transition: transform 0.3s ease;
-}
-
-.faq-question.collapsed i {
-    transform: rotate(-90deg);
-}
-
 .faq-answer {
-    color: #777;
-    margin-top: 1rem;
-    display: none;
+    font-size: 1rem;
+    color: #555;
+    margin-top: 10px;
 }
 
-.faq-answer.show {
-    display: block;
-}
 
 /* Contact Section */
 .contact-section {
@@ -384,7 +632,9 @@
 }
 
 .btn-secondary {
-    width: 150px;
+    width: 120px;
+    border-radius: 90px;
+
     background-color: #4300B1;
     border-color: #4300B1;
 }

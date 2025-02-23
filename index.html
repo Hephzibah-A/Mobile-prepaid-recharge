@@ -115,9 +115,10 @@
     <section id="plans" class="container mt-5">
         <h2 class="recommended-packs-title">Recommended Packs</h2>
         <div id="popular-plans" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
-            <!-- Popular plans will be dynamically inserted here -->
+            <!-- Popular plan cards will be dynamically inserted here -->
         </div>
     </section>
+
 
     <br>
     <!-- About Us Section -->
@@ -310,17 +311,19 @@
 
     <!-- Script for dynamically loading popular plans -->
     <script>
-        // Function to load plans data from the JSON endpoint
+        // Function to load plans data from the JSON file
         function loadPopularPlans() {
-            fetch('http://localhost:3000/plans')
+            fetch('/data/db.json')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error("HTTP error " + response.status);
                     }
                     return response.json();
                 })
-                .then(plans => {
-                    // Filter only popular plans and limit to the first 8
+                .then(data => {
+                    // Extract the plans array from the JSON file
+                    const plans = data.plans;
+                    // Filter for popular plans and limit to the first 8
                     const popularPlans = plans.filter(plan => plan.popular).slice(0, 8);
                     displayPopularPlans(popularPlans);
                 })
@@ -331,33 +334,34 @@
                 });
         }
 
-        // Function to display plans dynamically
+        // Function to display the popular plans in the Recommended Packs section
         function displayPopularPlans(plans) {
             let html = "";
             plans.forEach(plan => {
                 html += `
-        <div class="col popular-plan" data-plan-id="${plan.id}">
-          <div class="card plan-card">
-            ${plan.popular ? `<div class="popular-label">Popular</div>` : ""}
-            <div class="card-body plan-card-body">
-              <h5 class="plan-price">₹${plan.price}</h5>
-              <div class="plan-details">
-                <p>${plan.data}</p>
-                <p>Calls: ${plan.calls}</p>
-                <p>Validity: ${plan.validity} Days</p>
-              </div>
-              <a href="login.html" class="recharge-btn">Recharge</a>
-              <a href="#" class="view-details">View Details</a>
+      <div class="col popular-plan" data-plan-id="${plan.id}">
+        <div class="card plan-card">
+          ${plan.popular ? `<div class="popular-label">Popular</div>` : ""}
+          <div class="card-body plan-card-body">
+            <div class="plan-price">₹${plan.price}</div>
+            <div class="plan-details">
+              <p>${plan.data}</p>
+              <p>Calls: ${plan.calls}</p>
+              <p>Validity: ${plan.validity} Days</p>
             </div>
+            <a href="login.html" class="recharge-btn">Recharge</a>
+            <a href="#" class="view-details">View Details</a>
           </div>
         </div>
-      `;
+      </div>
+    `;
             });
             document.getElementById('popular-plans').innerHTML = html;
         }
 
-        // Call loadPopularPlans on page load
+        // Load popular plans when the page loads
         window.addEventListener('load', loadPopularPlans);
+
     </script>
 
 </body>

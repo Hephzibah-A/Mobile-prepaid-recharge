@@ -2,15 +2,23 @@
   "dependencies": {
     "body-parser": "^1.20.3",
     "bootstrap": "^5.3.3",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "json-server": "^1.0.0-beta.3",
+    "serverless-http": "^3.2.0"
   },
   "name": "mobile-prepaid-recharge",
   "version": "1.0.0",
   "description": "The **Mobile Recharge Application** provides users with a simple and efficient way to recharge their mobile numbers online. The frontend of the application is built using **HTML, CSS, JavaScript, and Bootstrap** to ensure a responsive and user-friendly interface.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:scss": "sass src/scss:dist/css",
+    "build": "npm run build:scss"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "keywords": [],
+  "devDependencies": {
+    "sass": "^1.85.0"
+  }
 }

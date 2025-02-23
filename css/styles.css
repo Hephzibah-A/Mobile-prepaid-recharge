@@ -356,7 +356,10 @@
     text-transform: uppercase;
     font-weight: bold;
     z-index: 1;
+
 }
+
+
 
 /* Responsive tweaks */
 @media (max-width: 576px) {

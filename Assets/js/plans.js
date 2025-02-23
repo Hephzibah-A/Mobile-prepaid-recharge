@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let plans = [];
 
     // Fetch plans from JSON file
-    fetch("json/plans.json")
+    fetch("/data/db.json")
         .then(response => response.json())
         .then(data => {
             plans = data;

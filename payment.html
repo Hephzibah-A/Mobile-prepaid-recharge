@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MobiComm | Payment</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/styles.css">
@@ -144,7 +144,6 @@
                             <div class="secure-payment">Your transaction is secured with SSL encryption</div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="col-md-4 payment-image">
@@ -254,9 +253,6 @@
             hideAllForms();
             cardForm.style.display = 'block';
 
-            // ======================================================
-            // Validation Functions Using <span> Elements for Error Messages
-            // ======================================================
 
             function validateCardForm() {
                 const cardNumber = document.getElementById('cardNumber').value;
@@ -366,9 +362,7 @@
                 return isValid;
             }
 
-            // ======================================================
-            // Record Payment and Update the User's Payment History via JSON Server
-            // ======================================================
+
             function recordPayment(paymentMethod) {
                 // Get the mobile number from localStorage (assumed stored under 'mobileNumber')
                 const mobileNumber = localStorage.getItem('mobileNumber');
@@ -385,20 +379,23 @@
                     method: paymentMethod
                 };
 
-                // Fetch the user record from JSON Server using the mobile number (assuming field 'phnno')
-                fetch('http://localhost:3000/users?phnno=' + mobileNumber)
+                // Fetch the JSON data from /data/db.json
+                fetch('/data/db.json')
                     .then(response => {
                         if (!response.ok) {
                             throw new Error("HTTP error " + response.status);
                         }
                         return response.json();
                     })
-                    .then(users => {
-                        if (users.length === 0) {
+                    .then(data => {
+                        const users = data.users || [];
+                        // Find the user record by matching mobile number
+                        const matchingUsers = users.filter(user => user.phnno === mobileNumber);
+                        if (matchingUsers.length === 0) {
                             console.error("User not found for mobile number: " + mobileNumber);
                             return;
                         }
-                        let user = users[0];
+                        let user = matchingUsers[0];
                         // Ensure user.paymentHistory is an array
                         if (!Array.isArray(user.paymentHistory)) {
                             user.paymentHistory = [];
@@ -406,8 +403,8 @@
                         // Append the new payment record
                         user.paymentHistory.push(newPayment);
 
-                        // Update the user record on JSON Server via PUT request
-                        fetch('http://localhost:3000/users/' + user.id, {
+
+                        fetch('/data/db.json/users/' + user.id, {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -434,9 +431,7 @@
                     });
             }
 
-            // ======================================================
-            // Attach Event Listeners to Payment Method Buttons
-            // ======================================================
+
 
             // Card Payment Button
             document.getElementById('cardPayBtn').addEventListener('click', function (event) {

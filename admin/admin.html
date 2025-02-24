@@ -5,16 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Font Awesome (adjust path if needed) -->
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css" />
-    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="styles.css" />
     <style>
-        /* You can add additional custom styles here */
         .user-card {
             border: 1px solid #ddd;
             padding: 10px;
@@ -31,32 +26,19 @@
 </head>
 
 <body>
-    <!-- Sidebar -->
     <nav class="sidebar">
         <h4 class="p-3">Admin Panel</h4>
         <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href="#" onclick="showPage('dashboard')">Dashboard</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" onclick="showPage('recharge-history')">Recharge History</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" onclick="showPage('analytics')">Analytics</a>
-            </li>
-            <!-- Plan Management Nav Item -->
-            <li class="nav-item">
-                <a class="nav-link" href="#" onclick="showPage('plan-management'); loadPlans();">Plan Management</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" onclick="logout()" style="color: rgb(255, 49, 49);">
-                    <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
-                </a>
-            </li>
+            <li class="nav-item"><a class="nav-link active" href="#" onclick="showPage('dashboard')">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('recharge-history')">Recharge
+                    History</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('analytics')">Analytics</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('plan-management'); loadPlans();">Plan
+                    Management</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="logout()" style="color: rgb(255, 49, 49);"><i
+                        class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
         </ul>
     </nav>
-
-    <!-- Dashboard Page -->
     <div id="dashboard" class="content">
         <div class="row mb-4">
             <div class="col-md-4">
@@ -91,29 +73,21 @@
             <tbody id="dashboard-data"></tbody>
         </table>
     </div>
-
-    <!-- Recharge History Page -->
     <div id="recharge-history" class="content d-none">
         <h3>Recharge History</h3>
-        <div id="user-list">
-            <!-- User cards will be dynamically inserted here -->
-        </div>
+        <div id="user-list"></div>
     </div>
-
-    <!-- Analytics Page -->
     <div id="analytics" class="content d-none">
         <div class="container">
             <h2 class="my-4 text-center">Analytics Dashboard</h2>
             <p class="text-center mb-4">Overview of key metrics and trends.</p>
             <div class="row">
-                <!-- Revenue Trends Chart -->
                 <div class="col-md-6 mb-4">
                     <div class="chart-container" style="height: 300px;">
                         <canvas id="revenueChart"></canvas>
                     </div>
                     <h5 class="text-center mt-2">Revenue Trends</h5>
                 </div>
-                <!-- User Growth Chart -->
                 <div class="col-md-6 mb-4">
                     <div class="chart-container" style="height: 300px;">
                         <canvas id="userGrowthChart"></canvas>
@@ -122,7 +96,6 @@
                 </div>
             </div>
             <div class="row">
-                <!-- Plan Distribution Chart -->
                 <div class="col-md-12 mb-4">
                     <div class="chart-container" style="height: 400px;">
                         <canvas id="planDistributionChart"></canvas>
@@ -131,7 +104,6 @@
                 </div>
             </div>
             <div class="row">
-                <!-- Recharge Trend Chart -->
                 <div class="col-md-12 mb-4">
                     <div class="chart-container" style="height: 400px;">
                         <canvas id="rechargeTrendChart"></canvas>
@@ -141,9 +113,6 @@
             </div>
         </div>
     </div>
-
-
-    <!-- Plan Management Page -->
     <div id="plan-management" class="content d-none">
         <h3>Plan Management</h3>
         <button class="btn btn-primary mb-3" onclick="showPlanModal('create')">Add New Plan</button>
@@ -160,13 +129,9 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody id="plans-table-body">
-                <!-- Plans will be populated here -->
-            </tbody>
+            <tbody id="plans-table-body"></tbody>
         </table>
     </div>
-
-    <!-- User Details Modal (for showing recharge & payment history) -->
     <div class="modal fade" id="userModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -180,8 +145,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Plan Modal -->
     <div class="modal fade" id="planModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -228,8 +191,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Toast Notification -->
     <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive"
         aria-atomic="true">
         <div class="d-flex">
@@ -238,238 +199,139 @@
                 aria-label="Close"></button>
         </div>
     </div>
-
-    <!-- External Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-
-    <!-- Scripts -->
     <script>
-        /* ----------------- Global Data and Initialization ----------------- */
         let plans = [];
         let allUsers = [];
-
-        // Fallback dummy data generator (for testing if JSON Server is unavailable)
-        const generateUsers = (count) => {
-            const users = [];
-            for (let i = 1; i <= count; i++) {
-                users.push({
-                    id: i,
-                    name: `User ${i}`,
-                    phnno: `98765432${i.toString().padStart(2, '0')}`,
-                    email: `user${i}@example.com`,
-                    rechargeHistory: Array.from({ length: Math.floor(Math.random() * 5) + 1 }, (_, j) => ({
-                        id: j + 1,
-                        date: `${j + 1}-Feb-2024`,
-                        plan: `${(j + 1) * 2}GB Data Plan`,
-                        payment: j % 2 === 0 ? 'UPI' : 'Credit Card',
-                        amount: (j + 1) * 50
-                    })),
-                    paymentHistory: Array.from({ length: Math.floor(Math.random() * 3) + 1 }, (_, j) => ({
-                        id: j + 1,
-                        date: `${j + 1}-Feb-2024`,
-                        amount: (j + 1) * 100,
-                        method: j % 2 === 0 ? 'Credit Card' : 'UPI',
-                        status: 'Successful'
-                    }))
-                });
-            }
-            return users;
-        };
-
-        // Fallback dummy data (for testing)
-        allUsers = generateUsers(50);
-
-        // ---------------------------
-        // Load Users from JSON Server
-        // ---------------------------
         function loadUsers() {
             fetch('/data/db.json')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("HTTP error " + response.status);
-                    }
-                    return response.json();
-                })
+                .then(response => { if (!response.ok) throw new Error("HTTP error " + response.status); return response.json(); })
                 .then(data => {
-                    allUsers = data;
-                    // Update Dashboard Table
+                    allUsers = data.users || [];
                     document.getElementById('dashboard-data').innerHTML = allUsers.map(user => `
-                <tr>
-                  <td>${user.name}</td>
-                  <td>${user.phnno}</td>
-                  <td>N/A</td>
-                  <td><button class="btn btn-warning" onclick="showToast()">Notify</button></td>
-                </tr>
-              `).join('');
-                    // Update Recharge History (User Cards)
+            <tr>
+              <td>${user.name}</td>
+              <td>${user.phnno}</td>
+              <td>N/A</td>
+              <td><button class="btn btn-warning" onclick="showToast()">Notify</button></td>
+            </tr>
+          `).join('');
                     document.getElementById('user-list').innerHTML = allUsers.map(user => `
-                <div class="user-card" onclick="showUserDetails(${user.id})">
-                  <div class="d-flex justify-content-between">
-                    <div>
-                      <h6>${user.name}</h6>
-                      <small class="text-muted">${user.phnno}</small>
-                    </div>
-                    <div class="text-end">
-                      <small>Email: ${user.email}</small>
-                    </div>
-                  </div>
+            <div class="user-card" onclick="showUserDetails(${user.id})">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <h6>${user.name}</h6>
+                  <small class="text-muted">${user.phnno}</small>
                 </div>
-              `).join('');
+                <div class="text-end">
+                  <small>Email: ${user.email}</small>
+                </div>
+              </div>
+            </div>
+          `).join('');
                 })
-                .catch(error => {
-                    console.error("Error loading users:", error);
-                });
+                .catch(error => { console.error("Error loading users:", error); });
         }
-
-        // Call loadUsers on page load
-        window.addEventListener('load', function () {
-            loadUsers();
-        });
-
-        // ---------------------------
-        // Show User Details Modal by Fetching Data from JSON Server
-        // ---------------------------
+        window.addEventListener('load', function () { loadUsers(); });
         function showUserDetails(userId) {
-            fetch('http://localhost:3000/users/' + userId)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("HTTP error " + response.status);
-                    }
-                    return response.json();
-                })
-                .then(user => {
+            fetch('/data/db.json')
+                .then(response => { if (!response.ok) throw new Error("HTTP error " + response.status); return response.json(); })
+                .then(data => {
+                    const user = data.users.find(u => u.id == userId);
                     let rechargeHistoryHTML = "";
                     if (user.rechargeHistory && user.rechargeHistory.length > 0) {
                         rechargeHistoryHTML = user.rechargeHistory.map(recharge => `
-                  <li class="list-group-item d-flex justify-content-between">
-                    <div>
-                      <strong>${recharge.plan}</strong><br>
-                      <small>${recharge.date}</small>
-                    </div>
-                    <span>₹${recharge.amount}</span>
-                  </li>
-                `).join('');
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <strong>${recharge.plan}</strong><br>
+                  <small>${recharge.date}</small>
+                </div>
+                <span>₹${recharge.amount}</span>
+              </li>
+            `).join('');
                     } else {
                         rechargeHistoryHTML = '<li class="list-group-item">No recharge history available.</li>';
                     }
                     let paymentHistoryHTML = "";
                     if (user.paymentHistory && user.paymentHistory.length > 0) {
                         paymentHistoryHTML = user.paymentHistory.map(payment => `
-                  <li class="list-group-item d-flex justify-content-between">
-                    <div>
-                      <strong>${payment.method}</strong><br>
-                      <small>${payment.date}</small>
-                    </div>
-                    <span >₹${payment.amount}</span>
-                  </li>
-                `).join('');
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <strong>${payment.method}</strong><br>
+                  <small>${payment.date}</small>
+                </div>
+                <span>₹${payment.amount}</span>
+              </li>
+            `).join('');
                     } else {
                         paymentHistoryHTML = '<li class="list-group-item">No payment history available.</li>';
                     }
                     const modalContent = `
-                <h6>${user.name}</h6>
-                <p><strong>Mobile:</strong> ${user.phnno}</p>
-                <p><strong>Email:</strong> ${user.email}</p>
-                <h6 class="mt-3">Recharge History:</h6>
-                <ul class="list-group">
-                  ${rechargeHistoryHTML}
-                </ul>
-                <h6 class="mt-3">Payment History:</h6>
-                <ul class="list-group">
-                  ${paymentHistoryHTML}
-                </ul>
-              `;
+            <h6>${user.name}</h6>
+            <p><strong>Mobile:</strong> ${user.phnno}</p>
+            <p><strong>Email:</strong> ${user.email}</p>
+            <h6 class="mt-3">Recharge History:</h6>
+            <ul class="list-group">${rechargeHistoryHTML}</ul>
+            <h6 class="mt-3">Payment History:</h6>
+            <ul class="list-group">${paymentHistoryHTML}</ul>
+          `;
                     document.getElementById('userDetailsContent').innerHTML = modalContent;
                     new bootstrap.Modal(document.getElementById('userModal')).show();
                 })
-                .catch(error => {
-                    console.error("Error fetching user details:", error);
-                });
+                .catch(error => { console.error("Error fetching user details:", error); });
         }
-
-        // ---------------------------
-        // Toast Notification Function
-        // ---------------------------
         const toastEl = document.querySelector('.toast');
         const toast = new bootstrap.Toast(toastEl);
-        function showToast() {
-            toast.show();
-        }
-
-        // ---------------------------
-        // Page Navigation
-        // ---------------------------
+        function showToast() { toast.show(); }
         function showPage(page) {
             document.querySelectorAll('.content').forEach(el => el.classList.add('d-none'));
             document.getElementById(page).classList.remove('d-none');
             if (page === 'analytics') {
-                // Force charts to update when analytics page is visible
-                if (window.revenueChart) window.revenueChart.resize();
-                if (window.userGrowthChart) window.userGrowthChart.resize();
-                if (window.planDistributionChart) window.planDistributionChart.resize();
-                if (window.rechargeTrendChart) window.rechargeTrendChart.resize();
+                loadAnalyticsData();
+                if (window.revenueChart) revenueChart.resize();
+                if (window.userGrowthChart) userGrowthChart.resize();
+                if (window.planDistributionChart) planDistributionChart.resize();
+                if (window.rechargeTrendChart) rechargeTrendChart.resize();
             }
         }
-
         function logout() {
             alert("Admin, You're Logging out!");
             window.location.href = 'login.html';
         }
-
-        /* ------------------- Plan Management Functions Using JSON Server ------------------- */
         function loadPlans() {
-            fetch('http://localhost:3000/plans')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("HTTP error " + response.status);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    plans = data;
-                    renderPlansTable();
-                })
-                .catch(error => {
-                    console.error("Error loading plans:", error);
-                    document.getElementById('plans-table-body').innerHTML =
-                        `<tr><td colspan="8" class="text-center text-danger">Error loading plans: ${error.message}</td></tr>`;
-                });
+            fetch('/data/db.json')
+                .then(response => { if (!response.ok) throw new Error("HTTP error " + response.status); return response.json(); })
+                .then(data => { plans = data.plans; renderPlansTable(); })
+                .catch(error => { console.error("Error loading plans:", error); document.getElementById('plans-table-body').innerHTML = `<tr><td colspan="8" class="text-center text-danger">Error loading plans: ${error.message}</td></tr>`; });
         }
-
         function renderPlansTable() {
             const tbody = document.getElementById('plans-table-body');
-            if (!plans.length) {
-                tbody.innerHTML = `<tr><td colspan="8" class="text-center">No plans found.</td></tr>`;
-                return;
-            }
+            if (!plans.length) { tbody.innerHTML = `<tr><td colspan="8" class="text-center">No plans found.</td></tr>`; return; }
             tbody.innerHTML = plans.map(plan => `
-            <tr>
-              <td>${plan.id}</td>
-              <td>${plan.price}</td>
-              <td>${plan.data}</td>
-              <td>${plan.calls}</td>
-              <td>${plan.validity}</td>
-              <td>${plan.planType}</td>
-              <td>${plan.popular ? 'Yes' : 'No'}</td>
-              <td>
-                <button class="btn btn-sm btn-info" onclick="showPlanModal('edit', ${plan.id})">Edit</button>
-                <button class="btn btn-sm btn-danger" onclick="deletePlan(${plan.id})">Delete</button>
-              </td>
-            </tr>
-          `).join('');
+        <tr>
+          <td>${plan.id}</td>
+          <td>${plan.price}</td>
+          <td>${plan.data}</td>
+          <td>${plan.calls}</td>
+          <td>${plan.validity}</td>
+          <td>${plan.planType}</td>
+          <td>${plan.popular ? 'Yes' : 'No'}</td>
+          <td>
+            <button class="btn btn-sm btn-info" onclick="showPlanModal('edit', ${plan.id})">Edit</button>
+            <button class="btn btn-sm btn-danger" onclick="deletePlan(${plan.id})">Delete</button>
+          </td>
+        </tr>
+      `).join('');
         }
-
         function showPlanModal(mode, planId = null) {
             const planModal = new bootstrap.Modal(document.getElementById('planModal'));
             const modalTitle = document.getElementById('planModalTitle');
             const planForm = document.getElementById('planForm');
             planForm.reset();
             document.getElementById('planId').value = '';
-
-            if (mode === 'create') {
-                modalTitle.textContent = 'Add New Plan';
-            } else if (mode === 'edit') {
+            if (mode === 'create') { modalTitle.textContent = 'Add New Plan'; }
+            else if (mode === 'edit') {
                 modalTitle.textContent = 'Edit Plan';
                 const plan = plans.find(p => p.id == planId);
                 if (plan) {
@@ -484,7 +346,6 @@
             }
             planModal.show();
         }
-
         document.getElementById('planForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const idValue = document.getElementById('planId').value;
@@ -494,234 +355,143 @@
             const validity = parseInt(document.getElementById('planValidity').value);
             const planType = document.getElementById('planType').value;
             const popular = document.getElementById('planPopular').checked;
-
             const planData = { price, data: dataValue, calls, validity, planType, popular };
-
             if (idValue) {
-                fetch(`http://localhost:3000/plans/${idValue}`, {
+                fetch('/data/db.json/plans/' + idValue, {
                     method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ id: parseInt(idValue), ...planData })
                 })
                     .then(response => response.json())
-                    .then(updatedPlan => {
-                        loadPlans();
-                    })
+                    .then(updatedPlan => { loadPlans(); })
                     .catch(error => console.error("Error updating plan:", error));
             } else {
-                fetch('http://localhost:3000/plans', {
+                fetch('/data/db.json/plans', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(planData)
                 })
                     .then(response => response.json())
-                    .then(newPlan => {
-                        loadPlans();
-                    })
+                    .then(newPlan => { loadPlans(); })
                     .catch(error => console.error("Error creating plan:", error));
             }
             const planModalEl = document.getElementById('planModal');
             const planModal = bootstrap.Modal.getInstance(planModalEl);
             planModal.hide();
         });
-
         function deletePlan(planId) {
             if (confirm("Are you sure you want to delete this plan?")) {
-                fetch(`http://localhost:3000/plans/${planId}`, { method: 'DELETE' })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error("HTTP error " + response.status);
-                        }
-                        loadPlans();
-                    })
-                    .catch(error => {
-                        console.error("Error deleting plan:", error);
-                        alert("Error deleting plan: " + error.message);
-                    });
+                fetch('/data/db.json/plans/' + planId, { method: 'DELETE' })
+                    .then(response => { if (!response.ok) throw new Error("HTTP error " + response.status); loadPlans(); })
+                    .catch(error => { console.error("Error deleting plan:", error); alert("Error deleting plan: " + error.message); });
             }
         }
-    </script>
-
-    <!-- Chart Configurations and Charts -->
-    <script>
-        // Chart configuration options (same for all charts)
         const chartOptions = {
             responsive: true,
-            plugins: {
-                legend: { position: 'top' },
-                title: { display: false }
-            },
-            scales: {
-                y: { grid: { color: '#e0e0e0' } },
-                x: { grid: { color: '#e0e0e0' } }
-            }
+            plugins: { legend: { position: 'top' }, title: { display: false } },
+            scales: { y: { grid: { color: '#e0e0e0' } }, x: { grid: { color: '#e0e0e0' } } }
         };
-
-        // Create charts with empty initial data
         window.revenueChart = new Chart(document.getElementById('revenueChart'), {
             type: 'line',
-            data: {
-                labels: [],
-                datasets: [{
-                    label: 'Revenue (₹ Lakhs)',
-                    data: [],
-                    borderColor: '#2c7873',
-                    tension: 0.4
-                }]
-            },
+            data: { labels: [], datasets: [{ label: 'Revenue (₹ Lakhs)', data: [], borderColor: '#2c7873', tension: 0.4 }] },
             options: chartOptions
         });
-
         window.userGrowthChart = new Chart(document.getElementById('userGrowthChart'), {
             type: 'bar',
-            data: {
-                labels: [],
-                datasets: [{
-                    label: 'Total Users',
-                    data: [],
-                    backgroundColor: '#f7c45a'
-                }]
-            },
+            data: { labels: [], datasets: [{ label: 'Total Users', data: [], backgroundColor: '#f7c45a' }] },
             options: chartOptions
         });
-
         window.planDistributionChart = new Chart(document.getElementById('planDistributionChart'), {
             type: 'doughnut',
-            data: {
-                labels: [],
-                datasets: [{
-                    data: [],
-                    backgroundColor: [] // will be set below
-                }]
-            },
+            data: { labels: [], datasets: [{ data: [], backgroundColor: [] }] },
             options: chartOptions
         });
-
         window.rechargeTrendChart = new Chart(document.getElementById('rechargeTrendChart'), {
             type: 'line',
-            data: {
-                labels: [],
-                datasets: [{
-                    label: 'Recharges',
-                    data: [],
-                    borderColor: '#ff6b6b',
-                    backgroundColor: 'rgba(255,107,107,0.2)',
-                    tension: 0.4
-                }]
-            },
+            data: { labels: [], datasets: [{ label: 'Recharges', data: [], borderColor: '#ff6b6b', backgroundColor: 'rgba(255,107,107,0.2)', tension: 0.4 }] },
             options: chartOptions
         });
-
-        // Function to load analytics data from the users and plans endpoints
         function loadAnalyticsData() {
-            // Use Promise.all to fetch users and plans concurrently
-            Promise.all([
-                fetch('http://localhost:3000/users').then(res => res.json()),
-                fetch('http://localhost:3000/plans').then(res => res.json())
-            ]).then(([users, plans]) => {
-                // -------- Revenue Trend Chart --------
-                // Aggregate revenue by month from paymentHistory of users
-                const revenueByMonth = {};
-                users.forEach(user => {
-                    if (user.paymentHistory && user.paymentHistory.length > 0) {
-                        user.paymentHistory.forEach(payment => {
-                            // Assume payment.date is in "DD-MMM-YYYY" format; extract "MMM-YYYY"
-                            const parts = payment.date.split('-');
-                            if (parts.length >= 3) {
-                                const key = parts[1] + '-' + parts[2];
-                                if (!revenueByMonth[key]) revenueByMonth[key] = 0;
-                                revenueByMonth[key] += payment.amount;
-                            }
-                        });
-                    }
-                });
-                const revenueLabels = Object.keys(revenueByMonth).sort((a, b) => a.localeCompare(b));
-                const revenueData = revenueLabels.map(label => revenueByMonth[label]);
-                revenueChart.data.labels = revenueLabels;
-                revenueChart.data.datasets[0].data = revenueData;
-                revenueChart.update();
-
-                // -------- User Growth Chart --------
-                // Group users by year using a createdAt property (fallback to '2023' if missing)
-                const userGrowth = {};
-                users.forEach(user => {
-                    const year = user.createdAt ? user.createdAt.slice(0, 4) : '2023';
-                    if (!userGrowth[year]) userGrowth[year] = 0;
-                    userGrowth[year]++;
-                });
-                const growthLabels = Object.keys(userGrowth).sort();
-                const growthData = growthLabels.map(year => userGrowth[year]);
-                userGrowthChart.data.labels = growthLabels;
-                userGrowthChart.data.datasets[0].data = growthData;
-                userGrowthChart.update();
-
-                // -------- Recharge Trend Chart --------
-                // Aggregate recharge events by month from rechargeHistory of users
-                const rechargeTrend = {};
-                users.forEach(user => {
-                    if (user.rechargeHistory && user.rechargeHistory.length > 0) {
-                        user.rechargeHistory.forEach(event => {
-                            const parts = event.date.split('-'); // "DD-MMM-YYYY"
-                            if (parts.length >= 3) {
-                                const key = parts[1] + '-' + parts[2];
-                                if (!rechargeTrend[key]) rechargeTrend[key] = 0;
-                                rechargeTrend[key]++;
-                            }
-                        });
-                    }
-                });
-                const rechargeLabels = Object.keys(rechargeTrend).sort((a, b) => a.localeCompare(b));
-                const rechargeData = rechargeLabels.map(key => rechargeTrend[key]);
-                rechargeTrendChart.data.labels = rechargeLabels;
-                rechargeTrendChart.data.datasets[0].data = rechargeData;
-                rechargeTrendChart.update();
-
-                // -------- Plan Distribution Chart --------
-                // Group plans by planType
-                const planDistribution = {};
-                plans.forEach(plan => {
-                    const type = plan.planType;
-                    if (!planDistribution[type]) planDistribution[type] = 0;
-                    planDistribution[type]++;
-                });
-                const planLabels = Object.keys(planDistribution);
-                const planData = planLabels.map(label => planDistribution[label]);
-                planDistributionChart.data.labels = planLabels;
-                planDistributionChart.data.datasets[0].data = planData;
-                // Set a background color for each plan type (customize as needed)
-                const colorMapping = {
-                    'combo': '#2c7873',
-                    'talktime': '#f7c45a',
-                    'data': '#ff6b6b',
-                    'international-roaming': '#6a4c93',
-                    'ott': '#00bcd4'
-                };
-                planDistributionChart.data.datasets[0].backgroundColor = planLabels.map(label => colorMapping[label] || '#cccccc');
-                planDistributionChart.update();
-            }).catch(error => {
-                console.error("Error loading analytics data:", error);
-            });
+            fetch('/data/db.json')
+                .then(response => { if (!response.ok) throw new Error("HTTP error " + response.status); return response.json(); })
+                .then(data => {
+                    const users = data.users || [];
+                    const plans = data.plans || [];
+                    const revenueByMonth = {};
+                    users.forEach(user => {
+                        if (user.paymentHistory) {
+                            user.paymentHistory.forEach(payment => {
+                                const parts = payment.date.split('-');
+                                if (parts.length >= 3) {
+                                    const key = parts[1] + '-' + parts[0];
+                                    revenueByMonth[key] = (revenueByMonth[key] || 0) + payment.amount;
+                                }
+                            });
+                        }
+                    });
+                    const revenueLabels = Object.keys(revenueByMonth).sort((a, b) => a.localeCompare(b));
+                    const revenueData = revenueLabels.map(label => revenueByMonth[label]);
+                    revenueChart.data.labels = revenueLabels;
+                    revenueChart.data.datasets[0].data = revenueData;
+                    revenueChart.update();
+                    const userGrowth = {};
+                    users.forEach(user => {
+                        const year = user.createdAt ? user.createdAt.slice(0, 4) : '2023';
+                        userGrowth[year] = (userGrowth[year] || 0) + 1;
+                    });
+                    const growthLabels = Object.keys(userGrowth).sort();
+                    const growthData = growthLabels.map(year => userGrowth[year]);
+                    userGrowthChart.data.labels = growthLabels;
+                    userGrowthChart.data.datasets[0].data = growthData;
+                    userGrowthChart.update();
+                    const rechargeTrend = {};
+                    users.forEach(user => {
+                        if (user.rechargeHistory) {
+                            user.rechargeHistory.forEach(event => {
+                                const parts = event.date.split('-');
+                                if (parts.length >= 3) {
+                                    const key = parts[1] + '-' + parts[0];
+                                    rechargeTrend[key] = (rechargeTrend[key] || 0) + 1;
+                                }
+                            });
+                        }
+                    });
+                    const rechargeLabels = Object.keys(rechargeTrend).sort((a, b) => a.localeCompare(b));
+                    const rechargeData = rechargeLabels.map(key => rechargeTrend[key]);
+                    rechargeTrendChart.data.labels = rechargeLabels;
+                    rechargeTrendChart.data.datasets[0].data = rechargeData;
+                    rechargeTrendChart.update();
+                    const planDistribution = {};
+                    plans.forEach(plan => {
+                        const type = plan.planType;
+                        planDistribution[type] = (planDistribution[type] || 0) + 1;
+                    });
+                    const planLabels = Object.keys(planDistribution);
+                    const planData = planLabels.map(label => planDistribution[label]);
+                    planDistributionChart.data.labels = planLabels;
+                    planDistributionChart.data.datasets[0].data = planData;
+                    const colorMapping = { 'combo': '#2c7873', 'talktime': '#f7c45a', 'data': '#ff6b6b', 'international-roaming': '#6a4c93', 'ott': '#00bcd4' };
+                    planDistributionChart.data.datasets[0].backgroundColor = planLabels.map(label => colorMapping[label] || '#cccccc');
+                    planDistributionChart.update();
+                })
+                .catch(error => { console.error("Error loading analytics data:", error); });
         }
-
-        // Update your showPage function so that when the analytics page is shown, we load the data
         function showPage(page) {
             document.querySelectorAll('.content').forEach(el => el.classList.add('d-none'));
             document.getElementById(page).classList.remove('d-none');
             if (page === 'analytics') {
                 loadAnalyticsData();
-                // Optionally, force charts to resize
                 if (window.revenueChart) revenueChart.resize();
                 if (window.userGrowthChart) userGrowthChart.resize();
                 if (window.planDistributionChart) planDistributionChart.resize();
                 if (window.rechargeTrendChart) rechargeTrendChart.resize();
             }
         }
+        function logout() {
+            alert("Admin, You're Logging out!");
+            window.location.href = 'login.html';
+        }
     </script>
-
 </body>
 
 </html>

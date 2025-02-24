@@ -7,7 +7,8 @@
       "calls": "Unlimited",
       "validity": 28,
       "planType": "combo",
-      "popular": true
+      "popular": true,
+      "addedOn": "2025-02-15T08:00:00Z"
     },
     {
       "id": "2",
@@ -16,7 +17,8 @@
       "calls": "Unlimited",
       "validity": 56,
       "planType": "talktime",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-10T12:00:00Z"
     },
     {
       "id": "3",
@@ -25,7 +27,8 @@
       "calls": "Unlimited",
       "validity": 28,
       "planType": "data",
-      "popular": true
+      "popular": true,
+      "addedOn": "2025-02-23T09:30:00Z"
     },
     {
       "id": "4",
@@ -34,7 +37,8 @@
       "calls": "Unlimited",
       "validity": 56,
       "planType": "combo",
-      "popular": true
+      "popular": true,
+      "addedOn": "2025-02-18T14:00:00Z"
     },
     {
       "id": "5",
@@ -43,7 +47,8 @@
       "calls": "Unlimited",
       "validity": 21,
       "planType": "data",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-12T11:00:00Z"
     },
     {
       "id": "6",
@@ -52,7 +57,8 @@
       "calls": "Unlimited",
       "validity": 84,
       "planType": "talktime",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-08T16:00:00Z"
     },
     {
       "id": "7",
@@ -61,7 +67,8 @@
       "calls": "500 Minutes",
       "validity": 30,
       "planType": "data",
-      "popular": true
+      "popular": true,
+      "addedOn": "2025-02-24T07:45:00Z"
     },
     {
       "id": "8",
@@ -70,7 +77,8 @@
       "calls": "Unlimited",
       "validity": 60,
       "planType": "combo",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-05T10:30:00Z"
     },
     {
       "id": "9",
@@ -79,7 +87,8 @@
       "calls": "Unlimited",
       "validity": 70,
       "planType": "combo",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-04T09:00:00Z"
     },
     {
       "id": "10",
@@ -88,7 +97,8 @@
       "calls": "Unlimited",
       "validity": 45,
       "planType": "combo",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-20T13:00:00Z"
     },
     {
       "id": "11",
@@ -97,7 +107,8 @@
       "calls": "Unlimited",
       "validity": 30,
       "planType": "talktime",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-01T08:00:00Z"
     },
     {
       "id": "12",
@@ -106,7 +117,8 @@
       "calls": "Unlimited",
       "validity": 90,
       "planType": "combo",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-01-25T14:00:00Z"
     },
     {
       "id": "13",
@@ -115,7 +127,8 @@
       "calls": "300 Minutes",
       "validity": 21,
       "planType": "talktime",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-22T11:30:00Z"
     },
     {
       "id": "14",
@@ -124,7 +137,8 @@
       "calls": "Unlimited",
       "validity": 90,
       "planType": "data",
-      "popular": true
+      "popular": true,
+      "addedOn": "2025-02-19T15:00:00Z"
     },
     {
       "id": "15",
@@ -133,7 +147,8 @@
       "calls": "Unlimited",
       "validity": 180,
       "planType": "combo",
-      "popular": true
+      "popular": true,
+      "addedOn": "2025-02-23T08:00:00Z"
     },
     {
       "id": "16",
@@ -142,7 +157,8 @@
       "calls": "Unlimited",
       "validity": 60,
       "planType": "data",
-      "popular": true
+      "popular": true,
+      "addedOn": "2025-02-21T12:30:00Z"
     },
     {
       "id": "17",
@@ -151,7 +167,8 @@
       "calls": "Unlimited",
       "validity": 60,
       "planType": "data",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-10T09:15:00Z"
     },
     {
       "id": "18",
@@ -160,7 +177,8 @@
       "calls": "Unlimited",
       "validity": 56,
       "planType": "data",
-      "popular": true
+      "popular": true,
+      "addedOn": "2025-02-24T06:00:00Z"
     },
     {
       "id": "19",
@@ -169,7 +187,8 @@
       "calls": "Unlimited",
       "validity": 60,
       "planType": "data",
-      "popular": true
+      "popular": true,
+      "addedOn": "2025-02-16T10:00:00Z"
     },
     {
       "id": "20",
@@ -178,7 +197,8 @@
       "calls": "Unlimited",
       "validity": 365,
       "planType": "combo",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-01-15T08:00:00Z"
     },
     {
       "id": "21",
@@ -187,7 +207,8 @@
       "calls": "500 Minutes",
       "validity": 30,
       "planType": "international-roaming",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-11T07:00:00Z"
     },
     {
       "id": "22",
@@ -196,7 +217,8 @@
       "calls": "Unlimited",
       "validity": 30,
       "planType": "international-roaming",
-      "popular": true
+      "popular": true,
+      "addedOn": "2025-02-23T13:00:00Z"
     },
     {
       "id": "23",
@@ -205,7 +227,8 @@
       "calls": "Unlimited",
       "validity": 30,
       "planType": "international-roaming",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-08T12:00:00Z"
     },
     {
       "id": "24",
@@ -214,7 +237,8 @@
       "calls": "Unlimited",
       "validity": 30,
       "planType": "international-roaming",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-03T10:00:00Z"
     },
     {
       "id": "25",
@@ -223,7 +247,8 @@
       "calls": "Unlimited",
       "validity": 56,
       "planType": "ott",
-      "popular": true
+      "popular": true,
+      "addedOn": "2025-02-24T08:30:00Z"
     },
     {
       "id": "26",
@@ -232,7 +257,8 @@
       "calls": "Unlimited",
       "validity": 56,
       "planType": "ott",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-14T11:00:00Z"
     },
     {
       "id": "27",
@@ -241,7 +267,8 @@
       "calls": "Unlimited",
       "validity": 56,
       "planType": "ott",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-12T15:30:00Z"
     },
     {
       "id": "28",
@@ -250,7 +277,8 @@
       "calls": "Unlimited",
       "validity": 56,
       "planType": "ott",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-05T10:30:00Z"
     },
     {
       "id": "30",
@@ -259,7 +287,8 @@
       "calls": "Unlimited",
       "validity": 48,
       "planType": "combo",
-      "popular": true
+      "popular": true,
+      "addedOn": "2025-02-24T09:00:00Z"
     },
     {
       "id": "31",
@@ -268,7 +297,8 @@
       "calls": "None",
       "validity": 1,
       "planType": "data",
-      "popular": true
+      "popular": true,
+      "addedOn": "2025-02-24T10:00:00Z"
     },
     {
       "id": "32",
@@ -277,7 +307,8 @@
       "calls": "None",
       "validity": 1,
       "planType": "data",
-      "popular": true
+      "popular": true,
+      "addedOn": "2025-02-24T10:05:00Z"
     },
     {
       "id": "33",
@@ -286,7 +317,8 @@
       "calls": "None",
       "validity": 1,
       "planType": "data",
-      "popular": true
+      "popular": true,
+      "addedOn": "2025-02-24T10:10:00Z"
     },
     {
       "id": "29bd",
@@ -295,7 +327,8 @@
       "calls": "None",
       "validity": 1,
       "planType": "data",
-      "popular": true
+      "popular": true,
+      "addedOn": "2025-02-24T10:15:00Z"
     },
     {
       "id": "fc15",
@@ -304,7 +337,8 @@
       "calls": "None",
       "validity": 1,
       "planType": "data",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-24T10:20:00Z"
     },
     {
       "id": "0b29",
@@ -313,7 +347,8 @@
       "calls": "Unlimited",
       "validity": 28,
       "planType": "combo",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-20T09:00:00Z"
     },
     {
       "id": "967c",
@@ -322,10 +357,10 @@
       "calls": "None",
       "validity": 2,
       "planType": "data",
-      "popular": false
+      "popular": false,
+      "addedOn": "2025-02-18T08:00:00Z"
     }
   ],
-
   "users": [
     {
       "id": "5",

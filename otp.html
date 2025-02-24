@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MobiComm OTP Verification</title>
-    <!-- Bootstrap CSS for responsiveness -->
+    <title>MobiComm | OTP Verification</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="Assets/css/otp.css">
     <link rel="stylesheet" href="style.css">
@@ -22,7 +21,6 @@
             </div>
         </nav>
     </section>
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 illustration-box">
@@ -32,22 +30,16 @@
             <div class="col-md-6 verification-box">
                 <h2 class="verification-title">VERIFICATION CODE</h2>
                 <p class="verification-details">We have sent the verification code to your mobile number</p>
-
-                <!-- OTP Display Box -->
                 <div id="otpDisplay"></div>
-
                 <div class="otp-input-group">
                     <input type="number" id="otp" class="form-control" maxlength="6" inputmode="numeric"
                         placeholder="Enter OTP">
                 </div>
-
                 <button type="button" class="btn btn-primary btn-block" onclick="verifyOTP()">Confirm</button>
-
                 <div id="verificationStatus" class="mt-3"></div>
             </div>
         </div>
     </div>
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 verification-box"></div>
@@ -55,13 +47,9 @@
             <div id="verificationStatus" class="mt-3"></div>
         </div>
     </div>
-
-    <!-- Include necessary JS libraries -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- OTP Verification Script -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const mobileNumber = localStorage.getItem('mobileNumber');
@@ -69,27 +57,24 @@
             const otpInput = document.getElementById("otp");
             const verificationStatus = document.getElementById("verificationStatus");
             const toast = document.getElementById("toast");
-
             let storedOTP = null;
-
             if (!mobileNumber) {
                 console.error("Mobile number not found in localStorage.");
                 window.location.href = "index.html";
                 return;
             }
-
-            // Fetch user data from JSON Server based on mobile number
-            fetch('http://localhost:3000/users?phnno=' + mobileNumber)
+            fetch('/data/db.json')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error("HTTP error " + response.status);
                     }
                     return response.json();
                 })
-                .then(users => {
-                    if (users.length > 0) {
-                        // Assume mobile numbers are unique; use the first matching user
-                        const user = users[0];
+                .then(data => {
+                    const users = data.users || [];
+                    const matchingUsers = users.filter(user => user.phnno === mobileNumber);
+                    if (matchingUsers.length > 0) {
+                        const user = matchingUsers[0];
                         storedOTP = user.otp;
                     } else {
                         console.error("User not found for mobile number: " + mobileNumber);
@@ -102,26 +87,20 @@
                     verificationStatus.textContent = "Error fetching OTP data. Please try again later.";
                     verificationStatus.classList.add("error-message");
                 });
-
             window.verifyOTP = function () {
                 if (!otpInput) {
                     console.error("OTP input field not found.");
                     return;
                 }
-
                 const enteredOTP = otpInput.value;
-
                 if (enteredOTP === storedOTP) {
                     verificationStatus.textContent = "Success! You have been successfully authenticated.";
                     verificationStatus.classList.add("success-message");
                     verificationStatus.classList.remove("error-message");
-
                     toast.textContent = "Congratulations! You have been successfully authenticated.";
                     toast.classList.add("show");
-
                     setTimeout(() => {
                         toast.classList.remove("show");
-                        // Redirect based on whether the user came from card payment flow
                         const fromCard = localStorage.getItem('fromCardPayment');
                         if (fromCard === 'true') {
                             window.location.href = "payment.html";
@@ -137,6 +116,7 @@
             };
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

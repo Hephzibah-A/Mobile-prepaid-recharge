@@ -6,10 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MobiComm | User Profile</title>
     <link rel="icon" href="Assets/png/favicon.ico" />
-    <!-- You can link external CSS files if needed -->
     <link rel="stylesheet" href="style.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         body {
@@ -17,7 +15,6 @@
             font-family: 'Roboto', sans-serif;
         }
 
-        /* Navbar styling */
         .navbar {
             background-color: #ffffff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -37,7 +34,6 @@
             color: #300377;
         }
 
-        /* Profile Container Styling */
         .profile-container {
             max-width: 600px;
             margin: 50px auto;
@@ -72,7 +68,6 @@
             margin-top: 20px;
         }
 
-        /* Modal Styling */
         .modal-content {
             border-radius: 10px;
         }
@@ -102,7 +97,6 @@
 </head>
 
 <body>
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="main.html">
@@ -125,8 +119,6 @@
             </div>
         </div>
     </nav>
-
-    <!-- Profile Container -->
     <div class="container">
         <div class="profile-container">
             <i class="fas fa-user profile-icon-user"></i>
@@ -138,8 +130,6 @@
             </button>
         </div>
     </div>
-
-    <!-- Edit Profile Modal -->
     <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
@@ -168,41 +158,34 @@
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap JS (CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- JavaScript to fetch and update user profile from JSON Server -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Retrieve mobile number of logged-in user from localStorage
             const mobileNumber = localStorage.getItem("mobileNumber");
             if (!mobileNumber) {
                 console.error("Mobile number not found in localStorage.");
-                window.location.href = "index.html"; // Redirect if no mobile number
+                window.location.href = "index.html";
                 return;
             }
-
-            // Function to fetch user data from JSON Server
             function fetchUserData() {
-                fetch('http://localhost:3000/users?phnno=' + mobileNumber)
+                fetch('/data/db.json')
                     .then(response => {
                         if (!response.ok) {
                             throw new Error("HTTP error " + response.status);
                         }
                         return response.json();
                     })
-                    .then(users => {
-                        if (users.length > 0) {
-                            const user = users[0];
-                            // Update profile display
+                    .then(data => {
+                        const users = data.users || [];
+                        const matchingUsers = users.filter(user => user.phnno === mobileNumber);
+                        if (matchingUsers.length > 0) {
+                            const user = matchingUsers[0];
                             document.getElementById("userName").innerText = user.name;
                             document.getElementById("userEmail").innerHTML = `<i class="fas fa-envelope"></i> ${user.email}`;
                             document.getElementById("userPhone").innerHTML = `<i class="fas fa-phone"></i> ${user.phnno}`;
-                            // Pre-fill the modal with current values
                             document.getElementById("editName").value = user.name;
                             document.getElementById("editEmail").value = user.email;
                             document.getElementById("editPhone").value = user.phnno;
-                            // Save user data to localStorage for later use
                             localStorage.setItem("userData", JSON.stringify(user));
                         } else {
                             console.error("User not found for mobile number: " + mobileNumber);
@@ -212,28 +195,18 @@
                         console.error("Error fetching user data:", error);
                     });
             }
-
-            // Call fetchUserData on page load
             fetchUserData();
-
-            // Save changes when clicking the Save Changes button
             document.getElementById("saveChangesBtn").addEventListener("click", function () {
                 const updatedName = document.getElementById("editName").value;
                 const updatedEmail = document.getElementById("editEmail").value;
-                const phone = document.getElementById("editPhone").value; // Phone is not editable
-
                 let userData = localStorage.getItem("userData");
                 if (userData) {
                     userData = JSON.parse(userData);
                     userData.name = updatedName;
                     userData.email = updatedEmail;
-                    // Update profile display
                     document.getElementById("userName").innerText = userData.name;
                     document.getElementById("userEmail").innerHTML = `<i class="fas fa-envelope"></i> ${userData.email}`;
-                    document.getElementById("userPhone").innerHTML = `<i class="fas fa-phone"></i> ${userData.phnno}`;
-
-                    // Update JSON Server via PUT request
-                    fetch('http://localhost:3000/users/' + userData.id, {
+                    fetch('/data/db.json/users/' + userData.id, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json'
@@ -249,7 +222,6 @@
                         .then(updatedUser => {
                             console.log("User profile updated successfully:", updatedUser);
                             localStorage.setItem("userData", JSON.stringify(updatedUser));
-                            // Close modal using Bootstrap API
                             const modalEl = document.getElementById("editProfileModal");
                             const modal = bootstrap.Modal.getInstance(modalEl);
                             modal.hide();
@@ -261,6 +233,7 @@
             });
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

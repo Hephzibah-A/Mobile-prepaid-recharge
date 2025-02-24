@@ -1,12 +1,15 @@
 :root {
-    --retro-teal: #2c7873;
-    --retro-mustard: #f7c45a;
-    --retro-coral: #ff6b6b;
-    --retro-gray: #4a4a4a;
+    --sidebar-bg: #E3F3EE;
+    --sidebar-hover: #D5E8E3;
+    --primary-green: #36A687;
+    --text-dark: #333;
+    --text-gray: #666;
+    --card-bg: #FFFFFF;
+    --border-color: #E0E0E0;
 }
 
 body {
-    background-color: #f8f9fa;
+    background-color: #F8F9FA;
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
@@ -15,31 +18,41 @@ body {
 
 /* Sidebar */
 .sidebar {
-    background-color: var(--retro-teal);
+    background-color: var(--sidebar-bg);
     height: 100vh;
-    color: white;
-    padding-top: 20px;
-    position: fixed;
     width: 250px;
-    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar h4 {
-    color: white;
+    color: var(--primary-green);
     text-align: center;
     font-weight: bold;
 }
 
 .sidebar .nav-link {
-    color: white;
-    padding: 10px 20px;
-    transition: background-color 0.3s;
+    color: var(--text-dark);
+    padding: 12px 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.sidebar .nav-link:hover {
-    background-color: #24625e;
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    background-color: var(--sidebar-hover);
+    color: var(--primary-green);
 }
-
 
 /* Content */
 .content {
@@ -48,12 +61,31 @@ body {
     transition: margin-left 0.3s;
 }
 
-/* Stats Cards */
-.stats-card {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+}
+
+/* Stats Cards */
+.stats-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stats-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    flex: 1;
+    min-width: 220px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
 }
@@ -63,95 +95,89 @@ body {
 }
 
 .stats-card h5 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+    font-size: 1rem;
+    color: var(--text-gray);
+    margin-bottom: 5px;
 }
 
 .stats-card h2 {
     font-size: 2rem;
     font-weight: bold;
-    color: black;
+    color: var(--text-dark);
+}
+
+/* Charts */
+.chart-container {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Bento Grid */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Product Cards */
+.product-container {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.product-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 15px;
+    min-width: 180px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.product-card h6 {
+    font-size: 1rem;
+    margin: 10px 0 5px;
+}
+
+.product-card small {
+    font-size: 0.85rem;
+    color: var(--text-gray);
 }
 
 /* Table */
-.table {
-    background-color: white;
+.table-container {
+    background: var(--card-bg);
     border-radius: 10px;
-    overflow: hidden;
+    padding: 15px;
+    overflow-x: auto;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .table th,
 .table td {
     padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .table th {
-    background-color: rgba(44, 120, 115, .85);
+    background-color: var(--primary-green);
     color: white;
-}
-
-/* Recharge History */
-.user-card {
-    background: white;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s;
-}
-
-.user-card:hover {
-    transform: translateX(5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.user-card h6 {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-}
-
-.user-card small {
-    font-size: 0.9rem;
-    color: #777;
-}
-
-/* Charts */
-.chart-container {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.bento-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-/* Toast */
-.toast {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-}
-
-/* Modal */
-.modal-content {
-    border-radius: 10px;
-}
-
-.modal-header {
-    background-color: var(--retro-teal);
-    color: white;
-    border-radius: 10px 10px 0 0;
-}
-
-.modal-body {
-    padding: 20px;
 }
 
 /* Responsive Adjustments */
@@ -162,15 +188,6 @@ body {
 
     .content {
         margin-left: 200px;
-    }
-
-    .stats-card h2 {
-        font-size: 1.8rem;
-    }
-
-    .table th,
-    .table td {
-        padding: 10px;
     }
 }
 
@@ -187,17 +204,8 @@ body {
         padding: 10px;
     }
 
-    .stats-card {
-        padding: 15px;
-    }
-
     .stats-card h2 {
         font-size: 1.5rem;
-    }
-
-    .table th,
-    .table td {
-        padding: 8px;
     }
 
     .bento-grid {
@@ -235,40 +243,12 @@ body {
         padding: 6px;
     }
 
-    .user-card {
-        padding: 10px;
+    .product-container {
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
-    .user-card h6 {
-        font-size: 1rem;
-    }
-
-    .user-card small {
-        font-size: 0.8rem;
-    }
-
-    .chart-container {
-        padding: 10px;
-    }
-}
-
-@media (max-width: 576px) {
-    .row {
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    .col-md-4 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-
-    h3 {
-        font-size: 1.2rem;
-    }
-
-    .btn-warning {
-        padding: 5px 10px;
-        font-size: 0.8rem;
+    .product-card {
+        min-width: 140px;
     }
 }

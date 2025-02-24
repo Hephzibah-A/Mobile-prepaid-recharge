@@ -1,11 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-
-body {
-    background-color: #f8f9fa;
-    /* Light Gray background */
-    font-family: "Open Sans", serif;
+:root {
+    --primary-color: #7b61ff;
+    --primary-hover: #6a52e3;
+    --badge-color: #ff4d00;
+    --bg-color: #f8f9fc;
+    --popular-badge-color: #007bff;
 }
 
+body {
+    background-color: var(--bg-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
 /* Offer Banner Styles */
 .offer-banner {
@@ -29,92 +35,158 @@ body {
     font-size: 14px;
 }
 
-.cta-buttons .btn {
-    margin-right: 10px;
+.search-filter-area {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
-/* Plan Card Styles */
+.search-filter-area input,
+.search-filter-area select {
+    margin-bottom: 15px;
+}
+
 .plan-card {
-    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    transition: transform 0.2s;
+    margin-bottom: 20px;
 }
 
-.plan-price {
-    font-size: 24px;
+.plan-card:hover {
+    transform: translateY(-5px);
+}
+
+.new-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--badge-color);
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
     font-weight: bold;
+    border-radius: 12px;
+}
+
+.plan-card .icon {
+    background: #e0c2ff;
+    color: var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-size: 24px;
+}
+
+.plan-card h2 {
+    font-size: 20px;
+    color: #333;
     margin-bottom: 10px;
+}
+
+.plan-card .plan-description {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.plan-card .price {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.plan-card .per-month {
+    font-size: 14px;
+    color: #888;
+}
+
+.btn-free {
+    background: #c1d1ff;
+    color: #333;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 15px;
 }
 
 .plan-details {
     list-style: none;
     padding: 0;
-    margin-bottom: 20px;
+    margin: 15px 0;
+    text-align: left;
 }
 
 .plan-details li {
-    margin-bottom: 5px;
-}
-
-/* Search and Filter Area Styles */
-.search-filter-area {
-    margin-bottom: 20px;
-}
-
-.filter-options {
-    border: 1px solid #ddd;
-    padding: 20px;
-}
-
-.filter-group {
-    margin-bottom: 20px;
-}
-
-.form-label {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-/* Footer Styles */
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-}
-
-
-
-
-/* footer */
-footer {
-    background: linear-gradient(to bottom, #4300B1, #36008E);
-    color: white;
-    padding: 15px 0;
-}
-
-footer .navbar-brand img {
-    max-height: 40px;
-
-}
-
-.footer-links {
-    text-align: right;
-    padding-top: 10px;
-
-}
-
-.footer-links p {
-    margin-bottom: 0;
-
     font-size: 14px;
-
+    margin: 8px 0;
+    color: #333;
 }
 
-.footer-links a {
+.plan-details li i {
+    color: #28a745;
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+.btn-choose {
+    background: var(--primary-color);
     color: white;
-    text-decoration: none;
-    margin-left: 10px;
-    /* Space between links */
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
-.footer-links a:hover {
-    text-decoration: underline;
+.btn-choose:hover {
+    background: var(--primary-hover);
+}
+
+.filter-container {
+    margin-bottom: 20px;
+}
+
+.filter-container input,
+.filter-container select {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .plan-card {
+        width: 100%;
+    }
+
+    .search-filter-area {
+        margin-bottom: 20px;
+    }
+}
+
+.popular-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: var(--popular-badge-color);
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 12px;
 }

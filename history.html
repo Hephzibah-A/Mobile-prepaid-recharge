@@ -117,25 +117,27 @@
                 return;
             }
 
-            // Function to load the user's recharge (payment) history from JSON Server
+            // Function to load the user's recharge (payment) history from /data/db.json
             function loadHistory() {
-                // Query JSON Server for the user with the matching phone number (assumes field "phnno")
-                fetch('http://localhost:3000/users?phnno=' + mobileNumber)
+                fetch('/data/db.json')
                     .then(response => {
                         if (!response.ok) {
                             throw new Error("HTTP error " + response.status);
                         }
                         return response.json();
                     })
-                    .then(users => {
-                        if (users.length === 0) {
+                    .then(data => {
+                        // Assume data.users is the array of user objects
+                        const users = data.users || [];
+                        // Find the user with matching mobile number (assumes mobile numbers are unique)
+                        const matchingUsers = users.filter(user => user.phnno === mobileNumber);
+                        if (matchingUsers.length === 0) {
                             console.error("User not found for mobile number: " + mobileNumber);
                             document.getElementById('historyBody').innerHTML =
                                 `<tr><td colspan="5" class="text-center">No history found.</td></tr>`;
                             return;
                         }
-                        // Assume mobile numbers are unique; use the first user found
-                        const user = users[0];
+                        const user = matchingUsers[0];
                         let historyHTML = "";
                         if (user.paymentHistory && user.paymentHistory.length > 0) {
                             user.paymentHistory.forEach(payment => {

@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
+/* Define theme variables */
+:root {
+    --text: rgb(6, 6, 4);
+    --background: rgb(251, 251, 249);
+    --primary: rgb(63, 0, 163);
+    --secondary: rgb(68, 0, 179);
+    --accent: rgb(255, 157, 0);
+}
+
 body {
     background-color: #f8f9fa;
     /* Light Gray background */
@@ -9,6 +18,156 @@ body {
 .container {
     max-width: 100%;
     /* Adjust container width */
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h2 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+/* Header & Navbar */
+header,
+.navbar {
+    background-color: var(--background);
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.navbar-brand img {
+    max-height: 50px;
+}
+
+/* Payment Container */
+main.container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    margin-top: 2rem;
+}
+
+.plan-summary {
+    background: var(--background);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+}
+
+.plan-summary h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.plan-summary ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.plan-summary ul li {
+    margin-bottom: 0.5rem;
+}
+
+.plan-summary ul li strong {
+    color: var(--secondary);
+}
+
+/* Payment Methods Styles */
+.payment-methods label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.payment-form {
+    margin-top: 1rem;
+}
+
+.card-details label {
+    font-size: 0.9rem;
+    color: var(--secondary);
+}
+
+.card-details input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+.card-details .error-message {
+    font-size: 0.85rem;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+}
+
+
+.btn-accent {
+    color: white;
+    background-color: rgb(255, 157, 0);
+    border-color: rgb(255, 157, 0);
+    border-radius: 50px;
+
+}
+
+.btn-accent:hover {
+    color: white;
+    background-color: rgb(204, 126, 0);
+    border-color: rgb(204, 126, 0);
+}
+
+
+.secure-payment {
+    font-size: 0.8rem;
+    color: var(--secondary);
+    margin-top: 0.5rem;
+}
+
+/* Payment Image */
+.payment-image img {
+    max-width: 100%;
+}
+
+/* Footer Styles */
+footer {
+    background: var(--background);
+    border-top: 1px solid #e0e0e0;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
+
+.footer-links p {
+    margin: 0;
+    color: var(--text);
+}
+
+.footer-links a {
+    color: var(--primary);
 }
 
 .plan-summary {

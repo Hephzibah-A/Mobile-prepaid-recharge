@@ -101,12 +101,9 @@
                     toast.classList.add("show");
                     setTimeout(() => {
                         toast.classList.remove("show");
-                        const fromCard = localStorage.getItem('fromCardPayment');
-                        if (fromCard === 'true') {
-                            window.location.href = "payment.html";
-                        } else {
-                            window.location.href = "main.html";
-                        }
+
+                        window.location.href = "main.html";
+
                     }, 3000);
                 } else {
                     verificationStatus.textContent = "Incorrect OTP. Please try again.";

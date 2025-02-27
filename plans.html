@@ -10,7 +10,75 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
+    <style>
+        /* Define theme variables */
+        :root {
+            --text: rgb(6, 6, 4);
+            --background: rgb(251, 251, 249);
+            --primary: rgb(63, 0, 163);
+            --secondary: rgb(68, 0, 179);
+            --accent: rgb(255, 157, 0);
+        }
 
+
+        /* Top Search Bar Row */
+        .search-filter-row {
+            margin-bottom: 1rem;
+        }
+
+        /* Modern, Minimalistic Sub Navigation */
+        .subnav {
+            /* background: var(--background); */
+            padding: 10px 15px;
+            border-radius: 8px;
+            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .subnav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .subnav ul li a {
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text);
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .subnav ul li a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 100%;
+            height: 2px;
+            background-color: transparent;
+            transition: background-color 0.3s ease;
+        }
+
+        /* .subnav ul li a.active,
+        .subnav ul li a:hover {
+            color: #fff;
+            background-color: var(--primary);
+            border-radius: 4px;
+            padding: 8px 12px;
+        } */
+
+        .subnav ul li a.active::after,
+        .subnav ul li a:hover::after {
+            background-color: var(--primary);
+        }
+    </style>
 </head>
 
 <body>
@@ -36,87 +104,119 @@
                         <p class="offer-text"><strong>30% OFF</strong><br>Unlock More with Our New Recharge Plan!</p>
                         <p class="plan-description">
                             Enjoy seamless connectivity with our latest recharge plan! Get more talk time, extra data,
-                            and
-                            exclusive cashback offers - all at an unbeatable price.
+                            and exclusive cashback offers - all at an unbeatable price.
                         </p>
-                       
                     </div>
                 </div>
             </div>
         </div>
     </header>
+
+    <!-- Main Container -->
     <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="search-filter-area">
-                    <input type="search" class="form-control" id="searchBox" placeholder="Search for plans">
-                    <div class="mb-3">
-                        <label for="sortOptions" class="form-label">Sort By</label>
-                        <select class="form-select" id="sortOptions">
-                            <option value="relevance">Relevance</option>
-                            <option value="low-to-high">Price: Low to High</option>
-                            <option value="high-to-low">Price: High to Low</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="priceRange" class="form-label">Price Range</label>
-                        <input type="range" class="form-range" id="priceRange" min="0" max="2000" step="50">
-                        <span id="priceValue">Max: ₹2000</span>
-                    </div>
-                    <div class="mb-3">
-                        <label for="validityFilter" class="form-label">Validity</label>
-                        <select class="form-select" id="validityFilter">
-                            <option value="all">All</option>
-                            <option value="1">1 Day</option>
-                            <option value="7">7 Days</option>
-                            <option value="28">28 Days</option>
-                            <option value="48">48 Days</option>
-                            <option value="56">56 Days</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="dataFilter" class="form-label">Data Allowance</label>
-                        <select class="form-select" id="dataFilter">
-                            <option value="all">All</option>
-                            <option value="1">1 GB/day</option>
-                            <option value="2">2 GB/day</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Plan Type</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="talkTime" value="talktime">
-                            <label class="form-check-label" for="talkTime">Talk Time Plans</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="dataPlans" value="data">
-                            <label class="form-check-label" for="dataPlans">Data Plans</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="comboPlans" value="combo">
-                            <label class="form-check-label" for="comboPlans">Combo Plans</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="international"
-                                value="international-roaming">
-                            <label class="form-check-label" for="international">International Roaming</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="ott" value="ott">
-                            <label class="form-check-label" for="ott">OTT Plans</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="popular" value="popular">
-                            <label class="form-check-label" for="popular">Popular Plans</label>
-                        </div>
-                    </div>
-                </div>
+        <!-- Top Search Bar and Filter Icon -->
+        <div class="row search-filter-row align-items-center">
+            <div class="col">
+                <input type="search" class="form-control" id="searchBox" placeholder="Search for plans">
             </div>
-            <div class="col-md-9">
+            <div class="col-auto">
+                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#filterOffcanvas" aria-controls="filterOffcanvas">
+                    <i class="fas fa-filter"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sub Navigation for Categories -->
+        <div class="subnav">
+            <ul class="nav" id="categoryNav">
+                <li><a href="#" class="active" data-category="all">All</a></li>
+                <li><a href="#" data-category="talktime">Talktime</a></li>
+                <li><a href="#" data-category="data">Data</a></li>
+                <li><a href="#" data-category="combo">Combo</a></li>
+                <li><a href="#" data-category="international-roaming">International</a></li>
+                <li><a href="#" data-category="ott">OTT</a></li>
+                <li><a href="#" data-category="popular">Popular</a></li>
+            </ul>
+        </div>
+
+        <!-- Plan List Container -->
+        <div class="row mt-4" id="planListContainer">
+            <div class="col-12">
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4" id="planList"></div>
             </div>
         </div>
     </div>
+
+    <!-- Offcanvas Filter Options -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="filterOffcanvas" aria-labelledby="filterOffcanvasLabel">
+        <div class="offcanvas-header">
+            <h5 id="filterOffcanvasLabel">Filter Options</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="mb-3">
+                <label for="sortOptions" class="form-label">Sort By</label>
+                <select class="form-select" id="sortOptions">
+                    <option value="relevance">Relevance</option>
+                    <option value="low-to-high">Price: Low to High</option>
+                    <option value="high-to-low">Price: High to Low</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="priceRange" class="form-label">Price Range</label>
+                <input type="range" class="form-range" id="priceRange" min="0" max="2000" step="50">
+                <span id="priceValue">Max: ₹2000</span>
+            </div>
+            <div class="mb-3">
+                <label for="validityFilter" class="form-label">Validity</label>
+                <select class="form-select" id="validityFilter">
+                    <option value="all">All</option>
+                    <option value="1">1 Day</option>
+                    <option value="7">7 Days</option>
+                    <option value="28">28 Days</option>
+                    <option value="48">48 Days</option>
+                    <option value="56">56 Days</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="dataFilter" class="form-label">Data Allowance</label>
+                <select class="form-select" id="dataFilter">
+                    <option value="all">All</option>
+                    <option value="1">1 GB/day</option>
+                    <option value="2">2 GB/day</option>
+                </select>
+            </div>
+            <button class="btn btn-secondary w-100" id="resetFilters">Reset Filters</button>
+        </div>
+    </div>
+
+    <!-- Custom Success Toast (Success Card) -->
+    <div id="successToast" class="toast-card" style="display: none;">
+        <svg class="wave" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M0,256L11.4,240C22.9,224,46,192,69,192C91.4,192,114,224,137,234.7C160,245,183,235,206,213.3C228.6,192,251,160,274,149.3C297.1,139,320,149,343,181.3C365.7,213,389,267,411,282.7C434.3,299,457,277,480,250.7C502.9,224,526,192,549,181.3C571.4,171,594,181,617,208C640,235,663,277,686,256C708.6,235,731,149,754,122.7C777.1,96,800,128,823,165.3C845.7,203,869,245,891,224C914.3,203,937,117,960,112C982.9,107,1006,181,1029,197.3C1051.4,213,1074,171,1097,144C1120,117,1143,107,1166,133.3C1188.6,160,1211,224,1234,218.7C1257.1,213,1280,139,1303,133.3C1325.7,128,1349,192,1371,192C1394.3,192,1417,128,1429,96L1440,64L1440,320L1428.6,320C1417.1,320,1394,320,1371,320C1348.6,320,1326,320,1303,320C1280,320,1257,320,1234,320C1211.4,320,1189,320,1166,320C1142.9,320,1120,320,1097,320C1074.3,320,1051,320,1029,320C1005.7,320,983,320,960,320C937.1,320,914,320,891,320C868.6,320,846,320,823,320C800,320,777,320,754,320C731.4,320,709,320,686,320C662.9,320,640,320,617,320C594.3,320,571,320,549,320C525.7,320,503,320,480,320C457.1,320,434,320,411,320C388.6,320,366,320,343,320C320,320,297,320,274,320C251.4,320,229,320,206,320C182.9,320,160,320,137,320C114.3,320,91,320,69,320C45.7,320,23,320,11,320L0,320Z"
+                fill-opacity="1"></path>
+        </svg>
+        <div class="icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" stroke-width="0" fill="currentColor"
+                class="icon">
+                <path
+                    d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z">
+                </path>
+            </svg>
+        </div>
+        <div class="message-text-container">
+            <p class="message-text">Success message</p>
+            <p class="sub-text">Everything seems great</p>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" stroke-width="0" fill="none" class="cross-icon">
+            <path fill="currentColor"
+                d="M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z"
+                clip-rule="evenodd" fill-rule="evenodd"></path>
+        </svg>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -127,8 +227,12 @@
             const priceValue = document.getElementById("priceValue");
             const validityFilter = document.getElementById("validityFilter");
             const dataFilter = document.getElementById("dataFilter");
-            const planTypeFilters = document.querySelectorAll(".form-check-input");
+            const categoryNavLinks = document.querySelectorAll("#categoryNav a");
+            const resetFiltersBtn = document.getElementById("resetFilters");
+            let currentCategory = "all";
             let plans = [];
+
+            // Fetch plans from db.json
             fetch("/data/db.json")
                 .then(response => response.json())
                 .then(data => {
@@ -136,6 +240,7 @@
                     displayPlans(plans);
                 })
                 .catch(error => console.error("Error fetching plans:", error));
+
             function isNewPlan(addedOn) {
                 if (!addedOn) return false;
                 const createdDate = new Date(addedOn);
@@ -143,6 +248,7 @@
                 const differenceInDays = (today - createdDate) / (1000 * 60 * 60 * 24);
                 return differenceInDays <= 7;
             }
+
             function displayPlans(filteredPlans) {
                 planList.innerHTML = "";
                 if (filteredPlans.length === 0) {
@@ -160,9 +266,7 @@
               ${newBadge}
               ${popularBadge}
               <div class="icon"><i class="fas fa-star"></i></div>
-          
               <div class="price">₹${plan.price} ${plan.validity == 1 ? "" : '<span class="per-month">/ month</span>'}</div>
-          
               <ul class="plan-details">
                 <li><i class="fas fa-check-circle"></i> ${plan.data}</li>
                 <li><i class="fas fa-check-circle"></i> ${plan.calls}</li>
@@ -175,6 +279,7 @@
                     fragment.appendChild(card);
                 });
                 planList.appendChild(fragment);
+
                 document.querySelectorAll(".btn-choose").forEach(button => {
                     button.addEventListener("click", function () {
                         const selectedPlan = JSON.parse(this.closest(".plan-card").getAttribute("data-plan"));
@@ -182,45 +287,53 @@
                         window.location.href = "payment.html";
                     });
                 });
-                document.querySelectorAll(".btn-free").forEach(button => {
-                    button.addEventListener("click", function () {
-                        const cardEl = this.closest(".plan-card");
-                        const priceText = cardEl.querySelector(".price").innerText;
-                        alert("Free trial activated for " + priceText);
-                    });
-                });
             }
+
             function filterAndSortPlans() {
                 let filteredPlans = [...plans];
+
+                // Filter by search term
                 const searchTerm = searchBox.value.trim().toLowerCase();
                 if (searchTerm) {
                     filteredPlans = filteredPlans.filter(plan =>
-                        plan.data.toLowerCase().includes(searchTerm) ||
-                        plan.calls.toLowerCase().includes(searchTerm)
+                        (plan.data && plan.data.toLowerCase().includes(searchTerm)) ||
+                        (plan.calls && plan.calls.toLowerCase().includes(searchTerm))
                     );
                 }
+
+                // Filter by category from sub nav
+                if (currentCategory !== "all") {
+                    filteredPlans = filteredPlans.filter(plan => {
+                        if (currentCategory === "popular") {
+                            return plan.popular;
+                        } else if (currentCategory === "international-roaming") {
+                            return plan.planType === "international-roaming" || plan.isInternational;
+                        } else if (currentCategory === "ott") {
+                            return plan.planType === "ott" || plan.isOtt;
+                        } else {
+                            return plan.planType === currentCategory;
+                        }
+                    });
+                }
+
+                // Filter by price
                 const maxPrice = parseInt(priceRange.value, 10);
                 priceValue.textContent = `Max: ₹${maxPrice}`;
                 filteredPlans = filteredPlans.filter(plan => plan.price <= maxPrice);
+
+                // Filter by validity
                 const validity = validityFilter.value;
                 if (validity !== "all") {
                     filteredPlans = filteredPlans.filter(plan => plan.validity == validity);
                 }
+
+                // Filter by data allowance
                 const data = dataFilter.value;
                 if (data !== "all") {
                     filteredPlans = filteredPlans.filter(plan => plan.data.startsWith(data));
                 }
-                const selectedTypes = Array.from(planTypeFilters)
-                    .filter(checkbox => checkbox.checked)
-                    .map(checkbox => checkbox.value);
-                if (selectedTypes.length > 0) {
-                    filteredPlans = filteredPlans.filter(plan =>
-                        selectedTypes.includes(plan.planType) ||
-                        (plan.isInternational && selectedTypes.includes("international-roaming")) ||
-                        (plan.isOtt && selectedTypes.includes("ott")) ||
-                        (plan.isPopular && selectedTypes.includes("popular"))
-                    );
-                }
+
+                // Sort plans
                 switch (sortOptions.value) {
                     case "low-to-high":
                         filteredPlans.sort((a, b) => a.price - b.price);
@@ -231,12 +344,54 @@
                     default:
                         break;
                 }
+
                 displayPlans(filteredPlans);
             }
+
+            // Attach event listeners for filter inputs
             [searchBox, priceRange, validityFilter, dataFilter, sortOptions].forEach(input =>
                 input.addEventListener("input", filterAndSortPlans)
             );
-            planTypeFilters.forEach(checkbox => checkbox.addEventListener("change", filterAndSortPlans));
+
+            // Sub nav category click events
+            categoryNavLinks.forEach(link => {
+                link.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    categoryNavLinks.forEach(l => l.classList.remove("active"));
+                    this.classList.add("active");
+                    currentCategory = this.getAttribute("data-category");
+                    filterAndSortPlans();
+                });
+            });
+
+            // Reset Filters Button
+            resetFiltersBtn.addEventListener("click", function () {
+                // Reset all filter inputs to default values
+                searchBox.value = "";
+                sortOptions.value = "relevance";
+                priceRange.value = 2000;
+                priceValue.textContent = "Max: ₹2000";
+                validityFilter.value = "all";
+                dataFilter.value = "all";
+                // Reset subnav category
+                currentCategory = "all";
+                categoryNavLinks.forEach(l => l.classList.remove("active"));
+                document.querySelector("#categoryNav a[data-category='all']").classList.add("active");
+                filterAndSortPlans();
+            });
+        });
+
+        // --- Custom Success Toast JavaScript ---
+        function showSuccessToast() {
+            const toast = document.getElementById("successToast");
+            toast.style.display = "flex";
+            setTimeout(function () {
+                toast.style.display = "none";
+            }, 3000);
+        }
+
+        document.querySelector("#successToast .cross-icon").addEventListener("click", function () {
+            document.getElementById("successToast").style.display = "none";
         });
     </script>
 </body>

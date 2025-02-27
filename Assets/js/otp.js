@@ -50,12 +50,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const fromCard = localStorage.getItem('fromCardPayment');
             setTimeout(() => {
                 toast.classList.remove("show");
-                // If 'fromCardPayment' flag is set to 'true', go to the payment page; otherwise, go to main.html.
-                if (fromCard === 'true') {
-                    window.location.href = "payment.html";
-                } else {
-                    window.location.href = "main.html";
-                }
+
+                window.location.href = "main.html";
+
             }, 3000);
         } else {
             verificationStatus.textContent = "Incorrect OTP. Please try again.";

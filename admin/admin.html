@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="styles.css" />
     <style>
+        /* Existing user-card styles */
         .user-card {
             border: 1px solid #ddd;
             padding: 10px;
@@ -22,10 +23,90 @@
         .user-card:hover {
             background-color: #f2f2f2;
         }
+
+        /* Custom Success Toast (Uiverse.io Success Card) */
+        /* Using a custom class .toast-card to avoid conflicts with Bootstrap's .card */
+        .toast-card {
+            width: 330px;
+            height: 80px;
+            border-radius: 8px;
+            box-sizing: border-box;
+            padding: 10px 15px;
+            background-color: #ffffff;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: 15px;
+            z-index: 1050;
+        }
+
+        .toast-card .wave {
+            position: absolute;
+            transform: rotate(90deg);
+            left: -31px;
+            top: 32px;
+            width: 80px;
+            fill: #04e4003a;
+        }
+
+        .toast-card .icon-container {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #04e40048;
+            border-radius: 50%;
+            margin-left: 8px;
+        }
+
+        .toast-card .icon {
+            width: 17px;
+            height: 17px;
+            color: #269b24;
+        }
+
+        .toast-card .message-text-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            flex-grow: 1;
+        }
+
+        .toast-card .message-text,
+        .toast-card .sub-text {
+            margin: 0;
+            cursor: default;
+        }
+
+        .toast-card .message-text {
+            color: #269b24;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .toast-card .sub-text {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .toast-card .cross-icon {
+            width: 18px;
+            height: 18px;
+            color: #555;
+            cursor: pointer;
+        }
     </style>
 </head>
 
 <body>
+    <!-- Sidebar Navigation -->
     <nav class="sidebar">
         <h4 class="p-3">Admin Panel</h4>
         <ul class="nav flex-column">
@@ -35,10 +116,12 @@
             <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('analytics')">Analytics</a></li>
             <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('plan-management'); loadPlans();">Plan
                     Management</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" onclick="logout()" style="color: rgb(255, 49, 49);"><i
-                        class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="logout()" style="color: rgb(255, 49, 49);">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
         </ul>
     </nav>
+
+    <!-- Dashboard Content -->
     <div id="dashboard" class="content">
         <div class="row mb-4">
             <div class="col-md-4">
@@ -60,23 +143,49 @@
                 </div>
             </div>
         </div>
-        <h3>Expiring Subscriptions (Next 3 Days)</h3>
-        <table class="table table-striped mt-3">
-            <thead>
-                <tr>
-                    <th>Subscriber Name</th>
-                    <th>Mobile Number</th>
-                    <th>Plan Expiry Date</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="dashboard-data"></tbody>
-        </table>
+
+        <!-- Two-column Row under cards -->
+        <div class="row">
+            <!-- Left Side: Customers with Expiring Plans -->
+            <div class="col-md-6">
+                <h3>Expiring Subscriptions (Next 3 Days)</h3>
+                <table class="table table-striped mt-3">
+                    <thead>
+                        <tr>
+                            <th>Subscriber Name</th>
+                            <th>Mobile Number</th>
+                            <th>Plan Expiry Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dashboard-expiring-data"></tbody>
+                </table>
+            </div>
+            <!-- Right Side: User Categories Table -->
+            <div class="col-md-6">
+                <h3>User Categories</h3>
+                <table class="table table-striped mt-3">
+                    <thead>
+                        <tr>
+                            <th>Subscriber Name</th>
+                            <th>Mobile Number</th>
+                            <th>Recharges</th>
+                            <th>Category</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dashboard-category-data"></tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
+    <!-- Recharge History -->
     <div id="recharge-history" class="content d-none">
         <h3>Recharge History</h3>
         <div id="user-list"></div>
     </div>
+
+    <!-- Analytics Dashboard -->
     <div id="analytics" class="content d-none">
         <div class="container">
             <h2 class="my-4 text-center">Analytics Dashboard</h2>
@@ -111,8 +220,19 @@
                     <h5 class="text-center mt-2">Recharge Trend</h5>
                 </div>
             </div>
+            <!-- New Analytics Chart: User Category Distribution -->
+            <div class="row">
+                <div class="col-md-12 mb-4">
+                    <div class="chart-container" style="height: 400px;">
+                        <canvas id="userCategoryChart"></canvas>
+                    </div>
+                    <h5 class="text-center mt-2">User Category Distribution</h5>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Plan Management -->
     <div id="plan-management" class="content d-none">
         <h3>Plan Management</h3>
         <button class="btn btn-primary mb-3" onclick="showPlanModal('create')">Add New Plan</button>
@@ -132,6 +252,8 @@
             <tbody id="plans-table-body"></tbody>
         </table>
     </div>
+
+    <!-- User Details Modal -->
     <div class="modal fade" id="userModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -145,6 +267,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Plan Management Modal -->
     <div class="modal fade" id="planModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -191,52 +315,107 @@
             </div>
         </div>
     </div>
-    <div id="toast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive"
-        aria-atomic="true">
-        <div class="d-flex">
-            <div class="toast-body">Notification sent successfully!</div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                aria-label="Close"></button>
+
+    <!-- Custom Success Toast (Success Card) -->
+    <!-- This will appear as a toast from the top right corner -->
+    <div id="successToast" class="toast-card" style="display: none;">
+        <svg class="wave" viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M0,256L11.4,240C22.9,224,46,192,69,192C91.4,192,114,224,137,234.7C160,245,183,235,206,213.3C228.6,192,251,160,274,149.3C297.1,139,320,149,343,181.3C365.7,213,389,267,411,282.7C434.3,299,457,277,480,250.7C502.9,224,526,192,549,181.3C571.4,171,594,181,617,208C640,235,663,277,686,256C708.6,235,731,149,754,122.7C777.1,96,800,128,823,165.3C845.7,203,869,245,891,224C914.3,203,937,117,960,112C982.9,107,1006,181,1029,197.3C1051.4,213,1074,171,1097,144C1120,117,1143,107,1166,133.3C1188.6,160,1211,224,1234,218.7C1257.1,213,1280,139,1303,133.3C1325.7,128,1349,192,1371,192C1394.3,192,1417,128,1429,96L1440,64L1440,320L1428.6,320C1417.1,320,1394,320,1371,320C1348.6,320,1326,320,1303,320C1280,320,1257,320,1234,320C1211.4,320,1189,320,1166,320C1142.9,320,1120,320,1097,320C1074.3,320,1051,320,1029,320C1005.7,320,983,320,960,320C937.1,320,914,320,891,320C868.6,320,846,320,823,320C800,320,777,320,754,320C731.4,320,709,320,686,320C662.9,320,640,320,617,320C594.3,320,571,320,549,320C525.7,320,503,320,480,320C457.1,320,434,320,411,320C388.6,320,366,320,343,320C320,320,297,320,274,320C251.4,320,229,320,206,320C182.9,320,160,320,137,320C114.3,320,91,320,69,320C45.7,320,23,320,11,320L0,320Z"
+                fill-opacity="1"></path>
+        </svg>
+
+        <div class="icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" stroke-width="0" fill="currentColor"
+                class="icon">
+                <path
+                    d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z">
+                </path>
+            </svg>
         </div>
+
+        <div class="message-text-container">
+            <p class="message-text">Notification Sent</p>
+            <!-- <p class="sub-text"></p> -->
+        </div>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" stroke-width="0" fill="none" class="cross-icon">
+            <path fill="currentColor"
+                d="M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z"
+                clip-rule="evenodd" fill-rule="evenodd"></path>
+        </svg>
     </div>
+
+    <!-- JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script>
         let plans = [];
         let allUsers = [];
+
         function loadUsers() {
             fetch('/data/db.json')
-                .then(response => { if (!response.ok) throw new Error("HTTP error " + response.status); return response.json(); })
+                .then(response => {
+                    if (!response.ok) throw new Error("HTTP error " + response.status);
+                    return response.json();
+                })
                 .then(data => {
                     allUsers = data.users || [];
-                    document.getElementById('dashboard-data').innerHTML = allUsers.map(user => `
+
+                    // Filter users whose planExpiryDate is within next 3 days
+                    const expiringUsers = allUsers.filter(user => {
+                        if (user.planExpiryDate) {
+                            let expiry = new Date(user.planExpiryDate);
+                            let now = new Date();
+                            let diffDays = (expiry - now) / (1000 * 60 * 60 * 24);
+                            return diffDays >= 0 && diffDays <= 3;
+                        }
+                        return false;
+                    });
+
+                    // Build Expiring Subscriptions Table (Left Column)
+                    document.getElementById('dashboard-expiring-data').innerHTML = expiringUsers.map(user => `
             <tr>
               <td>${user.name}</td>
               <td>${user.phnno}</td>
-              <td>N/A</td>
-              <td><button class="btn btn-warning" onclick="showToast()">Notify</button></td>
+              <td>${user.planExpiryDate ? user.planExpiryDate : "N/A"}</td>
+              <td><button class="btn btn-warning" onclick="showSuccessToast()">Notify</button></td>
             </tr>
           `).join('');
-                    document.getElementById('user-list').innerHTML = allUsers.map(user => `
-            <div class="user-card" onclick="showUserDetails(${user.id})">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <h6>${user.name}</h6>
-                  <small class="text-muted">${user.phnno}</small>
-                </div>
-                <div class="text-end">
-                  <small>Email: ${user.email}</small>
-                </div>
-              </div>
-            </div>
-          `).join('');
+
+                    // Build User Categories Table (Right Column)
+                    document.getElementById('dashboard-category-data').innerHTML = allUsers.map(user => {
+                        let rechargeCount = user.rechargeHistory ? user.rechargeHistory.length : 0;
+                        let category = "";
+                        if (rechargeCount <= 2) {
+                            category = "Basic";
+                        } else if (rechargeCount <= 5) {
+                            category = "Premium";
+                        } else {
+                            category = "Pro";
+                        }
+                        return `
+              <tr>
+                <td>${user.name}</td>
+                <td>${user.phnno}</td>
+                <td>${rechargeCount}</td>
+                <td>${category}</td>
+              </tr>
+            `;
+                    }).join('');
                 })
-                .catch(error => { console.error("Error loading users:", error); });
+                .catch(error => {
+                    console.error("Error loading users:", error);
+                });
         }
-        window.addEventListener('load', function () { loadUsers(); });
+        window.addEventListener('load', loadUsers);
+
         function showUserDetails(userId) {
             fetch('/data/db.json')
-                .then(response => { if (!response.ok) throw new Error("HTTP error " + response.status); return response.json(); })
+                .then(response => {
+                    if (!response.ok) throw new Error("HTTP error " + response.status);
+                    return response.json();
+                })
                 .then(data => {
                     const user = data.users.find(u => u.id == userId);
                     let rechargeHistoryHTML = "";
@@ -279,11 +458,11 @@
                     document.getElementById('userDetailsContent').innerHTML = modalContent;
                     new bootstrap.Modal(document.getElementById('userModal')).show();
                 })
-                .catch(error => { console.error("Error fetching user details:", error); });
+                .catch(error => {
+                    console.error("Error fetching user details:", error);
+                });
         }
-        const toastEl = document.querySelector('.toast');
-        const toast = new bootstrap.Toast(toastEl);
-        function showToast() { toast.show(); }
+
         function showPage(page) {
             document.querySelectorAll('.content').forEach(el => el.classList.add('d-none'));
             document.getElementById(page).classList.remove('d-none');
@@ -293,21 +472,38 @@
                 if (window.userGrowthChart) userGrowthChart.resize();
                 if (window.planDistributionChart) planDistributionChart.resize();
                 if (window.rechargeTrendChart) rechargeTrendChart.resize();
+                if (window.userCategoryChart) userCategoryChart.resize();
             }
         }
+
         function logout() {
             alert("Admin, You're Logging out!");
             window.location.href = 'login.html';
         }
+
         function loadPlans() {
             fetch('/data/db.json')
-                .then(response => { if (!response.ok) throw new Error("HTTP error " + response.status); return response.json(); })
-                .then(data => { plans = data.plans; renderPlansTable(); })
-                .catch(error => { console.error("Error loading plans:", error); document.getElementById('plans-table-body').innerHTML = `<tr><td colspan="8" class="text-center text-danger">Error loading plans: ${error.message}</td></tr>`; });
+                .then(response => {
+                    if (!response.ok) throw new Error("HTTP error " + response.status);
+                    return response.json();
+                })
+                .then(data => {
+                    plans = data.plans;
+                    renderPlansTable();
+                })
+                .catch(error => {
+                    console.error("Error loading plans:", error);
+                    document.getElementById('plans-table-body').innerHTML =
+                        `<tr><td colspan="8" class="text-center text-danger">Error loading plans: ${error.message}</td></tr>`;
+                });
         }
+
         function renderPlansTable() {
             const tbody = document.getElementById('plans-table-body');
-            if (!plans.length) { tbody.innerHTML = `<tr><td colspan="8" class="text-center">No plans found.</td></tr>`; return; }
+            if (!plans.length) {
+                tbody.innerHTML = `<tr><td colspan="8" class="text-center">No plans found.</td></tr>`;
+                return;
+            }
             tbody.innerHTML = plans.map(plan => `
         <tr>
           <td>${plan.id}</td>
@@ -324,14 +520,16 @@
         </tr>
       `).join('');
         }
+
         function showPlanModal(mode, planId = null) {
             const planModal = new bootstrap.Modal(document.getElementById('planModal'));
             const modalTitle = document.getElementById('planModalTitle');
             const planForm = document.getElementById('planForm');
             planForm.reset();
             document.getElementById('planId').value = '';
-            if (mode === 'create') { modalTitle.textContent = 'Add New Plan'; }
-            else if (mode === 'edit') {
+            if (mode === 'create') {
+                modalTitle.textContent = 'Add New Plan';
+            } else if (mode === 'edit') {
                 modalTitle.textContent = 'Edit Plan';
                 const plan = plans.find(p => p.id == planId);
                 if (plan) {
@@ -346,6 +544,7 @@
             }
             planModal.show();
         }
+
         document.getElementById('planForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const idValue = document.getElementById('planId').value;
@@ -379,44 +578,75 @@
             const planModal = bootstrap.Modal.getInstance(planModalEl);
             planModal.hide();
         });
+
         function deletePlan(planId) {
             if (confirm("Are you sure you want to delete this plan?")) {
                 fetch('/data/db.json/plans/' + planId, { method: 'DELETE' })
-                    .then(response => { if (!response.ok) throw new Error("HTTP error " + response.status); loadPlans(); })
-                    .catch(error => { console.error("Error deleting plan:", error); alert("Error deleting plan: " + error.message); });
+                    .then(response => {
+                        if (!response.ok) throw new Error("HTTP error " + response.status);
+                        loadPlans();
+                    })
+                    .catch(error => {
+                        console.error("Error deleting plan:", error);
+                        alert("Error deleting plan: " + error.message);
+                    });
             }
         }
+
         const chartOptions = {
             responsive: true,
             plugins: { legend: { position: 'top' }, title: { display: false } },
             scales: { y: { grid: { color: '#e0e0e0' } }, x: { grid: { color: '#e0e0e0' } } }
         };
+
         window.revenueChart = new Chart(document.getElementById('revenueChart'), {
             type: 'line',
             data: { labels: [], datasets: [{ label: 'Revenue (₹ Lakhs)', data: [], borderColor: '#2c7873', tension: 0.4 }] },
             options: chartOptions
         });
+
         window.userGrowthChart = new Chart(document.getElementById('userGrowthChart'), {
             type: 'bar',
             data: { labels: [], datasets: [{ label: 'Total Users', data: [], backgroundColor: '#f7c45a' }] },
             options: chartOptions
         });
+
         window.planDistributionChart = new Chart(document.getElementById('planDistributionChart'), {
             type: 'doughnut',
             data: { labels: [], datasets: [{ data: [], backgroundColor: [] }] },
             options: chartOptions
         });
+
         window.rechargeTrendChart = new Chart(document.getElementById('rechargeTrendChart'), {
             type: 'line',
             data: { labels: [], datasets: [{ label: 'Recharges', data: [], borderColor: '#ff6b6b', backgroundColor: 'rgba(255,107,107,0.2)', tension: 0.4 }] },
             options: chartOptions
         });
+
+        // New Chart for User Category Distribution
+        window.userCategoryChart = new Chart(document.getElementById('userCategoryChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Basic', 'Premium', 'Pro'],
+                datasets: [{
+                    data: [0, 0, 0],
+                    backgroundColor: ['#90ee90', '#ffd700', '#ff6347']
+                }]
+            },
+            options: chartOptions
+        });
+
         function loadAnalyticsData() {
             fetch('/data/db.json')
-                .then(response => { if (!response.ok) throw new Error("HTTP error " + response.status); return response.json(); })
+                .then(response => {
+                    if (!response.ok) throw new Error("HTTP error " + response.status);
+                    return response.json();
+                })
                 .then(data => {
                     const users = data.users || [];
                     const plans = data.plans || [];
+
+                    // Revenue Trends Analytics
                     const revenueByMonth = {};
                     users.forEach(user => {
                         if (user.paymentHistory) {
@@ -434,6 +664,8 @@
                     revenueChart.data.labels = revenueLabels;
                     revenueChart.data.datasets[0].data = revenueData;
                     revenueChart.update();
+
+                    // User Growth Analytics
                     const userGrowth = {};
                     users.forEach(user => {
                         const year = user.createdAt ? user.createdAt.slice(0, 4) : '2023';
@@ -444,6 +676,8 @@
                     userGrowthChart.data.labels = growthLabels;
                     userGrowthChart.data.datasets[0].data = growthData;
                     userGrowthChart.update();
+
+                    // Recharge Trend Analytics
                     const rechargeTrend = {};
                     users.forEach(user => {
                         if (user.rechargeHistory) {
@@ -461,6 +695,8 @@
                     rechargeTrendChart.data.labels = rechargeLabels;
                     rechargeTrendChart.data.datasets[0].data = rechargeData;
                     rechargeTrendChart.update();
+
+                    // Plan Distribution Analytics
                     const planDistribution = {};
                     plans.forEach(plan => {
                         const type = plan.planType;
@@ -473,24 +709,48 @@
                     const colorMapping = { 'combo': '#2c7873', 'talktime': '#f7c45a', 'data': '#ff6b6b', 'international-roaming': '#6a4c93', 'ott': '#00bcd4' };
                     planDistributionChart.data.datasets[0].backgroundColor = planLabels.map(label => colorMapping[label] || '#cccccc');
                     planDistributionChart.update();
+
+                    // User Category Distribution Analytics
+                    const categoryCounts = { Basic: 0, Premium: 0, Pro: 0 };
+                    users.forEach(user => {
+                        let count = user.rechargeHistory ? user.rechargeHistory.length : 0;
+                        let cat = "";
+                        if (count <= 2) {
+                            cat = "Basic";
+                        } else if (count <= 5) {
+                            cat = "Premium";
+                        } else {
+                            cat = "Pro";
+                        }
+                        categoryCounts[cat]++;
+                    });
+                    window.userCategoryChart.data.datasets[0].data = [
+                        categoryCounts.Basic,
+                        categoryCounts.Premium,
+                        categoryCounts.Pro
+                    ];
+                    window.userCategoryChart.update();
                 })
-                .catch(error => { console.error("Error loading analytics data:", error); });
+                .catch(error => {
+                    console.error("Error loading analytics data:", error);
+                });
         }
-        function showPage(page) {
-            document.querySelectorAll('.content').forEach(el => el.classList.add('d-none'));
-            document.getElementById(page).classList.remove('d-none');
-            if (page === 'analytics') {
-                loadAnalyticsData();
-                if (window.revenueChart) revenueChart.resize();
-                if (window.userGrowthChart) userGrowthChart.resize();
-                if (window.planDistributionChart) planDistributionChart.resize();
-                if (window.rechargeTrendChart) rechargeTrendChart.resize();
-            }
+
+        // --- Custom Success Toast JavaScript ---
+        // Function to show the success toast (custom success card)
+        function showSuccessToast() {
+            var toast = document.getElementById('successToast');
+            toast.style.display = 'flex';
+            // Auto-hide the toast after 3 seconds
+            setTimeout(function () {
+                toast.style.display = 'none';
+            }, 3000);
         }
-        function logout() {
-            alert("Admin, You're Logging out!");
-            window.location.href = 'login.html';
-        }
+
+        // Allow manual dismissal when clicking on the cross icon inside the toast
+        document.querySelector('#successToast .cross-icon').addEventListener('click', function () {
+            document.getElementById('successToast').style.display = 'none';
+        });
     </script>
 </body>
 

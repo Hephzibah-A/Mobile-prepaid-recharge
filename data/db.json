@@ -361,7 +361,6 @@
       "addedOn": "2025-02-18T08:00:00Z"
     }
   ],
-
   "users": [
     {
       "id": "5",
@@ -377,8 +376,24 @@
           "amount": 100,
           "method": "Credit Card"
         },
-        { "id": 2, "date": "2020-07-15", "amount": 150, "method": "UPI" },
-        { "id": 3, "date": "2025-01-05", "amount": 200, "method": "Debit Card" }
+        {
+          "id": 2,
+          "date": "2020-07-15",
+          "amount": 150,
+          "method": "UPI"
+        },
+        {
+          "id": 3,
+          "date": "2025-01-05",
+          "amount": 200,
+          "method": "Debit Card"
+        },
+        {
+          "id": 1740617922879,
+          "date": "2025-02-27",
+          "amount": 249,
+          "method": "upi"
+        }
       ],
       "rechargeHistory": [
         {
@@ -396,7 +411,7 @@
           "method": "Credit Card"
         }
       ],
-      "planExpiryDate": "2025-02-28"
+      "planExpiryDate": "2025-03-30"
     },
     {
       "id": "6",
@@ -451,7 +466,12 @@
           "amount": 115,
           "method": "Credit Card"
         },
-        { "id": 2, "date": "2023-03-15", "amount": 125, "method": "UPI" }
+        {
+          "id": 2,
+          "date": "2023-03-15",
+          "amount": 125,
+          "method": "UPI"
+        }
       ],
       "rechargeHistory": [
         {
@@ -485,7 +505,12 @@
           "amount": 120,
           "method": "Debit Card"
         },
-        { "id": 2, "date": "2022-01-22", "amount": 140, "method": "UPI" }
+        {
+          "id": 2,
+          "date": "2022-01-22",
+          "amount": 140,
+          "method": "UPI"
+        }
       ],
       "rechargeHistory": [
         {
@@ -519,7 +544,12 @@
           "amount": 130,
           "method": "Credit Card"
         },
-        { "id": 2, "date": "2023-07-15", "amount": 150, "method": "Debit Card" }
+        {
+          "id": 2,
+          "date": "2023-07-15",
+          "amount": 150,
+          "method": "Debit Card"
+        }
       ],
       "rechargeHistory": [
         {
@@ -592,7 +622,12 @@
           "amount": 140,
           "method": "Credit Card"
         },
-        { "id": 2, "date": "2022-05-10", "amount": 160, "method": "UPI" }
+        {
+          "id": 2,
+          "date": "2022-05-10",
+          "amount": 160,
+          "method": "UPI"
+        }
       ],
       "rechargeHistory": [
         {
@@ -665,7 +700,12 @@
           "amount": 150,
           "method": "Credit Card"
         },
-        { "id": 2, "date": "2025-06-20", "amount": 180, "method": "UPI" }
+        {
+          "id": 2,
+          "date": "2025-06-20",
+          "amount": 180,
+          "method": "UPI"
+        }
       ],
       "rechargeHistory": [
         {

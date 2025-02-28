@@ -14,7 +14,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
     <style>
-        /* Define theme variables */
+        /* Theme Variables */
         :root {
             --text: rgb(6, 6, 4);
             --background: rgb(251, 251, 249);
@@ -46,7 +46,7 @@
             margin-bottom: 1rem;
         }
 
-        /* Header / Navbar */
+        /* Navbar */
         header,
         .navbar {
             background-color: var(--background);
@@ -90,17 +90,17 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Highlight the Price with Accent */
         .plan-summary ul li strong {
             color: var(--secondary);
         }
 
+        /* Accent used for plan price */
         .plan-summary ul li .price-amount {
             color: var(--accent);
             font-weight: 600;
         }
 
-        /* Edit Plan button using accent color */
+        /* Edit Plan Button using Accent */
         #editPlanButton {
             background-color: var(--accent);
             border-color: var(--accent);
@@ -144,6 +144,7 @@
             font-size: 0.85rem;
         }
 
+        /* Buttons */
         .btn-primary {
             background-color: var(--primary);
             border-color: var(--primary);
@@ -181,7 +182,7 @@
             max-width: 100%;
         }
 
-        /* Footer Styles */
+        /* Footer */
         footer {
             background: var(--background);
             border-top: 1px solid #e0e0e0;
@@ -199,7 +200,7 @@
             color: var(--primary);
         }
 
-        /* Custom Success Toast (Success Card) */
+        /* Custom Success Toast */
         .toast-card {
             width: 330px;
             height: 80px;
@@ -632,16 +633,15 @@
                     method: paymentMethod
                 };
 
-                // Fetch the JSON data from /data/db.json
-                fetch('/data/db.json')
+                // Fetch users from API
+                fetch("http://localhost:3000/users")
                     .then(response => {
                         if (!response.ok) {
                             throw new Error("HTTP error " + response.status);
                         }
                         return response.json();
                     })
-                    .then(data => {
-                        const users = data.users || [];
+                    .then(users => {
                         // Find the user record by matching mobile number
                         const matchingUsers = users.filter(user => user.phnno === mobileNumber);
                         if (matchingUsers.length === 0) {
@@ -657,7 +657,7 @@
                         user.paymentHistory.push(newPayment);
 
                         // Calculate new plan expiry date:
-                        // If the user has an existing expiry date that is in the future, extend from that.
+                        // If the user has an existing expiry date in the future, extend from that.
                         // Otherwise, start from today.
                         let today = new Date(currentDateStr);
                         let baseDate = today;
@@ -672,8 +672,8 @@
                         newExpiry.setDate(newExpiry.getDate() + parseInt(selectedPlan.validity, 10));
                         user.planExpiryDate = newExpiry.toISOString().slice(0, 10);
 
-                        // Update the user record via PUT request
-                        fetch('/data/db.json/users/' + user.id, {
+                        // Update the user record via PUT request to API at localhost:3000
+                        fetch("http://localhost:3000/users/" + user.id, {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json'

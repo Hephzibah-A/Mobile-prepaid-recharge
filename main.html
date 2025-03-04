@@ -2,21 +2,524 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MobiComm</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="icon" href="Assets/png/favicon.ico">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="Assets/png/favicon.ico" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <style>
+        /* Theme Variables */
+        :root {
+            --text: rgb(6, 6, 4);
+            --background: rgb(251, 251, 249);
+            --primary: rgb(63, 0, 163);
+            --secondary: rgb(68, 0, 179);
+            --accent: rgb(255, 157, 0);
+        }
+
+        /* Global Styles */
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Reveal on Scroll (slower) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1.2s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navbar */
+        .header-container nav.navbar {
+            background: transparent;
+
+        }
+
+        .navbar-brand img {
+            max-height: 50px;
+        }
+
+        /* Navbar Toggler (Bootstrap 5) */
+        .navbar-toggler {
+            border: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%2863,0,163,0.7%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+
+        /* Hero Section with Typewriter Effect */
+        .hero {
+            padding: 4rem 0;
+        }
+
+        .header-content {
+            color: var(--text);
+        }
+
+        #heroHeading {
+            font-size: 2.5rem;
+            color: var(--primary);
+            min-height: 3em;
+        }
+
+        #heroSubheading {
+            font-size: 1.2rem;
+            color: var(--text);
+            min-height: 2em;
+            margin-bottom: 1rem;
+        }
+
+        .login-btn {
+            background-color: var(--accent);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: rgb(242, 160, 27);
+        }
+
+        /* Recommended Packs Card Styles (using your provided design) */
+        .card {
+            position: relative;
+            width: 190px;
+            height: 254px;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            padding: 12px;
+            gap: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            left: -5px;
+            margin: auto;
+            width: 200px;
+            height: 264px;
+            border-radius: 10px;
+            background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
+            z-index: -10;
+            pointer-events: none;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card::after {
+            content: "";
+            z-index: -1;
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
+            transform: translate3d(0, 0, 0) scale(0.95);
+            filter: blur(20px);
+        }
+
+        .heading {
+            font-size: 20px;
+            text-transform: capitalize;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .card p:not(.heading) {
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .card p:last-child {
+            color: #e81cff;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .card:hover::after {
+            filter: blur(30px);
+        }
+
+        .card:hover::before {
+            transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
+        }
+
+        /* Button inside card */
+        .btn-choose {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-choose:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Card details list */
+        .plan-details {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .plan-details li {
+            font-size: 14px;
+            margin: 8px 0;
+            color: #333;
+        }
+
+        .plan-details li i {
+            color: #28a745;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        /* Additional card text */
+        .price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .per-month {
+            font-size: 14px;
+            color: #888;
+        }
+
+        /* Recommended Packs Container */
+        #popular-plans {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* Responsive adjustments: for smaller screens, reduce card size */
+        @media (max-width: 768px) {
+            .card {
+                width: 150px;
+                height: 200px;
+            }
+        }
+
+        /* About Us Section */
+        .about-us {
+            padding: 4rem 0;
+        }
+
+        .about-us-title {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .about-us-text {
+            color: var(--text);
+            font-size: 1.1rem;
+        }
+
+        .about-us-details .detail-item {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: var(--secondary);
+        }
+
+        /* Why Choose Section */
+        .why-choose {
+            padding: 4rem 0;
+        }
+
+        .feature-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card i {
+            color: var(--accent);
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            padding: 4rem 0;
+        }
+
+        .faq-title {
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+
+        .faq-question {
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--text);
+            padding: 0.5rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            background: #fff;
+        }
+
+        .faq-answer {
+            padding: 0.75rem;
+            border: 1px solid #e0e0e0;
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            background: #fff;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 4rem 0;
+            background: #fff;
+        }
+
+        .contact-title {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-description {
+            color: var(--text);
+            margin-bottom: 2rem;
+        }
+
+        #contactForm .form-control {
+            border-radius: 4px;
+            padding: 0.75rem;
+            font-size: 1rem;
+        }
+
+        /* Unique Footer */
+        footer {
+            background: var(--primary);
+            padding: 1rem 0;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .footer-col {
+            flex: 1 1 250px;
+            margin: 0.5rem 0;
+        }
+
+        .footer-logo {
+            max-width: 120px;
+        }
+
+        .footer-col h5 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .footer-col ul li svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--accent);
+        }
+
+        .footer-col ul li a {
+            color: var(--background);
+            font-size: 0.85rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .social-icons li a {
+            font-size: 1.2rem;
+            color: var(--background);
+            transition: color 0.3s;
+        }
+
+        .social-icons li a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive adjustments for screens up to 430px */
+        @media (max-width: 430px) {
+            .header-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .header-content p {
+                font-size: 1rem;
+            }
+
+            #contactForm .form-control {
+                font-size: 0.9rem;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-col {
+                text-align: center;
+            }
+        }
+
+
+        .welcome-back {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #343a40;
+            font-weight: boldl;
+            /* Dark gray */
+        }
+
+        .enter-details {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #6c757d;
+            /* Gray */
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: #343a40;
+        }
+
+        .btn-primary {
+            background-color: #4B0082;
+            /* Dark Purple */
+            border-color: #4B0082;
+        }
+
+        .btn-primary:hover {
+            background-color: #3A0068;
+            /* Darker Purple */
+            border-color: #3A0068;
+        }
+
+
+        .btn-accent {
+            color: white;
+            background-color: rgb(255, 157, 0);
+            border-color: rgb(255, 157, 0);
+            border-radius: 50px;
+
+        }
+
+        .btn-accent:hover {
+            background-color: rgb(204, 126, 0);
+            border-color: rgb(204, 126, 0);
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .illustration {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .illustration-box {
+            display: flex;
+            justify-content: center;
+            /* Horizontally center */
+            align-items: center;
+            /* Vertically center */
+        }
+    </style>
 </head>
 
-
-
 <body>
-    <!-- background blur -->
+    <!-- Background Blur Shapes -->
     <div class="absolute">
         <div class="absolute inset-0 justify-center">
             <div class="bg-shape-1 bg-teal opacity-50 bg-blur"></div>
@@ -24,47 +527,43 @@
             <div class="bg-shape-3 bg-teal opacity-50 bg-blur"></div>
         </div>
     </div>
-    <!-- navbar   -->
+
+    <!-- Navbar -->
     <section class="header-container">
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand-lg reveal">
             <div class="container">
                 <a class="navbar-brand" href="#"><img src="Assets/png/logo_color.png" alt="MobiComm Logo"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                <!-- Burger Menu for Mobile -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#plans">Plans</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#plans">Plans</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#about">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#contact">Contact Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="profile.html">
-                                <i class="fas fa-user-circle fa-2x"></i> </a>
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                <i class="fas fa-user-circle fa-2x"></i>
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <!-- banner -->
-        <section class="hero">
+
+        <!-- Hero Banner with Typewriter Effect -->
+        <section class="hero reveal">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 header-content
-                    ">
-                        <h1>Recharge Your Mobile<br>in Just a Few Clicks!</h1>
-                        <p>Fast, Secure, and Hassle-Free<br>Recharges for All</p>
-                        <button class="btn btn-secondary login-btn"><a href="plans.html"
-                                style="text-decoration: none;">Explore plans</a></button>
+                    <div class="col-md-6 header-content">
+                        <h1 id="heroHeading"></h1>
+                        <p id="heroSubheading"></p>
+                        <button class="btn btn-secondary login-btn">
+                            <a href="plans.html" style="color: inherit; text-decoration: none;">Explore Plans</a>
+                        </button>
                     </div>
                     <div class="col-md-6">
                         <img src="Assets/png/Connected-cuate 1.png" alt="Recharge Illustration" class="img-fluid">
@@ -73,19 +572,42 @@
             </div>
         </section>
     </section>
-    <!-- plans -->
 
-
-    <div class="container mt-5">
-        <h2 class="recommended-packs-title">Recommended Packs</h2>
-        <div id="popular-plans" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
-            <!-- Popular plans will be dynamically inserted here -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 login-box">
+                <div class="login-form">
+                    <h2 class="welcome-back">WELCOME BACK</h2>
+                    <p class="enter-details">Welcome back! Please enter your details.</p>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="mobile">Mobile</label>
+                            <input type="text" class="form-control" id="mobile" name="mobile"
+                                placeholder="Enter your number">
+                            <span id="mobileError" class="error-message"></span>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-block" onclick="validateForm()">Get
+                            OTP</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6 illustration-box">
+                <img src="Assets/png/At the office-pana (1) 1.png" alt="Illustration" class="illustration">
+            </div>
         </div>
     </div>
 
+    <!-- Recommended Packs -->
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Recommended Packs</h2>
+        <div id="popular-plans" class="d-flex flex-wrap justify-content-center">
+            <!-- 8 Popular Plan Cards will be inserted here -->
+        </div>
+    </div>
     <br>
-    <!-- about us -->
-    <section class="about-us py-5" id="about">
+
+    <!-- About Us Section -->
+    <section class="about-us py-5 reveal" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -97,7 +619,6 @@
                         We are your go-to platform for quick, secure, and hassle-free mobile recharges anytime,
                         anywhere.
                     </p>
-
                     <div class="about-us-details">
                         <div class="detail-item">
                             <i class="fas fa-headset"></i>
@@ -127,9 +648,8 @@
         </div>
     </section>
 
-
-    <!-- Why Choose MobiComm -->
-    <section class="why-choose py-5">
+    <!-- Why Choose MobiComm Section -->
+    <section class="why-choose py-5 reveal">
         <div class="container">
             <h2 class="text-center mb-4">Why Choose MobiComm</h2>
             <div class="row">
@@ -158,14 +678,12 @@
         </div>
     </section>
 
-    <!-- faq -->
-
-    <section class="faq-container">
+    <!-- FAQ Section -->
+    <section class="faq-container reveal">
         <div class="container mt-5">
             <h2 class="faq-title text-center">FAQS</h2>
             <div class="faq-list">
-
-                <div class="faq-item ">
+                <div class="faq-item">
                     <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq-answer-1">
                         How do I recharge my mobile on this website?
                         <i class="fas fa-chevron-down"></i>
@@ -175,7 +693,6 @@
                         plan, and making a secure payment. The recharge is processed instantly!
                     </div>
                 </div>
-
                 <div class="faq-item">
                     <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq-answer-2">
                         What payment methods do you accept?
@@ -185,7 +702,6 @@
                         We accept various payment methods, including credit cards, debit cards, and mobile wallets.
                     </div>
                 </div>
-
                 <div class="faq-item">
                     <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq-answer-3">
                         How long does it take for the recharge to reflect?
@@ -195,7 +711,6 @@
                         Recharges are usually instant, but in some cases, it might take a few minutes.
                     </div>
                 </div>
-
                 <div class="faq-item">
                     <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq-answer-4">
                         What should I do if my recharge fails but money is deducted?
@@ -206,7 +721,6 @@
                         issue.
                     </div>
                 </div>
-
                 <div class="faq-item">
                     <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq-answer-5">
                         Can I get a refund if I recharge the wrong number?
@@ -217,13 +731,12 @@
                         soon as possible.
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- contact -->
-    <section class="contact-section" id="contact">
+    <!-- Contact Section -->
+    <section class="contact-section reveal" id="contact">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8">
@@ -249,80 +762,231 @@
         </div>
     </section>
 
-    <footer class="header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-3">
-                    <a class="navbar-brand" href="#">
-                        <img src="Assets/png/logo.png" alt="MobiComm Logo">
-                    </a>
-                </div>
-                <div class="col-md-9">
-                    <div class="footer-links">
-                        <p>&copy;2025 Company Name. All rights reserved.
-                            <a href="#">Privacy &amp; Policy</a> |
-                            <a href="#">Terms &amp; Condition</a>
-                        </p>
-                    </div>
-                </div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <img src="Assets/png/logo.png" alt="MobiComm Logo" class="footer-logo">
+                <p>Your trusted partner for mobile recharges.</p>
             </div>
+            <div class="footer-col">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li>
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2a7 7 0 00-7 7v4a7 7 0 0014 0V9a7 7 0 00-7-7zm3 11a3 3 0 01-6 0v-4a3 3 0 016 0v4z" />
+                            <path d="M5 20a1 1 0 011-1h12a1 1 0 011 1v1H5v-1z" />
+                        </svg>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M2 7a2 2 0 012-2h16a2 2 0 012 2v2H2V7zm0 4h20v6a2 2 0 01-2 2H4a2 2 0 01-2-2v-6zm2 0v6h16v-6H4z" />
+                        </svg>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms &amp; Conditions</a>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 4V1L8 5l4 4V6a6 6 0 016 6 6.002 6.002 0 01-5.197 5.958l1.191 2.432A8 8 0 1012 4z" />
+                        </svg>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#refundModal">Refund Policy</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Follow Us</h5>
+                <ul class="social-icons">
+                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy;2025 MobiComm. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="Assets/js/script.js"></script>
-    <script>
-        // Function to load popular plans from JSON Server// Function to load plans data from the JSON file
-function loadPopularPlans() {
-  fetch('/data/db.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("HTTP error " + response.status);
-      }
-      return response.json();
-    })
-    .then(data => {
-      // Extract the plans array from the JSON file
-      const plans = data.plans;
-      // Filter for popular plans and limit to the first 8
-      const popularPlans = plans.filter(plan => plan.popular).slice(0, 8);
-      displayPopularPlans(popularPlans);
-    })
-    .catch(error => {
-      console.error("Error loading popular plans:", error);
-      document.getElementById('popular-plans').innerHTML =
-        `<div class="alert alert-danger">Error loading plans: ${error.message}</div>`;
-    });
-}
+    <!-- Modals -->
 
-// Function to display the popular plans in the Recommended Packs section
-function displayPopularPlans(plans) {
-  let html = "";
-  plans.forEach(plan => {
-    html += `
-      <div class="col popular-plan" data-plan-id="${plan.id}">
-        <div class="card plan-card">
-          ${plan.popular ? `<div class="popular-label">Popular</div>` : ""}
-          <div class="card-body plan-card-body">
-            <div class="plan-price">₹${plan.price}</div>
-            <div class="plan-details">
-              <p>${plan.data}</p>
-              <p>Calls: ${plan.calls}</p>
-              <p>Validity: ${plan.validity} Days</p>
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword"
+                                placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+                </div>
             </div>
-            <a href="login.html" class="recharge-btn">Recharge</a>
-            <a href="#" class="view-details">View Details</a>
-          </div>
         </div>
-      </div>
-    `;
-  });
-  document.getElementById('popular-plans').innerHTML = html;
-}
+    </div>
 
-// Load popular plans when the page loads
-window.addEventListener('load', loadPopularPlans);
+    <!-- Privacy Policy Modal -->
+    <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Your privacy is important to us. We collect and use your data only to provide better services.
+                        [Full Privacy Policy Content]</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Terms & Conditions Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="termsModalLabel">Terms &amp; Conditions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>These terms and conditions outline the rules and regulations for the use of our website. [Full
+                        Terms &amp; Conditions Content]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Refund Policy Modal -->
+    <div class="modal fade" id="refundModal" tabindex="-1" aria-labelledby="refundModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="refundModalLabel">Refund Policy</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Refunds for incorrect recharges are subject to approval. Please contact our customer support for
+                        more details. [Full Refund Policy Content]</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External JS -->
+    <script src="Assets/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Reveal on Scroll Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const reveals = document.querySelectorAll(".reveal");
+            const options = { threshold: 0.2 };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                    }
+                });
+            }, options);
+            reveals.forEach(reveal => observer.observe(reveal));
+        });
     </script>
+
+    <!-- Typewriter Effect for Hero Section -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const heroHeading = document.getElementById("heroHeading");
+            const heroSubheading = document.getElementById("heroSubheading");
+            const headingText = "Recharge Your Mobile\nin Just a Few Clicks!";
+            const subheadingText = "Fast, Secure, and Hassle-Free\nRecharges for All";
+            const headingDelay = 100;
+            const subheadingDelay = 80;
+
+            function typeWriter(element, text, delay) {
+                let i = 0;
+                element.innerHTML = "";
+                function type() {
+                    if (i < text.length) {
+                        if (text.charAt(i) === "\n") {
+                            element.innerHTML += "<br>";
+                        } else {
+                            element.innerHTML += text.charAt(i);
+                        }
+                        i++;
+                        setTimeout(type, delay);
+                    }
+                }
+                type();
+            }
+            setTimeout(() => {
+                typeWriter(heroHeading, headingText, headingDelay);
+                typeWriter(heroSubheading, subheadingText, subheadingDelay);
+            }, 500);
+        });
+    </script>
+
+    <!-- Recommended Packs - Fetch from JSON -->
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            // Fetch plans from JSON server
+            fetch("http://localhost:3000/plans")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then(plans => {
+                    // Filter only popular plans (assuming plan.popular is a boolean)
+                    const popularPlans = plans.filter(plan => plan.popular === true);
+                    // Limit to 8 plans
+                    const eightPlans = popularPlans.slice(0, 8);
+                    let html = "";
+                    eightPlans.forEach(plan => {
+                        // Determine badges if applicable. If plan.new is true, show "New" badge.
+                        let newBadge = plan.new ? `<div class="new-badge">New</div>` : "";
+                        // Always add the popular badge.
+                        let popularBadge = `<div class="popular-badge">Popular</div>`;
+                        html += `
+                <div class="card" data-plan='${JSON.stringify(plan)}'>
+                  ${newBadge}
+                  ${popularBadge}
+                  <div class="icon"><i class="fas fa-star"></i></div>
+                  <div class="price">₹${plan.price} ${plan.validity == 1 ? "" : '<span class="per-month">/ month</span>'}</div>
+                  <ul class="plan-details">
+                    <li><i class="fas fa-check-circle"></i> ${plan.data}</li>
+                    <li><i class="fas fa-check-circle"></i> ${plan.calls}</li>
+                    <li><i class="fas fa-check-circle"></i> ${plan.validity} Days Validity</li>
+                    <li><i class="fas fa-check-circle"></i> Free SMS & OTT access</li>
+                  </ul>
+                  <button class="btn-choose">Choose Plan</button>
+                </div>
+              `;
+                    });
+                    document.getElementById("popular-plans").innerHTML = html;
+                })
+                .catch(error => {
+                    console.error("Error fetching recommended plans:", error);
+                    document.getElementById("popular-plans").innerHTML = `<p class="text-center text-danger">Error loading plans.</p>`;
+                });
+        });
+    </script>
+    <script src="Assets/js/login.js"></script>
 </body>
 
 </html>

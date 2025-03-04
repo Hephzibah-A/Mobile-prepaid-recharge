@@ -389,9 +389,21 @@
           "method": "Debit Card"
         },
         {
-          "id": 1740617922879,
+          "id": 4,
+          "date": "2020-07-15",
+          "amount": 150,
+          "method": "UPI"
+        },
+        {
+          "id": 5,
           "date": "2025-02-27",
           "amount": 249,
+          "method": "UPI"
+        },
+        {
+          "id": 1740738264654,
+          "date": "2025-02-28",
+          "amount": 299,
           "method": "upi"
         }
       ],
@@ -409,9 +421,17 @@
           "plan": "Combo",
           "amount": 199,
           "method": "Credit Card"
+        },
+        {
+          "id": 3,
+          "date": "2025-02-20",
+          "plan": "Combo",
+          "amount": 199,
+          "method": "Credit Card"
         }
       ],
-      "planExpiryDate": "2025-03-30"
+      "planExpiryDate": "2025-04-27",
+      "active": true
     },
     {
       "id": "6",
@@ -450,7 +470,8 @@
           "method": "Net Banking"
         }
       ],
-      "planExpiryDate": "2025-03-01"
+      "planExpiryDate": "2025-03-01",
+      "active": true
     },
     {
       "id": "7",
@@ -489,7 +510,8 @@
           "method": "Credit Card"
         }
       ],
-      "planExpiryDate": "2025-03-05"
+      "planExpiryDate": "2025-03-05",
+      "active": true
     },
     {
       "id": "8",
@@ -528,7 +550,8 @@
           "method": "Net Banking"
         }
       ],
-      "planExpiryDate": "2025-02-27"
+      "planExpiryDate": "2025-02-27",
+      "active": true
     },
     {
       "id": "9",
@@ -567,7 +590,8 @@
           "method": "Credit Card"
         }
       ],
-      "planExpiryDate": "2025-03-02"
+      "planExpiryDate": "2025-03-02",
+      "active": true
     },
     {
       "id": "10",
@@ -606,7 +630,8 @@
           "method": "Net Banking"
         }
       ],
-      "planExpiryDate": "2025-03-10"
+      "planExpiryDate": "2025-03-10",
+      "active": true
     },
     {
       "id": "11",
@@ -645,7 +670,8 @@
           "method": "Credit Card"
         }
       ],
-      "planExpiryDate": "2025-03-01"
+      "planExpiryDate": "2025-03-01",
+      "active": true
     },
     {
       "id": "12",
@@ -684,7 +710,8 @@
           "method": "Net Banking"
         }
       ],
-      "planExpiryDate": "2025-03-03"
+      "planExpiryDate": "2025-03-03",
+      "active": true
     },
     {
       "id": "13",
@@ -723,7 +750,8 @@
           "method": "Credit Card"
         }
       ],
-      "planExpiryDate": "2025-02-28"
+      "planExpiryDate": "2025-02-28",
+      "active": true
     },
     {
       "id": "14",
@@ -762,7 +790,198 @@
           "method": "Debit Card"
         }
       ],
-      "planExpiryDate": "2025-03-04"
+      "planExpiryDate": "2025-03-04",
+      "active": true
+    },
+    {
+      "id": "15",
+      "phnno": "9000000015",
+      "otp": "121212",
+      "name": "Manish Verma",
+      "address": "15 Connaught Place, New Delhi",
+      "email": "manish.verma@example.com",
+      "paymentHistory": [
+        {
+          "id": 1,
+          "date": "2010-05-10",
+          "amount": 120,
+          "method": "Credit Card"
+        },
+        {
+          "id": 2,
+          "date": "2012-08-20",
+          "amount": 130,
+          "method": "Debit Card"
+        },
+        {
+          "id": 3,
+          "date": "2015-11-15",
+          "amount": 140,
+          "method": "UPI"
+        }
+      ],
+      "rechargeHistory": [
+        {
+          "id": 1,
+          "date": "2010-06-01",
+          "plan": "Data",
+          "amount": 299,
+          "method": "Credit Card"
+        },
+        {
+          "id": 2,
+          "date": "2015-12-01",
+          "plan": "Combo",
+          "amount": 499,
+          "method": "UPI"
+        }
+      ],
+      "planExpiryDate": "2025-01-15",
+      "active": true
+    },
+    {
+      "id": "16",
+      "phnno": "9000000016",
+      "otp": "131313",
+      "name": "Shilpa Mehta",
+      "address": "16 Park Street, Kolkata",
+      "email": "shilpa.mehta@example.com",
+      "paymentHistory": [
+        {
+          "id": 1,
+          "date": "2011-03-15",
+          "amount": 125,
+          "method": "Debit Card"
+        },
+        {
+          "id": 2,
+          "date": "2014-07-22",
+          "amount": 135,
+          "method": "Credit Card"
+        },
+        {
+          "id": 3,
+          "date": "2018-10-05",
+          "amount": 145,
+          "method": "UPI"
+        }
+      ],
+      "rechargeHistory": [
+        {
+          "id": 1,
+          "date": "2011-04-01",
+          "plan": "Talktime",
+          "amount": 399,
+          "method": "Credit Card"
+        },
+        {
+          "id": 2,
+          "date": "2018-11-01",
+          "plan": "Data",
+          "amount": 299,
+          "method": "Net Banking"
+        }
+      ],
+      "planExpiryDate": "2025-02-10",
+      "active": true
+    },
+    {
+      "id": "17",
+      "phnno": "9000000017",
+      "otp": "141414",
+      "name": "Sandeep Joshi",
+      "address": "17 Residency Road, Mumbai",
+      "email": "sandeep.joshi@example.com",
+      "paymentHistory": [
+        {
+          "id": 1,
+          "date": "2010-09-05",
+          "amount": 110,
+          "method": "Credit Card"
+        },
+        {
+          "id": 2,
+          "date": "2013-02-12",
+          "amount": 115,
+          "method": "Debit Card"
+        },
+        {
+          "id": 3,
+          "date": "2017-05-20",
+          "amount": 120,
+          "method": "UPI"
+        },
+        {
+          "id": 4,
+          "date": "2020-08-15",
+          "amount": 125,
+          "method": "Net Banking"
+        }
+      ],
+      "rechargeHistory": [
+        {
+          "id": 1,
+          "date": "2010-10-01",
+          "plan": "Combo",
+          "amount": 499,
+          "method": "Credit Card"
+        },
+        {
+          "id": 2,
+          "date": "2017-06-01",
+          "plan": "Data",
+          "amount": 299,
+          "method": "UPI"
+        }
+      ],
+      "planExpiryDate": "2025-02-20",
+      "active": true
+    },
+    {
+      "id": "18",
+      "phnno": "9000000018",
+      "otp": "151515",
+      "name": "Alka Patel",
+      "address": "18 MG Road, Ahmedabad",
+      "email": "alka.patel@example.com",
+      "paymentHistory": [
+        {
+          "id": 1,
+          "date": "2012-01-10",
+          "amount": 130,
+          "method": "Debit Card"
+        },
+        {
+          "id": 2,
+          "date": "2016-04-18",
+          "amount": 140,
+          "method": "Credit Card"
+        },
+        {
+          "id": 3,
+          "date": "2020-07-25",
+          "amount": 150,
+          "method": "UPI"
+        }
+      ],
+      "rechargeHistory": [
+        {
+          "id": 1,
+          "date": "2012-02-01",
+          "plan": "Talktime",
+          "amount": 399,
+          "method": "Debit Card"
+        },
+        {
+          "id": 2,
+          "date": "2020-08-01",
+          "plan": "Combo",
+          "amount": 499,
+          "method": "Credit Card"
+        }
+      ],
+      "planExpiryDate": "2025-03-05",
+      "active": true
     }
   ]
 }

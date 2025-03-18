@@ -1,63 +1,40 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const mobileNumber = localStorage.getItem('mobileNumber');
-    const otpDisplay = document.getElementById("otpDisplay");
-    const otpInput = document.getElementById("otp");
-    const verificationStatus = document.getElementById("verificationStatus");
-    const toast = document.getElementById("toast");
+document.getElementById("otpForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-    let storedOTP = null;
+    let otp = document.getElementById("otp").value;
+    let otpError = document.getElementById("otpError");
+    let mobileNumber = localStorage.getItem("mobileNumber"); // Retrieve mobile number
 
     if (!mobileNumber) {
-        console.error("Mobile number not found in localStorage.");
-        window.location.href = "index.html";
+        alert("Session expired. Please log in again.");
+        window.location.href = "login.html";
         return;
     }
 
-    fetch('json/otps.json')
-        .then(response => response.json())
-        .then(otps => {
-            storedOTP = otps[mobileNumber];
+    if (!/^\d{6}$/.test(otp)) {
+        otpError.textContent = "Please enter a valid 6-digit OTP.";
+        return;
+    }
+    otpError.textContent = "";
 
-            if (!storedOTP) {
-                console.error("OTP not found for this number.");
-                verificationStatus.textContent = "OTP not found for this number.";
-                verificationStatus.classList.add("error-message");
-            }
-        })
-        .catch(error => {
-            console.error("Error fetching OTP data:", error);
-            verificationStatus.textContent = "Error fetching OTP data. Please try again later.";
-            verificationStatus.classList.add("error-message");
+    try {
+        // Call login API with OTP
+        const response = await fetch(`http://localhost:8082/api/auth/login?mobileNumber=${mobileNumber}&otp=${otp}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
         });
 
-    window.verifyOTP = function () {
-        if (!otpInput) {
-            console.error("OTP input field not found.");
-            return;
-        }
+        if (!response.ok) throw new Error("Invalid OTP. Please try again.");
 
-        const enteredOTP = otpInput.value;
+        const data = await response.json();
 
-        if (enteredOTP === storedOTP) {
-            verificationStatus.textContent = "Success! You have been successfully authenticated.";
-            verificationStatus.classList.add("success-message");
-            verificationStatus.classList.remove("error-message");
+        // Store tokens in localStorage
+        localStorage.setItem("accessToken", data.accessToken);
+        localStorage.setItem("refreshToken", data.refreshToken);
 
-            toast.textContent = "Congratulations! You have been successfully authenticated.";
-            toast.classList.add("show");
-
-            // Check if the user came from a card payment flow.
-            const fromCard = localStorage.getItem('fromCardPayment');
-            setTimeout(() => {
-                toast.classList.remove("show");
-
-                window.location.href = "main.html";
-
-            }, 3000);
-        } else {
-            verificationStatus.textContent = "Incorrect OTP. Please try again.";
-            verificationStatus.classList.add("error-message");
-            verificationStatus.classList.remove("success-message");
-        }
-    };
+        alert("Login successful!");
+        window.location.href = "main.html"; // Redirect to dashboard
+    } catch (error) {
+        alert(error.message);
+    }
 });

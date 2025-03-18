@@ -221,32 +221,66 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const planList = document.getElementById("planList");
-            const searchBox = document.getElementById("searchBox");
-            const sortOptions = document.getElementById("sortOptions");
-            const priceRange = document.getElementById("priceRange");
-            const priceValue = document.getElementById("priceValue");
-            const validityFilter = document.getElementById("validityFilter");
-            const dataFilter = document.getElementById("dataFilter");
-            const categoryNavLinks = document.querySelectorAll("#categoryNav a");
-            const resetFiltersBtn = document.getElementById("resetFilters");
-            let currentCategory = "all";
+            const categoryNav = document.getElementById("categoryNav");
             let plans = [];
+            let availableCategories = new Set();
 
-            // Fetch plans from db.json
-            fetch("/data/db.json")
-                .then(response => response.json())
-                .then(data => {
-                    plans = data.plans;
+            async function fetchPlans() {
+                try {
+                    console.log("Fetching plans...");
+                    const response = await fetch("http://localhost:8082/api/plans");
+
+                    console.log("Response status:", response.status);
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch plans. Status: ${response.status}`);
+                    }
+
+                    plans = await response.json();
+                    console.log("Fetched plans:", plans);
+
+                    // ✅ Collect all unique categories
+                    plans.forEach(plan => {
+                        if (plan.planType) {
+                            availableCategories.add(plan.planType);
+                        }
+                    });
+
+                    // ✅ Dynamically generate the navigation menu
+                    generateCategoryNav([...availableCategories]);
+
+                    // ✅ Display plans initially
                     displayPlans(plans);
-                })
-                .catch(error => console.error("Error fetching plans:", error));
+                } catch (error) {
+                    console.error("Error fetching plans:", error);
+                    planList.innerHTML = `<p class="text-center text-danger">Error loading plans. Please try again.</p>`;
+                }
+            }
 
-            function isNewPlan(addedOn) {
-                if (!addedOn) return false;
-                const createdDate = new Date(addedOn);
-                const today = new Date();
-                const differenceInDays = (today - createdDate) / (1000 * 60 * 60 * 24);
-                return differenceInDays <= 7;
+            function generateCategoryNav(categories) {
+                categoryNav.innerHTML = ""; // Clear existing categories
+
+                // ✅ Add "All" category first
+                categoryNav.innerHTML += `<a href="#" class="nav-link active" data-category="all">All</a>`;
+
+                // ✅ Add categories dynamically
+                categories.forEach(category => {
+                    categoryNav.innerHTML += `<a href="#" class="nav-link" data-category="${category}">${category}</a>`;
+                });
+
+                // ✅ Add event listeners for category selection
+                document.querySelectorAll("#categoryNav a").forEach(link => {
+                    link.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        document.querySelectorAll("#categoryNav a").forEach(l => l.classList.remove("active"));
+                        this.classList.add("active");
+                        filterAndDisplayPlans(this.getAttribute("data-category"));
+                    });
+                });
+            }
+
+            function filterAndDisplayPlans(category) {
+                let filteredPlans = category === "all" ? plans : plans.filter(plan => plan.planType === category);
+                displayPlans(filteredPlans);
             }
 
             function displayPlans(filteredPlans) {
@@ -259,140 +293,27 @@
                 filteredPlans.forEach(plan => {
                     const card = document.createElement("div");
                     card.className = "col-md-4";
-                    const newBadge = isNewPlan(plan.addedOn) ? `<span class="new-badge">New</span>` : "";
-                    const popularBadge = plan.popular ? `<span class="popular-badge">Popular</span>` : "";
                     card.innerHTML = `
-            <div class="plan-card" data-plan='${JSON.stringify(plan)}'>
-              ${newBadge}
-              ${popularBadge}
-              <div class="icon"><i class="fas fa-star"></i></div>
-              <div class="price">₹${plan.price} ${plan.validity == 1 ? "" : '<span class="per-month">/ month</span>'}</div>
-              <ul class="plan-details">
-                <li><i class="fas fa-check-circle"></i> ${plan.data}</li>
-                <li><i class="fas fa-check-circle"></i> ${plan.calls}</li>
-                <li><i class="fas fa-check-circle"></i> ${plan.validity} Days Validity</li>
-                <li><i class="fas fa-check-circle"></i> Free SMS & OTT access</li>
-              </ul>
-              <button class="btn-choose">Choose Plan</button>
-            </div>
-          `;
+                <div class="plan-card">
+                    <div class="icon"><i class="fas fa-star"></i></div>
+                    <div class="price">₹${plan.planPrice} ${plan.validityDays == 1 ? "" : '<span class="per-month">/ month</span>'}</div>
+                    <ul class="plan-details">
+                        <li><i class="fas fa-check-circle"></i> ${plan.data || "No Data Available"}</li>
+                        <li><i class="fas fa-check-circle"></i> ${plan.calls || "No Call Benefits"}</li>
+                        <li><i class="fas fa-check-circle"></i> ${plan.validityDays} Days Validity</li>
+                    </ul>
+                    <button class="btn-choose">Choose Plan</button>
+                </div>
+            `;
                     fragment.appendChild(card);
                 });
                 planList.appendChild(fragment);
-
-                document.querySelectorAll(".btn-choose").forEach(button => {
-                    button.addEventListener("click", function () {
-                        const selectedPlan = JSON.parse(this.closest(".plan-card").getAttribute("data-plan"));
-                        localStorage.setItem("selectedPlan", JSON.stringify(selectedPlan));
-                        window.location.href = "payment.html";
-                    });
-                });
             }
 
-            function filterAndSortPlans() {
-                let filteredPlans = [...plans];
-
-                // Filter by search term
-                const searchTerm = searchBox.value.trim().toLowerCase();
-                if (searchTerm) {
-                    filteredPlans = filteredPlans.filter(plan =>
-                        (plan.data && plan.data.toLowerCase().includes(searchTerm)) ||
-                        (plan.calls && plan.calls.toLowerCase().includes(searchTerm))
-                    );
-                }
-
-                // Filter by category from sub nav
-                if (currentCategory !== "all") {
-                    filteredPlans = filteredPlans.filter(plan => {
-                        if (currentCategory === "popular") {
-                            return plan.popular;
-                        } else if (currentCategory === "international-roaming") {
-                            return plan.planType === "international-roaming" || plan.isInternational;
-                        } else if (currentCategory === "ott") {
-                            return plan.planType === "ott" || plan.isOtt;
-                        } else {
-                            return plan.planType === currentCategory;
-                        }
-                    });
-                }
-
-                // Filter by price
-                const maxPrice = parseInt(priceRange.value, 10);
-                priceValue.textContent = `Max: ₹${maxPrice}`;
-                filteredPlans = filteredPlans.filter(plan => plan.price <= maxPrice);
-
-                // Filter by validity
-                const validity = validityFilter.value;
-                if (validity !== "all") {
-                    filteredPlans = filteredPlans.filter(plan => plan.validity == validity);
-                }
-
-                // Filter by data allowance
-                const data = dataFilter.value;
-                if (data !== "all") {
-                    filteredPlans = filteredPlans.filter(plan => plan.data.startsWith(data));
-                }
-
-                // Sort plans
-                switch (sortOptions.value) {
-                    case "low-to-high":
-                        filteredPlans.sort((a, b) => a.price - b.price);
-                        break;
-                    case "high-to-low":
-                        filteredPlans.sort((a, b) => b.price - a.price);
-                        break;
-                    default:
-                        break;
-                }
-
-                displayPlans(filteredPlans);
-            }
-
-            // Attach event listeners for filter inputs
-            [searchBox, priceRange, validityFilter, dataFilter, sortOptions].forEach(input =>
-                input.addEventListener("input", filterAndSortPlans)
-            );
-
-            // Sub nav category click events
-            categoryNavLinks.forEach(link => {
-                link.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    categoryNavLinks.forEach(l => l.classList.remove("active"));
-                    this.classList.add("active");
-                    currentCategory = this.getAttribute("data-category");
-                    filterAndSortPlans();
-                });
-            });
-
-            // Reset Filters Button
-            resetFiltersBtn.addEventListener("click", function () {
-                // Reset all filter inputs to default values
-                searchBox.value = "";
-                sortOptions.value = "relevance";
-                priceRange.value = 2000;
-                priceValue.textContent = "Max: ₹2000";
-                validityFilter.value = "all";
-                dataFilter.value = "all";
-                // Reset subnav category
-                currentCategory = "all";
-                categoryNavLinks.forEach(l => l.classList.remove("active"));
-                document.querySelector("#categoryNav a[data-category='all']").classList.add("active");
-                filterAndSortPlans();
-            });
+            // ✅ Fetch plans from backend on page load
+            fetchPlans();
         });
 
-        // --- Custom Success Toast JavaScript ---
-        function showSuccessToast() {
-            const toast = document.getElementById("successToast");
-            toast.style.display = "flex";
-            setTimeout(function () {
-                toast.style.display = "none";
-            }, 3000);
-        }
-
-        document.querySelector("#successToast .cross-icon").addEventListener("click", function () {
-            document.getElementById("successToast").style.display = "none";
-        });
     </script>
 </body>
 

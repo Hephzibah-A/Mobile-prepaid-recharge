@@ -405,6 +405,12 @@
           "date": "2025-02-28",
           "amount": 299,
           "method": "upi"
+        },
+        {
+          "id": 1741841889960,
+          "date": "2025-03-13",
+          "amount": 299,
+          "method": "upi"
         }
       ],
       "rechargeHistory": [
@@ -430,7 +436,7 @@
           "method": "Credit Card"
         }
       ],
-      "planExpiryDate": "2025-04-27",
+      "planExpiryDate": "2025-05-25",
       "active": true
     },
     {

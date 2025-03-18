@@ -8,13 +8,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const dataFilter = document.getElementById("dataFilter");
     const planTypeFilters = document.querySelectorAll(".form-check-input");
     let plans = [];
-    fetch("/data/db.json")
-        .then(response => response.json())
-        .then(data => {
-            plans = data.plans;
+
+    async function fetchPlans() {
+        try {
+            const response = await fetch("http://localhost:8082/api/plans", {
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("adminToken")}`,
+                    "Content-Type": "application/json"
+                }
+            });
+            if (!response.ok) throw new Error("Failed to fetch plans");
+            plans = await response.json();
             displayPlans(plans);
-        })
-        .catch(error => console.error("Error fetching plans:", error));
+        } catch (error) {
+            console.error("Error fetching plans:", error);
+            planList.innerHTML = `<p class="text-center text-danger">Error loading plans. Please try again later.</p>`;
+        }
+    }
+
     function isNewPlan(addedOn) {
         if (!addedOn) return false;
         const createdDate = new Date(addedOn);
@@ -22,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const differenceInDays = (today - createdDate) / (1000 * 60 * 60 * 24);
         return differenceInDays <= 7;
     }
+
     function displayPlans(filteredPlans) {
         planList.innerHTML = "";
         if (filteredPlans.length === 0) {
@@ -59,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
+
     function filterAndSortPlans() {
         let filteredPlans = [...plans];
         const searchTerm = searchBox.value.trim().toLowerCase();
@@ -102,8 +115,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         displayPlans(filteredPlans);
     }
+
     [searchBox, priceRange, validityFilter, dataFilter, sortOptions].forEach(input =>
         input.addEventListener("input", filterAndSortPlans)
     );
     planTypeFilters.forEach(checkbox => checkbox.addEventListener("change", filterAndSortPlans));
+
+    fetchPlans();
 });

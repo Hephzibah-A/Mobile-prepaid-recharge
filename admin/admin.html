@@ -2,917 +2,783 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Dashboard</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-  <!-- Font Awesome for Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    crossorigin="anonymous" />
-  <!-- Chart.js Library -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- Firebase CDN -->
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js"></script>
-  <style>
-    /* Global Reset & Base Styles */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Mobile Recharge</title>
 
-    body {
-      font-family: 'Arial', sans-serif;
-      background: #f0f2f5;
-    }
+  <!-- Paper Dashboard CSS -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/paper-dashboard.css" rel="stylesheet">
+  <link href="assets/css/demo.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
 
-    /* Sidebar Styles */
-    .sidebar {
-      width: 250px;
-      background: #ffffff;
-      border-right: 1px solid #ddd;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      padding: 20px;
-    }
-
-    .sidebar h2 {
-      color: #333;
-      margin-bottom: 20px;
-    }
-
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .sidebar ul li {
-      margin-bottom: 15px;
-    }
-
-    .sidebar ul li a {
-      text-decoration: none;
-      color: #333;
-      font-size: 16px;
-      display: block;
-      padding: 8px 12px;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-
-    .sidebar ul li a:hover,
-    .sidebar ul li a.active {
-      background: #e6f0fa;
-      color: #007bff;
-    }
-
-    /* Content Container */
-    .content-container {
-      margin-left: 270px;
-      padding: 20px;
-      min-height: 100vh;
-    }
-
-    /* Header Styles */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .header input[type="text"] {
-      width: 300px;
-      padding: 10px 15px;
-      border: 1px solid #ccc;
-      border-radius: 20px;
-      outline: none;
-    }
-
-    .header .profile {
-      font-size: 24px;
-      color: #333;
-    }
-
-    /* Glassmorphism Stats Cards */
-    .stats-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-
-    .stats-card {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(10px);
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s;
-    }
-
-    .stats-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .stats-card h3 {
-      font-size: 18px;
-      margin-bottom: 10px;
-      color: #555;
-    }
-
-    .stats-card p {
-      font-size: 24px;
-      font-weight: bold;
-      color: #007bff;
-    }
-
-    /* Expiring Recharges Table */
-    .expiring-table {
-      margin-bottom: 30px;
-    }
-
-    .expiring-table th,
-    .expiring-table td {
-      vertical-align: middle;
-    }
-
-    .notify-btn {
-      background: #007bff;
-      color: #fff;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 4px;
-      transition: background 0.3s;
-    }
-
-    .notify-btn:hover {
-      background: #0056b3;
-    }
-
-    /* Page Layout */
-    .page {
-      display: none;
-    }
-
-    .page.active {
-      display: block;
-    }
-
-    /* Plan Management & Custom Buttons */
-    .plan-management table {
-      margin-top: 20px;
-    }
-
-    .cssbuttons-io-button {
-      display: flex;
-      align-items: center;
-      font-family: inherit;
-      cursor: pointer;
-      font-size: 16px;
-      padding: 0.7em 1.4em;
-      color: white;
-      background: linear-gradient(0deg, rgba(20, 167, 62, 1) 0%, rgba(102, 247, 113, 1) 100%);
-      border: none;
-      border-radius: 20em;
-      transition: 0.3s ease-in-out;
-      margin-bottom: 20px;
-    }
-
-    .cssbuttons-io-button svg {
-      margin-right: 6px;
-    }
-
-    .cssbuttons-io-button:hover {
-      box-shadow: 0 0.5em 1.5em -0.5em #14a73e98;
-    }
-
-    .toggle-btn {
-      background: linear-gradient(0deg, rgba(167, 20, 20, 1) 0%, rgba(247, 102, 102, 1) 100%);
-      box-shadow: 0 0.7em 1.5em -0.5em #a7141498;
-      margin-left: 5px;
-    }
-
-    .toggle-btn:hover {
-      box-shadow: 0 0.5em 1.5em -0.5em #a7141498;
-    }
-
-    .inactive-plan {
-      opacity: 0.5;
-    }
-
-    /* Modal Glassmorphism */
-    .modal-content {
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(10px);
-      border: none;
-      border-radius: 10px;
-    }
-
-    /* Grouped Form Styles for Plan Modal */
-    .form-row {
-      display: flex;
-      gap: 20px;
-    }
-
-    .form-group {
-      flex: 1;
-    }
-
-    /* Toast Notification */
-    .toast-custom {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #fff;
-      border-radius: 8px;
-      padding: 15px 20px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-      display: none;
-      z-index: 9999;
-      font-size: 16px;
-      color: #333;
-    }
-
-    .toast-custom .cross-icon {
-      margin-left: 15px;
-      cursor: pointer;
-    }
-
-    /* Responsive Styles */
-    @media (max-width: 768px) {
-      .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        border-right: none;
-        border-bottom: 1px solid #ddd;
-        padding: 10px;
-      }
-
-      .sidebar h2 {
-        font-size: 20px;
-      }
-
-      .sidebar ul {
-        display: flex;
-        flex-wrap: wrap;
-      }
-
-      .sidebar ul li {
-        flex: 1 1 50%;
-        margin-bottom: 10px;
-      }
-
-      .content-container {
-        margin-left: 0;
-        padding: 10px;
-      }
-
-      .header input[type="text"] {
-        width: 100%;
-      }
-
-      .stats-cards {
-        grid-template-columns: 1fr;
-      }
-
-      .cssbuttons-io-button {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-
-    /* Style for All Data page */
-    #allDataPre {
-      background: #f8f9fa;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-    }
-  </style>
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Code injected by Five-server -->
+  <script async data-id="five-server" data-file="d:\TM JFS\CAPSTONE PROJECT 1\Mobile Prepaid Recharge\admin\admin.html"
+    type="application/javascript" src="/fiveserver.js"></script>
 </head>
 
+<style>
+  /* Toast Notification Styles */
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1050;
+    background-color: #28a745;
+    /* Green for success */
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    width: 300px;
+  }
+
+  .toast.show {
+    opacity: 0.95;
+    visibility: visible;
+  }
+
+  .toast-body {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  .toast .btn-close {
+    color: white;
+    opacity: 1;
+  }
+
+  .toast .btn-close:hover {
+    color: red;
+  }
+
+  .toast-close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  #managePlansSection {
+    display: none;
+    margin-top: 20px;
+  }
+
+
+
+  .btn-sm {
+    margin-right: 5px;
+  }
+</style>
+
 <body>
-  <!-- Sidebar Navigation -->
-  <nav class="sidebar">
-    <h2>Admin Panel</h2>
-    <ul>
-      <li><a href="#" onclick="showPage('dashboard')" class="active">Dashboard</a></li>
-      <li><a href="#" onclick="showPage('recharge-history')">Recharge History</a></li>
-      <li><a href="#" onclick="showPage('analytics')">Analytics</a></li>
-      <li><a href="#" onclick="showPage('plan-management'); loadPlans();">Plan Management</a></li>
-      <li><a href="#" onclick="showPage('user-management'); fetchUsers();">User Management</a></li>
-      <!-- New All Data link -->
-      <li><a href="#" onclick="showPage('all-data'); loadAllData();">All Data</a></li>
-      <li><a href="#" onclick="logout()" style="color:#d9534f;"><i class="fa fa-sign-out"></i> Logout</a></li>
-    </ul>
-  </nav>
 
-  <!-- Main Content Area -->
-  <div class="content-container">
-    <!-- Dashboard Page -->
-    <div id="dashboard" class="page active">
-      <div class="header">
-        <input type="text" placeholder="Search..." />
-        <div class="profile">
-          <i class="fa fa-bell"></i>
-          <i class="fa fa-user-circle"></i>
-        </div>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <div class="sidebar" data-color="purple" data-active-color="danger">
+      <div class="logo">
+        <a href="#" class="simple-text logo-mini">
+          <i class="fa fa-mobile"></i>
+        </a>
+        <a href="#" class="simple-text logo-normal">
+          Admin Panel
+        </a>
       </div>
-      <h3>Expiring Recharges (within 3 days)</h3>
-      <table class="table expiring-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Mobile</th>
-            <th>Expiry Date</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="expiring-users-table">
-          <!-- Loaded dynamically -->
-        </tbody>
-      </table>
-      <div class="stats-cards">
-        <div class="stats-card">
-          <h3>Total Users</h3>
-          <p id="total-users">0</p>
-        </div>
-        <div class="stats-card">
-          <h3>Active Users</h3>
-          <p id="active-users">0</p>
-        </div>
-        <div class="stats-card">
-          <h3>Expiring Plans</h3>
-          <p id="expiring-count">0</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Recharge History Page -->
-    <div id="recharge-history" class="page">
-      <h2>Recharge History</h2>
-      <div id="recharge-history-content">
-        <p>No recharge history available.</p>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item sidenav-dashboard active">
+            <a href="#" onclick="showSection('dashboardSection', this)">
+              <i class="fa fa-home"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item sidenav-manage-plans">
+            <a href="#" onclick="showSection('managePlansSection', this)">
+              <i class="ri-file-list-line"></i>
+              <p>Manage Plans</p>
+            </a>
+          </li>
+          <li class="nav-item sidenav-users">
+            <a href="#" onclick="showSection('usersSection', this)">
+              <i class="fa fa-users"></i>
+              <p>Users</p>
+            </a>
+          </li>
+          <li class="nav-item sidenav-transactions">
+            <a href="#" onclick="showSection('transactionsSection', this)">
+              <i class="fa fa-wallet"></i>
+              <p>Transactions</p>
+            </a>
+          </li>
+          <li class="nav-item sidenav-analytics">
+            <a href="#" onclick="showSection('analyticsSection', this)">
+              <i class="fa fa-chart-bar"></i>
+              <p>Analytics</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#">
+              <i class="fa fa-sign-out-alt"></i>
+              <p onclick="confirmLogout()">Logout</p>
+              <script>
+                function confirmLogout() {
+                  if (confirm("Are you sure you want to logout?")) {
+                    // Redirect to login page or perform logout action
+                    window.location.href = "login.html";
+                  }
+                }
+              </script>
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
 
-    <!-- Analytics Page -->
-    <div id="analytics" class="page">
-      <h2>Analytics</h2>
-      <div class="stats-cards">
-        <div class="stats-card">
-          <h3>Revenue Trends</h3>
-          <canvas id="revenueChart"></canvas>
+    <!-- Main Content -->
+    <div class="main-panel">
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="#">Admin Dashboard</a>
+          </div>
         </div>
-        <div class="stats-card">
-          <h3>User Growth</h3>
-          <canvas id="userGrowthChart"></canvas>
-        </div>
-        <div class="stats-card">
-          <h3>Plan Distribution</h3>
-          <canvas id="planDistributionChart"></canvas>
-        </div>
-        <div class="stats-card">
-          <h3>Recharge Trend</h3>
-          <canvas id="rechargeTrendChart"></canvas>
-        </div>
-        <div class="stats-card">
-          <h3>User Category Distribution</h3>
-          <canvas id="userCategoryChart"></canvas>
-        </div>
-      </div>
-    </div>
+      </nav>
 
-    <!-- Plan Management Page -->
-    <div id="plan-management" class="page">
-      <h2>Plan Management</h2>
-      <button class="cssbuttons-io-button" onclick="showPlanModal('create')">
-        <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0h24v24H0z" fill="none"></path>
-          <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="currentColor"></path>
-        </svg>
-        <span>Add Plan</span>
-      </button>
-      <table class="table table-striped mt-4">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Price</th>
-            <th>Data</th>
-            <th>Calls</th>
-            <th>Validity</th>
-            <th>Plan Type</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="plans-table-body">
-          <!-- Loaded dynamically -->
-        </tbody>
-      </table>
-    </div>
+      <!-- Sections -->
+      <div class="content">
+        <div class="container-fluid">
 
-    <!-- User Management Page -->
-    <div id="user-management" class="page">
-      <h2>User Management</h2>
-      <table class="table mt-4">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Mobile</th>
-            <th>Email</th>
-            <th>Recharges</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="users-table-body">
-          <!-- Loaded dynamically -->
-        </tbody>
-      </table>
-    </div>
+          <!-- Dashboard Section (Default Visible) -->
+          <div id="dashboardSection" class="admin-section">
+            <div class="row">
+              <div class="col-lg-4 col-md-6">
+                <div class="card card-stats">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-5">
+                        <div class="icon-big text-center icon-warning">
+                          <i class="fa fa-users text-primary"></i>
+                        </div>
+                      </div>
+                      <div class="col-7">
+                        <div class="numbers">
+                          <p class="card-category">Total Users</p>
+                          <h4 class="card-title" id="totalUsers">0</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-    <!-- All Data Page -->
-    <div id="all-data" class="page">
-      <h2>All Firebase Data</h2>
-      <pre id="allDataPre">Loading data...</pre>
-    </div>
-  </div>
+              <div class="col-lg-4 col-md-6">
+                <div class="card card-stats">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-5">
+                        <div class="icon-big text-center icon-success">
+                          <i class="fa fa-dollar-sign text-success"></i>
+                        </div>
+                      </div>
+                      <div class="col-7">
+                        <div class="numbers">
+                          <p class="card-category">Total Transactions</p>
+                          <h4 class="card-title" id="totalTransactions">0</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-  <!-- Modals -->
-  <!-- Plan Management Modal -->
-  <div class="modal fade" id="planModal" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="planModalTitle">Plan Management</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <form id="planForm">
-            <input type="hidden" id="planId">
-            <div class="row mb-3">
-              <div class="col form-group">
-                <label for="planPrice" class="form-label">Price</label>
-                <input type="number" class="form-control" id="planPrice" required>
-              </div>
-              <div class="col form-group">
-                <label for="planData" class="form-label">Data</label>
-                <input type="text" class="form-control" id="planData" required>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col form-group">
-                <label for="planCalls" class="form-label">Calls</label>
-                <input type="text" class="form-control" id="planCalls" required>
-              </div>
-              <div class="col form-group">
-                <label for="planValidity" class="form-label">Validity (Days)</label>
-                <input type="number" class="form-control" id="planValidity" required>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col form-group">
-                <label for="planType" class="form-label">Plan Type</label>
-                <select id="planType" class="form-select" required>
-                  <option value="combo">Combo</option>
-                  <option value="talktime">Talktime</option>
-                  <option value="data">Data</option>
-                  <option value="international-roaming">International Roaming</option>
-                  <option value="ott">OTT</option>
-                </select>
-              </div>
-              <div class="col form-group d-flex align-items-end">
-                <div class="form-check mt-2">
-                  <input type="checkbox" class="form-check-input" id="planPopular">
-                  <label for="planPopular" class="form-check-label">Popular</label>
+              <div class="col-lg-4 col-md-6">
+                <div class="card card-stats">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-5">
+                        <div class="icon-big text-center icon-warning">
+                          <i class="fa fa-clock text-warning"></i>
+                        </div>
+                      </div>
+                      <div class="col-7">
+                        <div class="numbers">
+                          <p class="card-category">Pending Requests</p>
+                          <h4 class="card-title" id="pendingRequests">0</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary" id="savePlanButton">Save Plan</button>
-          </form>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4 class="card-title">Plans Expiring in 3 Days</h4>
+                  </div>
+                  <div class="card-body">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>User ID</th>
+                          <th>Name</th>
+                          <th>Mobile</th>
+                          <th>Plan</th>
+                          <th>Expiry Date</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody id="expiringPlansTable">
+                        <!-- Expiring Plan Data Will Be Inserted Here -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+            <div id="notificationToast" class="toast align-items-center text-white bg-success border-0" role="alert">
+              <div class="d-flex">
+                <div class="toast-body" id="toastMessage">
+                  <!-- Message will be inserted dynamically -->
+                </div>
+                <button type="button" class="toast-close-btn" onclick="hideToast()">
+                  <i class="ri-close-line"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Other Sections (Initially Hidden) -->
+
+          <!-- Manage Plans Section -->
+          <div id="managePlansSection" class="admin-section" style="display: none;">
+            <div class="container mt-4">
+              <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <h4 class="card-title">Manage Plans</h4>
+                  <button class="btn btn-success" onclick="showAddPlanModal()">Add Plan</button>
+                </div>
+                <div class="card-body">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Plan ID</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Validity</th>
+                        <th>Data</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="plansTable">
+                      <!-- Plans will be dynamically added here -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add/Edit Plan Modal -->
+          <div class="modal fade" id="planModal" tabindex="-1" aria-labelledby="planModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="planModalLabel">Add Plan</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="planForm">
+                    <input type="hidden" id="planId">
+                    <div class="mb-3">
+                      <label for="planName" class="form-label">Plan Name</label>
+                      <input type="text" class="form-control" id="planName" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="planPrice" class="form-label">Price</label>
+                      <input type="number" class="form-control" id="planPrice" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="planValidity" class="form-label">Validity (Days)</label>
+                      <input type="number" class="form-control" id="planValidity" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="planData" class="form-label">Data (GB/Day)</label>
+                      <input type="text" class="form-control" id="planData" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Plan</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="usersSection" class="admin-section" style="display: none;">
+            <h3>Users</h3>
+            <div class="container mt-4">
+              <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <h4 class="card-title">Manage Users</h4>
+                  <button class="btn btn-success" onclick="showAddUserModal()">Add User</button>
+                </div>
+                <div class="card-body">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="usersTable">
+                      <!-- Users will be dynamically added here -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Add/Edit User Modal -->
+            <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="userModalLabel">Add User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="userForm">
+                      <input type="hidden" id="userId">
+                      <div class="mb-3">
+                        <label for="userName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="userName" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="userMobile" class="form-label">Mobile</label>
+                        <input type="text" class="form-control" id="userMobile" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="userEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="userEmail" required>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Save User</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", function () {
+                // Fetch plans from API and display in the table
+                async function fetchPlans() {
+                  try {
+                    const response = await fetch("http://localhost:8082/api/plans/admin");
+                    if (!response.ok) {
+                      throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const plans = await response.json();
+
+                    // Populate the plans table
+                    const tableBody = document.getElementById("plansTable");
+                    tableBody.innerHTML = "";
+                    plans.forEach((plan, index) => {
+                      const row = `
+                      <tr>
+                        <td>${plan.planId}</td>
+                        <td>${plan.name}</td>
+                        <td>₹${plan.planPrice}</td>
+                        <td>${plan.validityDays} Days</td>
+                        <td>${plan.data}</td>
+                        <td>
+                          <button class="btn btn-warning btn-sm" onclick="editPlan(${index})">✏️</button>
+                          <button class="btn btn-danger btn-sm" onclick="deletePlan(${index})">🗑</button>
+                        </td>
+                      </tr>`;
+                      tableBody.innerHTML += row;
+                    });
+                  } catch (error) {
+                    console.error("Error fetching plans:", error);
+                  }
+                }
+
+                // Load plans on page load
+                fetchPlans();
+              });
+            </script>
+          </div>
+          <div id="transactionsSection" class="admin-section" style="display: none;">
+            <h3>Transactions</h3>
+            <div class="container mt-4">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title">Transaction Management</h4>
+                </div>
+                <div class="card-body">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Transaction ID</th>
+                        <th>User ID</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="transactionsTable"></tbody>
+                    <!-- Transactions will be dynamically added here -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <script>
+              document.addEventListener("DOMContentLoaded", function () {
+                let transactions = [
+                  { id: "T001", userId: "U001", amount: 50, date: "2023-10-01", status: "Completed" },
+                  { id: "T002", userId: "U002", amount: 30, date: "2023-10-02", status: "Pending" },
+                  { id: "T003", userId: "U003", amount: 20, date: "2023-10-03", status: "Failed" }
+                ];
+
+                // Function to Load Transactions in Table
+                function loadTransactions() {
+                  let tableBody = document.getElementById("transactionsTable");
+                  tableBody.innerHTML = "";
+                  transactions.forEach((transaction, index) => {
+                    let row = `<tr>
+                  <td>${transaction.id}</td>
+                  <td>${transaction.userId}</td>
+                  <td>$${transaction.amount}</td>
+                  <td>${transaction.date}</td>
+                  <td>${transaction.status}</td>
+                  <td>
+                  <button class="btn btn-warning btn-sm" onclick="editTransaction(${index})">✏️</button>
+                  </td>
+                </tr>`;
+                    tableBody.innerHTML += row;
+                  });
+                }
+
+                // Show Modal for Editing a Transaction
+                window.editTransaction = function (index) {
+                  let transaction = transactions[index];
+                  alert(`Edit functionality for Transaction ID: ${transaction.id} is not implemented yet.`);
+                };
+
+                // Load Transactions on Page Load
+                loadTransactions();
+              });
+            </script>
+          </div>
+          <div id="analyticsSection" class="admin-section" style="display: none;">
+            <h3>Analytics</h3>
+            <div class="container mt-4">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="card">
+                    <div class="card-header">
+                      <h4 class="card-title">User Growth</h4>
+                    </div>
+                    <div class="card-body">
+                      <canvas id="userGrowthChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card">
+                    <div class="card-header">
+                      <h4 class="card-title">Revenue Breakdown</h4>
+                    </div>
+                    <div class="card-body">
+                      <canvas id="revenueChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <h4 class="card-title">Plan Popularity</h4>
+                    </div>
+                    <div class="card-body">
+                      <canvas id="planPopularityChart"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+              document.addEventListener("DOMContentLoaded", function () {
+                // User Growth Chart
+                const userGrowthCtx = document.getElementById('userGrowthChart').getContext('2d');
+                new Chart(userGrowthCtx, {
+                  type: 'line',
+                  data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                    datasets: [{
+                      label: 'New Users',
+                      data: [50, 75, 100, 125, 150, 200],
+                      borderColor: 'rgba(75, 192, 192, 1)',
+                      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                      borderWidth: 2
+                    }]
+                  },
+                  options: {
+                    responsive: true,
+                    plugins: {
+                      legend: { display: true }
+                    }
+                  }
+                });
+
+                // Revenue Breakdown Chart
+                const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+                new Chart(revenueCtx, {
+                  type: 'doughnut',
+                  data: {
+                    labels: ['Basic Plan', 'Premium Plan', 'Unlimited Plan'],
+                    datasets: [{
+                      data: [3000, 5000, 7000],
+                      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                    }]
+                  },
+                  options: {
+                    responsive: true,
+                    plugins: {
+                      legend: { display: true }
+                    }
+                  }
+                });
+
+                // Plan Popularity Chart
+                const planPopularityCtx = document.getElementById('planPopularityChart').getContext('2d');
+                new Chart(planPopularityCtx, {
+                  type: 'bar',
+                  data: {
+                    labels: ['Basic Plan', 'Premium Plan', 'Unlimited Plan'],
+                    datasets: [{
+                      label: 'Number of Subscriptions',
+                      data: [120, 200, 300],
+                      backgroundColor: ['#4BC0C0', '#FF9F40', '#9966FF']
+                    }]
+                  },
+                  options: {
+                    responsive: true,
+                    plugins: {
+                      legend: { display: true }
+                    },
+                    scales: {
+                      y: { beginAtZero: true }
+                    }
+                  }
+                });
+              });
+            </script>
+          </div>
+
         </div>
       </div>
+
     </div>
   </div>
 
-  <!-- User Details Modal -->
-  <div class="modal fade" id="userModal" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">User Details</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body" id="userDetailsContent">
-          <!-- User details loaded dynamically -->
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast Notification -->
-  <div id="successToast" class="toast-custom">
-    <span id="toastMessage">Notification Sent</span>
-    <i class="fa fa-times cross-icon" onclick="hideToast()"></i>
-  </div>
-
-  <!-- Firebase & Custom JavaScript -->
+  <!-- JavaScript -->
   <script>
-    // Updated Firebase configuration including databaseURL
-    const firebaseConfig = {
-      apiKey: "AIzaSyBxPUQjGL-Wc2DqwdLT-qzsg6yf7AFJ3w4",
-      authDomain: "mobile-prepaid-recharge.firebaseapp.com",
-      databaseURL: "https://mobile-prepaid-recharge-default-rtdb.firebaseio.com/",
-      projectId: "mobile-prepaid-recharge",
-      storageBucket: "mobile-prepaid-recharge.appspot.com",
-      messagingSenderId: "766572012852",
-      appId: "1:766572012852:web:aea0748cc25e0a9ce9b161"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+    function showSection(sectionId, clickedElement) {
+      // Hide all sections
+      document.querySelectorAll(".admin-section").forEach(section => section.style.display = "none");
 
-    // Helper: Convert Firebase snapshot object to an array
-    function snapshotToArray(snapshotVal) {
-      return snapshotVal ? Object.keys(snapshotVal).map(key => ({ id: key, ...snapshotVal[key] })) : [];
-    }
+      // Show the selected section
+      document.getElementById(sectionId).style.display = "block";
 
-    // Navigation Functions
-    function showPage(page) {
-      document.querySelectorAll('.page').forEach(el => el.style.display = 'none');
-      document.getElementById(page).style.display = 'block';
-      // Load analytics or all data if needed
-      if (page === 'analytics') loadAnalyticsData();
-      if (page === 'all-data') loadAllData();
-    }
-    function logout() {
-      alert("Admin, you're logging out!");
-      window.location.href = 'login.html';
+      // Remove "active" from all menu items
+      document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
+
+      // Add "active" to clicked menu item
+      clickedElement.parentElement.classList.add("active");
+
+      // Save active section
+      localStorage.setItem("activeSection", sectionId);
     }
 
-    // ------------------------------
-    // USER & RECHARGE FUNCTIONS using Firebase
-    // ------------------------------
-    function fetchUsers() {
-      db.ref('users').once('value')
-        .then(snapshot => {
-          const users = snapshotToArray(snapshot.val());
-          // Filter users with plans expiring within 3 days
-          const expiringUsers = users.filter(user => {
-            if (user.planExpiryDate) {
-              const expiry = new Date(user.planExpiryDate);
-              const now = new Date();
-              const diffDays = (expiry - now) / (1000 * 60 * 60 * 24);
-              return diffDays >= 0 && diffDays <= 3;
-            }
-            return false;
-          });
-          // Populate Expiring Recharges Table
-          document.getElementById('expiring-users-table').innerHTML = expiringUsers.map(user => `
-            <tr>
-              <td>${user.name}</td>
-              <td>${user.phnno}</td>
-              <td>${user.planExpiryDate ? user.planExpiryDate : "N/A"}</td>
-              <td><button class="notify-btn" onclick="notifyUser('${user.phnno}')">Notify</button></td>
-            </tr>
-          `).join('');
-          // Populate User Management Table
-          document.getElementById('users-table-body').innerHTML = users.map(user => `
-            <tr>
-              <td>${user.name}</td>
-              <td>${user.phnno}</td>
-              <td>${user.email}</td>
-              <td>${user.rechargeHistory ? user.rechargeHistory.length : 0}</td>
-              <td><button class="btn btn-info btn-sm" onclick="showUserDetails('${user.id}')">Details</button></td>
-            </tr>
-          `).join('');
-          // Update Dashboard Stats
-          document.getElementById('total-users').innerText = users.length;
-          document.getElementById('active-users').innerText = users.filter(u => u.active).length;
-          document.getElementById('expiring-count').innerText = expiringUsers.length;
-        })
-        .catch(error => console.error("Error fetching users:", error));
-    }
-    function notifyUser(phnno) {
-      showToast(`Notified user: ${phnno}`);
-    }
-    function showUserDetails(userId) {
-      db.ref('users/' + userId).once('value')
-        .then(snapshot => {
-          const user = snapshot.val();
-          if (user) {
-            let rechargeHistoryHTML = "";
-            if (user.rechargeHistory && user.rechargeHistory.length > 0) {
-              rechargeHistoryHTML = user.rechargeHistory.map(recharge => `
-                <li class="list-group-item d-flex justify-content-between">
-                  <div>
-                    <strong>${recharge.plan}</strong><br>
-                    <small>${recharge.date}</small>
-                  </div>
-                  <span>₹${recharge.amount}</span>
-                </li>
-              `).join('');
-            } else {
-              rechargeHistoryHTML = '<li class="list-group-item">No recharge history available.</li>';
-            }
-            let paymentHistoryHTML = "";
-            if (user.paymentHistory && user.paymentHistory.length > 0) {
-              paymentHistoryHTML = user.paymentHistory.map(payment => `
-                <li class="list-group-item d-flex justify-content-between">
-                  <div>
-                    <strong>${payment.method}</strong><br>
-                    <small>${payment.date}</small>
-                  </div>
-                  <span>₹${payment.amount}</span>
-                </li>
-              `).join('');
-            } else {
-              paymentHistoryHTML = '<li class="list-group-item">No payment history available.</li>';
-            }
-            const modalContent = `
-              <h6>${user.name}</h6>
-              <p><strong>Mobile:</strong> ${user.phnno}</p>
-              <p><strong>Email:</strong> ${user.email}</p>
-              <h6 class="mt-3">Recharge History:</h6>
-              <ul class="list-group">${rechargeHistoryHTML}</ul>
-              <h6 class="mt-3">Payment History:</h6>
-              <ul class="list-group">${paymentHistoryHTML}</ul>
-            `;
-            document.getElementById('userDetailsContent').innerHTML = modalContent;
-            new bootstrap.Modal(document.getElementById('userModal')).show();
-          } else {
-            console.error("User not found");
-          }
-        })
-        .catch(error => console.error("Error fetching user details:", error));
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+      const savedSection = localStorage.getItem("activeSection") || "dashboardSection";
 
-    // ------------------------------
-    // PLAN MANAGEMENT FUNCTIONS using Firebase
-    // ------------------------------
-    let plans = [];
-    async function loadPlans() {
-      try {
-        const snapshot = await db.ref('plans').once('value');
-        plans = snapshotToArray(snapshot.val());
-        renderPlansTable();
-      } catch (error) {
-        console.error("Error loading plans:", error);
-        document.getElementById('plans-table-body').innerHTML =
-          `<tr><td colspan="8" class="text-center text-danger">Error loading plans: ${error.message}</td></tr>`;
-      }
-    }
-    function renderPlansTable() {
-      const tbody = document.getElementById('plans-table-body');
-      if (!plans.length) {
-        tbody.innerHTML = `<tr><td colspan="8" class="text-center">No plans found.</td></tr>`;
-        return;
-      }
-      tbody.innerHTML = plans.map(plan => `
-        <tr class="${plan.active ? '' : 'inactive-plan'}">
-          <td>${plan.id}</td>
-          <td>${plan.price}</td>
-          <td>${plan.data}</td>
-          <td>${plan.calls}</td>
-          <td>${plan.validity}</td>
-          <td>${plan.planType}</td>
-          <td>${plan.active ? 'Active' : 'Inactive'}</td>
-          <td>
-            <button class="cssbuttons-io-button" onclick="showPlanModal('edit', '${plan.id}')">
-              <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0h24v24H0z" fill="none"></path>
-                <path d="M3 17.25V21h3.75l11.09-11.09-3.75-3.75L3 17.25zm15.41-10.66a1.5 1.5 0 0 0 0-2.12l-1.83-1.83a1.5 1.5 0 0 0-2.12 0L13 3.75l3.75 3.75 1.66-1.91z" fill="currentColor"></path>
-              </svg>
-              <span>Edit</span>
-            </button>
-            <button class="cssbuttons-io-button toggle-btn" onclick="togglePlanStatus('${plan.id}')">
-              <span>${plan.active ? 'Deactivate' : 'Activate'}</span>
-            </button>
-          </td>
-        </tr>
-      `).join('');
-    }
-    function togglePlanStatus(planId) {
-      const planToToggle = plans.find(p => p.id === planId);
-      if (planToToggle) {
-        const newStatus = !planToToggle.active;
-        db.ref('plans/' + planId).update({ active: newStatus })
-          .then(() => loadPlans())
-          .catch(error => console.error("Error updating plan status:", error));
-      }
-    }
-    function showPlanModal(mode, planId = null) {
-      const planModal = new bootstrap.Modal(document.getElementById('planModal'));
-      const modalTitle = document.getElementById('planModalTitle');
-      const planForm = document.getElementById('planForm');
-      planForm.reset();
-      document.getElementById('planId').value = '';
-      if (mode === 'create') {
-        modalTitle.textContent = 'Add New Plan';
-      } else if (mode === 'edit') {
-        modalTitle.textContent = 'Edit Plan';
-        const plan = plans.find(p => p.id === planId);
-        if (plan) {
-          document.getElementById('planId').value = plan.id;
-          document.getElementById('planPrice').value = plan.price;
-          document.getElementById('planData').value = plan.data;
-          document.getElementById('planCalls').value = plan.calls;
-          document.getElementById('planValidity').value = plan.validity;
-          document.getElementById('planType').value = plan.planType;
-          document.getElementById('planPopular').checked = plan.popular;
-        }
-      }
-      planModal.show();
-    }
-    document.getElementById('planForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const idValue = document.getElementById('planId').value;
-      const price = parseFloat(document.getElementById('planPrice').value);
-      const dataValue = document.getElementById('planData').value;
-      const calls = document.getElementById('planCalls').value;
-      const validity = parseInt(document.getElementById('planValidity').value);
-      const planType = document.getElementById('planType').value;
-      const popular = document.getElementById('planPopular').checked;
-      const planData = { price, data: dataValue, calls, validity, planType, popular, active: true };
-      if (idValue) {
-        // Update existing plan
-        db.ref('plans/' + idValue).set({ ...planData, id: idValue })
-          .then(() => loadPlans())
-          .catch(error => console.error("Error updating plan:", error));
-      } else {
-        // Create new plan
-        db.ref('plans').push(planData)
-          .then(() => loadPlans())
-          .catch(error => console.error("Error creating plan:", error));
-      }
-      const planModalEl = document.getElementById('planModal');
-      const planModalInstance = bootstrap.Modal.getInstance(planModalEl);
-      planModalInstance.hide();
+      // Set active menu item
+      document.querySelector(`.sidenav-${savedSection.replace("Section", "")}`)?.classList.add("active");
+
+      showSection(savedSection, document.querySelector(`.sidenav-${savedSection.replace("Section", "")} a`));
     });
-
-    // ------------------------------
-    // ANALYTICS FUNCTIONS using Firebase data
-    // ------------------------------
-    const chartOptions = {
-      responsive: true,
-      plugins: { legend: { position: 'top' }, title: { display: false } },
-      scales: { y: { grid: { color: '#e0e0e0' } }, x: { grid: { color: '#e0e0e0' } } }
-    };
-    window.revenueChart = new Chart(document.getElementById('revenueChart'), {
-      type: 'line',
-      data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], datasets: [{ label: 'Revenue (₹ Lakhs)', data: [12, 15, 11, 17, 14], borderColor: '#2c7873', tension: 0.4 }] },
-      options: chartOptions
-    });
-    window.userGrowthChart = new Chart(document.getElementById('userGrowthChart'), {
-      type: 'bar',
-      data: { labels: ['2020', '2021', '2022', '2023'], datasets: [{ label: 'Total Users', data: [1000, 1500, 2000, 2500], backgroundColor: '#f7c45a' }] },
-      options: chartOptions
-    });
-    window.planDistributionChart = new Chart(document.getElementById('planDistributionChart'), {
-      type: 'doughnut',
-      data: { labels: ['Combo', 'Talktime', 'Data'], datasets: [{ data: [30, 50, 20], backgroundColor: ['#2c7873', '#f7c45a', '#ff6b6b'] }] },
-      options: chartOptions
-    });
-    window.rechargeTrendChart = new Chart(document.getElementById('rechargeTrendChart'), {
-      type: 'line',
-      data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], datasets: [{ label: 'Recharges', data: [80, 90, 70, 110, 95], borderColor: '#ff6b6b', backgroundColor: 'rgba(255,107,107,0.2)', tension: 0.4 }] },
-      options: chartOptions
-    });
-    window.userCategoryChart = new Chart(document.getElementById('userCategoryChart'), {
-      type: 'doughnut',
-      data: {
-        labels: ['Basic', 'Premium', 'Pro'],
-        datasets: [{ data: [40, 35, 25], backgroundColor: ['#90ee90', '#ffd700', '#ff6347'] }]
-      },
-      options: chartOptions
-    });
-    function loadAnalyticsData() {
-      db.ref('users').once('value')
-        .then(snapshot => {
-          const users = snapshotToArray(snapshot.val());
-          // Revenue Trends Analytics
-          const revenueByMonth = {};
-          users.forEach(user => {
-            if (user.paymentHistory) {
-              user.paymentHistory.forEach(payment => {
-                const parts = payment.date.split('-');
-                if (parts.length >= 3) {
-                  const key = parts[1] + '-' + parts[0];
-                  revenueByMonth[key] = (revenueByMonth[key] || 0) + payment.amount;
-                }
-              });
-            }
-          });
-          const revenueLabels = Object.keys(revenueByMonth).sort((a, b) => a.localeCompare(b));
-          const revenueData = revenueLabels.map(label => revenueByMonth[label]);
-          window.revenueChart.data.labels = revenueLabels.length ? revenueLabels : ['Jan', 'Feb', 'Mar', 'Apr', 'May'];
-          window.revenueChart.data.datasets[0].data = revenueData.length ? revenueData : [12, 15, 11, 17, 14];
-          window.revenueChart.update();
-
-          // User Growth Analytics
-          const userGrowth = {};
-          users.forEach(user => {
-            const year = user.createdAt ? user.createdAt.slice(0, 4) : '2023';
-            userGrowth[year] = (userGrowth[year] || 0) + 1;
-          });
-          const growthLabels = Object.keys(userGrowth).sort();
-          const growthData = growthLabels.map(year => userGrowth[year]);
-          window.userGrowthChart.data.labels = growthLabels.length ? growthLabels : ['2020', '2021', '2022', '2023'];
-          window.userGrowthChart.data.datasets[0].data = growthData.length ? growthData : [1000, 1500, 2000, 2500];
-          window.userGrowthChart.update();
-
-          // Recharge Trend Analytics
-          const rechargeTrend = {};
-          users.forEach(user => {
-            if (user.rechargeHistory) {
-              user.rechargeHistory.forEach(event => {
-                const parts = event.date.split('-');
-                if (parts.length >= 3) {
-                  const key = parts[1] + '-' + parts[0];
-                  rechargeTrend[key] = (rechargeTrend[key] || 0) + 1;
-                }
-              });
-            }
-          });
-          const rechargeLabels = Object.keys(rechargeTrend).sort((a, b) => a.localeCompare(b));
-          const rechargeData = rechargeLabels.map(key => rechargeTrend[key]);
-          window.rechargeTrendChart.data.labels = rechargeLabels.length ? rechargeLabels : ['Jan', 'Feb', 'Mar', 'Apr', 'May'];
-          window.rechargeTrendChart.data.datasets[0].data = rechargeData.length ? rechargeData : [80, 90, 70, 110, 95];
-          window.rechargeTrendChart.update();
-
-          // Plan Distribution Analytics (from Firebase plans)
-          db.ref('plans').once('value')
-            .then(snapshot => {
-              const plans = snapshotToArray(snapshot.val());
-              const planDistribution = {};
-              plans.forEach(plan => {
-                const type = plan.planType;
-                planDistribution[type] = (planDistribution[type] || 0) + 1;
-              });
-              const planLabels = Object.keys(planDistribution);
-              const planData = planLabels.map(label => planDistribution[label]);
-              window.planDistributionChart.data.labels = planLabels.length ? planLabels : ['Combo', 'Talktime', 'Data'];
-              window.planDistributionChart.data.datasets[0].data = planData.length ? planData : [30, 50, 20];
-              const colorMapping = { 'combo': '#2c7873', 'talktime': '#f7c45a', 'data': '#ff6b6b', 'international-roaming': '#6a4c93', 'ott': '#00bcd4' };
-              window.planDistributionChart.data.datasets[0].backgroundColor = planLabels.length ? planLabels.map(label => colorMapping[label.toLowerCase()] || '#cccccc') : ['#2c7873', '#f7c45a', '#ff6b6b'];
-              window.planDistributionChart.update();
-            })
-            .catch(error => console.error("Error fetching plans for analytics:", error));
-
-          // User Category Distribution Analytics
-          const categoryCounts = { Basic: 0, Premium: 0, Pro: 0 };
-          users.forEach(user => {
-            let count = user.rechargeHistory ? user.rechargeHistory.length : 0;
-            let cat = (count <= 2) ? "Basic" : (count <= 5 ? "Premium" : "Pro");
-            categoryCounts[cat]++;
-          });
-          window.userCategoryChart.data.datasets[0].data = [categoryCounts.Basic, categoryCounts.Premium, categoryCounts.Pro];
-          window.userCategoryChart.update();
-        })
-        .catch(error => console.error("Error loading analytics data:", error));
-    }
-
-    // ------------------------------
-    // ALL DATA FUNCTION: Load Entire Firebase JSON and Display
-    // ------------------------------
-    function loadAllData() {
-      db.ref("/").once("value")
-        .then(snapshot => {
-          const allData = snapshot.val();
-          document.getElementById('allDataPre').innerText = JSON.stringify(allData, null, 2);
-        })
-        .catch(error => {
-          document.getElementById('allDataPre').innerText = "Error loading data: " + error;
-          console.error("Error loading all data:", error);
-        });
-    }
-
-    // ------------------------------
-    // CUSTOM SUCCESS TOAST
-    // ------------------------------
-    function showToast(message) {
-      const toast = document.getElementById('successToast');
-      document.getElementById('toastMessage').innerText = message;
-      toast.style.display = 'flex';
-      setTimeout(() => { toast.style.display = 'none'; }, 3000);
-    }
-    function hideToast() { document.getElementById('successToast').style.display = 'none'; }
-
-    // Initialize: load users and plans when window loads
-    window.onload = function () {
-      fetchUsers();
-      loadPlans();
-    };
   </script>
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+
+    // Dummy User Data (Fetched from Backend in Real Use)
+    const users = [
+      { id: "U123", name: "Alice Johnson", mobile: "9876543210", plan: "Premium 28 Days", expiry: "2025-03-25" },
+      { id: "U124", name: "Bob Smith", mobile: "9876543211", plan: "Basic 7 Days", expiry: "2025-03-25" },
+      { id: "U125", name: "Charlie Brown", mobile: "9876543212", plan: "Standard 14 Days", expiry: "2025-03-26" },
+      { id: "U126", name: "David Miller", mobile: "9876543213", plan: "Unlimited 30 Days", expiry: "2025-03-27" }
+    ];
+
+    // Function to Check for Plans Expiring in 3 Days
+    function getExpiringPlans() {
+      const today = new Date();
+      const expiringPlansTable = document.getElementById("expiringPlansTable");
+      expiringPlansTable.innerHTML = ""; // Clear table before adding new rows
+
+      users.forEach(user => {
+        let expiryDate = new Date(user.expiry);
+        let diffInDays = Math.floor((expiryDate - today) / (1000 * 60 * 60 * 24));
+
+        if (diffInDays <= 3 && diffInDays >= 0) { // Only show plans expiring within 3 days
+          const row = document.createElement("tr");
+          row.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.mobile}</td>
+                    <td>${user.plan}</td>
+                    <td>${user.expiry}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" onclick="notifyUser('${user.name}', '${user.mobile}')">
+                            Notify
+                        </button>
+                    </td>
+                `;
+          expiringPlansTable.appendChild(row);
+        }
+      });
+    }
+
+    function notifyUser(name, mobile) {
+      document.getElementById("toastMessage").innerText = `Notification sent to ${name} (${mobile})`;
+      let toast = new bootstrap.Toast(document.getElementById("notificationToast"));
+      toast.show();
+    }
+    function showToast(message) {
+      let toast = document.getElementById("toastNotification");
+      let toastBody = document.getElementById("toastMessage");
+
+      toastBody.innerText = message;
+      toast.classList.add("show");
+
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3000); // Hide toast after 3 seconds
+    }
+
+    // Load Expiring Plans on Page Load
+    getExpiringPlans();
+
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let plans = [
+        { id: "P001", name: "Basic Plan", price: 20, validity: 28, data: "2GB/Day" },
+        { id: "P002", name: "Premium Plan", price: 50, validity: 56, data: "5GB/Day" },
+        { id: "P003", name: "Unlimited Plan", price: 100, validity: 90, data: "Unlimited" }
+      ];
+
+      // Function to Load Plans in Table
+      function loadPlans() {
+        let tableBody = document.getElementById("plansTable");
+        tableBody.innerHTML = "";
+        plans.forEach((plan, index) => {
+          let row = `<tr>
+        <td>${plan.id}</td>
+        <td>${plan.name}</td>
+        <td>$${plan.price}</td>
+        <td>${plan.validity} Days</td>
+        <td>${plan.data}</td>
+        <td>
+          <button class="btn btn-warning btn-sm" onclick="editPlan(${index})">✏️</button>
+          <button class="btn btn-danger btn-sm" onclick="deletePlan(${index})">🗑</button>
+        </td>
+      </tr>`;
+          tableBody.innerHTML += row;
+        });
+      }
+
+      // Show Modal for Adding a New Plan
+      window.showAddPlanModal = function () {
+        document.getElementById("planForm").reset();
+        document.getElementById("planId").value = "";
+        document.getElementById("planModalLabel").textContent = "Add Plan";
+        let planModal = new bootstrap.Modal(document.getElementById("planModal"));
+        planModal.show();
+      };
+
+      // Show Modal for Editing a Plan
+      window.editPlan = function (index) {
+        let plan = plans[index];
+        document.getElementById("planId").value = index;
+        document.getElementById("planName").value = plan.name;
+        document.getElementById("planPrice").value = plan.price;
+        document.getElementById("planValidity").value = plan.validity;
+        document.getElementById("planData").value = plan.data;
+        document.getElementById("planModalLabel").textContent = "Edit Plan";
+        let planModal = new bootstrap.Modal(document.getElementById("planModal"));
+        planModal.show();
+      };
+
+      // Handle Add/Edit Plan Form Submission
+      document.getElementById("planForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        let id = document.getElementById("planId").value;
+        let name = document.getElementById("planName").value;
+        let price = document.getElementById("planPrice").value;
+        let validity = document.getElementById("planValidity").value;
+        let data = document.getElementById("planData").value;
+
+        if (id === "") {
+          // Add New Plan
+          let newPlan = {
+            id: "P00" + (plans.length + 1),
+            name,
+            price,
+            validity,
+            data
+          };
+          plans.push(newPlan);
+        } else {
+          // Edit Existing Plan
+          plans[id] = { id: plans[id].id, name, price, validity, data };
+        }
+
+        loadPlans();
+        let planModal = bootstrap.Modal.getInstance(document.getElementById("planModal"));
+        planModal.hide();
+      });
+
+      // Delete a Plan
+      window.deletePlan = function (index) {
+        plans.splice(index, 1);
+        loadPlans();
+      };
+
+      // Load Plans on Page Load
+      loadPlans();
+    });
+
+  </script>
 </body>
 
 </html>

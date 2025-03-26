@@ -5,190 +5,433 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MobiComm | Plans</title>
-    <link rel="stylesheet" href="Assets/css/plans.css">
+    <!-- <link rel="stylesheet" href="Assets/css/plans.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="main.css">
     <style>
-        /* Define theme variables */
+        /* ===== Base Styles ===== */
         :root {
             --text: rgb(6, 6, 4);
             --background: rgb(251, 251, 249);
-            --primary: rgb(63, 0, 163);
-            --secondary: rgb(68, 0, 179);
-            --accent: rgb(255, 157, 0);
+            --primary: #B8FC67;
+            --secondary: #B8FC67;
+
         }
 
-
-        /* Top Search Bar Row */
+        /* ===== Plan Filtering & Search ===== */
         .search-filter-row {
-            margin-bottom: 1rem;
+            margin: 20px 0;
         }
 
-        /* Modern, Minimalistic Sub Navigation */
+        #searchBox {
+            border-radius: 25px;
+            padding: 12px 20px;
+            border: 2px solid black;
+            outline: none;
+            /* Removes default blue outline */
+            transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        #searchBox:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 5px var(--primary);
+            /* Optional: Adds a subtle glow effect */
+        }
+
+
+        /* ===== Filter Button ===== */
+        .filter-btn {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid black;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background-color: #B8FC67;
+            border-color: #B8FC67;
+        }
+
+        /* ===== Category Navigation ===== */
         .subnav {
-            /* background: var(--background); */
-            padding: 10px 15px;
-            border-radius: 8px;
-            /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-            margin-bottom: 1rem;
-            border-bottom: 1px solid #e0e0e0;
+            margin: 20px 0;
+            border-bottom: 2px solid #eee;
+            padding: 10px;
         }
 
         .subnav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
             display: flex;
-            justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            list-style: none;
         }
 
         .subnav ul li a {
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--text);
-            padding: 8px 0;
             position: relative;
-            transition: color 0.3s ease;
+            padding: 10px 15px;
+            font-family: 'Helvetica', Helvetica, ;
+            font-weight: 600;
+            font-size: 1vw;
+            color: #000;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
         }
 
-        .subnav ul li a::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -4px;
-            width: 100%;
-            height: 2px;
-            background-color: transparent;
-            transition: background-color 0.3s ease;
-        }
-
-        /* .subnav ul li a.active,
+        .subnav ul li a.active,
         .subnav ul li a:hover {
-            color: #fff;
-            background-color: var(--primary);
-            border-radius: 4px;
-            padding: 8px 12px;
-        } */
+            background: #B8FC67;
+            color: #000;
+        }
 
-        .subnav ul li a.active::after,
-        .subnav ul li a:hover::after {
-            background-color: var(--primary);
+        /* ===== Remove blue outline when focusing input fields ===== */
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #B8FC67;
+            box-shadow: 0 0 5px rgba(184, 252, 103, 0.8);
+        }
+
+        .offcanvas {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 350px;
+            height: 100%;
+            background: #111;
+            color: white;
+            transition: 0.3s;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .offcanvas.open {
+            right: 0;
+        }
+
+        .offcanvas-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #444;
+            padding-bottom: 10px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .offcanvas-menu {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .offcanvas-menu li {
+            margin: 10px 0;
+        }
+
+        .offcanvas-menu a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .offcanvas-menu a:hover {
+            color: #B8FC67;
+        }
+
+        /* ===== Toast Notification ===== */
+        .toast-card {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        /* Override Bootstrap Primary Blue */
+        :root {
+            --bs-primary: #B8FC67 !important;
+            /* Set your theme color */
+            --bs-primary-rgb: 184, 252, 103 !important;
+            /* RGB equivalent */
+        }
+
+        /* Override Bootstrap default blue */
+        .btn-primary,
+        .dropdown-menu,
+        .form-select,
+        .btn-close {
+            background-color: #B8FC67 !important;
+            border-color: #B8FC67 !important;
+            color: black !important;
+        }
+
+        /* Hover & Active States */
+        .btn-primary:hover,
+        .btn-primary:focus,
+        .dropdown-menu .dropdown-item:hover,
+        .form-select:hover {
+            background-color: black !important;
+            color: white !important;
+            box-shadow: 0 0 5px rgba(184, 252, 103, 0.8);
+        }
+
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            background-color: black !important;
+            border: 1px solid #B8FC67 !important;
+            box-shadow: 0 0 5px rgba(184, 252, 103, 0.8);
+        }
+
+        .dropdown-item {
+            color: white !important;
+        }
+
+        .dropdown-item:hover,
+        .dropdown-item:focus {
+            background-color: #B8FC67 !important;
+            color: black !important;
+        }
+
+        /* Slider */
+        .form-range::-webkit-slider-runnable-track {
+            background-color: white !important;
+        }
+
+        .form-range::-webkit-slider-thumb {
+            background-color: #B8FC67 !important;
+            box-shadow: 0 0 5px rgba(184, 252, 103, 0.8);
+        }
+
+        .form-range::-webkit-slider-thumb:hover {
+            background-color: black !important;
+        }
+
+        /* Change Dropdown Item Hover & Selected Background */
+        select option:hover,
+        select option:checked {
+            background-color: #B8FC67 !important;
+            /* Your primary theme color */
+            color: white !important;
+            box-shadow: 0 0 5px rgba(184, 252, 103, 0.8);
+        }
+
+
+
+        /* Dropdown Hover Effect */
+        .form-select:hover {
+            border-color:
+                #B8FC67 !important;
+            /* Accent color on hover */
+            box-shadow: 0 0 5px rgba(184, 252, 103, 0.8);
+        }
+
+        /* Style the dropdown itself */
+        .form-select {
+            background-color: black !important;
+            color: white !important;
+            border: 2px solid #B8FC67 !important;
+            box-shadow: 0 0 5px rgba(184, 252, 103, 0.8);
+            /* Green border */
+        }
+
+
+
+        /* Change background color for ALL hovered/select items */
+        .dropdown-menu .dropdown-item {
+            color: white !important;
+            /* Text color */
+            background-color: black !important;
+            /* Default background */
+        }
+
+        /* Apply theme color when hovering */
+        .dropdown-menu .dropdown-item:hover,
+        .dropdown-menu .dropdown-item:focus,
+        .dropdown-menu .dropdown-item.active {
+            background-color: #B8FC67 !important;
+            box-shadow: 0 0 5px rgba(184, 252, 103, 0.8);
+            /* Your theme color */
+            color: black !important;
+            /* Text contrast */
+        }
+
+        /* Style the select dropdown */
+        select {
+            background-color: black !important;
+            color: white !important;
+            border: 2px solid #B8FC67 !important;
+            /* Your theme color */
+            appearance: none;
+            /* Remove browser default style */
+        }
+
+        /* Dropdown options styling */
+        select option {
+            background-color: black !important;
+            /* Default background */
+            color: white !important;
+            /* Default text */
+        }
+
+        /* When hovering over an option */
+        select option:hover,
+        select option:active {
+            background-color: #B8FC67 !important;
+
+            color: black !important;
+
+        }
+
+
+        select option:checked {
+            background-color: #B8FC67 !important;
+            /* Your theme color */
+            color: black !important;
+            /* Contrast text */
         }
     </style>
 </head>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <body>
     <!-- Navbar -->
-    <section class="header-container">
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <a class="navbar-brand" href="main.html"><img src="Assets/png/logo_color.png" alt="MobiComm Logo"
-                        style="height: 50px;"></a>
-            </div>
-        </nav>
-    </section>
+    <div class="main">
+        <header>
+            <a href="index.html">
+                <h1><i class="ri-gemini-fill"></i>MobiComm</h1>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#services">Plans</a></li>
+                    <li><a href="#usecases">About Us</a></li>
+                    <li><a href="#pricing">Contact Us</a></li>
 
-    <!-- Offer Banner -->
-    <header>
-        <div class="offer-banner">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-auto">
-                        <img src="Assets/png/offer.png" alt="Offer" class="offer-image">
-                    </div>
-                    <div class="col-md">
-                        <p class="offer-text"><strong>30% OFF</strong><br>Unlock More with Our New Recharge Plan!</p>
-                        <p class="plan-description">
-                            Enjoy seamless connectivity with our latest recharge plan! Get more talk time, extra data,
-                            and exclusive cashback offers - all at an unbeatable price.
-                        </p>
-                    </div>
+                </ul>
+                <button>Profile</button>
+            </nav>
+        </header>
+
+
+
+
+        <!-- Main Container -->
+        <div class="container mt-4 ">
+            <!-- Top Search Bar and Filter Icon -->
+            <div class="row search-filter-row align-items-center">
+                <div class="col">
+                    <input type="search" class="form-control" id="searchBox" placeholder="Search for plans">
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#filterOffcanvas" aria-controls="filterOffcanvas">
+                        <i class="ri-equalizer-line"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sub Navigation for Categories -->
+            <div class="subnav">
+                <ul class="nav" id="categoryNav">
+                    <li><a href="#" class="active" data-category="all">All</a></li>
+                    <li><a href="#" data-category="talktime">Talktime</a></li>
+                    <li><a href="#" data-category="data">Data</a></li>
+                    <li><a href="#" data-category="combo">Combo</a></li>
+                    <li><a href="#" data-category="international-roaming">International</a></li>
+                    <li><a href="#" data-category="ott">OTT</a></li>
+                    <li><a href="#" data-category="popular">Popular</a></li>
+                </ul>
+            </div>
+
+            <!-- Plan List Container -->
+            <div class="row mt-4" id="planListContainer">
+                <div class="col-12">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4" id="planList"></div>
+
                 </div>
             </div>
         </div>
-    </header>
 
-    <!-- Main Container -->
-    <div class="container mt-4">
-        <!-- Top Search Bar and Filter Icon -->
-        <div class="row search-filter-row align-items-center">
-            <div class="col">
-                <input type="search" class="form-control" id="searchBox" placeholder="Search for plans">
+        <!-- Offcanvas Filter Options -->
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="filterOffcanvas" aria-labelledby="filterOffcanvasLabel">
+            <div class="offcanvas-header">
+                <h5 id="filterOffcanvasLabel">Filter Options</h5>
+                <button type="button" class="btn-close" style="filter: invert(1);" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+
             </div>
-            <div class="col-auto">
-                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#filterOffcanvas" aria-controls="filterOffcanvas">
-                    <i class="fas fa-filter"></i>
-                </button>
+            <div class="offcanvas-body">
+                <div class="mb-3">
+                    <label for="sortOptions" class="form-label">Sort By</label>
+                    <select class="form-select" id="sortOptions">
+                        <option value="relevance">Relevance</option>
+                        <option value="low-to-high">Price: Low to High</option>
+                        <option value="high-to-low">Price: High to Low</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="priceRange" class="form-label">Price Range</label>
+                    <input type="range" class="form-range" id="priceRange" min="0" max="2000" step="50">
+                    <span id="priceValue">Max: ₹2000</span>
+                </div>
+                <div class="mb-3">
+                    <label for="validityFilter" class="form-label">Validity</label>
+                    <select class="form-select" id="validityFilter">
+                        <option value="all">All</option>
+                        <option value="1">1 Day</option>
+                        <option value="7">7 Days</option>
+                        <option value="28">28 Days</option>
+                        <option value="48">48 Days</option>
+                        <option value="56">56 Days</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="dataFilter" class="form-label">Data Allowance</label>
+                    <select class="form-select" id="dataFilter">
+                        <option value="all">All</option>
+                        <option value="1">1 GB/day</option>
+                        <option value="2">2 GB/day</option>
+                    </select>
+                </div>
+                <button class="btn btn-secondary w-100" id="resetFilters">Reset Filters</button>
             </div>
         </div>
 
-        <!-- Sub Navigation for Categories -->
-        <div class="subnav">
-            <ul class="nav" id="categoryNav">
-                <li><a href="#" class="active" data-category="all">All</a></li>
-                <li><a href="#" data-category="talktime">Talktime</a></li>
-                <li><a href="#" data-category="data">Data</a></li>
-                <li><a href="#" data-category="combo">Combo</a></li>
-                <li><a href="#" data-category="international-roaming">International</a></li>
-                <li><a href="#" data-category="ott">OTT</a></li>
-                <li><a href="#" data-category="popular">Popular</a></li>
-            </ul>
-        </div>
-
-        <!-- Plan List Container -->
-        <div class="row mt-4" id="planListContainer">
-            <div class="col-12">
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4" id="planList"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Offcanvas Filter Options -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="filterOffcanvas" aria-labelledby="filterOffcanvasLabel">
-        <div class="offcanvas-header">
-            <h5 id="filterOffcanvasLabel">Filter Options</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div class="mb-3">
-                <label for="sortOptions" class="form-label">Sort By</label>
-                <select class="form-select" id="sortOptions">
-                    <option value="relevance">Relevance</option>
-                    <option value="low-to-high">Price: Low to High</option>
-                    <option value="high-to-low">Price: High to Low</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="priceRange" class="form-label">Price Range</label>
-                <input type="range" class="form-range" id="priceRange" min="0" max="2000" step="50">
-                <span id="priceValue">Max: ₹2000</span>
-            </div>
-            <div class="mb-3">
-                <label for="validityFilter" class="form-label">Validity</label>
-                <select class="form-select" id="validityFilter">
-                    <option value="all">All</option>
-                    <option value="1">1 Day</option>
-                    <option value="7">7 Days</option>
-                    <option value="28">28 Days</option>
-                    <option value="48">48 Days</option>
-                    <option value="56">56 Days</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="dataFilter" class="form-label">Data Allowance</label>
-                <select class="form-select" id="dataFilter">
-                    <option value="all">All</option>
-                    <option value="1">1 GB/day</option>
-                    <option value="2">2 GB/day</option>
-                </select>
-            </div>
-            <button class="btn btn-secondary w-100" id="resetFilters">Reset Filters</button>
-        </div>
     </div>
 
     <!-- Custom Success Toast (Success Card) -->
@@ -216,105 +459,225 @@
                 clip-rule="evenodd" fill-rule="evenodd"></path>
         </svg>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+        integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const planList = document.getElementById("planList");
-            const categoryNav = document.getElementById("categoryNav");
-            let plans = [];
-            let availableCategories = new Set();
 
-            async function fetchPlans() {
-                try {
-                    console.log("Fetching plans...");
-                    const response = await fetch("http://localhost:8082/api/plans");
 
-                    console.log("Response status:", response.status);
-                    if (!response.ok) {
-                        throw new Error(`Failed to fetch plans. Status: ${response.status}`);
-                    }
 
-                    plans = await response.json();
-                    console.log("Fetched plans:", plans);
 
-                    // ✅ Collect all unique categories
-                    plans.forEach(plan => {
-                        if (plan.planType) {
-                            availableCategories.add(plan.planType);
-                        }
-                    });
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const planList = document.getElementById("planList");
+        const searchBox = document.getElementById("searchBox");
+        const categoryNav = document.getElementById("categoryNav");
+        const sortOptions = document.getElementById("sortOptions");
+        let plans = [];
 
-                    // ✅ Dynamically generate the navigation menu
-                    generateCategoryNav([...availableCategories]);
+        async function fetchPlans() {
+            try {
+                console.log("Fetching plans...");
+                const response = await fetch("http://localhost:8082/api/plans/user");
 
-                    // ✅ Display plans initially
-                    displayPlans(plans);
-                } catch (error) {
-                    console.error("Error fetching plans:", error);
-                    planList.innerHTML = `<p class="text-center text-danger">Error loading plans. Please try again.</p>`;
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch plans. Status: ${response.status}`);
                 }
+
+                plans = await response.json();
+                console.log("Fetched plans:", plans);
+
+                // Generate category navigation dynamically
+                generateCategoryNav(plans);
+
+                // Display plans initially
+                displayPlans(plans);
+            } catch (error) {
+                console.error("Error fetching plans:", error);
+                planList.innerHTML = `<p class="text-center text-danger">Error loading plans. Please try again.</p>`;
             }
+        }
 
-            function generateCategoryNav(categories) {
-                categoryNav.innerHTML = ""; // Clear existing categories
+        function generateCategoryNav(plans) {
+            let categories = new Set(plans.map(plan => plan.categoryEntity?.categoryName || "Other"));
+            categoryNav.innerHTML = `<li><a href="#" class="active" data-category="all">All</a></li>`;
 
-                // ✅ Add "All" category first
-                categoryNav.innerHTML += `<a href="#" class="nav-link active" data-category="all">All</a>`;
+            categories.forEach(category => {
+                categoryNav.innerHTML += `<li><a href="#" data-category="${category}">${category}</a></li>`;
+            });
 
-                // ✅ Add categories dynamically
-                categories.forEach(category => {
-                    categoryNav.innerHTML += `<a href="#" class="nav-link" data-category="${category}">${category}</a>`;
+            document.querySelectorAll("#categoryNav a").forEach(link => {
+                link.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    document.querySelectorAll("#categoryNav a").forEach(l => l.classList.remove("active"));
+                    this.classList.add("active");
+                    filterAndDisplayPlans(this.getAttribute("data-category"));
                 });
+            });
+        }
 
-                // ✅ Add event listeners for category selection
-                document.querySelectorAll("#categoryNav a").forEach(link => {
-                    link.addEventListener("click", function (e) {
-                        e.preventDefault();
-                        document.querySelectorAll("#categoryNav a").forEach(l => l.classList.remove("active"));
-                        this.classList.add("active");
-                        filterAndDisplayPlans(this.getAttribute("data-category"));
-                    });
-                });
+        function filterAndDisplayPlans(category) {
+            let filteredPlans = category === "all" ? plans : plans.filter(plan => plan.categoryEntity?.categoryName === category);
+            displayPlans(filteredPlans);
+        }
+
+        function displayPlans(filteredPlans) {
+            planList.innerHTML = "";
+            if (filteredPlans.length === 0) {
+                planList.innerHTML = `<p class="text-center text-muted">No plans found</p>`;
+                return;
             }
 
-            function filterAndDisplayPlans(category) {
-                let filteredPlans = category === "all" ? plans : plans.filter(plan => plan.planType === category);
-                displayPlans(filteredPlans);
-            }
+            const fragment = document.createDocumentFragment();
+            filteredPlans.forEach(plan => {
+                const card = document.createElement("div");
+                card.className = "col";
+                card.innerHTML = `
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">₹${plan.planPrice}</h5>
+                            <p class="card-text">${plan.planName}</p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Calls:</strong> ${plan.calls || "Unlimited"}</li>
+                                <li class="list-group-item"><strong>Data:</strong> ${plan.data || "Not Specified"}</li>
+                                <li class="list-group-item"><strong>Validity:</strong> ${plan.validityDays} Days</li>
+                            </ul>
+                            <button class="btn btn-primary w-100 mt-2">Recharge</button>
+                        </div>
+                    </div>
+                `;
+                fragment.appendChild(card);
+            });
+            planList.appendChild(fragment);
+        }
 
-            function displayPlans(filteredPlans) {
-                planList.innerHTML = "";
-                if (filteredPlans.length === 0) {
-                    planList.innerHTML = `<p class="text-center text-muted">No plans found</p>`;
-                    return;
-                }
-                const fragment = document.createDocumentFragment();
-                filteredPlans.forEach(plan => {
-                    const card = document.createElement("div");
-                    card.className = "col-md-4";
-                    card.innerHTML = `
-                <div class="plan-card">
-                    <div class="icon"><i class="fas fa-star"></i></div>
-                    <div class="price">₹${plan.planPrice} ${plan.validityDays == 1 ? "" : '<span class="per-month">/ month</span>'}</div>
-                    <ul class="plan-details">
-                        <li><i class="fas fa-check-circle"></i> ${plan.data || "No Data Available"}</li>
-                        <li><i class="fas fa-check-circle"></i> ${plan.calls || "No Call Benefits"}</li>
-                        <li><i class="fas fa-check-circle"></i> ${plan.validityDays} Days Validity</li>
-                    </ul>
-                    <button class="btn-choose">Choose Plan</button>
-                </div>
-            `;
-                    fragment.appendChild(card);
-                });
-                planList.appendChild(fragment);
-            }
-
-            // ✅ Fetch plans from backend on page load
-            fetchPlans();
+        // Search Functionality
+        searchBox.addEventListener("input", function () {
+            const searchQuery = this.value.toLowerCase();
+            const filteredPlans = plans.filter(plan => plan.planName.toLowerCase().includes(searchQuery));
+            displayPlans(filteredPlans);
         });
 
-    </script>
-</body>
+        // Sorting Functionality
+        sortOptions.addEventListener("change", function () {
+            let sortedPlans = [...plans];
+            if (this.value === "low-to-high") {
+                sortedPlans.sort((a, b) => a.planPrice - b.planPrice);
+            } else if (this.value === "high-to-low") {
+                sortedPlans.sort((a, b) => b.planPrice - a.planPrice);
+            }
+            displayPlans(sortedPlans);
+        });
+
+        // Fetch and display plans on page load
+        fetchPlans();
+    });
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const planList = document.getElementById("planList");
+        const categoryNav = document.getElementById("categoryNav");
+        let plans = [];
+        let availableCategories = new Set();
+
+        async function fetchPlans() {
+            try {
+                console.log("Fetching plans...");
+                const response = await fetch("http://localhost:8082/api/plans");
+
+                console.log("Response status:", response.status);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch plans. Status: ${response.status}`);
+                }
+
+                plans = await response.json();
+                console.log("Fetched plans:", plans);
+
+                // ✅ Collect all unique categories
+                plans.forEach(plan => {
+                    if (plan.planType) {
+                        availableCategories.add(plan.planType);
+                    }
+                });
+
+                // ✅ Dynamically generate the navigation menu
+                generateCategoryNav([...availableCategories]);
+
+                // ✅ Display plans initially
+                displayPlans(plans);
+            } catch (error) {
+                console.error("Error fetching plans:", error);
+                planList.innerHTML = `<p class="text-center text-danger">Error loading plans. Please try again.</p>`;
+            }
+        }
+
+        function generateCategoryNav(categories) {
+            categoryNav.innerHTML = ""; // Clear existing categories
+
+            // ✅ Add "All" category first
+            categoryNav.innerHTML += `<a href="#" class="nav-link active" data-category="all">All</a>`;
+
+            // ✅ Add categories dynamically
+            categories.forEach(category => {
+                categoryNav.innerHTML += `<a href="#" class="nav-link" data-category="${category}">${category}</a>`;
+            });
+
+            // ✅ Add event listeners for category selection
+            document.querySelectorAll("#categoryNav a").forEach(link => {
+                link.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    document.querySelectorAll("#categoryNav a").forEach(l => l.classList.remove("active"));
+                    this.classList.add("active");
+                    filterAndDisplayPlans(this.getAttribute("data-category"));
+                });
+            });
+        }
+
+        function filterAndDisplayPlans(category) {
+            let filteredPlans = category === "all" ? plans : plans.filter(plan => plan.planType === category);
+            displayPlans(filteredPlans);
+        }
+
+        function displayPlans(filteredPlans) {
+            planList.innerHTML = "";
+            if (filteredPlans.length === 0) {
+                planList.innerHTML = `<p class="text-center text-muted">No plans found</p>`;
+                return;
+            }
+
+            const fragment = document.createDocumentFragment();
+            filteredPlans.forEach(plan => {
+                const card = document.createElement("div");
+                card.className = "teamcol";
+                card.innerHTML = `
+            <div class="teamhead">
+                <div class="teamname">
+                    <h3>₹${plan.planPrice}</h3>
+                    <p>${plan.planName || "Plan Name"}</p>
+                </div>
+            </div>
+            <ul>
+                <li>${plan.calls || "Unlimited Calls"}</li>
+                <li>${plan.data || "100 GB Data"}</li>
+                <li>${plan.sms || "Free SMS"}</li>
+                <li>Validity: ${plan.validityDays} Days</li>
+            </ul>
+            <button class="btn-choose">Recharge</button>
+        `;
+                fragment.appendChild(card);
+            });
+            planList.appendChild(fragment);
+        }
+
+        // ✅ Fetch plans from backend on page load
+        fetchPlans();
+    });
+</script>
 
 </html>

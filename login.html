@@ -4,70 +4,403 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MobiComm | Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="Assets/css/login.css">
-    <link rel="icon" href="Assets/png/favicon.ico">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Additional CSS for responsiveness */
-        @media (max-width: 767px) {
-            .login-box {
-                /* Ensure the login box uses full width on small screens */
-                width: 100%;
-                padding: 0 15px;
-                margin-bottom: 20px;
-            }
+    <title>MobiComm</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
-            .illustration-box {
-                margin-top: 20px;
-            }
-
-            .login-form h2 {
-                font-size: 1.8rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="main.css">
 </head>
 
 <body>
-    <section class="header-container">
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <a class="navbar-brand" href="index.html"><img style="height: 50px;" src="Assets/png/logo_color.png"
-                        alt="MobiComm Logo"></a>
-            </div>
-        </nav>
-    </section>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 login-box">
-                <div class="login-form">
-                    <h2 class="welcome-back">WELCOME BACK</h2>
-                    <p class="enter-details">Welcome back! Please enter your details.</p>
-                    <form id="loginForm">
-                        <div class="form-group">
-                            <label for="mobile">Mobile</label>
-                            <input type="text" class="form-control" id="mobile" name="mobile"
-                                placeholder="Enter your number">
-                            <span id="mobileError" class="error-message"></span>
-                        </div>
-                        <button type="button" class="btn btn-primary btn-block" onclick="validateForm()">Get
-                            OTP</button>
+    <div id="main">
+        <header>
+            <a href="index.html">
+                <h1><i class="ri-gemini-fill"></i>MobiComm</h1>
+            </a>
+            <nav>
+                <ul>
 
-                    </form>
+                </ul>
+
+            </nav>
+        </header>
+        <br>
+        <br>
+
+
+        <section class="contact">
+            <div class="contactText">
+                <h2>Login</h2>
+            </div>
+            <div class="contactform">
+                <form id="loginForm">
+                    <label for="mobile">Mobile Number</label>
+                    <input type="tel" id="mobileInput" placeholder="Enter your mobile number">
+                    <button type="button" id="ascendOtpBtn">Send OTP</button> <!-- Ascend OTP Button -->
+                    <br><br>
+                    <label for="otp">OTP</label>
+                    <input type="number" id="otpInput" placeholder="Enter your OTP" disabled>
+                    <!-- OTP Disabled Initially -->
+                    <button type="button" id="loginBtn">Login</button> <!-- Login Button -->
+                </form>
+            </div>
+        </section>
+
+        <!-- Toast Notification Container -->
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+            <div id="toastContainer" class="toast align-items-center text-white bg-primary border-0" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body" id="toastMessage"></div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast"></button>
                 </div>
             </div>
-            <div class="col-md-6 illustration-box">
-                <img src="Assets/png/At the office-pana (1) 1.png" alt="Illustration" class="illustration">
-            </div>
         </div>
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="Assets/js/login.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const ascendOtpBtn = document.getElementById("ascendOtpBtn");
+                const loginBtn = document.getElementById("loginBtn");
+                const mobileInput = document.getElementById("mobileInput");
+                const otpInput = document.getElementById("otpInput");
+                const toastContainer = new bootstrap.Toast(document.getElementById("toastContainer"));
+
+                let userMobile = "";
+                let receivedOtp = "";
+
+                // Disable OTP input initially
+                otpInput.disabled = true;
+
+                function showToast(message, type = "bg-primary") {
+                    const toastMessage = document.getElementById("toastMessage");
+                    const toastDiv = document.getElementById("toastContainer");
+                    toastMessage.innerText = message;
+                    toastDiv.className = `toast align-items-center text-white ${type} border-0`;
+                    toastContainer.show();
+                }
+
+                ascendOtpBtn.addEventListener("click", async () => {
+                    userMobile = mobileInput.value.trim();
+
+                    if (!userMobile || userMobile.length !== 10) {
+                        showToast("Please enter a valid 10-digit mobile number.", "bg-danger");
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch("https://smtp-nodejs.onrender.com/send-otp", {
+                            method: "POST",
+                            mode: "no-cors",
+                        });
+
+                        showToast("OTP sent successfully!", "bg-success");
+                        console.log("OTP request sent to external API.");
+                        otpInput.disabled = false; // Enable OTP input
+                    } catch (error) {
+                        console.error("Error sending OTP:", error);
+                        showToast("An error occurred. Please try again.", "bg-danger");
+                    }
+                });
+
+                loginBtn.addEventListener("click", async () => {
+                    const enteredOtp = otpInput.value.trim();
+
+                    if (!enteredOtp || enteredOtp.length !== 4) {
+                        showToast("Please enter a valid 4-digit OTP.", "bg-warning");
+                        return;
+                    }
+
+                    try {
+                        // ✅ Verify OTP (Assuming OTP validation is handled internally)
+                        const loginResponse = await fetch(`http://localhost:8082/api/auth/login?mobile=${userMobile}`, {
+                            method: "POST",
+                        });
+
+                        const data = await loginResponse.json();
+
+                        if (loginResponse.ok) {
+                            // ✅ Store JWT Tokens
+                            localStorage.setItem("accessToken", data.accessToken);
+                            localStorage.setItem("refreshToken", data.refreshToken);
+                            showToast("Login successful! Redirecting...", "bg-success");
+
+                            setTimeout(() => {
+                                window.location.href = "main.html"; // Navigate to main page
+                            }, 1500);
+                        } else {
+                            showToast(data.message || "Login failed.", "bg-danger");
+                        }
+                    } catch (error) {
+                        console.error("Login error:", error);
+                        showToast("An error occurred. Please try again.", "bg-danger");
+                    }
+                });
+            });
+        </script>
+
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+        integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
+</body>
+
+<script>
+    function heroAnimation() {
+        var tl = gsap.timeline();
+
+        tl.from("header a", {
+            y: -50,
+            duration: 0.6,
+            delay: 0.5,
+            ease: "sine.out",
+            opacity: 0,
+        })
+
+        tl.from("nav ul li", {
+            y: -50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+            stagger: 0.3,
+        })
+
+        tl.from("nav button", {
+            y: -50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+        })
+
+        tl.from(".hero-text h1", {
+            x: -50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+        }, "-=0.3")
+
+        tl.from(".hero-text p", {
+            x: -50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+        })
+
+        tl.from(".hero-text button", {
+            x: -50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+        })
+
+        tl.from(".hero-image img", {
+            x: 50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+        }, "-=0.5")
+
+        tl.from(".clientlogo img", {
+            x: 50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+            stagger: 0.3,
+        })
+    }
+    function serviceAnimation() {
+        var tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".services",
+                scroller: "body",
+                start: "top 50%",
+                end: "top 10%",
+                scrub: 2,
+            }
+        })
+
+        tl2.from(".serviceText", {
+            x: -200,
+            duration: 0.5,
+            opacity: 0,
+        })
+        tl2.from(".servicebox1", {
+            x: -300,
+            duration: 1,
+            opacity: 0,
+        }, "serviveRow1")
+        tl2.from(".servicebox2", {
+            x: 300,
+            duration: 1,
+            opacity: 0,
+        }, "serviveRow1")
+
+        tl2.from(".servicebox3", {
+            x: -300,
+            duration: 1,
+            opacity: 0,
+        }, "serviveRow2")
+        tl2.from(".servicebox4", {
+            x: 300,
+            duration: 1,
+            opacity: 0,
+        }, "serviveRow2")
+    }
+
+    function casestudyAnimation() {
+        var tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".casestudies",
+                scroller: "body",
+                start: "top 80%",
+                end: "top 10%",
+                scrub: 2,
+            }
+        })
+        tl2.from(".caseText", {
+            x: -200,
+            duration: 0.5,
+            opacity: 0,
+        })
+        tl2.from(".casestudy-col", {
+            y: -300,
+            duration: 1,
+            opacity: 0,
+        })
+    }
+
+    function Accordion() {
+        document.querySelectorAll("details").forEach(details => {
+            details.addEventListener("toggle", () => {
+                const arrowUp = details.querySelector(".arrow-up");
+                const arrowDown = details.querySelector(".arrow-down");
+
+                if (details.open) {
+                    arrowUp.style.display = "block";
+                    arrowDown.style.display = "none";
+                } else {
+                    arrowUp.style.display = "none";
+                    arrowDown.style.display = "block";
+                }
+            });
+        });
+    }
+
+    function ProcessAnimation() {
+        var tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".process",
+                scroller: "body",
+                start: "top 80%",
+                end: "top 10%",
+                scrub: 2,
+            }
+        })
+        tl2.from(".processText", {
+            x: -200,
+            duration: 0.5,
+            opacity: 0,
+        })
+        tl2.from(".accordion-item", {
+            y: 300,
+            duration: 2,
+            opacity: 0,
+        })
+    }
+
+    function teamAnimation() {
+        var tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".team",
+                scroller: "body",
+                start: "top 80%",
+                end: "top 10%",
+                scrub: 2,
+            }
+        })
+        tl2.from(".teamText", {
+            x: -200,
+            duration: 0.5,
+            opacity: 0,
+        })
+        tl2.from("#team1", {
+            x: -300,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow1")
+        tl2.from("#team2", {
+            y: 0,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow1")
+        tl2.from("#team3", {
+            x: 300,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow1")
+        tl2.from("#team4", {
+            x: -300,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow2")
+        tl2.from("#team5", {
+            y: 0,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow2")
+        tl2.from("#team6", {
+            x: 300,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow2")
+    }
+
+    function contactAnimation() {
+        var tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".contact",
+                scroller: "body",
+                start: "top 80%",
+                end: "top 10%",
+                scrub: 2,
+            }
+        })
+        tl2.from(".contactText", {
+            x: -200,
+            duration: 0.5,
+            opacity: 0,
+        })
+        tl2.from(".contactform", {
+            x: 0,
+            duration: 3,
+            opacity: 0,
+        })
+    }
+
+
+    heroAnimation()
+    serviceAnimation()
+    casestudyAnimation()
+    Accordion()
+    ProcessAnimation()
+    teamAnimation()
+    contactAnimation()
+
+</script>
+
+
+<!-- External JS -->
+<script src="Assets/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script src="Assets/js/login.js"></script>
 </body>
 
 </html>

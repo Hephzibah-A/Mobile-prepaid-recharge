@@ -5,9 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MobiComm | Payment Successful</title>
-    <link rel="stylesheet" href="Assets/css/success.css" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="main.css">
     <link rel="icon" href="Assets/png/favicon.ico" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
@@ -16,22 +14,27 @@
         :root {
             --text: rgb(6, 6, 4);
             --background: rgb(251, 251, 249);
-            --primary: rgb(63, 0, 163);
-            --secondary: rgb(68, 0, 179);
-            --accent: rgb(255, 157, 0);
+            --primary: #B8FC67;
+
         }
 
         body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: var(--background);
             color: var(--text);
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
+
         }
 
         /* Success Container Styles */
         .success-container {
-            min-height: 100vh;
+
+            min-height: 60vh;
+
             /* Full viewport height */
             display: flex;
             flex-direction: column;
@@ -41,21 +44,19 @@
             text-align: center;
         }
 
-        .success-icon {
-            margin-bottom: 1rem;
-        }
+
 
         h1 {
             font-size: 2rem;
-            color: var(--primary);
+
             margin-bottom: 1.5rem;
         }
 
         .details-card {
             background: #fff;
-            padding: 1.5rem;
+
             border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
             margin-bottom: 1.5rem;
             width: 100%;
             max-width: 500px;
@@ -63,7 +64,7 @@
 
         .details-card h2 {
             margin-top: 0;
-            color: var(--secondary);
+
         }
 
         .details-card p {
@@ -79,6 +80,12 @@
 
         .btn-container a {
             text-decoration: none;
+        }
+
+        .teamText {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn-container a,
@@ -116,13 +123,17 @@
 </head>
 
 <body>
-    <div class="success-container">
-        <div class="success-icon">
+    <div class="success-container card-light">
+        <div class="success-icon ">
             <dotlottie-player src="https://lottie.host/901ad1b2-2873-4966-9767-c2e9f6fe4c34/HlsWzjIbTr.lottie"
-                background="transparent" speed="1" style="width: 200px; height: 200px" loop autoplay>
+                background="transparent" speed="1" style="width: 200px; height: 200px" autoplay>
             </dotlottie-player>
         </div>
-        <h1>Payment Successful</h1>
+        <div class="teamText">
+            <h2>Recharge Successful</h2>
+
+        </div>
+        <br>
         <!-- Transaction Details Section -->
         <div class="details-card" id="transactionDetails">
             <!-- Transaction details (including plan and payment method) will be inserted here -->

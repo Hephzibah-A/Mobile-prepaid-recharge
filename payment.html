@@ -5,431 +5,624 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MobiComm | Payment</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="Assets/css/payment.css" />
-    <link rel="icon" href="Assets/png/favicon.ico" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
     <style>
-        /* Theme Variables */
-        :root {
-            --text: rgb(6, 6, 4);
-            --background: rgb(251, 251, 249);
-            --primary: rgb(63, 0, 163);
-            --secondary: rgb(68, 0, 179);
-            --accent: rgb(255, 157, 0);
+        header {
+            padding: 20px;
         }
 
-        /* Global Styles */
-        body {
-            background-color: var(--background);
-            color: var(--text);
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        h2 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        /* Navbar */
-        header,
-        .navbar {
-            background-color: var(--background);
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .navbar-brand img {
-            max-height: 50px;
-        }
-
-        /* Main Payment Container */
-        main.container {
+        .card-light {
+            padding: 20px;
+            border-radius: 10px;
             background: #fff;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-            margin-top: 2rem;
-        }
-
-        .plan-summary {
-            background: var(--background);
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-            margin-bottom: 1.5rem;
-        }
-
-        .plan-summary h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .plan-summary ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .plan-summary ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .plan-summary ul li strong {
-            color: var(--secondary);
-        }
-
-        /* Accent used for plan price */
-        .plan-summary ul li .price-amount {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        /* Edit Plan Button using Accent */
-        #editPlanButton {
-            background-color: var(--accent);
-            border-color: var(--accent);
-            border-radius: 50px;
-            padding: 0.6rem 1.2rem;
-        }
-
-        #editPlanButton:hover {
-            opacity: 0.9;
-        }
-
-        /* Payment Methods */
-        .payment-methods label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-
-        /* Payment Form Styles */
-        .payment-form {
-            margin-top: 1rem;
-        }
-
-        .card-details label {
-            font-size: 0.9rem;
-            color: var(--secondary);
-        }
-
-        .card-details input {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
-            padding: 0.5rem;
-            margin-top: 0.25rem;
-            margin-bottom: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 0.95rem;
         }
 
-        .card-details .error-message {
-            font-size: 0.85rem;
+        .error-message {
+            color: red;
         }
 
-        /* Buttons */
-        .btn-primary {
-            background-color: var(--primary);
-            border-color: var(--primary);
-            font-weight: 600;
-            padding: 0.6rem 1.2rem;
-            border-radius: 50px;
+        .plan-summary,
+        .payment-methods {
+            text-align: left;
         }
 
-        .btn-primary:hover {
-            background-color: var(--secondary);
-            border-color: var(--secondary);
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            gap: 20px;
         }
 
-        .btn-accent {
-            color: white;
-            background-color: var(--accent);
-            border-color: var(--accent);
-            border-radius: 50px;
-            padding: 0.6rem 1.2rem;
-        }
 
-        .btn-accent:hover {
-            background-color: rgb(204, 126, 0);
-            border-color: rgb(204, 126, 0);
-        }
 
-        .secure-payment {
-            font-size: 0.8rem;
-            color: var(--accent);
-            margin-top: 0.5rem;
-        }
-
-        /* Payment Image */
-        .payment-image img {
-            max-width: 100%;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--background);
-            border-top: 1px solid #e0e0e0;
-            padding: 1rem 0;
-            margin-top: 2rem;
-            font-size: 0.9rem;
-        }
-
-        .footer-links p {
-            margin: 0;
-            color: var(--text);
-        }
-
-        .footer-links a {
-            color: var(--primary);
-        }
-
-        /* Custom Success Toast */
-        .toast-card {
-            width: 330px;
-            height: 80px;
-            border-radius: 8px;
+        .payment-methods label {
+            cursor: pointer;
+            font-weight: bold;
             padding: 10px 15px;
-            background-color: var(--background);
-            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-            position: fixed;
-            top: 20px;
-            right: 20px;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease-in-out;
+            white-space: nowrap;
+            /* Prevents text from breaking into two lines */
+        }
+
+        .payment-methods input[type="radio"] {
+            display: none;
+            /* Hide default radio buttons */
+        }
+
+
+
+
+        .payment-methods {
             display: flex;
-            align-items: center;
+            justify-content: space-between;
             gap: 15px;
-            z-index: 1050;
+            padding: 10px 0;
+            border-bottom: 2px solid #ccc;
+            flex-wrap: wrap;
+            /* Ensures responsiveness */
+        }
+        #editPlanButton {
+            width: 100%;
+            font-weight: bold;
         }
 
-        .toast-card .wave {
-            position: absolute;
-            transform: rotate(90deg);
-            left: -31px;
-            top: 32px;
-            width: 80px;
-            fill: rgba(63, 0, 163, 0.23);
+        /* General Form Styling */
+        form {
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .toast-card .icon-container {
-            width: 35px;
-            height: 35px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(63, 0, 163, 0.3);
-            border-radius: 50%;
-            margin-left: 8px;
+        /* Input Fields */
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
         }
 
-        .toast-card .icon {
-            width: 17px;
-            height: 17px;
-            color: var(--accent);
+        /* Labels */
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
         }
 
-        .toast-card .message-text-container {
+        /* Button Styling */
+        main button {
+            width: 100%;
+            padding: 12px;
+            background: black;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        main button:hover {
+            background: #B8FC67;
+            color: black;
+        }
+
+
+        /* Ensure the form appears below the selected radio button */
+        .radio-group {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            flex-grow: 1;
+            gap: 10px;
         }
 
-        .toast-card .message-text {
-            color: var(--primary);
-            font-size: 17px;
-            font-weight: 700;
-            margin: 0;
+
+
+
+        /* Align Payment Methods vertically */
+        .payment-container {
+            display: flex;
+            flex-direction: column;
+        }
+        /* Highlight selected method */
+        .payment-methods input[type="radio"]:checked+label {
+            border-bottom: 3px solid #B8FC67;
+            color: #B8FC67;
         }
 
-        .toast-card .sub-text {
-            font-size: 14px;
-            color: var(--secondary);
-            margin: 0;
+        /* Hide forms initially */
+        .payment-form {
+            display: none;
+            margin-top: 15px;
         }
 
-        .toast-card .cross-icon {
-            width: 18px;
-            height: 18px;
-            color: var(--text);
+
+        /* Show the active form */
+        .payment-form.active {
+            display: block;
+        }
+
+
+        /* Payment Button */
+        .pay-btn {
+            background-color: black;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
             cursor: pointer;
         }
+
+
+
+        .payment-option {
+            display: flex;
+            flex-direction: column;
+
+            align-items: flex-start;
+        }
     </style>
+
+
 </head>
 
 <body>
-    <!-- Header / Navbar -->
-    <header>
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <a class="navbar-brand" href="main.html">
-                    <img src="Assets/png/logo_color.png" alt="MobiComm Logo">
-                </a>
-            </div>
-        </nav>
-    </header>
+    <div class="main">
+        <!-- Header / Navbar -->
+        <header>
+            <a href="index.html">
+                <h1><i class="ri-gemini-fill"></i>MobiComm</h1>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#services">Plans</a></li>
+                    <li><a href="#usecases">About Us</a></li>
+                    <li><a href="#pricing">Contact Us</a></li>
 
-    <!-- Main Payment Section -->
-    <main class="container mt-4">
-        <div class="row">
-            <!-- Recharge Summary Section -->
-            <div class="col-md-3">
-                <div class="plan-summary">
-                    <h2>Recharge Summary</h2>
-                    <div id="planDetails"></div>
-                    <a href="plans.html"><button class="btn btn-accent" id="editPlanButton">Edit Plan</button></a>
+                </ul>
+                <button>Profile</button>
+            </nav>
+        </header>
+        <br>
+        <br><br>
+        <!-- Main Payment Section -->
+        <main class="container mt-4">
+            <div class="row">
+                <!-- Recharge Summary Section -->
+                <div class="col-md-6">
+                    <div class="card-light p-3">
+                        <div class="plan-summary">
+                            <h2 class="card-text">Recharge Summary</h2>
+                            <div id="planDetails"></div>
+                            <a href="plans.html"><button id="editPlanButton" class="btn btn-secondary">Edit
+                                    Plan</button></a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <!-- Payment Methods Section -->
-            <div class="col-md-5">
-                <div class="plan-summary">
+                <br>
+                <!-- Payment Methods Section -->
+                <div class="col-md-6">
                     <h2>Payment Methods</h2>
                     <div class="payment-methods">
-                        <label>
-                            <input type="radio" name="paymentMethod" value="upi" id="upi-radio"> UPI (Google Pay etc...)
-                        </label><br>
-                        <label>
-                            <input type="radio" name="paymentMethod" value="card" id="card-radio" checked> Credit /
-                            Debit card
-                        </label><br>
-                        <label>
-                            <input type="radio" name="paymentMethod" value="netbanking" id="netbanking-radio"> Net
-                            Banking
-                        </label><br>
-                        <label>
-                            <input type="radio" name="paymentMethod" value="wallet" id="wallet-radio"> Wallet (Paytm,
-                            etc...)
-                        </label>
+                        <input type="radio" id="upi" name="payment" checked>
+                        <label for="upi">UPI (Google Pay, etc...)</label>
+
+                        <input type="radio" id="card" name="payment">
+                        <label for="card">Credit / Debit Card</label>
+
+                        <input type="radio" id="netbanking" name="payment">
+                        <label for="netbanking">Net Banking</label>
+
+                        <input type="radio" id="wallet" name="payment">
+                        <label for="wallet">Wallet (Paytm, etc...)</label>
                     </div>
+                    <div class="card-light p-3">
 
-                    <!-- Card Payment Form -->
-                    <div id="card-form" class="payment-form">
-                        <div class="card-details">
-                            <label for="cardNumber">Card number</label>
-                            <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000">
-                            <span id="cardNumberError" class="error-message text-danger"></span><br>
+                        <!-- Payment Forms -->
+                        <div id="payment-forms">
+                            <!-- Card Payment Form -->
+                            <div id="card-form" class="payment-form">
+                                <div class="card-details">
+                                    <label for="cardNumber">Card Number</label>
+                                    <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000">
+                                    <span id="cardNumberError" class="error-message text-danger"></span>
 
-                            <label for="expiry">Expires</label>
-                            <input type="text" id="expiry" placeholder="MM / YY">
-                            <span id="expiryError" class="error-message text-danger"></span><br>
+                                    <label for="expiry">Expires</label>
+                                    <input type="text" id="expiry" placeholder="MM / YY">
+                                    <span id="expiryError" class="error-message text-danger"></span>
 
-                            <label for="cvc">Security code</label>
-                            <input type="text" id="cvc" placeholder="CVC">
-                            <span id="cvcError" class="error-message text-danger"></span><br>
+                                    <label for="cvc">Security Code</label>
+                                    <input type="text" id="cvc" placeholder="CVC">
+                                    <span id="cvcError" class="error-message text-danger"></span>
 
-                            <label for="cardholder">Cardholder name</label>
-                            <input type="text" id="cardholder" placeholder="Amy Schumer">
-                            <span id="cardholderError" class="error-message text-danger"></span><br>
+                                    <label for="cardholder">Cardholder Name</label>
+                                    <input type="text" id="cardholder" placeholder="John Doe">
+                                    <span id="cardholderError" class="error-message text-danger"></span>
 
-                            <button class="btn btn-primary" id="cardPayBtn">Pay ₹<span id="paymentAmount"></span>
-                                now</button>
-                            <div class="secure-payment">Your transaction is secured with SSL encryption</div>
+                                    <button class="btn btn-primary w-100" id="cardPayBtn">Pay ₹<span
+                                            id="paymentAmount"></span> Now</button>
+                                </div>
+                                <br>
+                                <div class="secure-payment text-center mt-2">
+                                    <small>Your transaction is secured with SSL encryption 🔒</small>
+                                </div>
+                            </div>
+
+                            <!-- UPI Payment Form -->
+                            <div id="upi-form" class="payment-form">
+                                <div class="card-details">
+                                    <label for="upiId">UPI ID</label>
+                                    <input type="text" id="upiId" placeholder="your_upi_id@bank">
+                                    <span id="upiIdError" class="error-message text-danger"></span>
+
+                                    <button class="btn btn-primary w-100" id="upiPayBtn">Pay ₹<span
+                                            id="paymentAmountUpi"></span> Now</button>
+                                </div>
+                                <br>
+                                <div class="secure-payment text-center mt-2">
+                                    <small>Your transaction is secured with SSL encryption 🔒</small>
+                                </div>
+                            </div>
+
+                            <!-- NetBanking Payment Form -->
+                            <div id="netbanking-form" class="payment-form">
+                                <div class="card-details">
+                                    <label for="bankName">Bank Name</label>
+                                    <input type="text" id="bankName" placeholder="Your Bank Name">
+                                    <span id="bankNameError" class="error-message text-danger"></span>
+
+                                    <label for="netbankingId">NetBanking ID</label>
+                                    <input type="text" id="netbankingId" placeholder="Your NetBanking ID">
+                                    <span id="netbankingIdError" class="error-message text-danger"></span>
+
+                                    <label for="netbankingPassword">Password</label>
+                                    <input type="password" id="netbankingPassword" placeholder="Your Password">
+                                    <span id="netbankingPasswordError" class="error-message text-danger"></span>
+
+                                    <button class="btn btn-primary w-100" id="netbankingPayBtn">Pay ₹<span
+                                            id="paymentAmountNetbanking"></span> Now</button>
+                                </div>
+                                <br>
+                                <div class="secure-payment text-center mt-2">
+                                    <small>Your transaction is secured with SSL encryption 🔒</small>
+                                </div>
+                            </div>
+
+                            <!-- Wallet Payment Form -->
+                            <div id="wallet-form" class="payment-form">
+                                <div class="card-details">
+                                    <label for="walletProvider">Wallet Provider</label>
+                                    <input type="text" id="walletProvider" placeholder="Paytm/PhonePe/etc.">
+                                    <span id="walletProviderError" class="error-message text-danger"></span>
+
+                                    <label for="walletMobile">Mobile Number</label>
+                                    <input type="text" id="walletMobile" placeholder="Your Mobile Number">
+                                    <span id="walletMobileError" class="error-message text-danger"></span>
+
+                                    <button class="btn btn-primary w-100" id="walletPayBtn">Pay ₹<span
+                                            id="paymentAmountWallet"></span> Now</button>
+                                </div>
+                                <br>
+                                <div class="secure-payment text-center mt-2">
+                                    <small>Your transaction is secured with SSL encryption 🔒</small>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- UPI Payment Form -->
-                    <div id="upi-form" class="payment-form">
-                        <div class="card-details">
-                            <label for="upiId">UPI ID</label>
-                            <input type="text" id="upiId" placeholder="your_upi_id@bank">
-                            <span id="upiIdError" class="error-message text-danger"></span><br>
-
-                            <button class="btn btn-primary" id="upiPayBtn">Pay ₹<span id="paymentAmountUpi"></span>
-                                now</button>
-                            <div class="secure-payment">Your transaction is secured with SSL encryption</div>
-                        </div>
-                    </div>
-
-                    <!-- NetBanking Payment Form -->
-                    <div id="netbanking-form" class="payment-form">
-                        <div class="card-details">
-                            <label for="bankName">Bank Name</label>
-                            <input type="text" id="bankName" placeholder="Your Bank Name">
-                            <span id="bankNameError" class="error-message text-danger"></span><br>
-
-                            <label for="netbankingId">NetBanking ID</label>
-                            <input type="text" id="netbankingId" placeholder="Your NetBanking ID">
-                            <span id="netbankingIdError" class="error-message text-danger"></span><br>
-
-                            <label for="netbankingPassword">Password</label>
-                            <input type="password" id="netbankingPassword" placeholder="Your Password">
-                            <span id="netbankingPasswordError" class="error-message text-danger"></span><br>
-
-                            <button class="btn btn-primary" id="netbankingPayBtn">Pay ₹<span
-                                    id="paymentAmountNetbanking"></span> now</button>
-                            <div class="secure-payment">Your transaction is secured with SSL encryption</div>
-                        </div>
-                    </div>
-
-                    <!-- Wallet Payment Form -->
-                    <div id="wallet-form" class="payment-form">
-                        <div class="card-details">
-                            <label for="walletProvider">Wallet Provider</label>
-                            <input type="text" id="walletProvider" placeholder="Paytm/PhonePe/etc.">
-                            <span id="walletProviderError" class="error-message text-danger"></span><br>
-
-                            <label for="walletMobile">Mobile Number</label>
-                            <input type="text" id="walletMobile" placeholder="Your Mobile Number">
-                            <span id="walletMobileError" class="error-message text-danger"></span><br>
-
-                            <button class="btn btn-primary" id="walletPayBtn">Pay ₹<span
-                                    id="paymentAmountWallet"></span> now</button>
-                            <div class="secure-payment">Your transaction is secured with SSL encryption</div>
-                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Payment Image Section -->
-            <div class="col-md-4 payment-image">
-                <img src="Assets/png/Mobile payments-rafiki 1.png" alt="Payment Illustration" class="img-fluid">
-            </div>
-        </div>
-    </main>
+        </main>
 
-    <br><br>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-md-3">
-                    <a class="navbar-brand" href="#">
-                        <img src="Assets/png/logo.png" alt="MobiComm Logo">
+
+
+        <br><br>
+
+        <!-- Footer -->
+        <!-- <footer class="footer">
+            <div class="footerTop">
+                <div class="footerLogo">
+                    <a href="index.html">
+                        <h2><i class="ri-gemini-fill"></i>MobiComm</h2>
                     </a>
                 </div>
-                <div class="col-md-9">
-                    <div class="footer-links">
-                        <p>&copy;2025 Company Name. All rights reserved.
-                            <a href="#">Privacy &amp; Policy</a> |
-                            <a href="#">Terms &amp; Condition</a>
-                        </p>
-                    </div>
+                <div class="footerNav">
+                    <ul>
+                        <li><a href="#services">Plans</a></li>
+                        <li><a href="#hero">About Us</a></li>
+
+                    </ul>
+                </div>
+                <div class="footerSocialBtn">
+                    <img src="https://md-rejoyan-islam.github.io/positivus/assets/images/social-icons/linkedin.svg"
+                        alt="LinkedIn">
+                    <img src="https://md-rejoyan-islam.github.io/positivus/assets/images/social-icons/facebook.svg"
+                        alt="Facebook">
+                    <img src="https://md-rejoyan-islam.github.io/positivus/assets/images/social-icons/twitter.svg"
+                        alt="Twitter">
                 </div>
             </div>
-        </div>
-    </footer>
+            <div class="footerCenter">
+                <div class="companyInformation">
+                    <h2><span>Contact use:</span></h2>
+                    <p>Email: info@mobicomm.com</p>
+                    <p>Phone: 555-687-8901</p>
+                    <p>Address: 1234 Main St
+                        Moonstone City,stardust State 12345</p>
+                </div>
+                <div class="footerform">
+                    <form action="">
+                        <input type="email" placeholder="Email">
+                        <button>Subscribe to news</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footerBottom">
+                <p>&copy; 2024 MobiComm. All rights reserved.</p>
+                <a href="#">Privacy Policy</a>
+            </div>
+
+        </footer> -->
+    </div>
+
+    <script>
+        function heroAnimation() {
+            var tl = gsap.timeline();
+
+            tl.from("header a", {
+                y: -50,
+                duration: 0.6,
+                delay: 0.5,
+                ease: "sine.out",
+                opacity: 0,
+            })
+
+            tl.from("nav ul li", {
+                y: -50,
+                duration: 0.7,
+                opacity: 0,
+                ease: "sine.out",
+                stagger: 0.3,
+            })
+
+            tl.from("nav button", {
+                y: -50,
+                duration: 0.7,
+                opacity: 0,
+                ease: "sine.out",
+            })
+
+            tl.from(".hero-text h1", {
+                x: -50,
+                duration: 0.7,
+                opacity: 0,
+                ease: "sine.out",
+            }, "-=0.3")
+
+            tl.from(".hero-text p", {
+                x: -50,
+                duration: 0.7,
+                opacity: 0,
+                ease: "sine.out",
+            })
+
+            tl.from(".hero-text button", {
+                x: -50,
+                duration: 0.7,
+                opacity: 0,
+                ease: "sine.out",
+            })
+
+            tl.from(".hero-image img", {
+                x: 50,
+                duration: 0.7,
+                opacity: 0,
+                ease: "sine.out",
+            }, "-=0.5")
+
+            tl.from(".clientlogo img", {
+                x: 50,
+                duration: 0.7,
+                opacity: 0,
+                ease: "sine.out",
+                stagger: 0.3,
+            })
+        }
+        function serviceAnimation() {
+            var tl2 = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".services",
+                    scroller: "body",
+                    start: "top 50%",
+                    end: "top 10%",
+                    scrub: 2,
+                }
+            })
+
+            tl2.from(".serviceText", {
+                x: -200,
+                duration: 0.5,
+                opacity: 0,
+            })
+            tl2.from(".servicebox1", {
+                x: -300,
+                duration: 1,
+                opacity: 0,
+            }, "serviveRow1")
+            tl2.from(".servicebox2", {
+                x: 300,
+                duration: 1,
+                opacity: 0,
+            }, "serviveRow1")
+
+            tl2.from(".servicebox3", {
+                x: -300,
+                duration: 1,
+                opacity: 0,
+            }, "serviveRow2")
+            tl2.from(".servicebox4", {
+                x: 300,
+                duration: 1,
+                opacity: 0,
+            }, "serviveRow2")
+        }
+
+        function casestudyAnimation() {
+            var tl2 = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".casestudies",
+                    scroller: "body",
+                    start: "top 80%",
+                    end: "top 10%",
+                    scrub: 2,
+                }
+            })
+            tl2.from(".caseText", {
+                x: -200,
+                duration: 0.5,
+                opacity: 0,
+            })
+            tl2.from(".casestudy-col", {
+                y: -300,
+                duration: 1,
+                opacity: 0,
+            })
+        }
+
+        function Accordion() {
+            document.querySelectorAll("details").forEach(details => {
+                details.addEventListener("toggle", () => {
+                    const arrowUp = details.querySelector(".arrow-up");
+                    const arrowDown = details.querySelector(".arrow-down");
+
+                    if (details.open) {
+                        arrowUp.style.display = "block";
+                        arrowDown.style.display = "none";
+                    } else {
+                        arrowUp.style.display = "none";
+                        arrowDown.style.display = "block";
+                    }
+                });
+            });
+        }
+
+        function ProcessAnimation() {
+            var tl2 = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".process",
+                    scroller: "body",
+                    start: "top 80%",
+                    end: "top 10%",
+                    scrub: 2,
+                }
+            })
+            tl2.from(".processText", {
+                x: -200,
+                duration: 0.5,
+                opacity: 0,
+            })
+            tl2.from(".accordion-item", {
+                y: 300,
+                duration: 2,
+                opacity: 0,
+            })
+        }
+
+        function teamAnimation() {
+            var tl2 = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".team",
+                    scroller: "body",
+                    start: "top 80%",
+                    end: "top 10%",
+                    scrub: 2,
+                }
+            })
+            tl2.from(".teamText", {
+                x: -200,
+                duration: 0.5,
+                opacity: 0,
+            })
+            tl2.from("#team1", {
+                x: -300,
+                duration: 1,
+                opacity: 0,
+            }, "teamRow1")
+            tl2.from("#team2", {
+                y: 0,
+                duration: 1,
+                opacity: 0,
+            }, "teamRow1")
+            tl2.from("#team3", {
+                x: 300,
+                duration: 1,
+                opacity: 0,
+            }, "teamRow1")
+            tl2.from("#team4", {
+                x: -300,
+                duration: 1,
+                opacity: 0,
+            }, "teamRow2")
+            tl2.from("#team5", {
+                y: 0,
+                duration: 1,
+                opacity: 0,
+            }, "teamRow2")
+            tl2.from("#team6", {
+                x: 300,
+                duration: 1,
+                opacity: 0,
+            }, "teamRow2")
+        }
+
+        function contactAnimation() {
+            var tl2 = gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".contact",
+                    scroller: "body",
+                    start: "top 80%",
+                    end: "top 10%",
+                    scrub: 2,
+                }
+            })
+            tl2.from(".contactText", {
+                x: -200,
+                duration: 0.5,
+                opacity: 0,
+            })
+            tl2.from(".contactform", {
+                x: 0,
+                duration: 3,
+                opacity: 0,
+            })
+        }
+
+
+        heroAnimation()
+        serviceAnimation()
+        casestudyAnimation()
+        Accordion()
+        ProcessAnimation()
+        teamAnimation()
+        contactAnimation()
+
+    </script>
 
     <!-- External JS -->
     <script src="Assets/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Inline Payment JS Code -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Retrieve the selected plan from localStorage
@@ -440,28 +633,52 @@
             const paymentAmountNetbanking = document.getElementById('paymentAmountNetbanking');
             const paymentAmountWallet = document.getElementById('paymentAmountWallet');
 
-            // Payment forms and radio buttons
-            const cardForm = document.getElementById('card-form');
-            const upiForm = document.getElementById('upi-form');
-            const netbankingForm = document.getElementById('netbanking-form');
-            const walletForm = document.getElementById('wallet-form');
-            const upiRadio = document.getElementById('upi-radio');
-            const cardRadio = document.getElementById('card-radio');
-            const netbankingRadio = document.getElementById('netbanking-radio');
-            const walletRadio = document.getElementById('wallet-radio');
-            const editPlanButton = document.getElementById('editPlanButton');
+            // Payment forms
+            const paymentForms = {
+                upi: document.getElementById("upi-form"),
+                card: document.getElementById("card-form"),
+                netbanking: document.getElementById("netbanking-form"),
+                wallet: document.getElementById("wallet-form"),
+            };
+
+            // Payment method radio buttons
+            const paymentRadios = document.querySelectorAll(".payment-methods input[type='radio']");
+
+            // Function to hide all forms
+            function hideAllForms() {
+                Object.values(paymentForms).forEach((form) => {
+                    form.style.display = "none";
+                });
+            }
+
+            // Function to show the selected form
+            function showSelectedForm(method) {
+                hideAllForms();
+                if (paymentForms[method]) {
+                    paymentForms[method].style.display = "block";
+                    localStorage.setItem("selectedPaymentMethod", method);
+                }
+            }
+
+            // Event listener for radio buttons
+            paymentRadios.forEach((radio) => {
+                radio.addEventListener("change", function () {
+                    const selectedMethod = this.id.replace("-radio", ""); // Extract method from ID
+                    showSelectedForm(selectedMethod);
+                });
+            });
 
             // Display the selected plan details and set payment amounts
             if (selectedPlan) {
                 planDetails.innerHTML = `
-              <ul>
-                  <li><strong>Plan Name:</strong> ${selectedPlan.name ? selectedPlan.name : "Plan " + selectedPlan.id}</li>
-                  <li><strong>Price:</strong> <span class="price-amount">₹${selectedPlan.price}</span></li>
-                  <li><strong>Data:</strong> ${selectedPlan.data}</li>
-                  <li><strong>Calls:</strong> ${selectedPlan.calls}</li>
-                  <li><strong>Validity:</strong> ${selectedPlan.validity} Days</li>
-              </ul>
-          `;
+            <ul>
+                <li><strong>Plan Name:</strong> ${selectedPlan.name ? selectedPlan.name : "Plan " + selectedPlan.id}</li>
+                <li><strong>Price:</strong> <span class="price-amount">₹${selectedPlan.price}</span></li>
+                <li><strong>Data:</strong> ${selectedPlan.data}</li>
+                <li><strong>Calls:</strong> ${selectedPlan.calls}</li>
+                <li><strong>Validity:</strong> ${selectedPlan.validity} Days</li>
+            </ul>
+        `;
                 paymentAmount.textContent = selectedPlan.price;
                 paymentAmountUpi.textContent = selectedPlan.price;
                 paymentAmountNetbanking.textContent = selectedPlan.price;
@@ -470,286 +687,83 @@
                 planDetails.innerHTML = `<p class="text-muted">No plan selected.</p>`;
             }
 
-            editPlanButton.addEventListener('click', () => {
-                window.location.href = 'plans.html';
-            });
-
-            // Utility function: Hide all payment forms
-            function hideAllForms() {
-                cardForm.style.display = 'none';
-                upiForm.style.display = 'none';
-                netbankingForm.style.display = 'none';
-                walletForm.style.display = 'none';
+            // Utility function: Form validation
+            function validateInput(inputId, errorId, pattern, errorMsg) {
+                const input = document.getElementById(inputId);
+                const error = document.getElementById(errorId);
+                error.textContent = '';
+                if (!pattern.test(input.value.trim())) {
+                    error.textContent = errorMsg;
+                    return false;
+                }
+                return true;
             }
 
-            // Event listeners for radio buttons to toggle forms
-            upiRadio.addEventListener('change', () => {
-                hideAllForms();
-                upiForm.style.display = 'block';
-                localStorage.setItem("selectedPaymentMethod", "UPI");
-            });
-            cardRadio.addEventListener('change', () => {
-                hideAllForms();
-                cardForm.style.display = 'block';
-                localStorage.setItem("selectedPaymentMethod", "Debit/Credit Card");
-            });
-            netbankingRadio.addEventListener('change', () => {
-                hideAllForms();
-                netbankingForm.style.display = 'block';
-                localStorage.setItem("selectedPaymentMethod", "Net Banking");
-            });
-            walletRadio.addEventListener('change', () => {
-                hideAllForms();
-                walletForm.style.display = 'block';
-                localStorage.setItem("selectedPaymentMethod", "Wallet");
-            });
-
-            // Show Card form by default
-            hideAllForms();
-            cardForm.style.display = 'block';
-
+            // Payment validation functions
             function validateCardForm() {
-                const cardNumber = document.getElementById('cardNumber').value;
-                const expiry = document.getElementById('expiry').value;
-                const cvc = document.getElementById('cvc').value;
-                const cardholder = document.getElementById('cardholder').value;
-
-                const cardNumberError = document.getElementById('cardNumberError');
-                const expiryError = document.getElementById('expiryError');
-                const cvcError = document.getElementById('cvcError');
-                const cardholderError = document.getElementById('cardholderError');
-
-                // Reset error messages
-                cardNumberError.textContent = '';
-                expiryError.textContent = '';
-                cvcError.textContent = '';
-                cardholderError.textContent = '';
-
-                let isValid = true;
-
-                // Validate card number: remove spaces and check for 16 digits
-                const sanitizedCardNumber = cardNumber.replace(/\s+/g, '');
-                if (!/^\d{16}$/.test(sanitizedCardNumber)) {
-                    cardNumberError.textContent = 'Please enter a valid 16-digit card number.';
-                    isValid = false;
-                }
-
-                // Validate expiry date (MM/YY)
-                if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry.trim())) {
-                    expiryError.textContent = 'Please enter a valid expiry date in MM/YY format.';
-                    isValid = false;
-                }
-
-                // Validate CVC: exactly 3 digits
-                if (!/^\d{3}$/.test(cvc.trim())) {
-                    cvcError.textContent = 'Please enter a valid 3-digit CVC.';
-                    isValid = false;
-                }
-
-                // Validate cardholder name: only letters and spaces
-                if (!/^[a-zA-Z\s]+$/.test(cardholder.trim())) {
-                    cardholderError.textContent = 'Please enter a valid cardholder name.';
-                    isValid = false;
-                }
-                return isValid;
+                return (
+                    validateInput("cardNumber", "cardNumberError", /^\d{16}$/, "Enter a valid 16-digit card number.") &&
+                    validateInput("expiry", "expiryError", /^(0[1-9]|1[0-2])\/\d{2}$/, "Enter MM/YY format.") &&
+                    validateInput("cvc", "cvcError", /^\d{3}$/, "Enter a valid 3-digit CVC.") &&
+                    validateInput("cardholder", "cardholderError", /^[a-zA-Z\s]+$/, "Enter a valid cardholder name.")
+                );
             }
 
             function validateUpiForm() {
-                const upiId = document.getElementById('upiId').value;
-                const upiIdError = document.getElementById('upiIdError');
-                upiIdError.textContent = '';
-                let isValid = true;
-                if (!/^[\w.-]+@[\w.-]+$/.test(upiId.trim())) {
-                    upiIdError.textContent = 'Please enter a valid UPI ID.';
-                    isValid = false;
-                }
-                return isValid;
+                return validateInput("upiId", "upiIdError", /^[\w.-]+@[\w.-]+$/, "Enter a valid UPI ID.");
             }
 
             function validateNetbankingForm() {
-                const bankName = document.getElementById('bankName').value;
-                const netbankingId = document.getElementById('netbankingId').value;
-                const netbankingPassword = document.getElementById('netbankingPassword').value;
-
-                const bankNameError = document.getElementById('bankNameError');
-                const netbankingIdError = document.getElementById('netbankingIdError');
-                const netbankingPasswordError = document.getElementById('netbankingPasswordError');
-
-                bankNameError.textContent = '';
-                netbankingIdError.textContent = '';
-                netbankingPasswordError.textContent = '';
-
-                let isValid = true;
-                if (bankName.trim() === '') {
-                    bankNameError.textContent = 'Bank Name is required.';
-                    isValid = false;
-                }
-                if (netbankingId.trim() === '') {
-                    netbankingIdError.textContent = 'NetBanking ID is required.';
-                    isValid = false;
-                }
-                if (netbankingPassword.trim() === '') {
-                    netbankingPasswordError.textContent = 'Password is required.';
-                    isValid = false;
-                }
-                return isValid;
+                return (
+                    validateInput("bankName", "bankNameError", /.+/, "Bank Name is required.") &&
+                    validateInput("netbankingId", "netbankingIdError", /.+/, "NetBanking ID is required.") &&
+                    validateInput("netbankingPassword", "netbankingPasswordError", /.+/, "Password is required.")
+                );
             }
 
             function validateWalletForm() {
-                const walletProvider = document.getElementById('walletProvider').value;
-                const walletMobile = document.getElementById('walletMobile').value;
-                const walletProviderError = document.getElementById('walletProviderError');
-                const walletMobileError = document.getElementById('walletMobileError');
-
-                walletProviderError.textContent = '';
-                walletMobileError.textContent = '';
-
-                let isValid = true;
-                if (walletProvider.trim() === '') {
-                    walletProviderError.textContent = 'Wallet Provider is required.';
-                    isValid = false;
-                }
-                if (!/^\d{10}$/.test(walletMobile.trim())) {
-                    walletMobileError.textContent = 'Please enter a valid 10-digit mobile number.';
-                    isValid = false;
-                }
-                return isValid;
+                return (
+                    validateInput("walletProvider", "walletProviderError", /.+/, "Wallet Provider is required.") &&
+                    validateInput("walletMobile", "walletMobileError", /^\d{10}$/, "Enter a valid 10-digit mobile number.")
+                );
             }
 
+            // Payment processing simulation
             function recordPayment(paymentMethod) {
-                // Get the mobile number from localStorage (assumed stored under 'mobileNumber')
-                const mobileNumber = localStorage.getItem('mobileNumber');
-                if (!mobileNumber) {
-                    console.error("Mobile number not found in localStorage.");
-                    return;
-                }
-                // Create a new payment record
-                const currentDate = new Date();
-                const currentDateStr = currentDate.toISOString().slice(0, 10); // Format: YYYY-MM-DD
-                const newPayment = {
-                    id: Date.now(), // using timestamp as unique ID
-                    date: currentDateStr,
-                    amount: selectedPlan ? selectedPlan.price : 0,
-                    method: paymentMethod
-                };
-
-                // Fetch users from API
-                fetch("http://localhost:3000/users")
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error("HTTP error " + response.status);
-                        }
-                        return response.json();
-                    })
-                    .then(users => {
-                        // Find the user record by matching mobile number
-                        const matchingUsers = users.filter(user => user.phnno === mobileNumber);
-                        if (matchingUsers.length === 0) {
-                            console.error("User not found for mobile number: " + mobileNumber);
-                            return;
-                        }
-                        let user = matchingUsers[0];
-                        // Ensure user.paymentHistory is an array
-                        if (!Array.isArray(user.paymentHistory)) {
-                            user.paymentHistory = [];
-                        }
-                        // Append the new payment record
-                        user.paymentHistory.push(newPayment);
-
-                        // Calculate new plan expiry date:
-                        // If the user has an existing expiry date in the future, extend from that.
-                        // Otherwise, start from today.
-                        let today = new Date(currentDateStr);
-                        let baseDate = today;
-                        if (user.planExpiryDate) {
-                            let currentExpiry = new Date(user.planExpiryDate);
-                            if (currentExpiry > today) {
-                                baseDate = currentExpiry;
-                            }
-                        }
-                        // Add validity days to baseDate (assuming selectedPlan.validity is a number or string convertible to a number)
-                        let newExpiry = new Date(baseDate);
-                        newExpiry.setDate(newExpiry.getDate() + parseInt(selectedPlan.validity, 10));
-                        user.planExpiryDate = newExpiry.toISOString().slice(0, 10);
-
-                        // Update the user record via PUT request to API at localhost:3000
-                        fetch("http://localhost:3000/users/" + user.id, {
-                            method: 'PUT',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(user)
-                        })
-                            .then(updateResponse => {
-                                if (!updateResponse.ok) {
-                                    throw new Error("HTTP error " + updateResponse.status);
-                                }
-                                return updateResponse.json();
-                            })
-                            .then(updatedUser => {
-                                console.log("Payment recorded successfully for user:", updatedUser);
-                                // After successful update, redirect to success page
-                                window.location.href = "success.html";
-                            })
-                            .catch(error => {
-                                console.error("Error updating user's payment history:", error);
-                            });
-                    })
-                    .catch(error => {
-                        console.error("Error fetching user record:", error);
-                    });
+                alert(`Payment successful using ${paymentMethod}`);
+                window.location.href = "success.html";
             }
 
-            // Card Payment Button
+            // Payment buttons
             document.getElementById('cardPayBtn').addEventListener('click', function (event) {
                 event.preventDefault();
-                if (validateCardForm()) {
-                    alert("Card payment successful");
-                    recordPayment("card");
-                }
+                if (validateCardForm()) recordPayment("Card");
             });
 
-            // UPI Payment Button
             document.getElementById('upiPayBtn').addEventListener('click', function (event) {
                 event.preventDefault();
-                if (validateUpiForm()) {
-                    alert("UPI payment successful");
-                    recordPayment("upi");
-                }
+                if (validateUpiForm()) recordPayment("UPI");
             });
 
-            // NetBanking Payment Button
             document.getElementById('netbankingPayBtn').addEventListener('click', function (event) {
                 event.preventDefault();
-                if (validateNetbankingForm()) {
-                    alert("Netbanking payment successful");
-                    recordPayment("netbanking");
-                }
+                if (validateNetbankingForm()) recordPayment("Net Banking");
             });
 
-            // Wallet Payment Button
             document.getElementById('walletPayBtn').addEventListener('click', function (event) {
                 event.preventDefault();
-                if (validateWalletForm()) {
-                    alert("Wallet payment successful");
-                    recordPayment("wallet");
-                }
+                if (validateWalletForm()) recordPayment("Wallet");
             });
+
+            // **Fix: Show UPI form initially since it is selected by default**
+            hideAllForms();
+            const savedMethod = localStorage.getItem("selectedPaymentMethod") || "upi";
+            document.getElementById(`${savedMethod}-radio`).checked = true;
+            showSelectedForm(savedMethod);
         });
 
-        // --- Custom Success Toast JavaScript ---
-        function showSuccessToast() {
-            const toast = document.getElementById("successToast");
-            toast.style.display = "flex";
-            setTimeout(function () {
-                toast.style.display = "none";
-            }, 3000);
-        }
-
-        document.querySelector("#successToast .cross-icon").addEventListener("click", function () {
-            document.getElementById("successToast").style.display = "none";
-        });
     </script>
 </body>
+
 
 </html>

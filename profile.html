@@ -6,160 +6,685 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MobiComm | User Profile</title>
     <link rel="icon" href="Assets/png/favicon.ico" />
-    <link rel="stylesheet" href="style.css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="main.css">
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" /> -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Roboto', sans-serif;
-        }
 
-        .navbar {
-            background-color: #ffffff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+</head>
 
-        .navbar-brand img {
-            max-height: 50px;
-        }
+<style>
+    header {
+        padding: 20px;
+    }
 
-        .navbar-nav .nav-link {
-            color: #4b0082;
-            font-weight: 500;
-            margin-right: 15px;
-        }
+    main {
+        padding: 20px;
+    }
 
-        .navbar-nav .nav-link:hover {
-            color: #300377;
-        }
+    header h1 {
+        color: black;
+        text-decoration: none;
+    }
 
-        .profile-container {
-            max-width: 600px;
-            margin: 50px auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-        .profile-icon-user {
-            font-size: 100px;
-            color: #4b0082;
-            border: 4px solid #4b0082;
-            padding: 20px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
+    .teamcol {
+        width: 90%;
+        max-width: 600px;
+        padding: 20px;
+        border: 2px solid black;
+        border-radius: 10px;
+        background: white;
+    }
 
-        h3 {
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 10px;
-        }
+    .teamhead {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
 
-        p {
-            font-size: 1.1rem;
-            color: #666;
-        }
+    .teamimg {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+    }
 
-        .edit-btn {
-            margin-top: 20px;
-        }
+    .teamname {
+        flex-grow: 1;
+        margin-left: 15px;
+    }
 
-        .modal-content {
-            border-radius: 10px;
-        }
+    .teamname p {
+        background-color: #B8FC67;
+        color: black;
+        font-weight: bold;
+        padding: 5px 12px;
+        border-radius: 15px;
+        display: inline-block;
+        font-size: 14px;
+        margin-top: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        text-transform: uppercase;
+        text-align: center;
+        min-width: 80px;
 
-        .modal-header {
-            border-bottom: none;
-            background: #4b0082;
-            color: #fff;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
+        max-width: 120px;
 
-        .modal-title {
-            font-weight: 700;
-        }
+        white-space: nowrap;
 
-        .btn-primary {
-            background-color: #4b0082;
-            border-color: #4b0082;
-        }
+    }
 
-        .btn-primary:hover {
-            background-color: #300377;
-            border-color: #300377;
+    .editBtn {
+        background: black;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .editBtn:hover {
+        background: #B8FC67;
+        color: black;
+    }
+
+    .teamText {
+        font-size: 12px;
+    }
+
+
+
+    /* Heading & Button Layout */
+
+    .align-container {
+
+        display: flex;
+        flex-direction: column;
+
+    }
+
+
+    /* Table Container */
+    .history-container {
+
+        max-width: 650px;
+        margin: 20px auto;
+        /* Centering */
+        text-align: center;
+    }
+
+    /* Header Section (Heading + Button) */
+    .header-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 10px;
+    }
+
+    .header-section h2 {
+        margin: 0;
+        color: rgb(6, 6, 4);
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    /* Table Styling */
+    .history-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    .history-table th,
+    .history-table td {
+        border: 1px solid rgb(6, 6, 4);
+        padding: 10px;
+        text-align: left;
+    }
+
+    .history-table th {
+        background: black;
+        color: white;
+        text-align: center;
+    }
+
+    .history-table tr:nth-child(even) {
+        background: rgb(251, 251, 249);
+    }
+
+    .history-table tr:nth-child(odd) {
+        background: rgb(240, 240, 240);
+    }
+
+    /* Status Colors */
+    .status-success {
+        color: green;
+        font-weight: bold;
+    }
+
+    .status-failed {
+        color: red;
+        font-weight: bold;
+    }
+
+    /* Download Button */
+    .btn-download {
+        background: black;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .btn-download:hover {
+        background: #B8FC67;
+        color: black;
+    }
+
+    /* Action Button */
+    .btn-action {
+        background: black;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .btn-action:hover {
+        background: #B8FC67;
+        color: black;
+    }
+
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal h2 {
+        font-size: 18px;
+    }
+
+    .modal p {
+        font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+        .modal {
+            width: 90%;
+            max-width: 350px;
         }
-    </style>
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 10px;
+        width: 50%;
+        text-align: center;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .close-btn {
+        float: right;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .close-btn:hover {
+        color: red;
+    }
+</style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="main.html">
-                <img src="Assets/png/logo_color.png" alt="MobiComm Logo" />
+
+    <div class="main">
+        <header>
+            <a href="main.html">
+                <h1><i class="ri-gemini-fill"></i> MobiComm</h1>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="main.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="plans.html">Plans</a></li>
-                    <li class="nav-item"><a class="nav-link" href="main.html">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="main.html">Contact Us</a></li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile.html"><i class="fas fa-user-circle fa-2x"></i></a>
-                    </li>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#services">Plans</a></li>
+                    <li><a href="#usecases">About Us</a></li>
+                    <li><a href="#pricing">Contact Us</a></li>
                 </ul>
+                <button>Profile</button>
+            </nav>
+        </header>
+
+        <div class="container">
+            <div class="teamcol" id="team5">
+                <div class="teamhead">
+                    <img class="teamimg"
+                        src="https://md-rejoyan-islam.github.io/positivus/assets/images/team/member3.svg"
+                        alt="team member">
+                    <div class="teamname">
+                        <h3>Brian Williams</h3>
+                        <p>Basic</p>
+                    </div>
+                    <button class="editBtn" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                        <i class="ri-pencil-line"></i> Edit Profile
+                    </button>
+                </div>
+                <div class="teamText">
+
+
+
+
+
+                    <div class="container history-container">
+                        <div class="align-container">
+                            <div class="header-section">
+                                <h2>Recharge History</h2>
+                                <button class="btn btn-download" onclick="downloadPDF()"><i
+                                        class="ri-download-line"></i></button>
+
+                            </div>
+                            <table class="history-table">
+                                <thead>
+                                    <tr>
+                                        <th>Transaction ID</th>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th>Method</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="historyTableBody">
+                                    <!-- Dynamic Data will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
-    <div class="container">
-        <div class="profile-container">
-            <i class="fas fa-user profile-icon-user"></i>
-            <h3 id="userName">Loading...</h3>
-            <p id="userEmail"><i class="fas fa-envelope"></i> Loading...</p>
-            <p id="userPhone"><i class="fas fa-phone"></i> Loading...</p>
-            <button class="btn btn-primary edit-btn" data-bs-toggle="modal" data-bs-target="#editProfileModal">
-                <i class="fas fa-edit"></i> Edit Profile
-            </button>
-        </div>
-    </div>
-    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="editProfileForm">
-                        <div class="mb-3">
-                            <label for="editName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="editName" value="">
-                        </div>
-                        <div class="mb-3">
-                            <label for="editEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="editEmail" value="">
-                        </div>
-                        <div class="mb-3">
-                            <label for="editPhone" class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="editPhone" value="" disabled>
-                        </div>
-                        <button type="button" class="btn btn-primary" id="saveChangesBtn">Save Changes</button>
-                    </form>
+
+        <!-- Modal -->
+        <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog card-light">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editProfileForm">
+                            <div class="mb-3">
+                                <label for="editName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="editName" value="">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="editEmail" value="">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editPhone" class="form-label">Phone</label>
+                                <input type="text" class="form-control" id="editPhone" value="" disabled>
+                            </div>
+                            <button type="button" class="btn btn-primary" id="saveChangesBtn">Save Changes</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Modal (Hidden by Default) -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Transaction Details</h2>
+            <p><strong>Transaction ID:</strong> <span id="modalTransactionId"></span></p>
+            <p><strong>Date:</strong> <span id="modalDate"></span></p>
+            <p><strong>Amount:</strong> <span id="modalAmount"></span></p>
+            <p><strong>Method:</strong> <span id="modalMethod"></span></p>
+            <p><strong>Status:</strong> <span id="modalStatus"></span></p>
+            <hr>
+            <h2>Plan Details</h2>
+            <p><strong>Plan Name:</strong> <span id="modalPlanName"></span></p>
+            <p><strong>Plan Price:</strong> <span id="modalPlanPrice"></span></p>
+            <p><strong>Validity:</strong> <span id="modalValidity"></span></p>
+            <p><strong>Data:</strong> <span id="modalData"></span></p>
+            <p><strong>Calls:</strong> <span id="modalCalls"></span></p>
+        </div>
+    </div>
+
+
+
+
     <script>
+        const historyData = [
+            {
+                transactionId: "TXN123456", date: "2025-03-22", amount: "$20", method: "Credit Card", status: "Success",
+                plan: { name: "Basic Plan", price: "$20", validity: "28 Days", data: "2GB/Day", calls: "Unlimited" }
+            },
+            {
+                transactionId: "TXN987654", date: "2025-03-21", amount: "$15", method: "UPI", status: "Failed",
+                plan: { name: "Standard Plan", price: "$15", validity: "21 Days", data: "1.5GB/Day", calls: "Unlimited" }
+            },
+            {
+                transactionId: "TXN543210", date: "2025-03-20", amount: "$30", method: "Net Banking", status: "Success",
+                plan: { name: "Premium Plan", price: "$30", validity: "30 Days", data: "3GB/Day", calls: "Unlimited" }
+            }
+        ];
+
+        const historyTableBody = document.getElementById("historyTableBody");
+
+        historyData.forEach(item => {
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${item.transactionId}</td>
+                <td>${item.date}</td>
+                <td>${item.amount}</td>
+                <td>${item.method}</td>
+                <td class="${item.status === 'Success' ? 'status-success' : 'status-failed'}">${item.status}</td>
+                <td>
+                    <button class="btn-action" onclick="viewDetails('${item.transactionId}')">View</button>
+                </td>
+            `;
+
+            historyTableBody.appendChild(row);
+        });
+
+        function viewDetails(transactionId) {
+            const transaction = historyData.find(item => item.transactionId === transactionId);
+            if (transaction) {
+                document.getElementById("modalTransactionId").innerText = transaction.transactionId;
+                document.getElementById("modalDate").innerText = transaction.date;
+                document.getElementById("modalAmount").innerText = transaction.amount;
+                document.getElementById("modalMethod").innerText = transaction.method;
+                document.getElementById("modalStatus").innerText = transaction.status;
+
+                // Plan Details
+                document.getElementById("modalPlanName").innerText = transaction.plan.name;
+                document.getElementById("modalPlanPrice").innerText = transaction.plan.price;
+                document.getElementById("modalValidity").innerText = transaction.plan.validity;
+                document.getElementById("modalData").innerText = transaction.plan.data;
+                document.getElementById("modalCalls").innerText = transaction.plan.calls;
+
+                document.getElementById("detailsModal").style.display = "block";
+            }
+        }
+
+        function closeModal() {
+            document.getElementById("detailsModal").style.display = "none";
+        }
+    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> -->
+<script>
+    function heroAnimation() {
+        var tl = gsap.timeline();
+
+        tl.from("header a", {
+            y: -50,
+            duration: 0.6,
+            delay: 0.5,
+            ease: "sine.out",
+            opacity: 0,
+        })
+
+        tl.from("nav ul li", {
+            y: -50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+            stagger: 0.3,
+        })
+
+        tl.from("nav button", {
+            y: -50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+        })
+
+        tl.from(".hero-text h1", {
+            x: -50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+        }, "-=0.3")
+
+        tl.from(".hero-text p", {
+            x: -50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+        })
+
+        tl.from(".hero-text button", {
+            x: -50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+        })
+
+        tl.from(".hero-image img", {
+            x: 50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+        }, "-=0.5")
+
+        tl.from(".clientlogo img", {
+            x: 50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+            stagger: 0.3,
+        })
+    }
+    function serviceAnimation() {
+        var tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".services",
+                scroller: "body",
+                start: "top 50%",
+                end: "top 10%",
+                scrub: 2,
+            }
+        })
+
+        tl2.from(".serviceText", {
+            x: -200,
+            duration: 0.5,
+            opacity: 0,
+        })
+        tl2.from(".servicebox1", {
+            x: -300,
+            duration: 1,
+            opacity: 0,
+        }, "serviveRow1")
+        tl2.from(".servicebox2", {
+            x: 300,
+            duration: 1,
+            opacity: 0,
+        }, "serviveRow1")
+
+        tl2.from(".servicebox3", {
+            x: -300,
+            duration: 1,
+            opacity: 0,
+        }, "serviveRow2")
+        tl2.from(".servicebox4", {
+            x: 300,
+            duration: 1,
+            opacity: 0,
+        }, "serviveRow2")
+    }
+
+    function casestudyAnimation() {
+        var tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".casestudies",
+                scroller: "body",
+                start: "top 80%",
+                end: "top 10%",
+                scrub: 2,
+            }
+        })
+        tl2.from(".caseText", {
+            x: -200,
+            duration: 0.5,
+            opacity: 0,
+        })
+        tl2.from(".casestudy-col", {
+            y: -300,
+            duration: 1,
+            opacity: 0,
+        })
+    }
+
+    function Accordion() {
+        document.querySelectorAll("details").forEach(details => {
+            details.addEventListener("toggle", () => {
+                const arrowUp = details.querySelector(".arrow-up");
+                const arrowDown = details.querySelector(".arrow-down");
+
+                if (details.open) {
+                    arrowUp.style.display = "block";
+                    arrowDown.style.display = "none";
+                } else {
+                    arrowUp.style.display = "none";
+                    arrowDown.style.display = "block";
+                }
+            });
+        });
+    }
+
+    function ProcessAnimation() {
+        var tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".process",
+                scroller: "body",
+                start: "top 80%",
+                end: "top 10%",
+                scrub: 2,
+            }
+        })
+        tl2.from(".processText", {
+            x: -200,
+            duration: 0.5,
+            opacity: 0,
+        })
+        tl2.from(".accordion-item", {
+            y: 300,
+            duration: 2,
+            opacity: 0,
+        })
+    }
+
+    function teamAnimation() {
+        var tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".team",
+                scroller: "body",
+                start: "top 80%",
+                end: "top 10%",
+                scrub: 2,
+            }
+        })
+        tl2.from(".teamText", {
+            x: -200,
+            duration: 0.5,
+            opacity: 0,
+        })
+        tl2.from("#team1", {
+            x: -300,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow1")
+        tl2.from("#team2", {
+            y: 0,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow1")
+        tl2.from("#team3", {
+            x: 300,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow1")
+        tl2.from("#team4", {
+            x: -300,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow2")
+        tl2.from("#team5", {
+            y: 0,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow2")
+        tl2.from("#team6", {
+            x: 300,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow2")
+    }
+
+    function contactAnimation() {
+        var tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".contact",
+                scroller: "body",
+                start: "top 80%",
+                end: "top 10%",
+                scrub: 2,
+            }
+        })
+        tl2.from(".contactText", {
+            x: -200,
+            duration: 0.5,
+            opacity: 0,
+        })
+        tl2.from(".contactform", {
+            x: 0,
+            duration: 3,
+            opacity: 0,
+        })
+    }
+
+
+    heroAnimation()
+    serviceAnimation()
+    casestudyAnimation()
+    Accordion()
+    ProcessAnimation()
+    teamAnimation()
+    contactAnimation()
+
+</script>
+
+<!-- <script>
         document.addEventListener("DOMContentLoaded", function () {
             const mobileNumber = localStorage.getItem("mobileNumber");
             if (!mobileNumber) {
@@ -181,8 +706,8 @@
                         if (matchingUsers.length > 0) {
                             const user = matchingUsers[0];
                             document.getElementById("userName").innerText = user.name;
-                            document.getElementById("userEmail").innerHTML = `<i class="fas fa-envelope"></i> ${user.email}`;
-                            document.getElementById("userPhone").innerHTML = `<i class="fas fa-phone"></i> ${user.phnno}`;
+                            document.getElementById("userEmail").innerHTML = <i class="fas fa-envelope"></i> ${user.email};
+                            document.getElementById("userPhone").innerHTML = <i class="fas fa-phone"></i> ${user.phnno};
                             document.getElementById("editName").value = user.name;
                             document.getElementById("editEmail").value = user.email;
                             document.getElementById("editPhone").value = user.phnno;
@@ -205,7 +730,7 @@
                     userData.name = updatedName;
                     userData.email = updatedEmail;
                     document.getElementById("userName").innerText = userData.name;
-                    document.getElementById("userEmail").innerHTML = `<i class="fas fa-envelope"></i> ${userData.email}`;
+                    document.getElementById("userEmail").innerHTML = <i class="fas fa-envelope"></i> ${userData.email};
                     fetch('/data/db.json/users/' + userData.id, {
                         method: 'PUT',
                         headers: {
@@ -232,7 +757,7 @@
                 }
             });
         });
-    </script>
+    </script> -->
 </body>
 
 </html>

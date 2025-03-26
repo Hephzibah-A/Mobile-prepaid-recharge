@@ -2,1006 +2,608 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MobiComm</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="icon" href="Assets/png/favicon.ico" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Bootstrap 5 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-    <style>
-        /* Theme Variables */
-        :root {
-            --text: rgb(6, 6, 4);
-            --background: rgb(251, 251, 249);
-            --primary: rgb(63, 0, 163);
-            --secondary: rgb(68, 0, 179);
-            --accent: rgb(255, 157, 0);
-        }
-
-        /* Global Styles */
-        body {
-            background-color: var(--background);
-            color: var(--text);
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-
-        a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Reveal on Scroll (slower) */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1.2s ease;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Navbar */
-        .header-container nav.navbar {
-            background: transparent;
-        }
-
-        .navbar-brand img {
-            max-height: 50px;
-        }
-
-        /* Navbar Toggler (Bootstrap 5) */
-        .navbar-toggler {
-            border: none;
-        }
-
-        .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(63,0,163,0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-        }
-
-        /* Hero Section with Typewriter Effect */
-        .hero {
-
-            justify-content: start;
-            padding: 1rem 0;
-        }
-
-        .header-content {
-            color: var(--text);
-            text-align: start;
-            padding-top: 150px;
-            /* Centering the typewriter text */
-        }
-
-        #heroHeading {
-            font-size: 2.5rem;
-            color: var(--primary);
-            min-height: 3em;
-        }
-
-        #heroSubheading {
-            font-size: 1.2rem;
-            color: var(--text);
-            min-height: 2em;
-            margin-bottom: .5rem;
-        }
-
-        .login-btn {
-            background-color: var(--accent);
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 400;
-            color: #fff;
-            transition: background-color 0.3s;
-        }
-
-        .login-btn:hover {
-            background-color: rgb(242, 160, 27);
-        }
-
-        /* ----------------------------- */
-        /* Recommended Packs Card Styles */
-        /* ----------------------------- */
-        /* Using new "e-card" design with animated waves */
-        .e-card {
-            margin: 100px auto;
-            background: transparent;
-            box-shadow: 0px 8px 28px -9px rgba(0, 0, 0, 0.45);
-            position: relative;
-            width: 240px;
-            height: 350px;
-            border-radius: 16px;
-            overflow: hidden;
-        }
-
-        .e-card .image {
-            /* Optional background image styling; leave transparent or add your own */
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: transparent;
-            z-index: 1;
-        }
-
-        .wave {
-            position: absolute;
-            width: 540px;
-            height: 700px;
-            opacity: 0.6;
-            left: 0;
-            top: 0;
-            margin-left: -50%;
-            margin-top: -70%;
-            background: linear-gradient(744deg, #af40ff, #5b42f3 60%, #00ddeb);
-            border-radius: 40%;
-            animation: wave 55s infinite linear;
-        }
-
-        .wave:nth-child(2),
-        .wave:nth-child(3) {
-            top: 210px;
-        }
-
-        .playing .wave {
-            animation: wave 3000ms infinite linear;
-        }
-
-        .playing .wave:nth-child(2) {
-            animation-duration: 4000ms;
-        }
-
-        .wave:nth-child(2) {
-            animation-duration: 50s;
-        }
-
-        .playing .wave:nth-child(3) {
-            animation-duration: 5000ms;
-        }
-
-        .wave:nth-child(3) {
-            animation-duration: 45s;
-        }
-
-        @keyframes wave {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .infotop {
-            text-align: center;
-            font-size: 20px;
-            position: absolute;
-            top: 5.6em;
-            left: 0;
-            right: 0;
-            color: rgb(255, 255, 255);
-            font-weight: 600;
-            z-index: 2;
-            padding: 0 10px;
-        }
-
-        .infotop .heading {
-            font-size: 20px;
-            text-transform: capitalize;
-            font-weight: 700;
-            margin: 0.2em 0;
-        }
-
-        .infotop p {
-            margin: 0.2em 0;
-            font-size: 14px;
-        }
-
-        .infotop .price {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 0.5em 0;
-        }
-
-        .infotop ul.plan-details {
-            list-style: none;
-            padding: 0;
-            margin: 0.5em 0;
-            font-size: 12px;
-            text-align: left;
-            display: inline-block;
-        }
-
-        .infotop ul.plan-details li {
-            margin: 2px 0;
-        }
-
-        .btn-payments {
-            background: var(--primary);
-            color: #fff;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background 0.2s;
-            margin-top: 0.5em;
-        }
-
-        .btn-payments:hover {
-            background: var(--secondary);
-        }
-
-        #popular-plans {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        /* Responsive adjustments: for smaller screens, reduce card size */
-        @media (max-width: 768px) {
-            .e-card {
-                width: 200px;
-                height: 280px;
-            }
-        }
-
-        /* ----------------------------- */
-        /* Other Sections (unchanged)  */
-        /* ----------------------------- */
-        .about-us {
-            padding: 4rem 0;
-        }
-
-        .about-us-title {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .about-us-text {
-            color: var(--text);
-            font-size: 1.1rem;
-        }
-
-        .about-us-details .detail-item {
-            margin-top: 1rem;
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        .detail-label {
-            font-weight: 500;
-            color: var(--secondary);
-        }
-
-        .why-choose {
-            padding: 4rem 0;
-        }
-
-        .feature-card {
-            background: #fff;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-            text-align: center;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-card i {
-            color: var(--accent);
-        }
-
-        .faq-container {
-            padding: 4rem 0;
-        }
-
-        .faq-title {
-            margin-bottom: 2rem;
-            color: var(--primary);
-        }
-
-        .faq-item {
-            margin-bottom: 1rem;
-        }
-
-        .faq-question {
-            font-weight: 500;
-            cursor: pointer;
-            color: var(--text);
-            padding: 0.5rem;
-            border: 1px solid #e0e0e0;
-            border-radius: 4px;
-            background: #fff;
-        }
-
-        .faq-answer {
-            padding: 0.75rem;
-            border: 1px solid #e0e0e0;
-            border-top: none;
-            border-radius: 0 0 4px 4px;
-            background: #fff;
-        }
-
-        .contact-section {
-            padding: 4rem 0;
-            background: #fff;
-        }
-
-        .contact-title {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .contact-description {
-            color: var(--text);
-            margin-bottom: 2rem;
-        }
-
-        #contactForm .form-control {
-            border-radius: 4px;
-            padding: 0.75rem;
-            font-size: 1rem;
-        }
-
-        footer {
-            background: var(--primary);
-            padding: 1rem 0;
-            font-size: 0.9rem;
-            color: white;
-        }
-
-        .footer-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        .footer-col {
-            flex: 1 1 250px;
-            margin: 0.5rem 0;
-        }
-
-        .footer-logo {
-            max-width: 120px;
-        }
-
-        .footer-col h5 {
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-col ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 0.3rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .footer-col ul li svg {
-            width: 16px;
-            height: 16px;
-            fill: var(--accent);
-        }
-
-        .footer-col ul li a {
-            color: var(--background);
-            font-size: 0.85rem;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 0.5rem;
-            list-style: none;
-            padding: 0;
-        }
-
-        .social-icons li a {
-            font-size: 1.2rem;
-            color: var(--background);
-            transition: color 0.3s;
-        }
-
-        .social-icons li a:hover {
-            color: var(--accent);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            border-top: 1px solid #e0e0e0;
-            padding-top: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        @media (max-width: 430px) {
-            .header-content h1 {
-                font-size: 1.8rem;
-            }
-
-            .header-content p {
-                font-size: 1rem;
-            }
-
-            #contactForm .form-control {
-                font-size: 0.9rem;
-            }
-
-            .footer-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .footer-col {
-                text-align: center;
-            }
-        }
-
-        .welcome-back {
-            text-align: center;
-            margin-bottom: 10px;
-            color: #343a40;
-            font-weight: bold;
-        }
-
-        .enter-details {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #6c757d;
-        }
-
-        .form-group label {
-            font-weight: 500;
-            color: #343a40;
-        }
-
-        .btn-primary {
-            background-color: #4B0082;
-            border-color: #4B0082;
-        }
-
-        .btn-primary:hover {
-            background-color: #3A0068;
-            border-color: #3A0068;
-        }
-
-        .btn-accent {
-            color: white;
-            background-color: rgb(255, 157, 0);
-            border-color: rgb(255, 157, 0);
-            border-radius: 50px;
-        }
-
-        .btn-accent:hover {
-            background-color: rgb(204, 126, 0);
-            border-color: rgb(204, 126, 0);
-        }
-
-        .error-message {
-            color: red;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        .illustration {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .illustration-box {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="main.css">
 </head>
 
 <body>
-    <!-- Background Blur Shapes -->
-    <div class="absolute">
-        <div class="absolute inset-0 justify-center">
-            <div class="bg-shape-1 bg-teal opacity-50 bg-blur"></div>
-            <div class="bg-shape-2 bg-purple opacity-50 bg-blur"></div>
-            <div class="bg-shape-3 bg-teal opacity-50 bg-blur"></div>
-        </div>
-    </div>
+    <div id="main">
+        <header>
+            <a href="index.html">
+                <h1><i class="ri-gemini-fill"></i>MobiComm</h1>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#services">Plans</a></li>
+                    <li><a href="#usecases">About Us</a></li>
+                    <li><a href="#pricing">Contact Us</a></li>
 
-    <!-- Navbar -->
-    <section class="header-container">
-        <nav class="navbar navbar-expand-lg reveal">
-            <div class="container">
-                <a class="navbar-brand" href="#"><img src="Assets/png/logo_color.png" alt="MobiComm Logo"></a>
-                <!-- Burger Menu for Mobile -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#plans">Plans</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                <i class="fas fa-user-circle fa-2x"></i>
-                            </a>
-                        </li>
-                    </ul>
+                </ul>
+                <button><a href="profile.html">Profile</a></button>
+            </nav>
+        </header>
+        <section id="hero">
+            <div class="hero-text">
+                <h1>Recharge Your
+                    Mobile in Just a Few Clicks!</h1>
+
+                <p>Experience the convenience of recharging your mobile anytime, anywhere. Join thousands of satisfied
+                    users today!</p>
+                <button>Get Started</button>
+            </div>
+            <div class="hero-image">
+                <img src="https://framerusercontent.com/images/57Ruwy4ZsvnD8kCeRIyxAbfU0.png" alt="hero-image">
+            </div>
+        </section>
+
+        <!-- recommended plans -->
+
+        <section id="recommended-plans" class="team">
+            <div class="teamText">
+                <h2>Recommended Plans</h2>
+                <p>Discover flexible and affordable recharge plans tailored to your needs.</p>
+            </div>
+            <div id="plansContainer" class="teamrow"></div> <!-- Dynamic plans will be inserted here -->
+        </section>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                fetch("http://localhost:8082/api/plans/user")
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Failed to fetch plans");
+                        }
+                        return response.json();
+                    })
+                    .then(plans => {
+                        const plansContainer = document.getElementById("plansContainer");
+                        plansContainer.innerHTML = ""; // Clear any existing content
+
+                        const recommendedPlans = plans.slice(0, 3); // Get only 6 plans
+
+                        recommendedPlans.forEach(plan => {
+                            const planCard = document.createElement("div");
+                            planCard.classList.add("teamcol"); // Add class for styling
+
+                            planCard.innerHTML = `
+                            <div class="teamhead">
+                                <div class="teamname">
+                                    <h3>₹${plan.planPrice}</h3>
+                                    <p>${plan.planName}</p>
+                                </div>
+                            </div>
+                            <ul>
+                                <li>${plan.calls ? "Unlimited Calls" : "Limited Calls"}</li>
+                                <li>${plan.data} GB Data</li>
+                                <li>Free SMS</li>
+                                <li>Validity: ${plan.validityDays} Days</li>
+                            </ul>
+                            <button onclick="window.location.href='payment.html?planId=${plan.id}'">Recharge</button>
+                        `;
+
+                            plansContainer.appendChild(planCard); // Append plan card to container
+                        });
+                    })
+                    .catch(error => {
+                        console.error("Error fetching recommended plans:", error);
+                        document.getElementById("plansContainer").innerHTML = `<p class="text-center text-danger">Error loading plans.</p>`;
+                    });
+            });
+        </script>
+
+        <!-- Why choose mobiComm -->
+        <section id="services" class="services">
+            <div class="serviceText">
+                <h2>Why MobiComm</h2>
+                <p>Discover why MobiComm is the ultimate choice for your mobile recharge needs. Explore the features
+                    below to see how we make your experience seamless and hassle-free.</p>
+            </div>
+            <div class="card-row">
+                <div class="card-light servicebox1">
+                    <div class="card-text">
+                        <h3><span>Fast Recharge</span></h3>
+                        <p>Recharge your mobile instantly with just a few clicks.</p>
+
+                    </div>
+                    <img src="https://md-rejoyan-islam.github.io/positivus/assets/images/services/web-search.svg"
+                        alt="">
+                </div>
+                <div class="card-dark servicebox2">
+                    <div class="card-dark-text">
+                        <h3><span>Best Deals</span></h3>
+                        <p style="color: white;">Enjoy exclusive offers and discounts on your recharges.</p>
+                    </div>
+                    <img src="https://md-rejoyan-islam.github.io/positivus/assets/images/services/advertising.svg"
+                        alt="">
                 </div>
             </div>
-        </nav>
+            <div class="card-row" style="margin-top: 0px;">
+                <div class="card-dark servicebox3">
+                    <div class="card-dark-text">
+                        <h3><span>24/7 Support</span></h3>
+                        <p style="color: white;">Our customer support is available 24/7 to assist you with any issues.
+                        </p>
 
-        <!-- Hero Banner with Typewriter Effect -->
-        <section class="hero reveal">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 header-content">
-                        <h1 id="heroHeading" aria-label="Recharge Your Mobile in Just a Few Clicks!">Recharge Your
-                            Mobile in Just a Few Clicks!</h1>
-                        <p id="heroSubheading"></p>
-                        <br>
-                        <br>
-                        <button class="btn  login-btn">
-                            <a href="plans.html" style="color: inherit; text-decoration: none;">Explore Plans</a>
-                        </button>
                     </div>
-                    <div class="col-md-6">
-                        <img src="Assets/png/Connected-cuate 1.png" alt="Recharge Illustration" class="img-fluid">
+                    <img src="https://md-rejoyan-islam.github.io/positivus/assets/images/services/marketing.svg" alt="">
+                </div>
+                <div class="card-light servicebox4">
+                    <div class="card-text">
+                        <h3><span>Secure Transactions</span></h3>
+                        <p>Your transactions are safe with our secure payment gateway.</p>
                     </div>
+                    <img src="https://md-rejoyan-islam.github.io/positivus/assets/images/services/email-markiing.svg"
+                        alt="">
                 </div>
             </div>
         </section>
-    </section>
 
-    <section class="reveal">
-        <div class="container ">
-            <div class="row justify-content-center">
-                <div class="col-md-6 login-box">
-                    <div class="login-form">
-                        <h2 class="welcome-back">WELCOME BACK</h2>
-                        <p class="enter-details">Welcome back! Please enter your details.</p>
-                        <form id="loginForm">
-                            <div class="form-group">
-                                <label for="mobile">Mobile</label>
-                                <input type="text" class="form-control" id="mobile" name="mobile"
-                                    placeholder="Enter your number">
-                                <span id="mobileError" class="error-message"></span>
-                            </div>
-                            <button type="button" class="btn btn-primary btn-block" onclick="validateForm()">Get
-                                OTP</button>
-                        </form>
-                    </div>
+        <section id="banner" class="banner">
+
+            <div class="banner-cards" style="display: flex; gap: 20px; justify-content: center;">
+                <div class="banner-card"
+                    style="flex: 1; text-align: center; padding: 20px; border: 1px solid #ccc; border-radius: 8px; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                    <h3 style="display: block; margin: 0;">New SIM</h3>
+                    <p style="display: block; margin: 0;">Get a new physical SIM card delivered to your doorstep.</p>
+                    <button style="display: block; margin-top: 10px;">Order Now</button>
                 </div>
-                <div class="col-md-6 illustration-box">
-                    <img src="Assets/png/At the office-pana (1) 1.png" alt="Illustration" class="illustration">
+                <div class="banner-card"
+                    style="flex: 1; text-align: center; padding: 20px; border: 1px solid #ccc; border-radius: 8px; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                    <h3 style="display: block; margin: 0;">New e-SIM</h3>
+                    <p style="display: block; margin: 0;">Switch to a digital e-SIM for a seamless and eco-friendly
+                        experience.</p>
+                    <button style="display: block; margin-top: 10px;">Activate e-SIM</button>
+                </div>
+                <div class="banner-card"
+                    style="flex: 1; text-align: center; padding: 20px; border: 1px solid #ccc; border-radius: 8px; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                    <h3 style="display: block; margin: 0;">Get Fancy Number</h3>
+                    <p style="display: block; margin: 0;">Choose a premium or fancy mobile number that stands out.</p>
+                    <button style="display: block; margin-top: 10px;">Explore Numbers</button>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Recommended Packs -->
-    <div class="container mt-5 reveal">
-        <h2 class="text-center mb-4">Recommended Packs</h2>
-        <div id="popular-plans" class="d-flex flex-wrap justify-content-center">
-            <!-- Recommended plan cards will be dynamically inserted here -->
-        </div>
-    </div>
-    <br>
+        </section>
+        <!-- about us -->
+        <section id="casestudies" class="casestudies">
+            <div class="caseText">
+                <h2>About US</h2>
+                <p>MobiComm simplifies mobile recharges for a hassle-free experience. Stay connected effortlessly with
+                    us.</p>
+            </div>
+            <div class="casestudy-row">
+                <div class="casestudy-col">
+                    <p>MobiComm is a leading platform that simplifies mobile recharges, offering fast, secure, and
+                        reliable services to users worldwide</p>
 
-    <!-- About Us Section -->
-    <section class="about-us py-5 reveal" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="Assets/png/Connected world-cuate 1.png" alt="About Us Illustration" class="img-fluid">
                 </div>
-                <div class="col-md-6 d-flex flex-column justify-content-center">
-                    <h2 class="about-us-title">About Us</h2>
-                    <p class="about-us-text">
-                        We are your go-to platform for quick, secure, and hassle-free mobile recharges anytime,
-                        anywhere.
-                    </p>
-                    <div class="about-us-details">
-                        <div class="detail-item">
-                            <i class="fas fa-headset"></i>
-                            <div>
-                                <span class="detail-label">Customer Support</span><br>
-                                <a href="mailto:support@mobicomm.com">support@mobicomm.com</a>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-award"></i>
-                            <div>
-                                <span class="detail-label">Best Price Guaranteed</span><br>
-                                <span>Enjoy the best prices on mobile recharges - guaranteed!</span>
-                            </div>
-                        </div>
-                        <div class="detail-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <span class="detail-label">Location</span><br>
-                                <span>H229+CMF, Knowledge College Rd. Kakapalayam, Selliampalayam, Tamil Nadu
-                                    637504</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="casestudy-col">
+                    <p>With MobiComm, users can enjoy exclusive deals, 24/7 customer support, and a seamless recharge
+                        experience tailored to their needs.</p>
+
+                </div>
+                <div class="casestudy-col">
+                    <p>Our mission at MobiComm is to keep you connected effortlessly, providing innovative solutions for
+                        all
+                        your mobile recharge requirements.</p>
+
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+        <!-- faq -->
+        <section class="process">
+            <div class="processText">
+                <h2>Frequently Asked Questions</h2>
 
-    <!-- Why Choose MobiComm Section -->
-    <section class="why-choose py-5 reveal">
-        <div class="container">
-            <h2 class="text-center mb-4">Why Choose MobiComm</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="feature-card text-center">
-                        <i class="fas fa-shield-alt fa-3x mb-3"></i>
-                        <h5>Secure Transactions</h5>
-                        <p>Your transactions are safe with our secure payment gateway.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature-card text-center">
-                        <i class="fas fa-bolt fa-3x mb-3"></i>
-                        <h5>Fast Recharge</h5>
-                        <p>Recharge your mobile instantly with just a few clicks.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature-card text-center">
-                        <i class="fas fa-headset fa-3x mb-3"></i>
-                        <h5>24/7 Support</h5>
-                        <p>Our customer support is available 24/7 to assist you with any issues.</p>
-                    </div>
-                </div>
             </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq-container reveal">
-        <div class="container mt-5">
-            <h2 class="faq-title text-center">FAQS</h2>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq-answer-1">
-                        How do I recharge my mobile on this website?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer collapse" id="faq-answer-1">
-                        You can recharge your mobile by selecting your country, entering your mobile number, choosing a
-                        plan,
-                        and making a secure payment. The recharge is processed instantly!
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq-answer-2">
-                        What payment methods do you accept?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer collapse" id="faq-answer-2">
-                        We accept various payment methods, including credit cards, debit cards, and mobile wallets.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq-answer-3">
-                        How long does it take for the recharge to reflect?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer collapse" id="faq-answer-3">
-                        Recharges are usually instant, but in some cases, it might take a few minutes.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq-answer-4">
-                        What should I do if my recharge fails but money is deducted?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer collapse" id="faq-answer-4">
-                        Please contact our customer support with the transaction details, and we'll investigate the
-                        issue.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq-answer-5">
-                        Can I get a refund if I recharge the wrong number?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer collapse" id="faq-answer-5">
-                        Refunds for incorrect numbers are subject to approval. Please contact our customer support as
-                        soon as possible.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact-section reveal" id="contact">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <h2 class="contact-title text-center">Contact</h2>
-                    <p class="contact-description text-center">
-                        We'd love to hear from you! For any inquiries or assistance, feel free to reach out to us. Our
-                        team is available to help you with any questions or issues.
-                    </p>
-                    <form id="contactForm">
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
-                            <div class="invalid-feedback">
-                                Please enter a valid email address.
+            <div class="accordion">
+                <div class="accordion-item" id="accordion1">
+                    <details open>
+                        <summary>
+                            <div class="accordion-title">
+                                <h3>How do I recharge my mobile on this website?</h3>
+                                <i class="ri-arrow-down-s-line arrow-down" style="display: none;"></i>
+                                <i class="ri-arrow-up-s-line arrow-up" style=" display:block;"></i>
                             </div>
+                        </summary>
+                        <div class="accordion-content">
+                            <p>You can recharge your mobile by selecting your country, entering your mobile number,
+                                choosing a
+                                plan,
+                                and making a secure payment. The recharge is processed instantly!</p>
                         </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Contact</button>
+                    </details>
+                </div>
+                <div class="accordion-item" id="accordion2">
+                    <details>
+                        <summary>
+                            <div class="accordion-title">
+                                <h3>What payment methods do you accept?</h3>
+                                <i class="ri-arrow-down-s-line arrow-down" style="display: block;"></i>
+                                <i class="ri-arrow-up-s-line arrow-up" style=" display:none;"></i>
+                            </div>
+                        </summary>
+                        <div class="accordion-content">
+                            <p> We accept various payment methods, including credit cards, debit cards, and mobile
+                                wallets.</p>
                         </div>
+                    </details>
+                </div>
+                <div class="accordion-item" id="accordion3">
+                    <details>
+                        <summary>
+                            <div class="accordion-title">
+                                <h3> How long does it take for the recharge to reflect?</h3>
+                                <i class="ri-arrow-down-s-line arrow-down" style="display: block;"></i>
+                                <i class="ri-arrow-up-s-line arrow-up" style=" display:none;"></i>
+                            </div>
+                        </summary>
+                        <div class="accordion-content">
+                            <p> Recharges are usually instant, but in some cases, it might take a few minutes.</p>
+                        </div>
+                    </details>
+                </div>
+                <div class="accordion-item" id="accordion4">
+                    <details>
+                        <summary>
+                            <div class="accordion-title">
+                                <h3> What should I do if my recharge fails but money is deducted?</h3>
+                                <i class="ri-arrow-down-s-line arrow-down" style="display: block;"></i>
+                                <i class="ri-arrow-up-s-line arrow-up" style=" display:none;"></i>
+                            </div>
+                        </summary>
+                        <div class="accordion-content">
+                            <p> Please contact our customer support with the transaction details, and we'll investigate
+                                the
+                                issue.</p>
+                        </div>
+                    </details>
+                </div>
+                <div class="accordion-item" id="accordion5">
+                    <details>
+                        <summary>
+                            <div class="accordion-title">
+                                <h3>Can I get a refund if I recharge the wrong number?</h3>
+                                <i class="ri-arrow-down-s-line arrow-down" style="display: block;"></i>
+                                <i class="ri-arrow-up-s-line arrow-up" style=" display:none;"></i>
+                            </div>
+                        </summary>
+                        <div class="accordion-content">
+                            <p> Refunds for incorrect numbers are subject to approval. Please contact our customer
+                                support as
+                                soon as possible.</p>
+                        </div>
+                    </details>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- contact us -->
+        <section class="contact">
+            <div class="contactText">
+                <h2>Contact Us</h2>
+                <p>Connect with Us: Let's Discuss Your Needs </p>
+            </div>
+            <div class="contactform">
+                <form action="">
+                    <input type="text" placeholder="Name">
+                    <input type="email" placeholder="Email">
+                    <input type="text" placeholder="Phone">
+                    <textarea name="" id="" cols="30" rows="10" placeholder="Message"></textarea>
+                    <button>Send Message</button>
+                </form>
+        </section>
+        <!-- footer -->
+        <footer class="footer">
+            <div class="footerTop">
+                <div class="footerLogo">
+                    <a href="index.html">
+                        <h2><i class="ri-gemini-fill"></i>MobiComm</h2>
+                    </a>
+                </div>
+                <div class="footerNav">
+                    <ul>
+                        <li><a href="#services">Plans</a></li>
+                        <li><a href="#hero">About Us</a></li>
+
+                    </ul>
+                </div>
+                <div class="footerSocialBtn">
+                    <img src="https://md-rejoyan-islam.github.io/positivus/assets/images/social-icons/linkedin.svg"
+                        alt="LinkedIn">
+                    <img src="https://md-rejoyan-islam.github.io/positivus/assets/images/social-icons/facebook.svg"
+                        alt="Facebook">
+                    <img src="https://md-rejoyan-islam.github.io/positivus/assets/images/social-icons/twitter.svg"
+                        alt="Twitter">
+                </div>
+            </div>
+            <div class="footerCenter">
+                <div class="companyInformation">
+                    <h2><span>Contact use:</span></h2>
+                    <p>Email: info@mobicomm.com</p>
+                    <p>Phone: 555-687-8901</p>
+                    <p>Address: 1234 Main St
+                        Moonstone City,stardust State 12345</p>
+                </div>
+                <div class="footerform">
+                    <form action="">
+                        <input type="email" placeholder="Email">
+                        <button>Subscribe to news</button>
                     </form>
                 </div>
             </div>
-        </div>
-    </section>
+            <div class="footerBottom">
+                <p>&copy; 2024 MobiComm. All rights reserved.</p>
+                <a href="#">Privacy Policy</a>
+            </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-col">
-                <img src="Assets/png/logo.png" alt="MobiComm Logo" class="footer-logo">
-                <p>Your trusted partner for mobile recharges.</p>
-            </div>
-            <div class="footer-col">
-                <h5>Quick Links</h5>
-                <ul>
-                    <li>
-                        <svg viewBox="0 0 24 24">
-                            <path
-                                d="M12 2a7 7 0 00-7 7v4a7 7 0 0014 0V9a7 7 0 00-7-7zm3 11a3 3 0 01-6 0v-4a3 3 0 016 0v4z" />
-                            <path d="M5 20a1 1 0 011-1h12a1 1 0 011 1v1H5v-1z" />
-                        </svg>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a>
-                    </li>
-                    <li>
-                        <svg viewBox="0 0 24 24">
-                            <path
-                                d="M2 7a2 2 0 012-2h16a2 2 0 012 2v2H2V7zm0 4h20v6a2 2 0 01-2 2H4a2 2 0 01-2-2v-6zm2 0v6h16v-6H4z" />
-                        </svg>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms &amp; Conditions</a>
-                    </li>
-                    <li>
-                        <svg viewBox="0 0 24 24">
-                            <path
-                                d="M12 4V1L8 5l4 4V6a6 6 0 016 6 6.002 6.002 0 01-5.197 5.958l1.191 2.432A8 8 0 1012 4z" />
-                        </svg>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#refundModal">Refund Policy</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h5>Follow Us</h5>
-                <ul class="social-icons">
-                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy;2025 MobiComm. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Modals -->
-
-    <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="loginForm">
-                        <div class="mb-3">
-                            <label for="loginEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email"
-                                required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="loginPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="loginPassword"
-                                placeholder="Enter your password" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Login</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+        </footer>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+        integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js"></script>
+</body>
 
-    <!-- Privacy Policy Modal -->
-    <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Your privacy is important to us. We collect and use your data only to provide better services.
-                        [Full Privacy Policy Content]</p>
-                </div>
-            </div>
-        </div>
-    </div>
+<script>
+    function heroAnimation() {
+        var tl = gsap.timeline();
 
-    <!-- Terms & Conditions Modal -->
-    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="termsModalLabel">Terms &amp; Conditions</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>These terms and conditions outline the rules and regulations for the use of our website.
-                        [Full Terms &amp; Conditions Content]</p>
-                </div>
-            </div>
-        </div>
-    </div>
+        tl.from("header a", {
+            y: -50,
+            duration: 0.6,
+            delay: 0.5,
+            ease: "sine.out",
+            opacity: 0,
+        })
 
-    <!-- Refund Policy Modal -->
-    <div class="modal fade" id="refundModal" tabindex="-1" aria-labelledby="refundModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="refundModalLabel">Refund Policy</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Refunds for incorrect recharges are subject to approval. Please contact our customer support for
-                        more details.
-                        [Full Refund Policy Content]</p>
-                </div>
-            </div>
-        </div>
-    </div>
+        tl.from("nav ul li", {
+            y: -50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+            stagger: 0.3,
+        })
 
-    <!-- External JS -->
-    <script src="Assets/js/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        tl.from("nav button", {
+            y: -50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+        })
 
-    <!-- Reveal on Scroll Script -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const reveals = document.querySelectorAll(".reveal");
-            const options = { threshold: 0.2 };
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("active");
-                    }
-                });
-            }, options);
-            reveals.forEach(reveal => observer.observe(reveal));
-        });
-    </script>
+        tl.from(".hero-text h1", {
+            x: -50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+        }, "-=0.3")
 
-    <!-- Typewriter Effect for Hero Section -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const heroHeading = document.getElementById("heroHeading");
-            const heroSubheading = document.getElementById("heroSubheading");
-            const headingText = "Recharge Your Mobile\nin Just a Few Clicks!";
-            const subheadingText = "Fast, Secure, and Hassle-Free\nRecharges for All";
-            const headingDelay = 100;
-            const subheadingDelay = 80;
+        tl.from(".hero-text p", {
+            x: -50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+        })
 
-            function typeWriter(element, text, delay) {
-                let i = 0;
-                element.innerHTML = "";
-                function type() {
-                    if (i < text.length) {
-                        if (text.charAt(i) === "\n") {
-                            element.innerHTML += "<br>";
-                        } else {
-                            element.innerHTML += text.charAt(i);
-                        }
-                        i++;
-                        setTimeout(type, delay);
-                    }
-                }
-                type();
+        tl.from(".hero-text button", {
+            x: -50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+        })
+
+        tl.from(".hero-image img", {
+            x: 50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+        }, "-=0.5")
+
+        tl.from(".clientlogo img", {
+            x: 50,
+            duration: 0.7,
+            opacity: 0,
+            ease: "sine.out",
+            stagger: 0.3,
+        })
+    }
+    function serviceAnimation() {
+        var tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".services",
+                scroller: "body",
+                start: "top 50%",
+                end: "top 10%",
+                scrub: 2,
             }
-            setTimeout(() => {
-                typeWriter(heroHeading, headingText, headingDelay);
-                typeWriter(heroSubheading, subheadingText, subheadingDelay);
-            }, 500);
-        });
-    </script>
+        })
 
-    <!-- Recommended Packs - Fetch from JSON and Build E-Card Style -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Fetch plans from JSON server
-            fetch("http://localhost:3000/plans")
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Network response was not ok");
-                    }
-                    return response.json();
-                })
-                .then(plans => {
-                    // Filter only popular plans (assuming plan.popular is a boolean)
-                    const popularPlans = plans.filter(plan => plan.popular === true);
-                    // Limit to 8 plans
-                    const eightPlans = popularPlans.slice(0, 4);
-                    let html = "";
-                    eightPlans.forEach(plan => {
-                        html += `
-              <div class="e-card playing" data-plan='${JSON.stringify(plan)}'>
-                <div class="image"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="wave"></div>
-                <div class="infotop">
-                  <p class="heading">${plan.planType}</p>
-                  <p class="price">₹${plan.price} ${plan.validity == 1 ? "" : '/ month'}</p>
-                  <ul class="plan-details">
-                    <li><strong>Data:</strong> ${plan.data}</li>
-                    <li><strong>Calls:</strong> ${plan.calls}</li>
-                    <li><strong>Validity:</strong> ${plan.validity} Days</li>
-                    <li>Free SMS & OTT access</li>
-                  </ul>
-                  <button class="btn-payments" onclick="window.location.href='payment.html'">Recharge </button>
-                </div>
-              </div>
-            `;
-                    });
-                    document.getElementById("popular-plans").innerHTML = html;
-                })
-                .catch(error => {
-                    console.error("Error fetching recommended plans:", error);
-                    document.getElementById("popular-plans").innerHTML = `<p class="text-center text-danger">Error loading plans.</p>`;
-                });
+        tl2.from(".serviceText", {
+            x: -200,
+            duration: 0.5,
+            opacity: 0,
+        })
+        tl2.from(".servicebox1", {
+            x: -300,
+            duration: 1,
+            opacity: 0,
+        }, "serviveRow1")
+        tl2.from(".servicebox2", {
+            x: 300,
+            duration: 1,
+            opacity: 0,
+        }, "serviveRow1")
+
+        tl2.from(".servicebox3", {
+            x: -300,
+            duration: 1,
+            opacity: 0,
+        }, "serviveRow2")
+        tl2.from(".servicebox4", {
+            x: 300,
+            duration: 1,
+            opacity: 0,
+        }, "serviveRow2")
+    }
+
+    function casestudyAnimation() {
+        var tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".casestudies",
+                scroller: "body",
+                start: "top 80%",
+                end: "top 10%",
+                scrub: 2,
+            }
+        })
+        tl2.from(".caseText", {
+            x: -200,
+            duration: 0.5,
+            opacity: 0,
+        })
+        tl2.from(".casestudy-col", {
+            y: -300,
+            duration: 1,
+            opacity: 0,
+        })
+    }
+
+    function Accordion() {
+        document.querySelectorAll("details").forEach(details => {
+            details.addEventListener("toggle", () => {
+                const arrowUp = details.querySelector(".arrow-up");
+                const arrowDown = details.querySelector(".arrow-down");
+
+                if (details.open) {
+                    arrowUp.style.display = "block";
+                    arrowDown.style.display = "none";
+                } else {
+                    arrowUp.style.display = "none";
+                    arrowDown.style.display = "block";
+                }
+            });
         });
-    </script>
-    <script src="Assets/js/login.js"></script>
+    }
+
+    function ProcessAnimation() {
+        var tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".process",
+                scroller: "body",
+                start: "top 80%",
+                end: "top 10%",
+                scrub: 2,
+            }
+        })
+        tl2.from(".processText", {
+            x: -200,
+            duration: 0.5,
+            opacity: 0,
+        })
+        tl2.from(".accordion-item", {
+            y: 300,
+            duration: 2,
+            opacity: 0,
+        })
+    }
+
+    function teamAnimation() {
+        var tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".team",
+                scroller: "body",
+                start: "top 80%",
+                end: "top 10%",
+                scrub: 2,
+            }
+        })
+        tl2.from(".teamText", {
+            x: -200,
+            duration: 0.5,
+            opacity: 0,
+        })
+        tl2.from("#team1", {
+            x: -300,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow1")
+        tl2.from("#team2", {
+            y: 0,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow1")
+        tl2.from("#team3", {
+            x: 300,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow1")
+        tl2.from("#team4", {
+            x: -300,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow2")
+        tl2.from("#team5", {
+            y: 0,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow2")
+        tl2.from("#team6", {
+            x: 300,
+            duration: 1,
+            opacity: 0,
+        }, "teamRow2")
+    }
+
+    function contactAnimation() {
+        var tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".contact",
+                scroller: "body",
+                start: "top 80%",
+                end: "top 10%",
+                scrub: 2,
+            }
+        })
+        tl2.from(".contactText", {
+            x: -200,
+            duration: 0.5,
+            opacity: 0,
+        })
+        tl2.from(".contactform", {
+            x: 0,
+            duration: 3,
+            opacity: 0,
+        })
+    }
+
+
+    heroAnimation()
+    serviceAnimation()
+    casestudyAnimation()
+    Accordion()
+    ProcessAnimation()
+    teamAnimation()
+    contactAnimation()
+
+</script>
+
+<!-- External JS -->
+<script src="Assets/js/script.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+<script src="Assets/js/login.js"></script>
 </body>
 
 </html>

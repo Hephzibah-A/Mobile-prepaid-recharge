@@ -595,6 +595,43 @@
 
 </script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".recharge-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                const planCard = this.closest(".plan-card");
+
+                if (!planCard) {
+                    console.error("Plan card not found!");
+                    return;
+                }
+
+                // Extract plan details from the card
+                const selectedPlan = {
+                    id: planCard.getAttribute("data-id") || Math.random().toString(36).substr(2, 9), // Generate ID if missing
+                    name: planCard.querySelector(".plan-name") ? planCard.querySelector(".plan-name").innerText : "N/A",
+                    price: planCard.querySelector(".plan-price") ? planCard.querySelector(".plan-price").innerText.replace("₹", "") : "0",
+                    data: planCard.querySelector(".plan-data") ? planCard.querySelector(".plan-data").innerText : "N/A",
+                    calls: planCard.querySelector(".plan-calls") ? planCard.querySelector(".plan-calls").innerText : "N/A",
+                    validity: planCard.querySelector(".plan-validity") ? planCard.querySelector(".plan-validity").innerText.replace(" Days", "") : "N/A"
+                };
+
+                // Check extracted data
+                console.log("Selected Plan:", selectedPlan);
+
+                // Store in localStorage
+                localStorage.setItem("selectedPlan", JSON.stringify(selectedPlan));
+
+                // Verify storage
+                console.log("Stored Plan in localStorage:", localStorage.getItem("selectedPlan"));
+
+                // Redirect to payment page
+                window.location.href = "payment.html";
+            });
+        });
+    });
+
+</script>
 <!-- External JS -->
 <script src="Assets/js/script.js"></script>
 

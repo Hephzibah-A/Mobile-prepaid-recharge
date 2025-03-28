@@ -323,6 +323,105 @@
             color: black !important;
             /* Contrast text */
         }
+
+        .text-bold {
+            font-weight: bolder;
+        }
+
+        /* Responsive Design for iPhone SE and Small Screens */
+        @media (max-width: 375px) {
+            header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                background-color: white;
+                position: absolute;
+                top: 50px;
+                right: 10px;
+                width: 200px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            nav ul li {
+                margin: 0;
+                padding: 10px;
+                text-align: center;
+            }
+
+            nav ul li a {
+                font-size: 0.9rem;
+            }
+
+            nav button {
+                display: none;
+            }
+
+            .burger-menu {
+                display: block;
+                font-size: 1.5rem;
+                cursor: pointer;
+                background: none;
+                border: none;
+            }
+
+            .burger-menu.active+ul {
+                display: flex;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            #searchBox {
+                width: 100%;
+                font-size: 0.9rem;
+            }
+
+            .filter-btn {
+                width: 35px;
+                height: 35px;
+            }
+
+            .subnav ul {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .subnav ul li a {
+                font-size: 5rem;
+                /* padding: 8px 10px; */
+            }
+
+            .card {
+                font-size: 0.9rem;
+            }
+
+            .offcanvas {
+                width: 100%;
+            }
+
+            .toast-card {
+                width: 90%;
+                bottom: 10px;
+                right: 5%;
+            }
+
+            ul#categoryNav.nav {
+                font-size: large;
+            }
+        }
     </style>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -478,7 +577,26 @@
         const categoryNav = document.getElementById("categoryNav");
         const sortOptions = document.getElementById("sortOptions");
         let plans = [];
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".recharge-btn").forEach(button => {
+                button.addEventListener("click", function () {
+                    const planCard = this.closest(".plan-card");
+                    const planDetails = {
+                        name: planCard.querySelector(".plan-name").innerText,
+                        price: planCard.querySelector(".plan-price").innerText,
+                        validity: planCard.querySelector(".plan-validity").innerText,
+                        data: planCard.querySelector(".plan-data").innerText,
+                        calls: planCard.querySelector(".plan-calls").innerText
+                    };
 
+                    // Store plan details in localStorage
+                    localStorage.setItem("selectedPlan", JSON.stringify(planDetails));
+
+                    // Redirect to payment page
+                    window.location.href = "payment.html";
+                });
+            });
+        });
         async function fetchPlans() {
             try {
                 console.log("Fetching plans...");
@@ -539,7 +657,7 @@
                 card.innerHTML = `
                     <div class="card shadow-sm">
                         <div class="card-body">
-                            <h5 class="card-title">₹${plan.planPrice}</h5>
+                            <h4 class="card-title text-bold">₹${plan.planPrice}</h4>
                             <p class="card-text">${plan.planName}</p>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"><strong>Calls:</strong> ${plan.calls || "Unlimited"}</li>
